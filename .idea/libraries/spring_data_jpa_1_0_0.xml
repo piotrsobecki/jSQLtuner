@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="spring-data-jpa-1.0.0" type="spring-data-jpa">
+    <properties version="1.0.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/spring-data-jpa-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-data-commons-core-1.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

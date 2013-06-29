@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="spring-mvc-3.2.2.RELEASE" type="spring-mvc">
+    <properties version="3.2.2.RELEASE" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/spring-webmvc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-web.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
