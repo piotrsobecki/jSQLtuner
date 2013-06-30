@@ -2,10 +2,10 @@
   <artifact type="exploded-war" name="ORM Performance  And NoSQL:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/ORM_Performance__And_NoSQL_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="SQL-Query-NoSQL-Tuner/web/Web" />
+      <element id="javaee-facet-resources" facet="jSQLtuner/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="SQL-Query-NoSQL-Tuner" />
+          <element id="module-output" name="jSQLtuner" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="hibernate-4.2.2" />
