@@ -17,4 +17,17 @@ public class QueryExecution {
         this.queryHash = queryHash;
         this.queryExecutionTime = queryExecutionTime;
     }
+
+
+    public IQuery getQuery() {
+        return query;
+    }
+
+    public String getQueryHash() {
+        return queryHash;
+    }
+
+    public Long getQueryExecutionTime() {
+        return queryExecutionTime;
+    }
 }
