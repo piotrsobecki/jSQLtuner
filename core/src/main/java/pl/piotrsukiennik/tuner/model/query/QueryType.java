@@ -8,5 +8,6 @@ package pl.piotrsukiennik.tuner.model.query;
 public enum QueryType {
     SELECT,
     UPDATE,
-    DELETE
+    DELETE,
+    INSERT
 }

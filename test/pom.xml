@@ -10,12 +10,43 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>test</artifactId>
-
+    <properties>
+        <spring.version>3.2.2.RELEASE</spring.version>
+        <aspectj.version>1.7.2</aspectj.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>core</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring AOP + AspectJ -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 

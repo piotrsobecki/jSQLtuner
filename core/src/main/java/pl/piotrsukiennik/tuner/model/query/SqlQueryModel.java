@@ -9,6 +9,8 @@ import pl.piotrsukiennik.tuner.parser.IQuery;
  */
 public abstract class SqlQueryModel implements IQuery {
     private QueryType queryType;
+    private Integer id;
+    private SqlQueryModel parentQuery;
     private String  table;
     private String  whereColumns;
     private String  whereColumnsValues;
@@ -17,6 +19,23 @@ public abstract class SqlQueryModel implements IQuery {
     private String  queryHash;
     protected SqlQueryModel(QueryType queryType) {
         this.queryType = queryType;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+
+    public SqlQueryModel getParentQuery() {
+        return parentQuery;
+    }
+
+    public void setParentQuery(SqlQueryModel parentQuery) {
+        this.parentQuery = parentQuery;
     }
 
     public String getQueryHash() {
