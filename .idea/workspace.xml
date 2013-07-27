@@ -1,82 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7038789f-e8df-4153-8cf6-1e2ff971e290" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/InsertSqlQueryModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_14_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_jsqlparser_jsqlparser_0_8_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_4_0_2_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_4_2_2_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_15_0_GA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_0_GA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_1_spec_1_0_1_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_3_2_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_3_2_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_3_2_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_3_2_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_3_2_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/test/java/pl/piotrsukiennik/tuner/test/query/ParserTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/QueryExecutionService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementHolder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsDeregisteringAdvice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsMonitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsRegisteringAdvice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/test/java/pl/piotrsukiennik/tuner/test/Tests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/main/resources/hibernate-context.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/main/resources/queries.sql" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__backport_util_concurrent_backport_util_concurrent_3_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__classworlds_classworlds_1_1_alpha_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__junit_junit_3_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_abego_treelayout_org_abego_treelayout_core_1_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_ST4_4_0_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_antlr4_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_antlr4_maven_plugin_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_antlr4_runtime_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_antlr_runtime_3_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_antlr_stringtemplate_3_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_artifact_3_0_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_artifact_manager_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_model_3_0_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_plugin_api_3_0_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_plugin_registry_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_profile_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_project_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_repository_metadata_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_maven_settings_2_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_apache_maven_wagon_wagon_provider_api_1_0_beta_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_classworlds_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_compiler_api_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_component_annotations_1_5_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_container_default_1_0_alpha_9_stable_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_interpolation_1_11.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_codehaus_plexus_plexus_utils_1_5_15.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_sonatype_sisu_sisu_guava_0_9_9.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_sonatype_sisu_sisu_guice_no_aop_3_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_sonatype_sisu_sisu_inject_bean_2_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\.idea\libraries\Maven__org_sonatype_sisu_sisu_inject_plexus_2_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\core\src\main\java\pl\piotrsukiennik\tuner\parser\antlr\AntlrQueryParser.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\core\src\main\java\pl\piotrsukiennik\tuner\ConnectionAspect.java" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/DataSourceMonitorAspect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/Main.java" afterPath="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/QueryType.java" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/QueryType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/SqlQueryModel.java" afterPath="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/SqlQueryModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/core.iml" afterPath="$PROJECT_DIR$/core/core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/pom.xml" afterPath="$PROJECT_DIR$/core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/pom.xml" afterPath="$PROJECT_DIR$/test/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/main/resources/root-context.xml" afterPath="$PROJECT_DIR$/test/src/main/resources/root-context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test.iml" afterPath="$PROJECT_DIR$/test/test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/tuner-context.xml" afterPath="$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/tuner-context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="7038789f-e8df-4153-8cf6-1e2ff971e290" name="Default" comment="" />
     <ignored path="ORM Performance  And NoSQL.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373303430216" ignored="false" />
+    <file path="/Dummy.txt" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913113458" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/examples/SingleRegionExample.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/neuron/exhibitory/ExhibitoryNeurons.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/examples/NoFeedbackMultipleExample.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
@@ -86,7 +14,7 @@
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/util/math/RandomFloatGenerator.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404695" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/util/math/Generators.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404695" ignored="false" />
     <file path="/ConnectionAspect.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373300985590" ignored="false" />
-    <file path="/pom.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373299589027" ignored="false" />
+    <file path="/pom.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876687056" ignored="false" />
     <file path="/ConnectionWrapper.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372114709407" ignored="false" />
     <file path="/File Header.txt.ft" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372114788704" ignored="false" />
     <file path="/ActionScript File Header.txt.ft" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372114797176" ignored="false" />
@@ -94,10 +22,10 @@
     <file path="/advisor-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372115872002" ignored="false" />
     <file path="/StatementRegisteringAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372116063761" ignored="false" />
     <file path="/root-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373303523389" ignored="false" />
-    <file path="/fragment.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373119238940" ignored="false" />
+    <file path="/fragment.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374879171764" ignored="false" />
     <file path="/Main.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373298965441" ignored="false" />
     <file path="/TunerConfiguration.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372188623505" ignored="false" />
-    <file path="/tuner-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373303746954" ignored="false" />
+    <file path="/tuner-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876603027" ignored="false" />
     <file path="/QueryType.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373119252172" ignored="false" />
     <file path="/SqlQueryModel.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373109040082" ignored="false" />
     <file path="/UpdateSqlQueryModel.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372603653332" ignored="false" />
@@ -115,16 +43,73 @@
     <file path="/AntlrQueryParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372956507160" ignored="false" />
     <file path="/ParserTest.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373119498339" ignored="false" />
     <file path="/Tests.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373041290468" ignored="false" />
-    <file path="/JSqlQueryParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373120724970" ignored="false" />
+    <file path="/JSqlQueryParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374874812819" ignored="false" />
     <file path="/TablesNamesFinder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373044414970" ignored="false" />
     <file path="/InsertSqlQueryModel.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373119260177" ignored="false" />
-    <file path="/hibernate-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373299369291" ignored="false" />
+    <file path="/hibernate-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882810813" ignored="false" />
     <file path="/queries.sql" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373298117400" ignored="false" />
-    <file path="/QueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373298918839" ignored="false" />
+    <file path="/QueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882853114" ignored="false" />
     <file path="/StatementsMonitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373300074812" ignored="false" />
     <file path="/StatementsDeregisteringAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373300264219" ignored="false" />
     <file path="/StatementsRegisteringAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373300447789" ignored="false" />
     <file path="/StatementHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373300809330" ignored="false" />
+    <file path="/StatementsInterceptingAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373323629206" ignored="false" />
+    <file path="/StatementInterceptingAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373325413181" ignored="false" />
+    <file path="/InterceptingAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373325101097" ignored="false" />
+    <file path="/Criteria.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374267425209" ignored="false" />
+    <file path="/View.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374267826907" ignored="false" />
+    <file path="/ColumnView.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374267861977" ignored="false" />
+    <file path="/DeleteQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882284137" ignored="false" />
+    <file path="/SelectQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881619718" ignored="false" />
+    <file path="/ReadQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913828194" ignored="false" />
+    <file path="/WriteQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913835510" ignored="false" />
+    <file path="/CallQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866674325" ignored="false" />
+    <file path="/InsertAsSelectQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866788163" ignored="false" />
+    <file path="/ProjectionValueCondition.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881310579" ignored="false" />
+    <file path="/PairCondition.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881262814" ignored="false" />
+    <file path="/FunctionProjection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374880731215" ignored="false" />
+    <file path="/StarProjection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866549178" ignored="false" />
+    <file path="/StaticProjection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881990436" ignored="false" />
+    <file path="/ColumnProjection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913859944" ignored="false" />
+    <file path="/StaticSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866657137" ignored="false" />
+    <file path="/SqlFragment.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866162507" ignored="false" />
+    <file path="/Condition.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913522759" ignored="false" />
+    <file path="/Source.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913543398" ignored="false" />
+    <file path="/GroupBy.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867370994" ignored="false" />
+    <file path="/OrderBy.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867559148" ignored="false" />
+    <file path="/SourceProjection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866527201" ignored="false" />
+    <file path="/SubQuerySource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866627788" ignored="false" />
+    <file path="/TableSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866638784" ignored="false" />
+    <file path="/ConditionQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374868115020" ignored="false" />
+    <file path="/InsertQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913848441" ignored="false" />
+    <file path="/Query.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913551898" ignored="false" />
+    <file path="/UpdateQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881655632" ignored="false" />
+    <file path="/Column.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881724599" ignored="false" />
+    <file path="/Database.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881699330" ignored="false" />
+    <file path="/Schema.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866965561" ignored="false" />
+    <file path="/Table.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882081604" ignored="false" />
+    <file path="/DbEntity.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374868736778" ignored="false" />
+    <file path="/SortableByPosition.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867330054" ignored="false" />
+    <file path="/Values.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881350900" ignored="false" />
+    <file path="/ColumnValue.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867633011" ignored="false" />
+    <file path="/Projection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913535154" ignored="false" />
+    <file path="/QueryException.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374878803406" ignored="false" />
+    <file path="/MappingStatementVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875711419" ignored="false" />
+    <file path="/MappingVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374871859897" ignored="false" />
+    <file path="/ParsingVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875775549" ignored="false" />
+    <file path="/SelectVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374872531457" ignored="false" />
+    <file path="/IQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374872428641" ignored="false" />
+    <file path="/DoNothingStatementVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876227019" ignored="false" />
+    <file path="/DeleteStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876027811" ignored="false" />
+    <file path="/SelectStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876002908" ignored="false" />
+    <file path="/InsertStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876038787" ignored="false" />
+    <file path="/UpdateStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876063162" ignored="false" />
+    <file path="/ParsingSelectVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374874663998" ignored="false" />
+    <file path="/StatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875969843" ignored="false" />
+    <file path="/StatementParserVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875703262" ignored="false" />
+    <file path="/jsqltuner-hibernate-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374883130551" ignored="false" />
+    <file path="/Type.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374878981464" ignored="false" />
+    <file path="/ValueEntity.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374914152412" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,22 +166,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java" line="53" class="pl.piotrsukiennik.tuner.parser.jsqlqueryparser.JSqlQueryParser" package="pl.piotrsukiennik.tuner.parser.jsqlqueryparser">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java" line="48" class="pl.piotrsukiennik.tuner.parser.jsqlqueryparser.JSqlQueryParser" package="pl.piotrsukiennik.tuner.parser.jsqlqueryparser">
+      <breakpoint url="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java" line="30" class="pl.piotrsukiennik.tuner.parser.jsqlqueryparser.JSqlQueryParser" package="pl.piotrsukiennik.tuner.parser.jsqlqueryparser">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -222,91 +192,396 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/Main.java">
+      <file leaf-file-name="JSqlQueryParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="13" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0">
+            <state line="30" column="0" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/pom.xml">
+      <file leaf-file-name="ValueEntity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/ValueEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="0" selection-start="2920" selection-end="2920" vertical-scroll-proportion="0.0">
+            <state line="11" column="15" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="queries.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/main/resources/queries.sql">
+      <file leaf-file-name="JAVA/pl.piotrsukiennik.tuner.model" pinned="false" current="true" current-in-tab="true">
+        <entry file="uml://JAVA/pl.piotrsukiennik.tuner.model">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>pl.piotrsukiennik.tuner.model</OriginalElement>
+              <nodes>
+                <node x="698.8125000000001" y="948.0">pl.piotrsukiennik.tuner.model.query.source.SubQuerySource</node>
+                <node x="517.5640795206976" y="276.0">pl.piotrsukiennik.tuner.model.query.other.SortableByPosition</node>
+                <node x="328.2111056644885" y="384.0">pl.piotrsukiennik.tuner.model.query.projection.Projection</node>
+                <node x="1121.3376851851858" y="178.0">pl.piotrsukiennik.tuner.model.log.QueryException</node>
+                <node x="806.8376851851859" y="542.0">pl.piotrsukiennik.tuner.model.query.source.StaticSource</node>
+                <node x="589.2500000000001" y="532.0">pl.piotrsukiennik.tuner.model.query.other.OrderByFragment</node>
+                <node x="1414.291666666667" y="948.0">pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery</node>
+                <node x="260.2500000000001" y="790.0">pl.piotrsukiennik.tuner.model.query.projection.StarProjection</node>
+                <node x="1257.8376851851858" y="0.0">pl.piotrsukiennik.tuner.model.ValueEntity</node>
+                <node x="855.8376851851859" y="188.0">pl.piotrsukiennik.tuner.model.schema.Type</node>
+                <node x="442.2500000000001" y="532.0">pl.piotrsukiennik.tuner.model.query.other.GroupByFragment</node>
+                <node x="747.8125000000001" y="710.0">pl.piotrsukiennik.tuner.model.query.SelectQuery</node>
+                <node x="0.0" y="188.0">pl.piotrsukiennik.tuner.model.schema.Function</node>
+                <node x="219.0000000000001" y="542.0">pl.piotrsukiennik.tuner.model.query.projection.SourceProjection</node>
+                <node x="2312.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.schema.Database</node>
+                <node x="1269.3376851851858" y="188.0">pl.piotrsukiennik.tuner.model.schema.Procedure</node>
+                <node x="2035.2256535947718" y="780.0">pl.piotrsukiennik.tuner.model.query.InsertQuery</node>
+                <node x="1322.2515795206975" y="760.0">pl.piotrsukiennik.tuner.model.query.condition.PairCondition</node>
+                <node x="2122.1875000000005" y="276.0">pl.piotrsukiennik.tuner.model.schema.Column</node>
+                <node x="1369.8376851851858" y="552.0">pl.piotrsukiennik.tuner.model.query.condition.Condition</node>
+                <node x="1419.8376851851858" y="188.0">pl.piotrsukiennik.tuner.model.schema.ConditionOperator</node>
+                <node x="382.2500000000001" y="780.0">pl.piotrsukiennik.tuner.model.query.condition.ProjectionValueCondition</node>
+                <node x="2477.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.other.Values</node>
+                <node x="2019.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.source.TableSource</node>
+                <node x="1813.8958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.WriteQuery</node>
+                <node x="5.25" y="948.0">pl.piotrsukiennik.tuner.model.query.projection.FunctionProjection</node>
+                <node x="930.8376851851859" y="542.0">pl.piotrsukiennik.tuner.model.query.ReadQuery</node>
+                <node x="48.0" y="780.0">pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection</node>
+                <node x="2147.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.schema.Schema</node>
+                <node x="1193.8376851851858" y="542.0">pl.piotrsukiennik.tuner.model.query.CallQuery</node>
+                <node x="90.0" y="542.0">pl.piotrsukiennik.tuner.model.query.projection.StaticProjection</node>
+                <node x="1016.8376851851859" y="374.0">pl.piotrsukiennik.tuner.model.query.Query</node>
+                <node x="1843.2256535947718" y="770.0">pl.piotrsukiennik.tuner.model.query.UpdateQuery</node>
+                <node x="1539.7307461873643" y="542.0">pl.piotrsukiennik.tuner.model.query.ConditionQuery</node>
+                <node x="2123.9375000000005" y="384.0">pl.piotrsukiennik.tuner.model.schema.Table</node>
+                <node x="716.2640795206976" y="384.0">pl.piotrsukiennik.tuner.model.query.source.Source</node>
+                <node x="1620.2256535947718" y="770.0">pl.piotrsukiennik.tuner.model.query.DeleteQuery</node>
+                <node x="2485.1458333333335" y="384.0">pl.piotrsukiennik.tuner.model.query.other.ColumnValue</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="pl.piotrsukiennik.tuner.model.query.source.TableSource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+                  <point x="-27.0" y="-24.0" />
+                  <point x="2046.3958333333335" y="492.0" />
+                  <point x="812.5640795206975" y="492.0" />
+                  <point x="42.799999999999955" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.source.StaticSource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+                  <point x="-26.0" y="-24.0" />
+                  <point x="832.8376851851859" y="502.0" />
+                  <point x="791.1640795206977" y="502.0" />
+                  <point x="21.40000000000009" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.source.Source" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-24.0" />
+                  <point x="769.7640795206976" y="128.0" />
+                  <point x="1285.8965087145975" y="128.0" />
+                  <point x="-24.94117647058829" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery" target="pl.piotrsukiennik.tuner.model.query.InsertQuery">
+                  <point x="43.75" y="-24.0" />
+                  <point x="1545.541666666667" y="923.0" />
+                  <point x="2122.2256535947718" y="923.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.InsertQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+                  <point x="-43.5" y="-24.0" />
+                  <point x="2078.7256535947718" y="620.0" />
+                  <point x="1933.0625" y="620.0" />
+                  <point x="47.666666666666515" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection" target="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection">
+                  <point x="31.5" y="-24.0" />
+                  <point x="142.5" y="690.0" />
+                  <point x="249.7500000000001" y="690.0" />
+                  <point x="-30.75" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.DeleteQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+                  <point x="-25.375" y="-34.0" />
+                  <point x="1696.3506535947718" y="660.0" />
+                  <point x="1631.2307461873643" y="660.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.ConditionOperator" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-14.0" />
+                  <point x="1481.3376851851858" y="148.0" />
+                  <point x="1323.3082734204795" y="148.0" />
+                  <point x="12.47058823529369" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Table" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="40.75" y="-24.0" />
+                  <point x="2246.1875000000005" y="354.0" />
+                  <point x="2236.6875000000005" y="354.0" />
+                  <point x="2236.6875000000005" y="118.0" />
+                  <point x="1342.014155773421" y="118.0" />
+                  <point x="31.176470588235134" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.GroupByFragment" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-34.0" />
+                  <point x="505.7500000000001" y="492.0" />
+                  <point x="500.09119825708103" y="492.0" />
+                  <point x="500.09119825708103" y="108.0" />
+                  <point x="1273.4259204793038" y="108.0" />
+                  <point x="-37.41176470588198" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.WriteQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+                  <point x="0.0" y="-24.0" />
+                  <point x="1885.3958333333335" y="502.0" />
+                  <point x="1181.3376851851858" y="502.0" />
+                  <point x="70.5" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.FunctionProjection" target="pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection">
+                  <point x="34.5" y="-24.0" />
+                  <point x="108.75" y="923.0" />
+                  <point x="111.0" y="923.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.Projection" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="-26.75" y="-24.0" />
+                  <point x="354.9611056644885" y="98.0" />
+                  <point x="1267.190626361656" y="98.0" />
+                  <point x="-43.64705882352973" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.condition.ProjectionValueCondition" target="pl.piotrsukiennik.tuner.model.query.condition.Condition">
+                  <point x="38.5" y="-24.0" />
+                  <point x="497.7500000000001" y="660.0" />
+                  <point x="1376.4210185185193" y="660.0" />
+                  <point x="-32.916666666666515" y="14.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Database" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="36.25" y="-24.0" />
+                  <point x="2421.1458333333335" y="108.0" />
+                  <point x="1348.2494498910678" y="108.0" />
+                  <point x="37.41176470588198" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.SelectQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+                  <point x="153.125" y="-94.0" />
+                  <point x="1075.9375" y="690.0" />
+                  <point x="1570.2307461873643" y="690.0" />
+                  <point x="-61.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.condition.Condition" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-14.0" />
+                  <point x="1409.3376851851858" y="158.0" />
+                  <point x="1317.0729793028327" y="158.0" />
+                  <point x="6.235294117646845" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.GroupByFragment" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+                  <point x="42.333333333333485" y="-34.0" />
+                  <point x="548.0833333333336" y="492.0" />
+                  <point x="579.0640795206976" y="492.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.CallQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+                  <point x="-39.0" y="-24.0" />
+                  <point x="1232.8376851851858" y="512.0" />
+                  <point x="1134.3376851851858" y="512.0" />
+                  <point x="23.5" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.condition.PairCondition" target="pl.piotrsukiennik.tuner.model.query.condition.Condition">
+                  <point x="0.0" y="-44.0" />
+                  <point x="1436.7515795206975" y="680.0" />
+                  <point x="1415.9210185185193" y="680.0" />
+                  <point x="6.583333333333485" y="14.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Procedure" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-14.0" />
+                  <point x="0.0" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.source.SubQuerySource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+                  <point x="-43.75" y="-24.0" />
+                  <point x="742.5625000000001" y="923.0" />
+                  <point x="731.7500000000001" y="923.0" />
+                  <point x="731.7500000000001" y="512.0" />
+                  <point x="748.3640795206975" y="512.0" />
+                  <point x="-21.40000000000009" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.Values" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="53.75" y="-24.0" />
+                  <point x="2638.6458333333335" y="512.0" />
+                  <point x="2621.6458333333335" y="512.0" />
+                  <point x="2621.6458333333335" y="88.0" />
+                  <point x="1360.7200381263624" y="88.0" />
+                  <point x="49.88235294117658" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.log.QueryException" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-24.0" />
+                  <point x="1185.3376851851858" y="158.0" />
+                  <point x="1304.602391067539" y="158.0" />
+                  <point x="-6.235294117646845" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.Projection" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+                  <point x="26.75" y="-24.0" />
+                  <point x="408.4611056644885" y="344.0" />
+                  <point x="538.0640795206976" y="344.0" />
+                  <point x="-41.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.StarProjection" target="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection">
+                  <point x="0.0" y="-14.0" />
+                  <point x="30.75" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.DeleteQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+                  <point x="25.375" y="-34.0" />
+                  <point x="1747.1006535947718" y="670.0" />
+                  <point x="1837.729166666667" y="670.0" />
+                  <point x="-47.666666666666515" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Type" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-14.0" />
+                  <point x="884.8376851851859" y="138.0" />
+                  <point x="1292.1318028322444" y="138.0" />
+                  <point x="-18.705882352941444" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.SelectQuery" target="pl.piotrsukiennik.tuner.model.query.ReadQuery">
+                  <point x="21.875" y="-94.0" />
+                  <point x="944.6875000000001" y="640.0" />
+                  <point x="1003.8376851851859" y="640.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.UpdateQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+                  <point x="-21.5" y="-34.0" />
+                  <point x="1907.7256535947718" y="640.0" />
+                  <point x="1692.2307461873643" y="640.0" />
+                  <point x="61.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.OrderByFragment" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="42.33333333333337" y="-34.0" />
+                  <point x="695.0833333333335" y="492.0" />
+                  <point x="673.7500000000001" y="492.0" />
+                  <point x="673.7500000000001" y="118.0" />
+                  <point x="1279.6612145969507" y="118.0" />
+                  <point x="-31.176470588235134" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.ReadQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+                  <point x="0.0" y="-24.0" />
+                  <point x="1003.8376851851859" y="512.0" />
+                  <point x="1040.3376851851858" y="512.0" />
+                  <point x="-70.5" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.StaticProjection" target="pl.piotrsukiennik.tuner.model.query.projection.Projection">
+                  <point x="27.25" y="-24.0" />
+                  <point x="171.75" y="482.0" />
+                  <point x="337.12777233115526" y="482.0" />
+                  <point x="-44.583333333333314" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Column" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="26.000000000000114" y="-24.0" />
+                  <point x="2200.1875000000005" y="128.0" />
+                  <point x="1335.778861655774" y="128.0" />
+                  <point x="24.94117647058829" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.ColumnValue" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="31.5" y="-24.0" />
+                  <point x="2579.6458333333335" y="98.0" />
+                  <point x="1354.4847440087156" y="98.0" />
+                  <point x="43.64705882352973" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Function" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-14.0" />
+                  <point x="37.5" y="88.0" />
+                  <point x="1260.9553322440092" y="88.0" />
+                  <point x="-49.88235294117658" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection" target="pl.piotrsukiennik.tuner.model.query.projection.Projection">
+                  <point x="-30.75" y="-24.0" />
+                  <point x="249.7500000000001" y="492.0" />
+                  <point x="354.9611056644885" y="492.0" />
+                  <point x="-26.75" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.UpdateQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+                  <point x="21.5" y="-34.0" />
+                  <point x="1950.7256535947718" y="630.0" />
+                  <point x="1885.3958333333335" y="630.0" />
+                  <point x="0.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.other.OrderByFragment" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+                  <point x="0.0" y="-34.0" />
+                  <point x="652.7500000000001" y="344.0" />
+                  <point x="620.0640795206976" y="344.0" />
+                  <point x="41.0" y="24.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.schema.Schema" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="-36.25" y="-24.0" />
+                  <point x="2183.6458333333335" y="482.0" />
+                  <point x="2047.3828649237475" y="482.0" />
+                  <point x="2047.3828649237475" y="138.0" />
+                  <point x="1329.5435675381273" y="138.0" />
+                  <point x="18.705882352941444" y="34.0" />
+                </edge>
+                <edge source="pl.piotrsukiennik.tuner.model.query.Query" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+                  <point x="0.0" y="-34.0" />
+                  <point x="1110.8376851851858" y="148.0" />
+                  <point x="1298.3670969498921" y="148.0" />
+                  <point x="-12.47058823529369" y="34.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.3177257525083612" x="1430.5421052631577" y="568.0" />
+              <SelectedNodes />
+              <Categories>
+                <Category>Properties</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReadQuery.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/ReadQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="65" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+            <state line="12" column="51" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="root-context.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/main/resources/root-context.xml">
+      <file leaf-file-name="WriteQuery.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/WriteQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="705" selection-end="705" vertical-scroll-proportion="0.0">
+            <state line="12" column="51" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tuner-context.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/tuner-context.xml">
+      <file leaf-file-name="InsertQuery.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/InsertQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="103" selection-start="2029" selection-end="2029" vertical-scroll-proportion="-13.4827585">
+            <state line="15" column="51" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementsDeregisteringAdvice.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsDeregisteringAdvice.java">
+      <file leaf-file-name="ColumnProjection.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/ColumnProjection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="18" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
+            <state line="15" column="51" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementsRegisteringAdvice.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsRegisteringAdvice.java">
+      <file leaf-file-name="StarProjection.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/StarProjection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="8" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0">
+            <state line="10" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementHolder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementHolder.java">
+      <file leaf-file-name="ProjectionValueCondition.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/condition/ProjectionValueCondition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="37" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
+            <state line="13" column="13" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementsMonitor.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsMonitor.java">
+      <file leaf-file-name="Condition.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/condition/Condition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="662" selection-end="662" vertical-scroll-proportion="0.2635659">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataSourceMonitorAspect.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/DataSourceMonitorAspect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="34" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+            <state line="14" column="51" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -320,6 +595,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="SYNC_SETTING" value="DONT" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
@@ -331,22 +607,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/test/src/main/resources/queries.sql" />
-        <option value="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/QueryExecutionService.java" />
-        <option value="$PROJECT_DIR$/test/src/main/resources/hibernate-context.xml" />
-        <option value="$PROJECT_DIR$/test/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/Main.java" />
-        <option value="$PROJECT_DIR$/core/pom.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/util/StatementsDeregisteringAdvice.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/util/StatementsRegisteringAdvice.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/util/StatementsMonitor.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/util/StatementHolder.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/ConnectionAspect.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/StaticProjection.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/schema/Table.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/DeleteQuery.java" />
         <option value="$PROJECT_DIR$/test/src/main/resources/root-context.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/tuner-context.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/DataSourceMonitorAspect.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/DataSourceMonitorAspect.java" />
+        <option value="$PROJECT_DIR$/test/src/main/resources/hibernate-context.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/jsqltuner-hibernate-context.xml" />
+        <option value="$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/QueryExecutionService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/condition/Condition.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/Projection.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/source/Source.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/Query.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/ReadQuery.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/WriteQuery.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/InsertQuery.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/ColumnProjection.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/ValueEntity.java" />
       </list>
     </option>
   </component>
@@ -402,6 +678,10 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="core" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -470,6 +750,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -477,10 +758,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="ORM Performance  And NoSQL" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -610,6 +887,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -740,23 +1029,516 @@
               <option name="myItemId" value="tuner" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="schema" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="query" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="query" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="query" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="query" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="other" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="query" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="condition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="execution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="keyvalue" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="keyvalue" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memcached" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="MavenSettings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
+    <property name="project.structure.side.proportion" value="0.40440324" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -769,9 +1551,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pl.piotrsukiennik.tuner.parser.jsqlqueryparser" />
+      <recent name="pl.piotrsukiennik.tuner.model.view" />
+      <recent name="pl.piotrsukiennik.tuner.statement" />
       <recent name="pl.piotrsukiennik.tuner.model.query" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\core\src\main\resources\pl\piotrsukiennik\tuner" />
       <recent name="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\test\src\main\resources" />
       <recent name="C:\Users\SERIES 9\IdeaProjects\SQL-Query-NoSQL-Tuner\web\WEB-INF\spring" />
       <recent name="C:\Users\SERIES 9\IdeaProjects\SQL-Query-NoSQL-Tuner\web\WEB-INF\spring\context" />
@@ -839,6 +1625,40 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="test" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Tests" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="pl.piotrsukiennik.tuner.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="pl.piotrsukiennik.tuner.test" />
+      <option name="MAIN_CLASS_NAME" value="pl.piotrsukiennik.tuner.test.Tests" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
@@ -968,14 +1788,16 @@
       <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="JUnit.ParserTest" />
       <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.Tests" />
     </list>
     <recent_temporary>
-      <list size="2">
+      <list size="3">
         <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ParserTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.Tests" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ParserTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1032,9 +1854,9 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.6859504" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6473829" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37465563" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3278237" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29338843" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1044,9 +1866,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32947233" sideWeight="0.35261708" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14736165" sideWeight="0.62534434" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967825" sideWeight="0.35261708" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967825" sideWeight="0.62534434" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28099173" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1122,37 +1944,16 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jsqlparser/jsqlparser/0.8.0/jsqlparser-0.8.0.jar!/net/sf/jsqlparser/expression/operators/relational/MinorThan.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="37" selection-start="2678" selection-end="2678" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="37" selection-start="587" selection-end="587" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="5" selection-start="534" selection-end="534" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/src/main/resources/hibernate-context.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="69" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
+        <state line="8" column="69" selection-start="681" selection-end="699" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/jsqltuner-hibernate-context.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="6" selection-start="1765" selection-end="2087" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1164,73 +1965,399 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/Main.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/Projection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="13" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0">
+        <state line="15" column="51" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/pom.xml">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/source/Source.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="2920" selection-end="2920" vertical-scroll-proportion="0.0">
+        <state line="14" column="51" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/resources/root-context.xml">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/Query.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="705" selection-end="705" vertical-scroll-proportion="0.0">
+        <state line="15" column="51" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/DataSourceMonitorAspect.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/ReadQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="34" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+        <state line="12" column="51" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/pl/piotrsukiennik/tuner/tuner-context.xml">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/WriteQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="103" selection-start="2029" selection-end="2029" vertical-scroll-proportion="-13.4827585">
+        <state line="12" column="51" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/resources/queries.sql">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/InsertQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="65" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+        <state line="15" column="51" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementHolder.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/ColumnProjection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="37" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
+        <state line="15" column="51" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsDeregisteringAdvice.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/projection/StarProjection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="18" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
+        <state line="10" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsRegisteringAdvice.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/condition/ProjectionValueCondition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0">
+        <state line="13" column="13" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/StatementsMonitor.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/query/condition/Condition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="662" selection-end="662" vertical-scroll-proportion="0.2635659">
+        <state line="14" column="51" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/JSqlQueryParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/model/ValueEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="15" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/pl.piotrsukiennik.tuner.model">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>pl.piotrsukiennik.tuner.model</OriginalElement>
+          <nodes>
+            <node x="698.8125000000001" y="948.0">pl.piotrsukiennik.tuner.model.query.source.SubQuerySource</node>
+            <node x="517.5640795206976" y="276.0">pl.piotrsukiennik.tuner.model.query.other.SortableByPosition</node>
+            <node x="328.2111056644885" y="384.0">pl.piotrsukiennik.tuner.model.query.projection.Projection</node>
+            <node x="1121.3376851851858" y="178.0">pl.piotrsukiennik.tuner.model.log.QueryException</node>
+            <node x="806.8376851851859" y="542.0">pl.piotrsukiennik.tuner.model.query.source.StaticSource</node>
+            <node x="589.2500000000001" y="532.0">pl.piotrsukiennik.tuner.model.query.other.OrderByFragment</node>
+            <node x="1414.291666666667" y="948.0">pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery</node>
+            <node x="260.2500000000001" y="790.0">pl.piotrsukiennik.tuner.model.query.projection.StarProjection</node>
+            <node x="1257.8376851851858" y="0.0">pl.piotrsukiennik.tuner.model.ValueEntity</node>
+            <node x="855.8376851851859" y="188.0">pl.piotrsukiennik.tuner.model.schema.Type</node>
+            <node x="442.2500000000001" y="532.0">pl.piotrsukiennik.tuner.model.query.other.GroupByFragment</node>
+            <node x="747.8125000000001" y="710.0">pl.piotrsukiennik.tuner.model.query.SelectQuery</node>
+            <node x="0.0" y="188.0">pl.piotrsukiennik.tuner.model.schema.Function</node>
+            <node x="219.0000000000001" y="542.0">pl.piotrsukiennik.tuner.model.query.projection.SourceProjection</node>
+            <node x="2312.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.schema.Database</node>
+            <node x="1269.3376851851858" y="188.0">pl.piotrsukiennik.tuner.model.schema.Procedure</node>
+            <node x="2035.2256535947718" y="780.0">pl.piotrsukiennik.tuner.model.query.InsertQuery</node>
+            <node x="1322.2515795206975" y="760.0">pl.piotrsukiennik.tuner.model.query.condition.PairCondition</node>
+            <node x="2122.1875000000005" y="276.0">pl.piotrsukiennik.tuner.model.schema.Column</node>
+            <node x="1369.8376851851858" y="552.0">pl.piotrsukiennik.tuner.model.query.condition.Condition</node>
+            <node x="1419.8376851851858" y="188.0">pl.piotrsukiennik.tuner.model.schema.ConditionOperator</node>
+            <node x="382.2500000000001" y="780.0">pl.piotrsukiennik.tuner.model.query.condition.ProjectionValueCondition</node>
+            <node x="2477.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.other.Values</node>
+            <node x="2019.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.source.TableSource</node>
+            <node x="1813.8958333333335" y="542.0">pl.piotrsukiennik.tuner.model.query.WriteQuery</node>
+            <node x="5.25" y="948.0">pl.piotrsukiennik.tuner.model.query.projection.FunctionProjection</node>
+            <node x="930.8376851851859" y="542.0">pl.piotrsukiennik.tuner.model.query.ReadQuery</node>
+            <node x="48.0" y="780.0">pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection</node>
+            <node x="2147.3958333333335" y="542.0">pl.piotrsukiennik.tuner.model.schema.Schema</node>
+            <node x="1193.8376851851858" y="542.0">pl.piotrsukiennik.tuner.model.query.CallQuery</node>
+            <node x="90.0" y="542.0">pl.piotrsukiennik.tuner.model.query.projection.StaticProjection</node>
+            <node x="1016.8376851851859" y="374.0">pl.piotrsukiennik.tuner.model.query.Query</node>
+            <node x="1843.2256535947718" y="770.0">pl.piotrsukiennik.tuner.model.query.UpdateQuery</node>
+            <node x="1539.7307461873643" y="542.0">pl.piotrsukiennik.tuner.model.query.ConditionQuery</node>
+            <node x="2123.9375000000005" y="384.0">pl.piotrsukiennik.tuner.model.schema.Table</node>
+            <node x="716.2640795206976" y="384.0">pl.piotrsukiennik.tuner.model.query.source.Source</node>
+            <node x="1620.2256535947718" y="770.0">pl.piotrsukiennik.tuner.model.query.DeleteQuery</node>
+            <node x="2485.1458333333335" y="384.0">pl.piotrsukiennik.tuner.model.query.other.ColumnValue</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="pl.piotrsukiennik.tuner.model.query.source.TableSource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+              <point x="-27.0" y="-24.0" />
+              <point x="2046.3958333333335" y="492.0" />
+              <point x="812.5640795206975" y="492.0" />
+              <point x="42.799999999999955" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.source.StaticSource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+              <point x="-26.0" y="-24.0" />
+              <point x="832.8376851851859" y="502.0" />
+              <point x="791.1640795206977" y="502.0" />
+              <point x="21.40000000000009" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.source.Source" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-24.0" />
+              <point x="769.7640795206976" y="128.0" />
+              <point x="1285.8965087145975" y="128.0" />
+              <point x="-24.94117647058829" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery" target="pl.piotrsukiennik.tuner.model.query.InsertQuery">
+              <point x="43.75" y="-24.0" />
+              <point x="1545.541666666667" y="923.0" />
+              <point x="2122.2256535947718" y="923.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.InsertQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+              <point x="-43.5" y="-24.0" />
+              <point x="2078.7256535947718" y="620.0" />
+              <point x="1933.0625" y="620.0" />
+              <point x="47.666666666666515" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection" target="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection">
+              <point x="31.5" y="-24.0" />
+              <point x="142.5" y="690.0" />
+              <point x="249.7500000000001" y="690.0" />
+              <point x="-30.75" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.DeleteQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+              <point x="-25.375" y="-34.0" />
+              <point x="1696.3506535947718" y="660.0" />
+              <point x="1631.2307461873643" y="660.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.ConditionOperator" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-14.0" />
+              <point x="1481.3376851851858" y="148.0" />
+              <point x="1323.3082734204795" y="148.0" />
+              <point x="12.47058823529369" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Table" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="40.75" y="-24.0" />
+              <point x="2246.1875000000005" y="354.0" />
+              <point x="2236.6875000000005" y="354.0" />
+              <point x="2236.6875000000005" y="118.0" />
+              <point x="1342.014155773421" y="118.0" />
+              <point x="31.176470588235134" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.GroupByFragment" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-34.0" />
+              <point x="505.7500000000001" y="492.0" />
+              <point x="500.09119825708103" y="492.0" />
+              <point x="500.09119825708103" y="108.0" />
+              <point x="1273.4259204793038" y="108.0" />
+              <point x="-37.41176470588198" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.WriteQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+              <point x="0.0" y="-24.0" />
+              <point x="1885.3958333333335" y="502.0" />
+              <point x="1181.3376851851858" y="502.0" />
+              <point x="70.5" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.FunctionProjection" target="pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection">
+              <point x="34.5" y="-24.0" />
+              <point x="108.75" y="923.0" />
+              <point x="111.0" y="923.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.Projection" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="-26.75" y="-24.0" />
+              <point x="354.9611056644885" y="98.0" />
+              <point x="1267.190626361656" y="98.0" />
+              <point x="-43.64705882352973" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.condition.ProjectionValueCondition" target="pl.piotrsukiennik.tuner.model.query.condition.Condition">
+              <point x="38.5" y="-24.0" />
+              <point x="497.7500000000001" y="660.0" />
+              <point x="1376.4210185185193" y="660.0" />
+              <point x="-32.916666666666515" y="14.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Database" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="36.25" y="-24.0" />
+              <point x="2421.1458333333335" y="108.0" />
+              <point x="1348.2494498910678" y="108.0" />
+              <point x="37.41176470588198" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.SelectQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+              <point x="153.125" y="-94.0" />
+              <point x="1075.9375" y="690.0" />
+              <point x="1570.2307461873643" y="690.0" />
+              <point x="-61.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.condition.Condition" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-14.0" />
+              <point x="1409.3376851851858" y="158.0" />
+              <point x="1317.0729793028327" y="158.0" />
+              <point x="6.235294117646845" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.GroupByFragment" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+              <point x="42.333333333333485" y="-34.0" />
+              <point x="548.0833333333336" y="492.0" />
+              <point x="579.0640795206976" y="492.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.CallQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+              <point x="-39.0" y="-24.0" />
+              <point x="1232.8376851851858" y="512.0" />
+              <point x="1134.3376851851858" y="512.0" />
+              <point x="23.5" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.condition.PairCondition" target="pl.piotrsukiennik.tuner.model.query.condition.Condition">
+              <point x="0.0" y="-44.0" />
+              <point x="1436.7515795206975" y="680.0" />
+              <point x="1415.9210185185193" y="680.0" />
+              <point x="6.583333333333485" y="14.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Procedure" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-14.0" />
+              <point x="0.0" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.source.SubQuerySource" target="pl.piotrsukiennik.tuner.model.query.source.Source">
+              <point x="-43.75" y="-24.0" />
+              <point x="742.5625000000001" y="923.0" />
+              <point x="731.7500000000001" y="923.0" />
+              <point x="731.7500000000001" y="512.0" />
+              <point x="748.3640795206975" y="512.0" />
+              <point x="-21.40000000000009" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.Values" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="53.75" y="-24.0" />
+              <point x="2638.6458333333335" y="512.0" />
+              <point x="2621.6458333333335" y="512.0" />
+              <point x="2621.6458333333335" y="88.0" />
+              <point x="1360.7200381263624" y="88.0" />
+              <point x="49.88235294117658" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.log.QueryException" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-24.0" />
+              <point x="1185.3376851851858" y="158.0" />
+              <point x="1304.602391067539" y="158.0" />
+              <point x="-6.235294117646845" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.Projection" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+              <point x="26.75" y="-24.0" />
+              <point x="408.4611056644885" y="344.0" />
+              <point x="538.0640795206976" y="344.0" />
+              <point x="-41.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.StarProjection" target="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection">
+              <point x="0.0" y="-14.0" />
+              <point x="30.75" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.DeleteQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+              <point x="25.375" y="-34.0" />
+              <point x="1747.1006535947718" y="670.0" />
+              <point x="1837.729166666667" y="670.0" />
+              <point x="-47.666666666666515" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Type" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-14.0" />
+              <point x="884.8376851851859" y="138.0" />
+              <point x="1292.1318028322444" y="138.0" />
+              <point x="-18.705882352941444" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.SelectQuery" target="pl.piotrsukiennik.tuner.model.query.ReadQuery">
+              <point x="21.875" y="-94.0" />
+              <point x="944.6875000000001" y="640.0" />
+              <point x="1003.8376851851859" y="640.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.UpdateQuery" target="pl.piotrsukiennik.tuner.model.query.ConditionQuery">
+              <point x="-21.5" y="-34.0" />
+              <point x="1907.7256535947718" y="640.0" />
+              <point x="1692.2307461873643" y="640.0" />
+              <point x="61.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.OrderByFragment" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="42.33333333333337" y="-34.0" />
+              <point x="695.0833333333335" y="492.0" />
+              <point x="673.7500000000001" y="492.0" />
+              <point x="673.7500000000001" y="118.0" />
+              <point x="1279.6612145969507" y="118.0" />
+              <point x="-31.176470588235134" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.ReadQuery" target="pl.piotrsukiennik.tuner.model.query.Query">
+              <point x="0.0" y="-24.0" />
+              <point x="1003.8376851851859" y="512.0" />
+              <point x="1040.3376851851858" y="512.0" />
+              <point x="-70.5" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.StaticProjection" target="pl.piotrsukiennik.tuner.model.query.projection.Projection">
+              <point x="27.25" y="-24.0" />
+              <point x="171.75" y="482.0" />
+              <point x="337.12777233115526" y="482.0" />
+              <point x="-44.583333333333314" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Column" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="26.000000000000114" y="-24.0" />
+              <point x="2200.1875000000005" y="128.0" />
+              <point x="1335.778861655774" y="128.0" />
+              <point x="24.94117647058829" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.ColumnValue" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="31.5" y="-24.0" />
+              <point x="2579.6458333333335" y="98.0" />
+              <point x="1354.4847440087156" y="98.0" />
+              <point x="43.64705882352973" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Function" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-14.0" />
+              <point x="37.5" y="88.0" />
+              <point x="1260.9553322440092" y="88.0" />
+              <point x="-49.88235294117658" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.projection.SourceProjection" target="pl.piotrsukiennik.tuner.model.query.projection.Projection">
+              <point x="-30.75" y="-24.0" />
+              <point x="249.7500000000001" y="492.0" />
+              <point x="354.9611056644885" y="492.0" />
+              <point x="-26.75" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.UpdateQuery" target="pl.piotrsukiennik.tuner.model.query.WriteQuery">
+              <point x="21.5" y="-34.0" />
+              <point x="1950.7256535947718" y="630.0" />
+              <point x="1885.3958333333335" y="630.0" />
+              <point x="0.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.other.OrderByFragment" target="pl.piotrsukiennik.tuner.model.query.other.SortableByPosition">
+              <point x="0.0" y="-34.0" />
+              <point x="652.7500000000001" y="344.0" />
+              <point x="620.0640795206976" y="344.0" />
+              <point x="41.0" y="24.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.schema.Schema" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="-36.25" y="-24.0" />
+              <point x="2183.6458333333335" y="482.0" />
+              <point x="2047.3828649237475" y="482.0" />
+              <point x="2047.3828649237475" y="138.0" />
+              <point x="1329.5435675381273" y="138.0" />
+              <point x="18.705882352941444" y="34.0" />
+            </edge>
+            <edge source="pl.piotrsukiennik.tuner.model.query.Query" target="pl.piotrsukiennik.tuner.model.ValueEntity">
+              <point x="0.0" y="-34.0" />
+              <point x="1110.8376851851858" y="148.0" />
+              <point x="1298.3670969498921" y="148.0" />
+              <point x="-12.47058823529369" y="34.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.3177257525083612" x="1430.5421052631577" y="568.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Properties</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
@@ -1244,7 +2371,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.40440324" />
                 <option value="0.5" />
               </list>
             </option>
@@ -1253,11 +2380,11 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Hibernate</last-edited>
+          <last-edited>Hibernate (core)|Hibernate</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.40440324" />
               </list>
             </option>
           </splitter-proportions>
@@ -1268,7 +2395,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.4391657" />
               </list>
             </option>
           </splitter-proportions>
@@ -1280,7 +2407,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.4391657" />
               </list>
             </option>
           </splitter-proportions>
@@ -1288,11 +2415,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>jSQLtuner</last-edited>
+          <last-edited>core</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.40440324" />
                 <option value="0.5" />
               </list>
             </option>
@@ -1317,7 +2444,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.40440324" />
               </list>
             </option>
           </splitter-proportions>

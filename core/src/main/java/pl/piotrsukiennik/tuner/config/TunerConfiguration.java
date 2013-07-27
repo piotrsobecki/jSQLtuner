@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
  * Time: 21:29
  */
 @Configuration
-@ImportResource("classpath:pl/piotrsukiennik/tuner/tuner-context.xml")
+@ImportResource("classpath:pl/piotrsukiennik/tuner/jsqltuner-context.xml")
 public class TunerConfiguration {
     public TunerConfiguration() {
     }

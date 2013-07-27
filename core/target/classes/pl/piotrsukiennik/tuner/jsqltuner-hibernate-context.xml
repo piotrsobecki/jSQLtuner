@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="jsqlTunerDataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/jsqltuner" />
+        <property name="username" value="jsqltuner" />
+        <property name="password" value="jsqltuner" />
+    </bean>
+
+    <bean id="jsqlTunerSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="jsqlTunerDataSource"/>
+        <property name="packagesToScan" value="pl.piotrsukiennik.tuner.model.*"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            </props>
+        </property>
+    </bean>
+<!--
+    <bean id="myTxManager" class="jsqlTunerTransactionManager"/>
+    <tx:advice  id="txAdvice" transaction-manager="myTxManager"/>
+    <aop:config>
+        <aop:pointcut id="somePointcut" expression="execution(...)"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="somePointcut" />
+    </aop:config>
+    -->
+    <bean id="jsqlTunerTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="jsqlTunerSessionFactory"/>
+        <property name="dataSource" ref="jsqlTunerDataSource"/>
+
+    </bean>
+</beans>

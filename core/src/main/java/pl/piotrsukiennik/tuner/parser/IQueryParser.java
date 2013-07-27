@@ -1,6 +1,5 @@
 package pl.piotrsukiennik.tuner.parser;
 
-import pl.piotrsukiennik.tuner.model.query.SqlQueryModel;
 
 /**
  * Author: Piotr Sukiennik

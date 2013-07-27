@@ -6,4 +6,6 @@ package pl.piotrsukiennik.tuner.parser;
  * Time: 17:46
  */
 public interface IQuery {
+    String getValue();
+    void setValue(String value);
 }
