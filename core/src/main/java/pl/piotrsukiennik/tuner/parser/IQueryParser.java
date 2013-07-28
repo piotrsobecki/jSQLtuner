@@ -7,5 +7,5 @@ package pl.piotrsukiennik.tuner.parser;
  * Time: 17:44
  */
 public interface IQueryParser {
-    IQuery parse(String query);
+    IQuery parse(String query) throws Exception;
 }

@@ -6,7 +6,7 @@ import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
-import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.UpdateQuery;
 import pl.piotrsukiennik.tuner.parser.IQuery;
 
 /**

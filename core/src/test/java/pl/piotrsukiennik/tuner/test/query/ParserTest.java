@@ -23,8 +23,8 @@ public class ParserTest {
     public void parseTest(){
         QueryExecutionBuilder queryExecutionBuilder  = new QueryExecutionBuilder(HashGenerators.MD5,new JSqlQueryParser());
         for (String query: queries){
-            QueryExecution queryExecution = queryExecutionBuilder.build(query,0l);
-            System.out.println(queryExecution);
+            //QueryExecution queryExecution = queryExecutionBuilder.build(query,0l);
+            //System.out.println(queryExecution);
         }
 
     }

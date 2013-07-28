@@ -11,9 +11,9 @@
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/jsqltuner" />
-        <property name="username" value="jsqltuner" />
-        <property name="password" value="jsqltuner" />
+        <property name="url" value="jdbc:mysql://localhost:3306/jsqltunertest" />
+        <property name="username" value="jsqltunertest" />
+        <property name="password" value="jsqltunertest" />
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

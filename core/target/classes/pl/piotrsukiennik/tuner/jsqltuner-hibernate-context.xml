@@ -16,7 +16,7 @@
 
     <bean id="jsqlTunerSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="jsqlTunerDataSource"/>
-        <property name="packagesToScan" value="pl.piotrsukiennik.tuner.model.*"/>
+        <property name="packagesToScan" value="pl.piotrsukiennik.tuner.persistance.model.*"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>

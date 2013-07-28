@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 
 import net.sf.jsqlparser.statement.insert.Insert;
-import pl.piotrsukiennik.tuner.model.query.InsertQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.InsertQuery;
 
 /**
  * Author: Piotr Sukiennik
@@ -16,6 +16,7 @@ public class InsertStatementParser extends StatementParser<InsertQuery>  {
 
     @Override
     public void visit(Insert insert) {
+
         super.visit(insert);
     }
 

@@ -15,28 +15,28 @@
     <aop:config/>
     <aop:aspectj-autoproxy />
 
-    <bean id="statementsMonitor" class="pl.piotrsukiennik.tuner.statement.StatementsMonitor"/>
+    <bean name="jsqltunerIgnoreSchema" class="java.lang.String">
+        <constructor-arg value="jsqltuner"/>
+    </bean>
 
     <bean id="statementsInterceptingAdvice"  class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
-        <property name="advice" ><bean class="pl.piotrsukiennik.tuner.statement.StatementInterceptingAdvice"/></property>
+        <property name="advice" ref="statementInterceptingAdvice"/>
         <property name="order" value="1"/>
     </bean>
 
     <bean id="statementsRegisteringAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor" >
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (java.sql.* java.sql.Connection.*(..))"/>
-        <property name="advice" ><bean class="pl.piotrsukiennik.tuner.statement.StatementsRegisteringAdvice"/></property>
+        <property name="advice" ref="statementsRegisteringAdvice" />
         <property name="order" value="100"/>
     </bean>
 
     <bean id="statementsDeregisteringeAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (* java.sql.Connection.close(..))"/>
-        <property name="advice" >
-            <bean class="pl.piotrsukiennik.tuner.statement.StatementsDeregisteringAdvice"/></property>
+        <property name="advice" ref="statementsDeregisteringAdvice"/>
         <property name="order" value="10"/>
     </bean>
-    <bean id="dataSourceMonitorAspect" class="pl.piotrsukiennik.tuner.statement.DataSourceMonitorAspect"/>
 </beans>

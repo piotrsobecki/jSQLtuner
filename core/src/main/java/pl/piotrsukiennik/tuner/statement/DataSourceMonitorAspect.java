@@ -10,9 +10,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
+@Component
 @Aspect
 class DataSourceMonitorAspect {
 

@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 
 import net.sf.jsqlparser.statement.delete.Delete;
-import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.DeleteQuery;
 
 /**
  * Author: Piotr Sukiennik

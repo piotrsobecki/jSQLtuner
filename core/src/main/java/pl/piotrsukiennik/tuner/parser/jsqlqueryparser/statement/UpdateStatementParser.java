@@ -1,7 +1,10 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 
+import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.update.Update;
-import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.UpdateQuery;
+
+import java.util.List;
 
 /**
  * Author: Piotr Sukiennik
@@ -15,7 +18,9 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
 
     @Override
     public void visit(Update update) {
-        setQuery(new UpdateQuery());
+        List<Column> columnList = update.getColumns();
+        for (Column column: columnList){
+        }
         super.visit(update);
     }
 }

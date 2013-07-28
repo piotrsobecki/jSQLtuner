@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 @Transactional
 public class QueryExecutionService {
 
-    private @Resource SessionFactory sessionFactory;
+    private @Resource @Named("sessionFactory") SessionFactory sessionFactory;
 
 
     public Session s(){

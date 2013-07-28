@@ -9,7 +9,9 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StatementsMonitor {
 
 private ListMultimap<Connection, StatementHolder> statements = Multimaps.synchronizedListMultimap(ArrayListMultimap

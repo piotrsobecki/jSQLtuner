@@ -8,7 +8,9 @@ import java.lang.reflect.Method;
 import javax.inject.Inject;
 
 import org.springframework.aop.AfterReturningAdvice;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StatementsRegisteringAdvice implements AfterReturningAdvice {
 
 @Inject
