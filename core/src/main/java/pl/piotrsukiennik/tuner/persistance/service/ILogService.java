@@ -6,5 +6,5 @@ package pl.piotrsukiennik.tuner.persistance.service;
  * Time: 14:30
  */
 public interface ILogService {
-    void logException(String query, Exception exception);
+    void logException(String query, String exception);
 }

@@ -14,7 +14,7 @@ import javax.inject.Named;
  * Time: 15:00
  */
 public abstract class AbstractService {
-    private @Resource  @Named("jsqlTunerSessionFactory") SessionFactory sessionFactory;
+    private @Resource(name="jsqlTunerSessionFactory") SessionFactory sessionFactory;
 
     protected Session s(){
         return sessionFactory.getCurrentSession();

@@ -13,15 +13,15 @@ import java.util.Set;
 @Entity
 public class Table extends ValueEntity {
 
+    private Schema schema;
 
-     private Set<Column> columns;
-
-    @ManyToMany
-    public Set<Column> getColumns() {
-        return columns;
+    @ManyToOne
+    public Schema getSchema() {
+        return schema;
     }
 
-    public void setColumns(Set<Column> columns) {
-        this.columns = columns;
+    public void setSchema(Schema schema) {
+        this.schema = schema;
     }
+
 }

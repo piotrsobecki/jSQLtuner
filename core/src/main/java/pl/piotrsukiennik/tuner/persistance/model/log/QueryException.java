@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.log;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
+import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
  * Date: 26.07.13
  * Time: 22:17
  */
+@Entity
 public class QueryException extends ValueEntity {
     private String message;
     private Timestamp timestamp;

@@ -1,7 +1,9 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 
+import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.insert.Insert;
 import pl.piotrsukiennik.tuner.persistance.model.query.InsertQuery;
+import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 /**
  * Author: Piotr Sukiennik
@@ -10,8 +12,8 @@ import pl.piotrsukiennik.tuner.persistance.model.query.InsertQuery;
  */
 public class InsertStatementParser extends StatementParser<InsertQuery>  {
 
-    public InsertStatementParser(Insert insert) {
-        super(insert);
+    public InsertStatementParser(QueryContextManager queryContextManager,Insert insert) {
+        super(queryContextManager,insert);
     }
 
     @Override
@@ -20,8 +22,8 @@ public class InsertStatementParser extends StatementParser<InsertQuery>  {
         super.visit(insert);
     }
 
-    @Override
-    protected void init(Object o) {
+
+    protected void init(Statement o) {
         setQuery(new InsertQuery());
         super.init(o);
     }

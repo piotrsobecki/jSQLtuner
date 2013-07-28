@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.statement;
 
+import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+
 import java.sql.Statement;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,10 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Time: 18:19
  */
 public class StatementHolder {
-    private AtomicInteger atomicInteger = new AtomicInteger(0);
+    private static AtomicInteger atomicInteger = new AtomicInteger(0);
     private Integer id;
     private String sql;
     private Statement statement;
+    private Query query;
+    private long timestamp = System.currentTimeMillis();
 
     public StatementHolder(Integer id){
         this.id=id;
@@ -27,6 +31,17 @@ public class StatementHolder {
         return statement;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery(Query query) {
+        this.query = query;
+    }
 
     @Override
     public boolean equals(Object o) {

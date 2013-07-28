@@ -19,12 +19,37 @@
         <constructor-arg value="jsqltuner"/>
     </bean>
 
-    <bean id="statementsInterceptingAdvice"  class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+
+    <!-- QueryAdvisors -->
+
+    <bean class="pl.piotrsukiennik.tuner.statement.advisor.ReadQueryAdvisorBuilder">
+        <qualifier value="readQueryAdvisorBuilder"/>
+        <property name="expression" value="execution (java.sql.ResultSet java.sql.PreparedStatement.*(..))"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean class="pl.piotrsukiennik.tuner.statement.advisor.WriteQueryAdvisorBuilder">
+        <qualifier value="writeQueryAdvisorBuilder"/>
+        <property name="expression" value="execution (* java.sql.PreparedStatement.*(..))"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <!-- !QueryAdvisors -->
+
+
+
+
+
+
+    <!-- StatementsAdvisors -->
+
+    <bean id="statementsInterceptingAdvisor"  class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
         <property name="advice" ref="statementInterceptingAdvice"/>
         <property name="order" value="1"/>
     </bean>
+
 
     <bean id="statementsRegisteringAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor" >
         <qualifier value="connectionQualifier"/>
@@ -39,4 +64,8 @@
         <property name="advice" ref="statementsDeregisteringAdvice"/>
         <property name="order" value="10"/>
     </bean>
+
+
+    <!-- !StatementsAdvisors -->
+
 </beans>

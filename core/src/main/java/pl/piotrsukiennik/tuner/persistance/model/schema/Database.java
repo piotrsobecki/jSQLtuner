@@ -12,19 +12,4 @@ import java.util.Set;
  */
 @Entity
 public class Database extends ValueEntity {
-
-
-
-
-
-    private Set<Table> tables;
-
-    @OneToMany
-    public Set<Table> getTables() {
-        return tables;
-    }
-
-    public void setTables(Set<Table> tables) {
-        this.tables = tables;
-    }
 }

@@ -4,6 +4,7 @@ import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Union;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.ParsingVisitor;
+import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,8 +12,8 @@ import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.ParsingVisitor;
  * Time: 22:54
  */
 public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor implements net.sf.jsqlparser.statement.select.SelectVisitor {
-    public SelectBodyParser(T query) {
-        super(query);
+    public SelectBodyParser(QueryContextManager queryContextManager, T query) {
+        super(queryContextManager,query);
     }
 
     @Override

@@ -10,29 +10,44 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 import org.springframework.stereotype.Component;
+import pl.piotrsukiennik.tuner.statement.manager.StatementLiveCycleListener;
+
+import javax.annotation.Resource;
 
 @Component
 public class StatementsMonitor {
 
-private ListMultimap<Connection, StatementHolder> statements = Multimaps.synchronizedListMultimap(ArrayListMultimap
-.<Connection, StatementHolder> create());
+    private @Resource List<StatementLiveCycleListener> listeners;
 
-public void add(final Statement stmt, final String sql) throws SQLException {
-    statements.put(stmt.getConnection(), new StatementHolder(sql, stmt));
+    private ListMultimap<Connection, StatementHolder> statements = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Connection, StatementHolder> create());
+
+public StatementHolder add(final Statement stmt, final String sql) throws SQLException {
+    StatementHolder statementHolder =  new StatementHolder(sql, stmt);
+    statements.put(stmt.getConnection(),statementHolder);
+    for (StatementLiveCycleListener listener:listeners){
+        listener.onNewStatement(statementHolder);
+    }
+    return statementHolder;
 }
 
-public void remove(final Connection con) {
-    this.statements.removeAll(con);
+public List<StatementHolder> remove(final Connection con) {
+    List<StatementHolder> list =  this.statements.removeAll(con);
+    for (StatementLiveCycleListener listener:listeners){
+        for (StatementHolder statementHolder: list){
+            listener.onRemoveStatement(statementHolder);
+        }
     }
+    return list;
+}
 
 @ManagedOperation(description = "Current active JDBC statements.")
 public List<String> getCurrentStatements() {
-List<String> retVal = new ArrayList<String>(100);
-synchronized (this.statements) {
-for (StatementHolder stmt : statements.values()) {
-retVal.add(stmt.toString());
-}
-}
+    List<String> retVal = new ArrayList<String>(100);
+    synchronized (this.statements) {
+        for (StatementHolder stmt : statements.values()) {
+             retVal.add(stmt.toString());
+        }
+    }
 
 return retVal;
 }

@@ -11,6 +11,8 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.parser.IQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 
 /**
@@ -18,11 +20,12 @@ import pl.piotrsukiennik.tuner.parser.IQuery;
  * Date: 26.07.13
  * Time: 23:06
  */
-public abstract class StatementParser<T extends IQuery> extends ParsingVisitor<T> implements StatementVisitor {
+public abstract class StatementParser<T extends Query> extends ParsingVisitor<T> implements StatementVisitor {
 
 
-    protected StatementParser(Statement statement){
-        super();
+
+    protected StatementParser(QueryContextManager queryContextManager,Statement statement){
+        super(queryContextManager);
         init(statement);
         statement.accept(this);
     }

@@ -3,9 +3,7 @@ package pl.piotrsukiennik.tuner.statement;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-public abstract class InterceptingAdvice<T> implements MethodInterceptor {
-
-
+public interface InterceptingAdvice<T> extends MethodInterceptor {
     @Override
-    public abstract T invoke(MethodInvocation methodInvocation) throws Throwable;
+    T invoke(MethodInvocation methodInvocation) throws Throwable;
 }

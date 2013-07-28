@@ -4,6 +4,7 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.SelectBodyParser;
+import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,18 +12,16 @@ import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.SelectBodyParser;
  * Time: 23:15
  */
 public class SelectStatementParser extends StatementParser<SelectQuery>  {
-    public SelectStatementParser(Select select) {
-        super(select);
+    public SelectStatementParser(QueryContextManager queryContextManager, Select select) {
+        super(queryContextManager,select);
 
     }
 
     @Override
     public void visit(Select select) {
         SelectBody selectBody = select.getSelectBody();
-        SelectBodyParser<SelectQuery> parsingVisitor = new SelectBodyParser<SelectQuery>(query);
+        SelectBodyParser<SelectQuery> parsingVisitor = new SelectBodyParser<SelectQuery>(getQueryContextManager(),query);
         selectBody.accept(parsingVisitor);
-
-
         super.visit(select);
     }
 

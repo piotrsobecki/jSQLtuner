@@ -6,6 +6,7 @@ import pl.piotrsukiennik.tuner.parser.IQuery;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import java.sql.Timestamp;
 
 /**
  * Author: Piotr Sukiennik
@@ -15,8 +16,16 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class Query  extends ValueEntity implements IQuery{
-    private long executionTimeMillis;
     private long hash;
+    private long timestamp;
+    private long executionTimeMillis;
+    public  long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public long getExecutionTimeMillis() {
         return executionTimeMillis;

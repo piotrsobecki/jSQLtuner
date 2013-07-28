@@ -14,16 +14,14 @@ import java.util.Set;
 public class Schema extends ValueEntity {
 
 
+    private Database database;
 
-
-    private Set<Table> tables;
-
-    @OneToMany
-    public Set<Table> getTables() {
-        return tables;
+    @ManyToOne
+    public Database getDatabase() {
+        return database;
     }
 
-    public void setTables(Set<Table> tables) {
-        this.tables = tables;
+    public void setDatabase(Database database) {
+        this.database = database;
     }
 }

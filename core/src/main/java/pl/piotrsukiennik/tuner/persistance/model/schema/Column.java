@@ -11,10 +11,20 @@ import javax.persistence.*;
  */
 @Entity
 public class Column extends ValueEntity {
+    private Table table;
 
+    @ManyToOne
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
 
     private Type type;
-   @ManyToOne
+
+    @ManyToOne
     public Type getType() {
         return type;
     }
