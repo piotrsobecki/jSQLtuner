@@ -10,6 +10,7 @@ import javax.persistence.Entity;
  * Time: 21:05
  */
 @Entity
+@javax.persistence.Table(name = "ProcedureEntity")
 public class Procedure extends ValueEntity {
 
 

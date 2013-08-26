@@ -3,9 +3,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.parser.IQuery;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -16,7 +14,7 @@ import java.sql.Timestamp;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class Query  extends ValueEntity implements IQuery{
-    private long hash;
+    private String hash;
     private long timestamp;
     private long executionTimeMillis;
     public  long getTimestamp() {
@@ -34,12 +32,11 @@ public abstract class Query  extends ValueEntity implements IQuery{
     public void setExecutionTimeMillis(long executionTimeMillis) {
         this.executionTimeMillis = executionTimeMillis;
     }
-
-    public long getHash() {
+    @Column(length = 32)
+    public String getHash() {
         return hash;
     }
-
-    public void setHash(long hash) {
+    public void setHash(String hash) {
         this.hash = hash;
     }
 }

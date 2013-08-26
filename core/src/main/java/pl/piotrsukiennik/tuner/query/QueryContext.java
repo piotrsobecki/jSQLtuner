@@ -5,6 +5,7 @@ import pl.piotrsukiennik.tuner.persistance.model.schema.Column;
 import pl.piotrsukiennik.tuner.persistance.model.schema.Database;
 import pl.piotrsukiennik.tuner.persistance.model.schema.Schema;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,9 +19,9 @@ public class QueryContext {
 
     private Schema schema;
 
-    private Map<String,Table> tables;
+    private Map<String,Table> tables = new HashMap<String, Table>();
 
-    private Map<String,Column> columns;
+    private Map<String,Column> columns= new HashMap<String, Column>();
 
     public Database getDatabase() {
         return database;

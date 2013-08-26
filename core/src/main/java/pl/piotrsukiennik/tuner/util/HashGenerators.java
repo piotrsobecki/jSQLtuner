@@ -18,4 +18,6 @@ public class HashGenerators {
             return MD5Hash.toMd5(value);
         }
     };
+
+
 }

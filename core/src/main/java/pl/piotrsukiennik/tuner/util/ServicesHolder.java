@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.persistance.service.ILogService;
 import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
+import pl.piotrsukiennik.tuner.persistance.service.transactional.LogServiceImpl;
+import pl.piotrsukiennik.tuner.persistance.service.transactional.QueryServiceImpl;
+import pl.piotrsukiennik.tuner.persistance.service.transactional.SchemaServiceImpl;
 
 import javax.annotation.Resource;
 
@@ -35,7 +38,7 @@ public class ServicesHolder {
 
     public ILogService getLogService() {
         if (logService==null){
-            logService = applicationContext.getBean(ILogService.class);
+            logService = applicationContext.getBean("LogService",ILogService.class);
         }
         return logService;
     }
@@ -45,8 +48,8 @@ public class ServicesHolder {
     }
 
     public IQueryService getQueryService() {
-        if (schemaService==null){
-            queryService = applicationContext.getBean(IQueryService.class);
+        if (queryService==null){
+            queryService = applicationContext.getBean("QueryService",IQueryService.class);
         }
         return queryService;
     }
@@ -57,7 +60,7 @@ public class ServicesHolder {
 
     public ISchemaService getSchemaService() {
         if (schemaService==null){
-            schemaService = applicationContext.getBean(ISchemaService.class);
+            schemaService = applicationContext.getBean("SchemaService",ISchemaService.class);
         }
         return schemaService;
     }

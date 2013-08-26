@@ -11,5 +11,6 @@ import java.util.Set;
  * Time: 20:57
  */
 @Entity
+@javax.persistence.Table(name = "DatabaseEntity")
 public class Database extends ValueEntity {
 }

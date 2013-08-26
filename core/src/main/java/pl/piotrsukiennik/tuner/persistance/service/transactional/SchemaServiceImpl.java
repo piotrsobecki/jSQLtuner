@@ -2,7 +2,8 @@ package pl.piotrsukiennik.tuner.persistance.service.transactional;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.persistance.model.schema.*;
 import pl.piotrsukiennik.tuner.persistance.service.AbstractService;
 import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
@@ -12,7 +13,8 @@ import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
  * Date: 28.07.13
  * Time: 20:03
  */
-@Component
+@Service(value = "SchemaService")
+@Transactional
 public class SchemaServiceImpl extends AbstractService implements ISchemaService {
     @Override
     public Database getDatabase(String databaseName) {

@@ -15,7 +15,7 @@ import pl.piotrsukiennik.tuner.statement.InterceptingAdvice;
  */
 public abstract class QueryAdvice<Q extends Query,O extends Object> implements InterceptingAdvice<O> {
 
-    private Q query;
+    protected Q query;
 
     public QueryAdvice(Q query) {
         this.query = query;

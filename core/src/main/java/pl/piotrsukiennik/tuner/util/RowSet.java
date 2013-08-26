@@ -12,9 +12,10 @@ import java.sql.SQLException;
  */
 public class RowSet {
     private RowSet(){}
-    public static CachedRowSet cached(javax.sql.RowSet rowSet) throws SQLException{
+    public static CachedRowSet cached(java.sql.ResultSet rowSet) throws SQLException{
         CachedRowSetImpl cachedRowSet = new CachedRowSetImpl();
         cachedRowSet.populate(rowSet);
+
         return cachedRowSet;
     }
 }

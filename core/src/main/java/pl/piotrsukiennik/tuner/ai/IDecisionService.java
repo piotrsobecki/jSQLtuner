@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
  * Time: 14:13
  */
 public interface IDecisionService {
-    boolean checkToProxy(Connection connection);
+    boolean checkToProxy(String schema);
     boolean checkProceed(IQuery query);
     PreparedStatement proceed(PreparedStatement source, Connection connection,String query) throws Throwable;
 

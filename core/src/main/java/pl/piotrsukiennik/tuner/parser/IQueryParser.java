@@ -9,5 +9,5 @@ import pl.piotrsukiennik.tuner.persistance.model.query.Query;
  * Time: 17:44
  */
 public interface IQueryParser {
-    Query parse(String query)  ;
+    Query parse(String databaseStr, String schemaStr, String queryStr)  ;
 }

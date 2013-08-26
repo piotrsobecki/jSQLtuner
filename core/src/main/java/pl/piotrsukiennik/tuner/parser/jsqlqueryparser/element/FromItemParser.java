@@ -20,7 +20,6 @@ import pl.piotrsukiennik.tuner.util.QueryUtils;
  * Date: 27.07.13
  * Time: 13:24
  */
-@Component
 public class FromItemParser implements FromItemVisitor {
 
 
@@ -37,7 +36,7 @@ public class FromItemParser implements FromItemVisitor {
     public void visit(Table tableName) {
         TableSource tableSource = new TableSource();
         tableSource.setAlias(tableName.getAlias());
-        tableSource.setValue(tableName.getWholeTableName() + tableName.getAlias() == null ? "" : (" " + tableName.getAlias()));
+        tableSource.setValue(tableName.getWholeTableName() + (tableName.getAlias() == null ? "" : (" " + tableName.getAlias())));
         tableSource.setTable(queryContextManager.getTable(tableName.getWholeTableName()));
         if (sourceQuery instanceof SourcesAware){
             QueryUtils.addSource((SourcesAware) sourceQuery,tableSource);

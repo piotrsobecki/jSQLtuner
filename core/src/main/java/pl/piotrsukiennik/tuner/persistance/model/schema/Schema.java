@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.persistance.model.schema;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Table;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,12 +11,13 @@ import java.util.Set;
  * Time: 20:57
  */
 @Entity
+@Table(name = "SchemaEntity")
 public class Schema extends ValueEntity {
 
 
     private Database database;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     public Database getDatabase() {
         return database;
     }

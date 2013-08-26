@@ -1,9 +1,6 @@
 package pl.piotrsukiennik.tuner.query;
 
-import pl.piotrsukiennik.tuner.persistance.model.schema.Table;
-import pl.piotrsukiennik.tuner.persistance.model.schema.Column;
-import pl.piotrsukiennik.tuner.persistance.model.schema.Database;
-import pl.piotrsukiennik.tuner.persistance.model.schema.Schema;
+import pl.piotrsukiennik.tuner.persistance.model.schema.*;
 import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
 
 import javax.annotation.Resource;
@@ -17,7 +14,9 @@ import java.util.Map;
 public class QueryContextManager {
     private QueryContext queryContext;
     private ISchemaService schemaService;
-
+    public QueryContextManager(ISchemaService schemaService) {
+       this(schemaService,new QueryContext());
+    }
     public QueryContextManager(ISchemaService schemaService, QueryContext queryContext) {
         this.queryContext=queryContext;
         this.schemaService=schemaService;
@@ -61,6 +60,5 @@ public class QueryContextManager {
         return table;
 
     }
-
 
 }

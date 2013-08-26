@@ -7,6 +7,8 @@ import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
 import net.sf.jsqlparser.expression.operators.relational.*;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
+import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 /**
  * Author: Piotr Sukiennik
@@ -14,6 +16,15 @@ import net.sf.jsqlparser.statement.select.SubSelect;
  * Time: 13:25
  */
 public class ExpresionParser implements ExpressionVisitor {
+
+    private Query sourceQuery;
+    private QueryContextManager queryContextManager;
+
+    public ExpresionParser(QueryContextManager queryContextManager, Query sourceQuery) {
+        this.sourceQuery=sourceQuery;
+        this.queryContextManager=queryContextManager;
+    }
+
     @Override
     public void visit(NullValue nullValue) {
 
@@ -21,6 +32,7 @@ public class ExpresionParser implements ExpressionVisitor {
 
     @Override
     public void visit(Function function) {
+
     }
 
     @Override

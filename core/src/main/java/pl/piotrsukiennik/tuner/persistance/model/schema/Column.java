@@ -10,10 +10,11 @@ import javax.persistence.*;
  * Time: 20:57
  */
 @Entity
+@javax.persistence.Table(name = "ColumnEntity")
 public class Column extends ValueEntity {
     private Table table;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     public Table getTable() {
         return table;
     }
@@ -24,7 +25,7 @@ public class Column extends ValueEntity {
 
     private Type type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Type getType() {
         return type;
     }

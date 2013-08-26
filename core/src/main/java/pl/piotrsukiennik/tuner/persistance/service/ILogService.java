@@ -7,4 +7,5 @@ package pl.piotrsukiennik.tuner.persistance.service;
  */
 public interface ILogService {
     void logException(String query, String exception);
+    void logException(String query, Throwable exception);
 }

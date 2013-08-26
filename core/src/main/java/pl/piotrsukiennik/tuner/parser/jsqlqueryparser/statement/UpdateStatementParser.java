@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 26.07.13
  * Time: 23:07
  */
-public class UpdateStatementParser<U extends UpdateQuery> extends StatementParser<UpdateQuery>{
+public class  UpdateStatementParser<U extends UpdateQuery> extends StatementParser<UpdateQuery>{
     public UpdateStatementParser(QueryContextManager queryContextManager,Update update) {
         super(queryContextManager,update);
     }
@@ -20,9 +20,7 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
     @Override
     public void visit(Update update) {
         List<Column> columnList = update.getColumns();
-        for (Column column: columnList){
 
-        }
         super.visit(update);
     }
 }

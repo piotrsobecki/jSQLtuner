@@ -6,10 +6,7 @@ import pl.piotrsukiennik.tuner.persistance.model.query.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.Source;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OrderBy;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +34,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
 
     private Query parentQuery;
 
-    private Boolean distinct;
+    private Boolean distinctFragment;
 
 
 
@@ -62,15 +59,16 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
         this.limitTo = limitTo;
     }
 
-    public Boolean getDistinct() {
-        return distinct;
+    public Boolean getDistinctFragment() {
+        return distinctFragment;
     }
 
-    public void setDistinct(Boolean distinct) {
-        this.distinct = distinct;
+    public void setDistinctFragment(Boolean distinctFragment) {
+        this.distinctFragment = distinctFragment;
     }
 
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     public List<Projection> getProjections() {
         return projections;
     }
@@ -78,8 +76,8 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     public void setProjections(List<Projection> projections) {
         this.projections = projections;
     }
-
-    @ManyToMany
+    @JoinTable(name = "SelectQuery_Joins")
+    @ManyToMany(cascade = CascadeType.ALL)
     public Set<Source> getSources() {
         return sources;
     }
@@ -87,8 +85,16 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     public void setSources(Set<Source> sources) {
         this.sources = sources;
     }
+    @JoinTable(name = "SelectQuery_Sources")
+    @ManyToMany(cascade = CascadeType.ALL)
+    public Set<Source> getJoins() {
+        return joins;
+    }
 
-    @ManyToMany
+    public void setJoins(Set<Source> joins) {
+        this.joins = joins;
+    }
+    @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
     public List<GroupByFragment> getGroups() {
         return groups;
@@ -98,16 +104,10 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
         this.groups = groups;
     }
 
-    @ManyToMany
-    public Set<Source> getJoins() {
-        return joins;
-    }
 
-    public void setJoins(Set<Source> joins) {
-        this.joins = joins;
-    }
 
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
     public List<OrderByFragment> getOrders() {
         return orders;
@@ -116,7 +116,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     public void setOrders(List<OrderByFragment> orders) {
         this.orders = orders;
     }
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
     public Query getParentQuery() {
         return parentQuery;
     }
@@ -126,7 +126,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     }
 
     @Override
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     public Set<Condition> getConditions() {
         return conditions;
     }

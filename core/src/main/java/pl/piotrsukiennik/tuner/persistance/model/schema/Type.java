@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
  * Time: 21:20
  */
 @Entity
+@javax.persistence.Table(name = "TypeEntity")
 public class Type extends ValueEntity{
 
     private Database database;

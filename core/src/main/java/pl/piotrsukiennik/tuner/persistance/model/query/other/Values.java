@@ -4,6 +4,7 @@ import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  * Time: 21:09
  */
 @Entity
+@Table(name = "ValuesEntity")
 public class Values extends ValueEntity {
     private List<ColumnValue> columnValues;
 

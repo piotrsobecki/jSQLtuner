@@ -9,9 +9,12 @@ import pl.piotrsukiennik.tuner.parser.IQuery;
 import pl.piotrsukiennik.tuner.parser.IQueryParser;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.StatementParserVisitor;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Database;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Schema;
 import pl.piotrsukiennik.tuner.persistance.service.ILogService;
 import pl.piotrsukiennik.tuner.query.QueryContext;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
+import pl.piotrsukiennik.tuner.util.HashGenerators;
 import pl.piotrsukiennik.tuner.util.ServicesHolder;
 
 
@@ -28,15 +31,16 @@ public class JSqlQueryParser implements IQueryParser {
     private @Resource ServicesHolder services;
 
     @Override
-    public Query parse(String query)  {
+    public Query parse(String databaseStr, String schemaStr, String query)  {
         try{
             CCJSqlParserManager pm = new CCJSqlParserManager();
-            QueryContext queryContext = new QueryContext();
-            QueryContextManager queryContextManager = new QueryContextManager(services.getSchemaService(),queryContext);
+            QueryContextManager queryContextManager = new QueryContextManager(services.getSchemaService());
+            Database database = queryContextManager.getDatabase(databaseStr);
+            Schema schema = queryContextManager.getSchema(schemaStr);
             StatementParserVisitor statementParserVisitor = new StatementParserVisitor(queryContextManager,pm.parse(new StringReader(query)));
             return  statementParserVisitor.getQuery();
         }catch (JSQLParserException e){
-            services.getLogService().logException(query, e.getCause().getMessage());
+            services.getLogService().logException(query, e);
         }
         return null;
     }

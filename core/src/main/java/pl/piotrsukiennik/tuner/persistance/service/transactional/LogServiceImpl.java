@@ -13,9 +13,13 @@ import java.sql.Timestamp;
  * Date: 27.07.13
  * Time: 15:01
  */
-@Service
+@Service(value = "LogService")
 @Transactional(readOnly = true)
 public class LogServiceImpl extends AbstractService implements ILogService {
+
+    public void logException(String query, Throwable exception) {
+        logException(query,exception.getCause().getMessage());
+    }
     @Override
     @Transactional(readOnly = false)
     public void logException(String query, String exception) {

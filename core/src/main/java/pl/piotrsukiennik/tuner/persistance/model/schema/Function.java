@@ -2,8 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.schema;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,10 +10,11 @@ import javax.persistence.ManyToOne;
  * Time: 20:59
  */
 @Entity
+@javax.persistence.Table(name = "FunctionEntity")
 public class Function extends ValueEntity {
     private Database database;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     public Database getDatabase() {
         return database;
     }

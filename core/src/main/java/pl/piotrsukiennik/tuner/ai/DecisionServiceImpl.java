@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.parser.IQuery;
 import pl.piotrsukiennik.tuner.parser.IQueryParser;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 import pl.piotrsukiennik.tuner.statement.PreparedStatementProxyCreator;
 import pl.piotrsukiennik.tuner.statement.manager.QueryCompletionListener;
 import pl.piotrsukiennik.tuner.statement.manager.QueryInitializationListener;
@@ -15,9 +16,11 @@ import pl.piotrsukiennik.tuner.util.Statements;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.List;
+import java.util.Properties;
 import java.util.TreeSet;
 
 /**
@@ -42,9 +45,8 @@ public class DecisionServiceImpl implements IDecisionService {
     private List<String> ignoreSchema;
 
     @Override
-    public boolean checkToProxy(Connection connection) {
-        String preparedStatementSchema = Statements.getSchema(connection);
-        return !ignoreSchema.contains(preparedStatementSchema);
+    public boolean checkToProxy(String schema) {
+        return !ignoreSchema.contains(schema);
     }
 
     @Override
@@ -58,12 +60,14 @@ public class DecisionServiceImpl implements IDecisionService {
     }
 
 
-    @Override
     public PreparedStatement proceed(PreparedStatement source, Connection connection, String queryString) throws Throwable{
-        if (checkToProxy(connection)){
-            Query query = parser.parse(queryString);
-            for (QueryInitializationListener queryInitializationListener:listeners){
-                queryInitializationListener.onNewQuery(query,source);
+        String schema = Statements.getSchema(connection);
+        if (checkToProxy(schema)){
+            Query query = parser.parse(schema,schema,queryString);
+            if (query!=null){
+                for (QueryInitializationListener queryInitializationListener:listeners){
+                    queryInitializationListener.onNewQuery(query,source);
+                }
             }
             return proceed(source, query);
         }
