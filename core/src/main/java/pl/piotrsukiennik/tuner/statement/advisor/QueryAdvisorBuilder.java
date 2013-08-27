@@ -3,7 +3,10 @@ package pl.piotrsukiennik.tuner.statement.advisor;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
+import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+
+import javax.annotation.Resource;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,6 +14,8 @@ import pl.piotrsukiennik.tuner.persistance.model.query.Query;
  * Time: 15:56
  */
 public abstract class QueryAdvisorBuilder<Q extends Query> {
+
+    protected  @Resource  DataSourcesManager manager;
     private String expression;
     private Integer order;
 

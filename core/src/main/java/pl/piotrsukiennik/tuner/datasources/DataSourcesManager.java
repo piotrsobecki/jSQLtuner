@@ -15,6 +15,7 @@ import java.util.Map;
 @Component
 public class DataSourcesManager {
 
+
     private Map<Query,IDataSource> sources = new LinkedHashMap<Query,IDataSource>();
 
 

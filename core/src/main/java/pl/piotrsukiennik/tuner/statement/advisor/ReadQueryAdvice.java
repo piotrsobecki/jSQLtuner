@@ -2,10 +2,8 @@ package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.aopalliance.intercept.MethodInvocation;
 import pl.piotrsukiennik.tuner.datasources.*;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 
-import javax.annotation.Resource;
 import java.sql.ResultSet;
 
 /**
@@ -13,29 +11,28 @@ import java.sql.ResultSet;
  * Date: 28.07.13
  * Time: 15:58
  */
-public class ReadQueryAdvice extends QueryAdvice<ReadQuery,ResultSet> implements IDataSourceAware {
+public class ReadQueryAdvice extends QueryAdvice<ReadQuery,ResultSet> {
 
-    private IDataSourceMetaData dataSourceMetaData;
-
-    private @Resource DataSourcesManager manager;
+    private DataSourcesManager manager;
 
 
-    public ReadQueryAdvice(ReadQuery query) {
+    public ReadQueryAdvice(DataSourcesManager dataSourcesManager, ReadQuery query) {
         super(query);
+        this.manager = dataSourcesManager;
     }
 
     @Override
     public ResultSet invoke(final MethodInvocation methodInvocation) throws Throwable {
-        manager.setDataForQuery(query,new MethodInvocationDataSource(dataSourceMetaData,methodInvocation));
+        manager.setDataForQuery(query,new StatementMethodInvocationDataSource(methodInvocation));
         return manager.getData(query);
     }
 
-    @Override
-    public IDataSourceMetaData getDataSourceMetaData() {
-        return dataSourceMetaData;
+
+    public DataSourcesManager getManager() {
+        return manager;
     }
 
-    protected void setDataSourceMetaData(IDataSourceMetaData dataSourceMetaData){
-        this.dataSourceMetaData = dataSourceMetaData;
+    public void setManager(DataSourcesManager manager) {
+        this.manager = manager;
     }
 }

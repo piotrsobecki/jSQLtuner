@@ -17,7 +17,7 @@ public class QueryExecutionBuilder {
         this.queryParser=queryParser;
     }
 
-    /*public QueryExecution build(String query, Long queryExecutionTime){
-        return new QueryExecution(queryParser.parse(query),hashGenerator.getHash(query),queryExecutionTime);
+    /*public QueryForDataSource build(String query, Long queryExecutionTime){
+        return new QueryForDataSource(queryParser.parse(query),hashGenerator.getHash(query),queryExecutionTime);
     }*/
 }

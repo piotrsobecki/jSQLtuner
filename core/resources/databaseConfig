@@ -1,0 +1,18 @@
+DELIMITER $$
+
+CREATE PROCEDURE `jsqltuner`.`updateQueryExecutionSettings` (queryId INT, dataSourceId INT)
+  BEGIN
+    SET @rs:=0;
+    UPDATE jsqltuner.queryfordatasource
+    SET probability = 1 - (averageExecutionTimeMillis / (SELECT * FROM ( SELECT SUM(b.averageExecutionTimeMillis) FROM queryfordatasource b
+    WHERE b.dataSource_id = dataSourceId AND b.query_id = queryId) AS T))
+    WHERE id>0 AND dataSource_id = dataSourceId AND query_id = queryId;
+
+    UPDATE jsqltuner.queryfordatasource
+    SET probability = (probability /
+                       (SELECT * FROM ( SELECT SUM(b.probability) FROM queryfordatasource b
+                       WHERE b.dataSource_id = dataSourceId AND b.query_id = queryId) AS T))
+      , rouletteShareTo= CAST((@rs:=@rs+probability) AS DECIMAL(10,5)),
+      rouletteShareFrom = rouletteShareTo-probability
+    WHERE id>0 AND dataSource_id = dataSourceId AND query_id = queryId;
+  END
