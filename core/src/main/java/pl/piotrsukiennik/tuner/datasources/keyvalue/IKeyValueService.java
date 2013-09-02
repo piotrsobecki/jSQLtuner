@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.datasources.keyvalue;
 
+import pl.piotrsukiennik.tuner.datasources.IDataSourceMetaData;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -7,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Date: 04.07.13
  * Time: 17:49
  */
-public interface IKeyValueService {
+public interface IKeyValueService extends IDataSourceMetaData{
     Object get(String key);
     void put(String key, Object value);
     void put(String key, Object value, TimeUnit timeUnit, long expiration);

@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.execution;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.persistence.*;
 
@@ -15,29 +16,35 @@ import javax.persistence.*;
 @NamedNativeQueries({
 @NamedNativeQuery(
         name = QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS,
-        query = "CALL updateQueryExecutionSettings(:queryId,:dataSourceId)"
+        query = "CALL updateQueryExecutionSettings(:queryId)"
 )
 })
+@NamedQueries({
+    @NamedQuery(name = QueryForDataSource.GET_DATASOURCE_FOR_QUERY,query = "SELECT q.dataSource FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo"),
+   @NamedQuery(name = QueryForDataSource.GET_FOR_QUERY,query = "FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo")
+})
 public class QueryForDataSource extends ValueEntity {
+    public static final String  GET_DATASOURCE_FOR_QUERY = "getDataSourceForQuery";
+    public static final String  GET_FOR_QUERY = "getForQuery";
 
     public static final String  UPDATE_QUERY_EXECUTION_SETTINGS = "updateQueryExecutionSettings";
 
-    private Query query;
+    private SelectQuery query;
     private DataSource dataSource;
-    private long averageRows;
-    private long averageExecutionTimeMillis;
+    private float averageRows;
+    private float averageExecutionTimeMillis;
     private long executions;
-    private float probability;
-    private float rouletteShareFrom;
-    private float rouletteShareTo;
+    private Float probability;
+    private Float rouletteShareFrom;
+    private Float rouletteShareTo;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public Query getQuery() {
+    public SelectQuery getQuery() {
         return query;
     }
 
-    public void setQuery(Query query) {
+    public void setQuery(SelectQuery query) {
         this.query = query;
     }
 
@@ -51,19 +58,19 @@ public class QueryForDataSource extends ValueEntity {
     }
 
 
-    public long getAverageRows() {
+    public float getAverageRows() {
         return averageRows;
     }
 
-    public void setAverageRows(long averageRows) {
+    public void setAverageRows(float averageRows) {
         this.averageRows = averageRows;
     }
 
-    public long getAverageExecutionTimeMillis() {
+    public float getAverageExecutionTimeMillis() {
         return averageExecutionTimeMillis;
     }
 
-    public void setAverageExecutionTimeMillis(long averageExecutionTimeMillis) {
+    public void setAverageExecutionTimeMillis(float averageExecutionTimeMillis) {
         this.averageExecutionTimeMillis = averageExecutionTimeMillis;
     }
 
@@ -74,28 +81,28 @@ public class QueryForDataSource extends ValueEntity {
     public void setExecutions(long executions) {
         this.executions = executions;
     }
-
-    public float getRouletteShareFrom() {
+    @Column(nullable  = true)
+    public Float getRouletteShareFrom() {
         return rouletteShareFrom;
     }
 
-    public void setRouletteShareFrom(float rouletteShareFrom) {
+    public void setRouletteShareFrom(Float rouletteShareFrom) {
         this.rouletteShareFrom = rouletteShareFrom;
     }
-
-    public float getRouletteShareTo() {
+    @Column(nullable = true)
+    public Float getRouletteShareTo() {
         return rouletteShareTo;
     }
 
-    public void setRouletteShareTo(float rouletteShareTo) {
+    public void setRouletteShareTo(Float rouletteShareTo) {
         this.rouletteShareTo = rouletteShareTo;
     }
-
-    public float getProbability() {
+    @Column(nullable = true)
+    public Float getProbability() {
         return probability;
     }
 
-    public void setProbability(float probability) {
+    public void setProbability(Float probability) {
         this.probability = probability;
     }
 }

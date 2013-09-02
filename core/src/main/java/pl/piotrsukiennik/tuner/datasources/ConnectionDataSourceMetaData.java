@@ -16,12 +16,9 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
     private final static String EXCEPTION_FORMAT = "%s.getIdentifier() Exception";
 
     private Connection connection;
-  //  private ILogService logService;
 
-    public ConnectionDataSourceMetaData(//ILogService logService,
-     Connection connection) {
+    public ConnectionDataSourceMetaData(Connection connection) {
         this.connection = connection;
-    //    this.logService = logService;
     }
 
     @Override
@@ -30,7 +27,6 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
             return connection.getMetaData().getURL();
         }
         catch (SQLException s){
-         //   logService.logException(String.format(EXCEPTION_FORMAT,this.getClass().toString()),s);
             return "";
         }
     }

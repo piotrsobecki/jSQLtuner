@@ -32,12 +32,12 @@ public class PreparedStatementProxyCreator {
 
     @Inject
     @Qualifier("readQueryAdvisorBuilder")
-    private List<ReadQueryAdvisorBuilder<ReadQuery>> readQueryAdvisors;
+    private List<ReadQueryAdvisorBuilder<SelectQuery>> readQueryAdvisors;
 
 
     public  <PS extends PreparedStatement> PS create(Query query, PS source){
-        if (query instanceof ReadQuery){
-            return attachAdvisors(readQueryAdvisors,(ReadQuery)query,source);
+        if (query instanceof SelectQuery){
+            return attachAdvisors(readQueryAdvisors,(SelectQuery)query,source);
         }   else if (query instanceof WriteQuery) {
             return attachAdvisors(writeQueryAdvisors, (WriteQuery) query, source);
         }

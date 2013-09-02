@@ -1,7 +1,9 @@
 package pl.piotrsukiennik.tuner.persistance.model.log;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Column;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.sql.Timestamp;
@@ -17,6 +19,7 @@ public class QueryException extends ValueEntity {
     private String message;
     private Timestamp timestamp;
 
+    @javax.persistence.Column(name = "`timestamp`")
     public Timestamp getTimestamp() {
         return timestamp;
     }

@@ -1,15 +1,10 @@
-package pl.piotrsukiennik.tuner.util;
+package pl.piotrsukiennik.tuner.util.holder;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.persistance.service.ILogService;
+import pl.piotrsukiennik.tuner.persistance.service.IQueryExecutionService;
 import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
-import pl.piotrsukiennik.tuner.persistance.service.transactional.LogServiceImpl;
-import pl.piotrsukiennik.tuner.persistance.service.transactional.QueryServiceImpl;
-import pl.piotrsukiennik.tuner.persistance.service.transactional.SchemaServiceImpl;
-
-import javax.annotation.Resource;
 
 /**
  * Author: Piotr Sukiennik
@@ -17,24 +12,13 @@ import javax.annotation.Resource;
  * Time: 13:14
  */
 @Component
-public class ServicesHolder {
-
-    private @Resource
-    ApplicationContext applicationContext;
+public class ServicesHolder extends Holder {
 
 
     private ILogService logService;
     private IQueryService queryService;
     private ISchemaService schemaService;
-
-
-    ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
-    void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private IQueryExecutionService queryExecutionService;
 
     public ILogService getLogService() {
         if (logService==null){
@@ -67,5 +51,16 @@ public class ServicesHolder {
 
     void setSchemaService(ISchemaService schemaService) {
         this.schemaService = schemaService;
+    }
+
+    public IQueryExecutionService getQueryExecutionService() {
+        if (queryExecutionService==null){
+            queryExecutionService = applicationContext.getBean("QueryExecutionService",IQueryExecutionService.class);
+        }
+        return queryExecutionService;
+    }
+
+    public void setQueryExecutionService(IQueryExecutionService queryExecutionService) {
+        this.queryExecutionService = queryExecutionService;
     }
 }

@@ -12,10 +12,21 @@ import java.sql.SQLException;
  */
 public class RowSet {
     private RowSet(){}
-    public static CachedRowSet cached(java.sql.ResultSet rowSet) throws SQLException{
+    public static CachedRowSetImpl cached(java.sql.ResultSet rowSet) throws SQLException{
         CachedRowSetImpl cachedRowSet = new CachedRowSetImpl();
         cachedRowSet.populate(rowSet);
-
         return cachedRowSet;
+    }
+
+    public static long size(CachedRowSet rowSet){
+        long rows =0;
+        try{
+            rowSet.last();
+            rows = rowSet.getPageSize();
+            rowSet.first();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rows;
     }
 }

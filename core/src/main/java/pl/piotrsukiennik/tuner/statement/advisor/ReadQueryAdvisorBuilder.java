@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.statement.advisor;
 import org.springframework.aop.Advisor;
 import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
 import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.annotation.Resource;
 
@@ -11,7 +12,7 @@ import javax.annotation.Resource;
  * Date: 28.07.13
  * Time: 16:16
  */
-public class ReadQueryAdvisorBuilder<Q extends ReadQuery> extends QueryAdvisorBuilder<Q> {
+public class ReadQueryAdvisorBuilder<Q extends SelectQuery> extends QueryAdvisorBuilder<Q> {
 
 
     @Override

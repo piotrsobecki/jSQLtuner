@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pl.piotrsukiennik.tuner.test.model.Test;
 import pl.piotrsukiennik.tuner.test.service.EntityService;
 import pl.piotrsukiennik.tuner.test.service.SQLQueryExecutionService;
 import pl.piotrsukiennik.tuner.test.util.Utils;
@@ -39,6 +40,7 @@ public class Main {
 
     public static void testEntities(ApplicationContext applicationContext ){
         final EntityService entityService = applicationContext.getBean(EntityService.class);
-        entityService.testEntities();
+        List<Test> tests =  entityService.testEntities();
+        System.out.println(tests);
     }
 }

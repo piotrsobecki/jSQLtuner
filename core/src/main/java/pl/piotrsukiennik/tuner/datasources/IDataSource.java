@@ -1,7 +1,10 @@
 package pl.piotrsukiennik.tuner.datasources;
 
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 
 /**
@@ -10,7 +13,9 @@ import java.sql.ResultSet;
  * Time: 22:00
  */
 public interface IDataSource {
+    void  setPersistedDataSource(DataSource ds);
+    DataSource getPersistedDataSource();
     IDataSourceMetaData getMetaData();
-    ResultSet getData(Query query) throws Throwable;
-    void putData(Query query,ResultSet resultSet);
+    DataRetrieval getData(SelectQuery query) throws Throwable;
+    void putData(SelectQuery query,Serializable resultSet);
 }

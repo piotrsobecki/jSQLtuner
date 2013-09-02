@@ -29,7 +29,7 @@
 
     <tx:advice  id="txAdvice" transaction-manager="jsqlTunerTransactionManager"/>
     <aop:config>
-        <aop:pointcut id="somePointcut" expression="execution (* pl.piotrsukiennik.tuner.persistance.service.transactional.*.*(..))"/>
+        <aop:pointcut id="somePointcut" expression="execution(* pl.piotrsukiennik.tuner.persistance.service.transactional.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="somePointcut" />
      </aop:config>
 

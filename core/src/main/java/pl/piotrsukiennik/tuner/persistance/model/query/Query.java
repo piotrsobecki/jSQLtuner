@@ -17,6 +17,8 @@ public abstract class Query  extends ValueEntity implements IQuery{
     private String hash;
     private long timestamp;
     private long executionTimeMillis;
+
+    @javax.persistence.Column(name = "`timestamp`")
     public  long getTimestamp() {
         return timestamp;
     }
