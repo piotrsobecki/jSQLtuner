@@ -1,8 +1,10 @@
 package pl.piotrsukiennik.tuner.persistance.service.transactional;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.ColumnValue;
@@ -24,8 +26,22 @@ import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 public class QueryServiceImpl extends AbstractService implements IQueryService {
 
     @Override
-    public void submit(Query query) {
-        persist(query);
+    public <T extends Query> T submit(T query) {
+        if (query.getId()==0){
+            Session session = s();
+            T queryPersisted = (T)getQueryByHash(query.getHash());
+            if (queryPersisted==null){
+               return persist(query);
+            } else{
+                return queryPersisted;
+            }
+        } else {
+            return query;
+        }
+    }
+
+    protected Query getQueryByHash(String hash){
+        return (Query)s().createCriteria(Query.class).add(Restrictions.eq("hash",hash)).setMaxResults(1).uniqueResult();
     }
 
     @Override
@@ -63,11 +79,12 @@ public class QueryServiceImpl extends AbstractService implements IQueryService {
         persist(source);
     }
 
-    protected void persist(Object object){
+    protected <T extends ValueEntity> T persist(T object){
         Session session = s();
         session.save(object);
         session.flush();
         session.refresh(object);
+        return object;
     }
 }
 

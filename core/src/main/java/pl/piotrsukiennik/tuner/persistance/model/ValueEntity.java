@@ -30,4 +30,23 @@ public abstract class ValueEntity {
     public void setValue(String value) {
         this.value = value;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ValueEntity)) return false;
+        ValueEntity that = (ValueEntity) o;
+
+        if (id != that.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
+    }
 }

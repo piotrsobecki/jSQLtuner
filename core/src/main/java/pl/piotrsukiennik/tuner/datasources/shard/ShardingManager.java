@@ -31,7 +31,7 @@ public class ShardingManager implements IShardingManager{
         if (dataSource!=null) {
             try{
                 ResultSet resultSet = null;
-                DataRetrieval dataRetrieval = new DataRetrieval();
+                DataRetrieval dataRetrieval = null;
                 dataRetrieval = dataSource.getData(query);
                 dataRetrieval.setDataSource(dataSource);
                 return dataRetrieval;
@@ -46,6 +46,7 @@ public class ShardingManager implements IShardingManager{
     public void put(SelectQuery query, Serializable data) {
         for (IDataSharder dataSharder : dataSharders) {
             dataSharder.putData(query, data);
+            queryExecutionService.submitPossibleDataSource(query,dataSharder);
         }
     }
 
@@ -53,6 +54,9 @@ public class ShardingManager implements IShardingManager{
     public void delete(Query query) {
         for (IDataSharder dataSharder : dataSharders) {
             dataSharder.delete(query);
+            if (query instanceof SelectQuery){
+                queryExecutionService.removePossibleDataSource((SelectQuery)query,dataSharder);
+            }
         }
     }
 

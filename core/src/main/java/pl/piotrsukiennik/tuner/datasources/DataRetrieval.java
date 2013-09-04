@@ -4,7 +4,6 @@ import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Author: Piotr Sukiennik
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 public class DataRetrieval {
     private ResultSet resultSet;
     private IDataSource dataSource;
-    private long executionTimeMillis;
+    private long executionTimeNano;
     private long rows;
 
     public ResultSet getResultSet() {
@@ -28,12 +27,12 @@ public class DataRetrieval {
         this.resultSet = resultSet;
     }
 
-    public long getExecutionTimeMillis() {
-        return executionTimeMillis;
+    public long getExecutionTimeNano() {
+        return executionTimeNano;
     }
 
-    public void setExecutionTimeMillis(long executionTimeMillis) {
-        this.executionTimeMillis = executionTimeMillis;
+    public void setExecutionTimeNano(long executionTimeNano) {
+        this.executionTimeNano = executionTimeNano;
     }
 
     public long getRows() {

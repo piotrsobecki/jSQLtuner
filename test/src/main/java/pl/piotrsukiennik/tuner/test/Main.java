@@ -17,9 +17,13 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("root-context.xml");
-        testQueries(applicationContext);
-        testEntities(applicationContext);
+        for (int i=0; i<3; i++){
+            testQueries(applicationContext);
+            testEntities(applicationContext);
+        }
+
     }
 
 

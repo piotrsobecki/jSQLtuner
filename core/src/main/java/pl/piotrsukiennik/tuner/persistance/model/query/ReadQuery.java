@@ -12,13 +12,5 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class ReadQuery extends Query {
-    private long rowsReturned;
 
-    public long getRowsReturned() {
-        return rowsReturned;
-    }
-
-    public void setRowsReturned(long rowsReturned) {
-        this.rowsReturned = rowsReturned;
-    }
 }

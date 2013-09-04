@@ -12,7 +12,6 @@ import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSou
 import pl.piotrsukiennik.tuner.statement.LocalDataSourceMapper;
 import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,29 +27,35 @@ public class QueryExecutionServiceWrapper  {
     private @Resource ServicesHolder servicesHolder;
     private @Resource LocalDataSourceMapper dataSourceMapper;
 
-
-
-
-    private LoadingCache<String,IDataSource> cache = CacheBuilder.<String,IDataSource>newBuilder().
-            build(new CacheLoader<String, IDataSource>() {
+    private LoadingCache<String,? extends IDataSource> cache = CacheBuilder.<String,IDataSource>newBuilder().
+            build(new CacheLoader<String,  IDataSource>() {
                 @Override
                 public IDataSource load(String key) throws Exception {
-                    return getLocal(servicesHolder.getQueryExecutionService().getDataSource(key));
+                    String[] keySplit = key.split(":");
+                    return getLocal(servicesHolder.getQueryExecutionService().getDataSource(Class.forName(keySplit[0]),keySplit[1]));
                 }
             });
+    public void removePossibleDataSource(SelectQuery query,
+                                                       IDataSource dataSource) {
 
+        servicesHolder.getQueryExecutionService().removeDataSourceForQuery(query, getDatabase(dataSource));
+    }
+    public QueryForDataSource submitPossibleDataSource(SelectQuery query,
+                                                 IDataSource dataSource) {
 
+        return servicesHolder.getQueryExecutionService().submitNewDataSourceForQuery(query, getDatabase(dataSource));
+    }
     public Collection<QueryForDataSource> submit(SelectQuery query,
                                                  DataRetrieval dataRetrieval) {
 
         return servicesHolder.getQueryExecutionService().submit(query,
                 getDatabase(dataRetrieval.getDataSource()),
-                dataRetrieval.getExecutionTimeMillis(),
+                dataRetrieval.getExecutionTimeNano(),
                 dataRetrieval.getRows());
     }
 
     protected DataSource getDatabase(IDataSource dataSource){
-        return servicesHolder.getQueryExecutionService().getDataSource(dataSource.getMetaData().getIdentifier());
+        return servicesHolder.getQueryExecutionService().getDataSource(dataSource.getClass(),dataSource.getMetaData().getIdentifier());
     }
     protected IDataSource getLocal(DataSource dataSource){
         Collection<IDataSource> collection = dataSourceMapper.getLocal(dataSource);
@@ -69,8 +74,9 @@ public class QueryExecutionServiceWrapper  {
     }
 
 
-    public IDataSource getDataSource(String identifier) {
-        return cache.getUnchecked(identifier);
+    public <T extends IDataSource> T getDataSource(Class<T> clazz, String identifier) {
+        String key = clazz.getName()+":"+identifier;
+        return (T)cache.getUnchecked(key);
     }
 
 }

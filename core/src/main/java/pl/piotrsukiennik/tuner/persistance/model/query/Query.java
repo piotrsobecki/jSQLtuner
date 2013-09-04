@@ -15,25 +15,8 @@ import java.sql.Timestamp;
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class Query  extends ValueEntity implements IQuery{
     private String hash;
-    private long timestamp;
-    private long executionTimeMillis;
 
-    @javax.persistence.Column(name = "`timestamp`")
-    public  long getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public long getExecutionTimeMillis() {
-        return executionTimeMillis;
-    }
-
-    public void setExecutionTimeMillis(long executionTimeMillis) {
-        this.executionTimeMillis = executionTimeMillis;
-    }
     @Column(length = 32)
     public String getHash() {
         return hash;
@@ -41,4 +24,5 @@ public abstract class Query  extends ValueEntity implements IQuery{
     public void setHash(String hash) {
         this.hash = hash;
     }
+
 }

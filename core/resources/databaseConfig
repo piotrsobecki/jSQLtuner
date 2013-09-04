@@ -4,7 +4,7 @@ CREATE PROCEDURE `jsqltuner`.`updateQueryExecutionSettings` (queryId INT, dataSo
   BEGIN
     SET @rs:=0;
     UPDATE jsqltuner.queryfordatasource
-    SET probability = 1 - (averageExecutionTimeMillis / (SELECT * FROM ( SELECT SUM(b.averageExecutionTimeMillis) FROM queryfordatasource b
+    SET probability = 1 - (averageExecutionTimeNano / (SELECT * FROM ( SELECT SUM(b.averageExecutionTimeNano) FROM queryfordatasource b
     WHERE b.dataSource_id = dataSourceId AND b.query_id = queryId) AS T))
     WHERE id>0 AND dataSource_id = dataSourceId AND query_id = queryId;
 

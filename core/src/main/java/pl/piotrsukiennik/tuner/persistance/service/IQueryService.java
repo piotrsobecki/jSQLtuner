@@ -17,7 +17,7 @@ import pl.piotrsukiennik.tuner.persistance.model.query.source.Source;
  */
 public interface IQueryService {
 
-    void submit(Query query);
+    <T extends Query> T submit(T query);
     void submit(Condition condition);
     void submit(ColumnValue columnValue);
     void submit(GroupByFragment groupByFragment);

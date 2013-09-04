@@ -18,7 +18,6 @@ public class QueryCompletionListenerImpl implements QueryCompletionListener {
 
     @Override
     public void queryCompleted(Query query) {
-        servicesHolder.getQueryService().submit(query);
     }
 
     @Override

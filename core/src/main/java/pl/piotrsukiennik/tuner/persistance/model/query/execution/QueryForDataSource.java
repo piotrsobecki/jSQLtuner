@@ -1,7 +1,6 @@
 package pl.piotrsukiennik.tuner.persistance.model.query.execution;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.persistence.*;
@@ -16,14 +15,17 @@ import javax.persistence.*;
 @NamedNativeQueries({
 @NamedNativeQuery(
         name = QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS,
-        query = "CALL updateQueryExecutionSettings(:queryId)"
+        query = "CALL updateQueryExecutionSettings(:queryHash)"
 )
 })
 @NamedQueries({
+        @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY,query = "DELETE FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND q.dataSource = (:dataSource)"),
     @NamedQuery(name = QueryForDataSource.GET_DATASOURCE_FOR_QUERY,query = "SELECT q.dataSource FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo"),
    @NamedQuery(name = QueryForDataSource.GET_FOR_QUERY,query = "FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo")
 })
 public class QueryForDataSource extends ValueEntity {
+
+    public static final String  REMOVE_DATASOURCE_FOR_QUERY = "removeDataSourceForQuery";
     public static final String  GET_DATASOURCE_FOR_QUERY = "getDataSourceForQuery";
     public static final String  GET_FOR_QUERY = "getForQuery";
 
@@ -32,7 +34,7 @@ public class QueryForDataSource extends ValueEntity {
     private SelectQuery query;
     private DataSource dataSource;
     private float averageRows;
-    private float averageExecutionTimeMillis;
+    private float averageExecutionTimeNano;
     private long executions;
     private Float probability;
     private Float rouletteShareFrom;
@@ -66,12 +68,12 @@ public class QueryForDataSource extends ValueEntity {
         this.averageRows = averageRows;
     }
 
-    public float getAverageExecutionTimeMillis() {
-        return averageExecutionTimeMillis;
+    public float getAverageExecutionTimeNano() {
+        return averageExecutionTimeNano;
     }
 
-    public void setAverageExecutionTimeMillis(float averageExecutionTimeMillis) {
-        this.averageExecutionTimeMillis = averageExecutionTimeMillis;
+    public void setAverageExecutionTimeNano(float averageExecutionTimeNano) {
+        this.averageExecutionTimeNano = averageExecutionTimeNano;
     }
 
     public long getExecutions() {
@@ -105,4 +107,7 @@ public class QueryForDataSource extends ValueEntity {
     public void setProbability(Float probability) {
         this.probability = probability;
     }
+
+
+
 }

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class RowSet {
     private RowSet(){}
     public static CachedRowSetImpl cached(java.sql.ResultSet rowSet) throws SQLException{
-        CachedRowSetImpl cachedRowSet = new CachedRowSetImpl();
+        CachedRowSetImpl cachedRowSet = new FixedCachedRowSetImpl();
         cachedRowSet.populate(rowSet);
         return cachedRowSet;
     }

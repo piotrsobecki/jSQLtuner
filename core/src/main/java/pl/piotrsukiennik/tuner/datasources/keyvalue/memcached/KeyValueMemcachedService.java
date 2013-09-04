@@ -1,6 +1,7 @@
 package pl.piotrsukiennik.tuner.datasources.keyvalue.memcached;
 
 import net.spy.memcached.MemcachedClient;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.datasources.keyvalue.IKeyValueService;
 import pl.piotrsukiennik.tuner.util.holder.MemcachedHolder;
@@ -9,6 +10,7 @@ import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Collection;

@@ -56,6 +56,6 @@ public class KeyValueDataSharder extends AbstractDataSource implements IDataShar
 
 
     protected String getKey(String suffix){
-        return keyValueService +suffix;
+        return suffix;
     }
 }

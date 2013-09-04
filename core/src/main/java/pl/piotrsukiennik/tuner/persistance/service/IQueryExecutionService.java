@@ -12,7 +12,11 @@ import java.util.Collection;
  * Time: 19:57
  */
 public interface IQueryExecutionService {
+
     DataSource getDataSourceForQuery(SelectQuery selectQuery);
-    DataSource getDataSource(String identifier);
-    Collection<QueryForDataSource> submit(final SelectQuery query,final  DataSource dataSource, long executionTimeMillis, long rows);
+    DataSource getDataSource(Class clazz, String identifier);
+    Collection<QueryForDataSource> submit(final SelectQuery query,final  DataSource dataSource, long executionTimeNano, long rows);
+    QueryForDataSource submitNewDataSourceForQuery(final SelectQuery query,final  DataSource dataSource);
+    void removeDataSourceForQuery(final SelectQuery query, final DataSource dataSource);
+
 }

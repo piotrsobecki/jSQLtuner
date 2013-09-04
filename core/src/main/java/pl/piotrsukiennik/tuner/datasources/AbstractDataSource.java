@@ -1,6 +1,5 @@
 package pl.piotrsukiennik.tuner.datasources;
 
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 
@@ -33,10 +32,10 @@ public abstract class AbstractDataSource implements IDataSource {
     @Override
     public final DataRetrieval getData(SelectQuery query) throws Throwable {
         DataRetrieval dataRetrieval = new DataRetrieval();
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         ResultSet resultSet = get(query);
-        long end = System.currentTimeMillis();
-        dataRetrieval.setExecutionTimeMillis(end-start);
+        long end = System.nanoTime();
+        dataRetrieval.setExecutionTimeNano(end - start);
         dataRetrieval.setResultSet(resultSet);
         return dataRetrieval;
     }

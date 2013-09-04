@@ -39,7 +39,6 @@ public abstract class ParsingVisitor<T extends Query> {
     protected  <T extends Object> void init(T o){
         if (query!=null){
             query.setValue(o.toString());
-            query.setTimestamp(System.currentTimeMillis());
         }
     }
 

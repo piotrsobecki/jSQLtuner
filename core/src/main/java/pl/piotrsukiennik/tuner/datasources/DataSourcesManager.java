@@ -4,11 +4,13 @@ import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.datasources.shard.IShardingManager;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSource;
 import pl.piotrsukiennik.tuner.persistance.service.QueryExecutionServiceWrapper;
 import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.annotation.Resource;
 import java.sql.ResultSet;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,7 +41,7 @@ public class DataSourcesManager {
                 shardingManager.put(query, RowSet.cached(dataRetrieval.getResultSet()));
             }
         }
-        executionService.submit(query,dataRetrieval);
+        Collection<QueryForDataSource> queries = executionService.submit(query,dataRetrieval);
         return dataRetrieval.getResultSet();
     }
 
