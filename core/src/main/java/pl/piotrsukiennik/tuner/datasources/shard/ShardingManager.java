@@ -30,7 +30,6 @@ public class ShardingManager implements IShardingManager{
         IDataSource dataSource =  queryExecutionService.getDataSourceForQuery(query);
         if (dataSource!=null) {
             try{
-                ResultSet resultSet = null;
                 DataRetrieval dataRetrieval = null;
                 dataRetrieval = dataSource.getData(query);
                 dataRetrieval.setDataSource(dataSource);

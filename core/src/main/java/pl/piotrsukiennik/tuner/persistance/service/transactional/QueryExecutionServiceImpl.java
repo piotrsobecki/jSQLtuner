@@ -16,6 +16,7 @@ import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.Random;
 
 /**
  * Author: Piotr Sukiennik
@@ -50,7 +51,11 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
 
     @Override
     public DataSource getDataSourceForQuery(SelectQuery selectQuery) {
-        return (DataSource) s().getNamedQuery(QueryForDataSource.GET_DATASOURCE_FOR_QUERY).setString("queryHash",selectQuery.getHash()).setDouble("random",Math.random()).setMaxResults(1).uniqueResult();
+        float random= (float)Math.random();
+        DataSource dataSource =  (DataSource) s().getNamedQuery(QueryForDataSource.GET_DATASOURCE_FOR_QUERY)
+                .setString("queryHash",selectQuery.getHash())
+                .setFloat("random", random).setMaxResults(1).uniqueResult();
+        return dataSource;
     }
     @Override
     public DataSource getDataSource(Class clazz, String identifier) {
@@ -84,7 +89,7 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
     public  QueryForDataSource submitNewDataSourceForQuery(final SelectQuery q,final  DataSource dataSource){
         Session session = s();
         SelectQuery persistedQuery = queryService.submit(q);
-        QueryForDataSource queryForDataSource = getQueryForDataSource(q,dataSource);
+        QueryForDataSource queryForDataSource = getQueryForDataSource(persistedQuery,dataSource);
         if (queryForDataSource==null){
             queryForDataSource = new QueryForDataSource();
             queryForDataSource.setAverageRows(-1);
@@ -105,6 +110,7 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
             session.flush();
             refreshRoulette(persistedQuery);
         }
+        sourceMultiValueMap.put(persistedQuery.getHash(),queryForDataSource);
         return queryForDataSource;
     }
     public  Collection<QueryForDataSource> submit(final SelectQuery q,final  DataSource dataSource, long executionTimeNano, long rows){
@@ -131,7 +137,7 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
                 float averageExecution = queryForDataSource.getAverageExecutionTimeNano();
                 float averageRows = queryForDataSource.getAverageRows();
                 averageRows = (averageRows * executions + rows)/(executions +1);
-                averageExecution = (averageExecution* executions + rows)/(executions+1);
+                averageExecution = (averageExecution* executions + executionTimeNano)/(executions+1);
                 queryForDataSource.setExecutions(executions+1);
                 queryForDataSource.setAverageExecutionTimeNano(averageExecution);
                 queryForDataSource.setAverageRows(averageRows);

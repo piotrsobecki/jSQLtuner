@@ -6,6 +6,7 @@ import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSource;
 import pl.piotrsukiennik.tuner.persistance.service.QueryExecutionServiceWrapper;
+import pl.piotrsukiennik.tuner.statement.LocalDataSourceMapper;
 import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.annotation.Resource;
@@ -22,24 +23,26 @@ import java.util.Map;
 @Component
 public class DataSourcesManager {
 
+    private @Resource
+    LocalDataSourceMapper dataSourceMapper;
 
-    private Map<Query,IDataSource> sources = new LinkedHashMap<Query,IDataSource>();
     private @Resource IShardingManager shardingManager;
     private @Resource QueryExecutionServiceWrapper executionService;
 
     public void setDataForQuery(Query query, IDataSource dataSource){
-        sources.put(query, dataSource);
+        dataSourceMapper.setRootDataSource(query,dataSource);
     }
 
     public ResultSet getData(SelectQuery query) throws Throwable{
         DataRetrieval dataRetrieval = shardingManager.getData(query);
         if (dataRetrieval == null){
-            IDataSource dataSource =  sources.get(query);
+            IDataSource dataSource =  dataSourceMapper.getRootDataSource(query);
             dataRetrieval=dataSource.getData(query);
             dataRetrieval.setDataSource(dataSource);
-            if (isShardable(query)){
+            if (isShardable(query)  && dataRetrieval.getResultSet() !=null){
                 shardingManager.put(query, RowSet.cached(dataRetrieval.getResultSet()));
             }
+
         }
         Collection<QueryForDataSource> queries = executionService.submit(query,dataRetrieval);
         return dataRetrieval.getResultSet();
