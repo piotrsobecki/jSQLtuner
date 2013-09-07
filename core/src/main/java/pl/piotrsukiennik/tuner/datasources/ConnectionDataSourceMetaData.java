@@ -16,15 +16,18 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
     private final static String EXCEPTION_FORMAT = "%s.getIdentifier() Exception";
 
     private Connection connection;
-
+    private String identifier;
     public ConnectionDataSourceMetaData(Connection connection) {
         this.connection = connection;
     }
 
     @Override
     public String getIdentifier() {
+        if (identifier!=null){
+            return identifier;
+        }
         try{
-            return connection.getMetaData().getURL();
+            return identifier =  connection.getMetaData().getURL();
         }
         catch (SQLException s){
             return "";

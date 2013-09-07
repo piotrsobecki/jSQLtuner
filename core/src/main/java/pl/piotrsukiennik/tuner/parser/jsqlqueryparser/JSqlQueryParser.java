@@ -34,7 +34,7 @@ public class JSqlQueryParser implements IQueryParser {
             StatementParserVisitor statementParserVisitor = new StatementParserVisitor(queryContextManager,pm.parse(new StringReader(query)));
             return  statementParserVisitor.getQuery();
         }catch (JSQLParserException e){
-            services.getLogService().logException(query, e);
+             services.getLogService().logException(query, e);
         }
         return null;
     }

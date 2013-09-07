@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element;
 
+import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
 import net.sf.jsqlparser.statement.select.SubSelect;
@@ -8,6 +9,8 @@ import pl.piotrsukiennik.tuner.persistance.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
+
+import java.util.List;
 
 /**
  * Author: Piotr Sukiennik
@@ -30,15 +33,17 @@ public class ItemsListParser implements ItemsListVisitor {
         selectQuery.setParentQuery(sourceQuery);
         FromItemParser fromItemParser = new FromItemParser(queryContextManager,selectQuery);
         ExpresionParser expresionParser = new ExpresionParser(queryContextManager,selectQuery);
-        ItemsListParser itemsListParser = new ItemsListParser(queryContextManager,selectQuery);
         subSelect.accept(fromItemParser);
         subSelect.accept(expresionParser);
-        subSelect.accept(itemsListParser);
     }
 
     @Override
     public void visit(ExpressionList expressionList) {
         ItemsListParser itemsListParser = new ItemsListParser(queryContextManager,sourceQuery);
-        expressionList.accept(itemsListParser);
+        List<Expression> expressions  = expressionList.getExpressions();
+        for (Expression ex: expressions){
+            ExpresionParser expresionParser = new ExpresionParser(queryContextManager,sourceQuery);
+            ex.accept(expresionParser);
+        }
     }
 }

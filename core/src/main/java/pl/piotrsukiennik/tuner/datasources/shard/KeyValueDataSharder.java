@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 import javax.sql.rowset.CachedRowSet;
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,8 +24,8 @@ import java.util.concurrent.TimeUnit;
  * Time: 19:17
  */
 public class KeyValueDataSharder extends AbstractDataSource implements IDataSharder{
-    private
-    IKeyValueService keyValueService;
+    private IKeyValueService keyValueService;
+    private Set<String> supportedQueries = new LinkedHashSet<String>();
 
     public KeyValueDataSharder(IKeyValueService keyValueService) {
         super(new IdentifierMetaData(keyValueService.getIdentifier()));
@@ -38,20 +40,21 @@ public class KeyValueDataSharder extends AbstractDataSource implements IDataShar
 
     @Override
     public boolean contains(SelectQuery query) {
-        String key =  getKey(query.getHash());
-        return keyValueService.get(key)!=null;
+        return supportedQueries.contains(query.getHash());
     }
 
     @Override
     public void putData(SelectQuery query, Serializable data) {
         String key =  getKey(query.getHash());
         keyValueService.put(key, data);
+        supportedQueries.add(query.getHash());
     }
 
     @Override
     public void delete(Query query) {
         String key =  getKey(query.getHash());
         keyValueService.delete(key);
+        supportedQueries.remove(query.getHash());
     }
 
 

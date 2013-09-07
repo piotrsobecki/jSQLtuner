@@ -4,8 +4,12 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.persistance.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.source.Source;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
+import pl.piotrsukiennik.tuner.util.CollectionUtils;
+
+import java.util.Set;
 
 /**
  * Author: Piotr Sukiennik
@@ -27,7 +31,9 @@ public class SelectIntoTableParser implements IntoTableVisitor {
         tableSource.setAlias(tableName.getAlias());
         tableSource.setValue(tableName.getWholeTableName() + tableName.getAlias() == null ? "" : (" " + tableName.getAlias()));
         tableSource.setTable(queryContextManager.getTable(tableName.getWholeTableName()));
-       // sourceQuery.set(tableSource);
+        Set<Source> sourceSet = CollectionUtils.createNewLinkedHashSetIfNull(sourceQuery.getSources());
+        sourceSet.add(tableSource);
+        sourceQuery.setSources(sourceSet);
     }
 
 }
