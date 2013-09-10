@@ -6,6 +6,7 @@ import com.google.common.cache.LoadingCache;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.datasources.DataRetrieval;
 import pl.piotrsukiennik.tuner.datasources.IDataSource;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSource;
@@ -27,38 +28,30 @@ public class QueryExecutionServiceWrapper  {
     private @Resource ServicesHolder servicesHolder;
     private @Resource LocalDataSourceMapper dataSourceMapper;
 
-    private LoadingCache<String,? extends IDataSource> cache = CacheBuilder.<String,IDataSource>newBuilder().
-            build(new CacheLoader<String,  IDataSource>() {
-                @Override
-                public IDataSource load(String key) throws Exception {
-                    String[] keySplit = key.split(":");
-                    return getLocal(servicesHolder.getQueryExecutionService().getDataSource(Class.forName(keySplit[0]),keySplit[1]));
-                }
-            });
-    public void removePossibleDataSource(SelectQuery query,
+
+    public void removePossibleDataSource(ReadQuery query,
                                                        IDataSource dataSource) {
 
         servicesHolder.getQueryExecutionService().removeDataSourceForQuery(query, getDatabase(dataSource));
     }
-    public QueryForDataSource submitPossibleDataSource(SelectQuery query,
+    public QueryForDataSource submitPossibleDataSource(ReadQuery query,
                                                  IDataSource dataSource) {
 
         return servicesHolder.getQueryExecutionService().submitNewDataSourceForQuery(query, getDatabase(dataSource));
     }
-    public Collection<QueryForDataSource> submit(SelectQuery query,
+    public Collection<QueryForDataSource> submit(ReadQuery query,
                                                  DataRetrieval dataRetrieval) {
 
         return servicesHolder.getQueryExecutionService().submit(query,
                 getDatabase(dataRetrieval.getDataSource()),
-                dataRetrieval.getExecutionTimeNano(),
-                dataRetrieval.getRows());
+                dataRetrieval.getExecutionTimeNano());
     }
 
     protected DataSource getDatabase(IDataSource dataSource){
         return servicesHolder.getQueryExecutionService().getDataSource(dataSource.getClass(),dataSource.getMetaData().getIdentifier());
     }
-    protected IDataSource getLocal(DataSource dataSource){
-        Collection<IDataSource> collection = dataSourceMapper.getLocal(dataSource);
+    protected IDataSource getLocal(ReadQuery selectQuery,DataSource dataSource){
+        Collection<IDataSource> collection = dataSourceMapper.getLocal(selectQuery,dataSource);
         Iterator<IDataSource> iterator = collection.iterator();
         if (iterator.hasNext()){
             IDataSource dataSourceLocal =  iterator.next();
@@ -69,14 +62,8 @@ public class QueryExecutionServiceWrapper  {
         }
     }
 
-    public IDataSource getDataSourceForQuery(SelectQuery selectQuery) {
-        return getLocal(servicesHolder.getQueryExecutionService().getDataSourceForQuery(selectQuery));
-    }
-
-
-    public <T extends IDataSource> T getDataSource(Class<T> clazz, String identifier) {
-        String key = clazz.getName()+":"+identifier;
-        return (T)cache.getUnchecked(key);
+    public IDataSource getDataSourceForQuery(ReadQuery selectQuery) {
+        return getLocal(selectQuery,servicesHolder.getQueryExecutionService().getDataSourceForQuery(selectQuery));
     }
 
 }

@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
 
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("root-context.xml");
-        for (int i=0; i<100; i++){
+        for (int i=0; i<1000; i++){
             testQueries(applicationContext);
             testEntities(applicationContext);
         }

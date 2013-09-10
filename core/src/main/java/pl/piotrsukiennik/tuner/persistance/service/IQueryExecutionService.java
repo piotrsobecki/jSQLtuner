@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.persistance.service;
 
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSource;
@@ -13,10 +14,10 @@ import java.util.Collection;
  */
 public interface IQueryExecutionService {
 
-    DataSource getDataSourceForQuery(SelectQuery selectQuery);
+    DataSource getDataSourceForQuery(ReadQuery selectQuery);
     DataSource getDataSource(Class clazz, String identifier);
-    Collection<QueryForDataSource> submit(final SelectQuery query,final  DataSource dataSource, long executionTimeNano, long rows);
-    QueryForDataSource submitNewDataSourceForQuery(final SelectQuery query,final  DataSource dataSource);
-    void removeDataSourceForQuery(final SelectQuery query, final DataSource dataSource);
+    Collection<QueryForDataSource> submit(final ReadQuery query,final  DataSource dataSource, long executionTimeNano);
+    QueryForDataSource submitNewDataSourceForQuery(final ReadQuery query,final  DataSource dataSource);
+    void removeDataSourceForQuery(final ReadQuery query, final DataSource dataSource);
 
 }

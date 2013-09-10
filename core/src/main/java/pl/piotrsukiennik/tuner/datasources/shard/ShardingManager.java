@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.datasources.DataRetrieval;
 import pl.piotrsukiennik.tuner.datasources.IDataSource;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.service.QueryExecutionServiceWrapper;
 
@@ -26,7 +27,7 @@ public class ShardingManager implements IShardingManager{
 
 
     @Override
-    public DataRetrieval getData(SelectQuery query) {
+    public DataRetrieval getData(ReadQuery query) {
         IDataSource dataSource =  queryExecutionService.getDataSourceForQuery(query);
         if (dataSource!=null) {
             try{
@@ -42,7 +43,7 @@ public class ShardingManager implements IShardingManager{
     }
 
     @Override
-    public void put(SelectQuery query, Serializable data) {
+    public void put(ReadQuery query, Serializable data) {
         for (IDataSharder dataSharder : dataSharders) {
             dataSharder.putData(query, data);
             queryExecutionService.submitPossibleDataSource(query,dataSharder);

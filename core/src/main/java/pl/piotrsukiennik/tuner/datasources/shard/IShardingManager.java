@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.datasources.shard;
 
 import pl.piotrsukiennik.tuner.datasources.DataRetrieval;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.sql.rowset.CachedRowSet;
@@ -14,7 +15,7 @@ import java.sql.ResultSet;
  * Time: 18:57
  */
 public interface IShardingManager {
-    void put(SelectQuery query, Serializable data);
+    void put(ReadQuery query, Serializable data);
     void delete(Query query);
-    DataRetrieval getData(SelectQuery query);
+    DataRetrieval getData(ReadQuery query);
 }

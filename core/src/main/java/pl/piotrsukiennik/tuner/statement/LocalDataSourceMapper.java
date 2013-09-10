@@ -19,8 +19,8 @@ import java.util.*;
 @Component
 public class LocalDataSourceMapper {
 
-    private @Resource List<IDataSource> dataSourceList;
-    private Map<Query,IDataSource> rootDataSources = new LinkedHashMap<Query,IDataSource>();
+    private @Resource Set<IDataSource> dataSourceList;
+    private Map<String,IDataSource> rootDataSources = new LinkedHashMap<String,IDataSource>();
 
     private class IdentifierPredicate implements Predicate<IDataSource>{
         private String identifier;
@@ -34,20 +34,23 @@ public class LocalDataSourceMapper {
             return identifier.equalsIgnoreCase(iDataSource.getMetaData().getIdentifier());
         }
     }
-    public void addDataSource(IDataSource dataSource){
-        dataSourceList.add(dataSource);
-    }
+
     public IDataSource getRootDataSource(Query selectQuery){
-        return rootDataSources.get(selectQuery);
+        return rootDataSources.get(selectQuery.getHash());
     }
     public void setRootDataSource(Query query, IDataSource dataSource){
-        rootDataSources.put(query, dataSource);
-        dataSourceList.add(dataSource);
+        rootDataSources.put(query.getHash(), dataSource);
     }
-    public Collection<IDataSource> getLocal(DataSource dataSource){
+    public Collection<IDataSource> getLocal(Query query,DataSource dataSource){
         if (dataSource==null){
             return Collections.EMPTY_LIST;
         }
-        return Collections2.filter(dataSourceList, new IdentifierPredicate(dataSource.getIdentifier()));
+        IdentifierPredicate identifierPredicate  = new IdentifierPredicate(dataSource.getIdentifier());
+        Collection<IDataSource> out = new LinkedHashSet<IDataSource>(Collections2.filter(dataSourceList,identifierPredicate));
+        IDataSource rootDS =  getRootDataSource(query);
+        if (identifierPredicate.apply(rootDS)){
+            out.add(rootDS);
+        }
+        return out;
     }
 }

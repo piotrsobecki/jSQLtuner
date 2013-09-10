@@ -1,18 +1,62 @@
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE PROCEDURE `jsqltuner`.`updateQueryExecutionSettings` (queryId INT, dataSourceId INT)
-  BEGIN
-    SET @rs:=0;
-    UPDATE jsqltuner.queryfordatasource
-    SET probability = 1 - (averageExecutionTimeNano / (SELECT * FROM ( SELECT SUM(b.averageExecutionTimeNano) FROM queryfordatasource b
-    WHERE b.dataSource_id = dataSourceId AND b.query_id = queryId) AS T))
-    WHERE id>0 AND dataSource_id = dataSourceId AND query_id = queryId;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateQueryExecutionSettings`(IN queryId INT)
+BEGIN
 
-    UPDATE jsqltuner.queryfordatasource
-    SET probability = (probability /
-                       (SELECT * FROM ( SELECT SUM(b.probability) FROM queryfordatasource b
-                       WHERE b.dataSource_id = dataSourceId AND b.query_id = queryId) AS T))
-      , rouletteShareTo= CAST((@rs:=@rs+probability) AS DECIMAL(10,5)),
-      rouletteShareFrom = rouletteShareTo-probability
-    WHERE id>0 AND dataSource_id = dataSourceId AND query_id = queryId;
-  END
+	SET SQL_SAFE_UPDATES=0;
+	SET @rs:=0;
+	SET @sum:=0;
+	SET @updatedId := -1;
+
+	UPDATE jsqltuner.queryfordatasource q
+	SET q.rouletteShareFrom = 0,
+		q.rouletteShareTo = 1,
+		q.id = (SELECT @updatedId := q.id)
+	WHERE averageExecutionTimeNano<0 AND q.query_id=queryId; 
+
+	IF (@updatedId != -1) THEN 
+
+		UPDATE jsqltuner.queryfordatasource q
+		SET q.rouletteShareFrom = -1,
+			q.rouletteShareTo = -1,
+			q.id = (SELECT @updatedId := q.id)
+		WHERE q.query_id=queryId AND q.id != @updatedId; 
+
+	ELSE 
+
+		SELECT SUM(q.averageExecutionTimeNano) INTO @sum
+		FROM queryfordatasource q 
+		WHERE q.query_id=queryId;
+		
+		UPDATE jsqltuner.queryfordatasource q
+		SET q.probability =q.averageExecutionTimeNano / @sum
+		WHERE q.query_id=queryId;  
+
+		UPDATE jsqltuner.queryfordatasource q JOIN
+			(SELECT id,b.probability FROM (
+				(SELECT (@val1:=@val1+1) AS r,q.*
+				FROM jsqltuner.queryfordatasource q,(SELECT @val2:=0) s 
+				WHERE q.query_id=queryId ORDER BY q.probability ASC) a
+			JOIN 
+				(SELECT (@val2:=@val2+1) AS r,q.probability 
+				FROM jsqltuner.queryfordatasource q,(SELECT @val1:=0) s 
+				WHERE q.query_id=queryId ORDER BY q.probability DESC) b
+				on a.r=b.r )) AS T ON q.id = T.id 
+		SET q.probability = T.probability,
+			q.rouletteShareFrom =
+									CASE q.averageExecutionTimeNano
+										WHEN -1 THEN 0
+										ELSE CAST(@rs AS DECIMAL(15,10))
+									END
+			,q.rouletteShareTo = 
+									CASE q.averageExecutionTimeNano
+										WHEN -1 THEN 1
+										ELSE CAST(@rs := (@rs + T.probability) AS DECIMAL(15,10))
+									END WHERE q.id>0;
+	END IF;
+
+END

@@ -28,7 +28,6 @@ public class QueryServiceImpl extends AbstractService implements IQueryService {
     @Override
     public <T extends Query> T submit(T query) {
         if (query.getId()==0){
-            Session session = s();
             T queryPersisted = (T)getQueryByHash(query.getHash());
             if (queryPersisted==null){
                return persist(query);

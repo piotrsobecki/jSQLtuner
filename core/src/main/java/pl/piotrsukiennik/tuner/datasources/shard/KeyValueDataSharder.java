@@ -8,6 +8,7 @@ import pl.piotrsukiennik.tuner.datasources.IDataSourceMetaData;
 import pl.piotrsukiennik.tuner.datasources.IdentifierMetaData;
 import pl.piotrsukiennik.tuner.datasources.keyvalue.IKeyValueService;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.annotation.Resource;
@@ -33,18 +34,18 @@ public class KeyValueDataSharder extends AbstractDataSource implements IDataShar
     }
 
     @Override
-    public CachedRowSet get(SelectQuery query) {
+    public CachedRowSet get(ReadQuery query) {
         String key =  getKey(query.getHash());
         return (CachedRowSet) keyValueService.get(key);
     }
 
     @Override
-    public boolean contains(SelectQuery query) {
+    public boolean contains(ReadQuery query) {
         return supportedQueries.contains(query.getHash());
     }
 
     @Override
-    public void putData(SelectQuery query, Serializable data) {
+    public void putData(ReadQuery query, Serializable data) {
         String key =  getKey(query.getHash());
         keyValueService.put(key, data);
         supportedQueries.add(query.getHash());

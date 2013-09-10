@@ -2,13 +2,11 @@ package pl.piotrsukiennik.tuner.datasources;
 
 import org.aopalliance.intercept.MethodInvocation;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import java.io.Serializable;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -19,19 +17,44 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
 
     private Statement statement;
     private MethodInvocation methodInvocation;
-
-    public StatementMethodInvocationDataSource(Statement statement,MethodInvocation methodInvocation) throws SQLException {
+    private ReadQuery readQuery;
+    public StatementMethodInvocationDataSource(Statement statement,
+                                               MethodInvocation methodInvocation,
+                                               ReadQuery readQuery) throws SQLException {
         super(new ConnectionDataSourceMetaData(statement.getConnection()));
         this.statement = statement;
         this.methodInvocation=methodInvocation;
+        this.readQuery=readQuery;
     }
 
     @Override
-    protected ResultSet get(SelectQuery query) throws Throwable {
+    protected ResultSet get(ReadQuery query) throws Throwable {
         return (ResultSet)methodInvocation.proceed();
     }
 
     @Override
-    public void putData(SelectQuery query, Serializable resultSet) {
+    public void putData(ReadQuery query, Serializable resultSet) {
+    }
+
+    public ReadQuery getReadQuery() {
+        return readQuery;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o instanceof StatementMethodInvocationDataSource){
+            ReadQuery oQ = ((StatementMethodInvocationDataSource) o).getReadQuery();
+            return ((getReadQuery().getId()==oQ.getId()) && oQ.getId()!=0)
+                    || getReadQuery().getHash().equals(oQ.getHash());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + readQuery.hashCode();
+        return result;
     }
 }

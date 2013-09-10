@@ -24,7 +24,8 @@ public class ReadQueryAdvice extends QueryAdvice<SelectQuery,ResultSet> {
 
     @Override
     public ResultSet invoke(final MethodInvocation methodInvocation) throws Throwable {
-        manager.setDataForQuery(query,new StatementMethodInvocationDataSource((Statement)methodInvocation.getThis(),methodInvocation));
+        manager.setDataForQuery(query
+                ,new StatementMethodInvocationDataSource((Statement)methodInvocation.getThis(),methodInvocation,query));
         return manager.getData(query);
     }
 

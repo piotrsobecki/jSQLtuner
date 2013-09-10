@@ -1,6 +1,7 @@
 package pl.piotrsukiennik.tuner.persistance.model.query.execution;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NamedNativeQueries({
 @NamedNativeQuery(
         name = QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS,
-        query = "CALL updateQueryExecutionSettings(:queryHash)"
+        query = "CALL updateQueryExecutionSettings(:queryId)"
 )
 })
 @NamedQueries({
@@ -31,9 +32,8 @@ public class QueryForDataSource extends ValueEntity {
 
     public static final String  UPDATE_QUERY_EXECUTION_SETTINGS = "updateQueryExecutionSettings";
 
-    private SelectQuery query;
+    private ReadQuery query;
     private DataSource dataSource;
-    private float averageRows;
     private float averageExecutionTimeNano;
     private long executions;
     private Float probability;
@@ -42,11 +42,11 @@ public class QueryForDataSource extends ValueEntity {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public SelectQuery getQuery() {
+    public ReadQuery getQuery() {
         return query;
     }
 
-    public void setQuery(SelectQuery query) {
+    public void setQuery(ReadQuery query) {
         this.query = query;
     }
 
@@ -57,15 +57,6 @@ public class QueryForDataSource extends ValueEntity {
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-
-    public float getAverageRows() {
-        return averageRows;
-    }
-
-    public void setAverageRows(float averageRows) {
-        this.averageRows = averageRows;
     }
 
     public float getAverageExecutionTimeNano() {

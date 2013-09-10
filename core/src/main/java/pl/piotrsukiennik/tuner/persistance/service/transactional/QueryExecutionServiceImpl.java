@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.QueryForDataSource;
@@ -50,7 +51,7 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
     private Multimap<String,QueryForDataSource> sourceMultiValueMap = HashMultimap.create();
 
     @Override
-    public DataSource getDataSourceForQuery(SelectQuery selectQuery) {
+    public DataSource getDataSourceForQuery(ReadQuery selectQuery) {
         float random= (float)Math.random();
         DataSource dataSource =  (DataSource) s().getNamedQuery(QueryForDataSource.GET_DATASOURCE_FOR_QUERY)
                 .setString("queryHash",selectQuery.getHash())
@@ -76,52 +77,50 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
     }
 
     public void refreshRoulette(Query query){
-       s().getNamedQuery(QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS).setString("queryHash", query.getHash()).executeUpdate();
+       s().getNamedQuery(QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS).setLong("queryId", query.getId()).executeUpdate();
     }
 
-    public void removeDataSourceForQuery(final SelectQuery query,final  DataSource dataSource){
+    public void removeDataSourceForQuery(final ReadQuery query,final  DataSource dataSource){
       s().getNamedQuery(QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY).setString("queryHash",query.getHash()).setEntity("dataSource",dataSource).executeUpdate();
     }
-    public QueryForDataSource getQueryForDataSource(final SelectQuery q,final  DataSource dataSource){
+    public QueryForDataSource getQueryForDataSource(final ReadQuery q,final  DataSource dataSource){
         return (QueryForDataSource) s().createCriteria(QueryForDataSource.class)
                 .add(Restrictions.eq("query", q)).add(Restrictions.eq("dataSource", dataSource)).uniqueResult();
     }
-    public  QueryForDataSource submitNewDataSourceForQuery(final SelectQuery q,final  DataSource dataSource){
+
+    protected QueryForDataSource initNew(QueryForDataSource queryForDataSource, ReadQuery q, DataSource dataSource){
+        queryForDataSource.setExecutions(0);
+        queryForDataSource.setAverageExecutionTimeNano(-1);
+        queryForDataSource.setDataSource(dataSource);
+        queryForDataSource.setQuery(q);
+        return queryForDataSource;
+
+    }
+    public  QueryForDataSource submitNewDataSourceForQuery(final ReadQuery q,final  DataSource dataSource){
         Session session = s();
-        SelectQuery persistedQuery = queryService.submit(q);
+        ReadQuery persistedQuery = queryService.submit(q);
         QueryForDataSource queryForDataSource = getQueryForDataSource(persistedQuery,dataSource);
         if (queryForDataSource==null){
             queryForDataSource = new QueryForDataSource();
-            queryForDataSource.setAverageRows(-1);
-            queryForDataSource.setExecutions(0);
-            queryForDataSource.setAverageExecutionTimeNano(-1);
-            queryForDataSource.setDataSource(dataSource);
-            queryForDataSource.setQuery(persistedQuery);
+            queryForDataSource = initNew(queryForDataSource,persistedQuery,dataSource);
             session.save(queryForDataSource);
-            session.flush();
-            refreshRoulette(persistedQuery);
         }  else {
-            queryForDataSource.setAverageRows(-1);
-            queryForDataSource.setExecutions(0);
-            queryForDataSource.setAverageExecutionTimeNano(-1);
-            queryForDataSource.setDataSource(dataSource);
-            queryForDataSource.setQuery(persistedQuery);
+            queryForDataSource = initNew(queryForDataSource,persistedQuery,dataSource);
             session.merge(queryForDataSource);
-            session.flush();
-            refreshRoulette(persistedQuery);
         }
+        session.flush();
+        refreshRoulette(persistedQuery);
         sourceMultiValueMap.put(persistedQuery.getHash(),queryForDataSource);
         return queryForDataSource;
     }
-    public  Collection<QueryForDataSource> submit(final SelectQuery q,final  DataSource dataSource, long executionTimeNano, long rows){
-        SelectQuery persistedQuery = queryService.submit(q);
+    public  Collection<QueryForDataSource> submit(final ReadQuery q,final  DataSource dataSource, long executionTimeNano){
+        ReadQuery persistedQuery = queryService.submit(q);
         Collection<QueryForDataSource> queryForDataSourceCollection =  sourceMultiValueMap.get(persistedQuery.getHash());
         Collection<QueryForDataSource> filtered = Collections2.filter(queryForDataSourceCollection,new PredicateQueryDataSource(dataSource));
         Session session = s();
 
         if (filtered.isEmpty()){
             QueryForDataSource queryForDataSource = new QueryForDataSource();
-            queryForDataSource.setAverageRows(rows);
             queryForDataSource.setExecutions(1);
             queryForDataSource.setAverageExecutionTimeNano(executionTimeNano);
             queryForDataSource.setDataSource(dataSource);
@@ -135,12 +134,9 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
             for (QueryForDataSource queryForDataSource : filtered) {
                 long executions = queryForDataSource.getExecutions();
                 float averageExecution = queryForDataSource.getAverageExecutionTimeNano();
-                float averageRows = queryForDataSource.getAverageRows();
-                averageRows = (averageRows * executions + rows)/(executions +1);
                 averageExecution = (averageExecution* executions + executionTimeNano)/(executions+1);
                 queryForDataSource.setExecutions(executions+1);
                 queryForDataSource.setAverageExecutionTimeNano(averageExecution);
-                queryForDataSource.setAverageRows(averageRows);
                 session.merge(queryForDataSource);
                 session.flush();
                 refreshRoulette(persistedQuery);

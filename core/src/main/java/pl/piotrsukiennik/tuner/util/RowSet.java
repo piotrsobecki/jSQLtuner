@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.util;
 import com.sun.rowset.CachedRowSetImpl;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -18,11 +19,16 @@ public class RowSet {
         return cachedRowSet;
     }
 
-    public static long size(CachedRowSet rowSet){
-        long rows =0;
+
+    public static int size(CachedRowSet rowSet){
+        return rowSet.size();
+    }
+
+    public static int size(ResultSet rowSet){
+        int rows =0;
         try{
             rowSet.last();
-            rows = rowSet.getPageSize();
+            rows = rowSet.getRow();
             rowSet.first();
         }catch (SQLException e){
             e.printStackTrace();

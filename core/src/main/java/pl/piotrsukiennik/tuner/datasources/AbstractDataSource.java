@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.datasources;
 
+import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 
@@ -30,7 +31,7 @@ public abstract class AbstractDataSource implements IDataSource {
     }
 
     @Override
-    public final DataRetrieval getData(SelectQuery query) throws Throwable {
+    public final DataRetrieval getData(ReadQuery query) throws Throwable {
         DataRetrieval dataRetrieval = new DataRetrieval();
         long start = System.nanoTime();
         ResultSet resultSet = get(query);
@@ -40,5 +41,23 @@ public abstract class AbstractDataSource implements IDataSource {
         return dataRetrieval;
     }
 
-    protected abstract ResultSet get(SelectQuery query) throws Throwable;
+    protected abstract ResultSet get(ReadQuery query) throws Throwable;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractDataSource)) return false;
+        AbstractDataSource that = (AbstractDataSource) o;
+        if (dataSourceMetaData != null ? !dataSourceMetaData.getIdentifier().equals(that.dataSourceMetaData.getIdentifier()) :
+                that.dataSourceMetaData != null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = dataSourceMetaData != null ? dataSourceMetaData.hashCode() : 0;
+        result = 31 * result + (persistedDataSource != null ? persistedDataSource.hashCode() : 0);
+        return result;
+    }
 }
