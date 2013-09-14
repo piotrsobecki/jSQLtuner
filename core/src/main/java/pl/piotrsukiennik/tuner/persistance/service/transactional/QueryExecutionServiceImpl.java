@@ -17,6 +17,7 @@ import pl.piotrsukiennik.tuner.persistance.service.IQueryService;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Random;
 
 /**
@@ -54,7 +55,7 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
     public DataSource getDataSourceForQuery(ReadQuery selectQuery) {
         float random= (float)Math.random();
         DataSource dataSource =  (DataSource) s().getNamedQuery(QueryForDataSource.GET_DATASOURCE_FOR_QUERY)
-                .setString("queryHash",selectQuery.getHash())
+                .setString("queryHash", selectQuery.getHash())
                 .setFloat("random", random).setMaxResults(1).uniqueResult();
         return dataSource;
     }
@@ -81,7 +82,30 @@ public class QueryExecutionServiceImpl extends AbstractService implements IQuery
     }
 
     public void removeDataSourceForQuery(final ReadQuery query,final  DataSource dataSource){
-      s().getNamedQuery(QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY).setString("queryHash",query.getHash()).setEntity("dataSource",dataSource).executeUpdate();
+      Query queryPersisted = queryService.submit(query);
+      s().getNamedQuery(QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY).setEntity("query",queryPersisted).setEntity("dataSource", dataSource).executeUpdate();
+        refreshRoulette(query);
+    }
+    public void removeDataSourcesForQueries(Collection<? extends  ReadQuery> queries, final Collection<DataSource> dataSources){
+        if (dataSources==null || dataSources.isEmpty() || queries==null || queries.isEmpty()){
+            return;
+        }
+        Collection<Query> queriesPersisted = new LinkedHashSet<Query>();
+        for (ReadQuery readQuery:queries){
+            queriesPersisted.add(queryService.submit(readQuery));
+        }
+        s().getNamedQuery(QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERIES).setParameterList("queries",queriesPersisted).setParameterList("dataSources",dataSources).executeUpdate();
+        for (Query query:queriesPersisted){
+            refreshRoulette(query);
+        }
+    }
+    public void removeDataSourcesForQuery(final ReadQuery query,final  Collection<DataSource> dataSources){
+        if (dataSources==null || dataSources.isEmpty()){
+            return;
+        }
+        Query queryPersisted = queryService.submit(query);
+        s().getNamedQuery(QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERY).setEntity("query",queryPersisted).setParameterList("dataSource",dataSources).executeUpdate();
+        refreshRoulette(query);
     }
     public QueryForDataSource getQueryForDataSource(final ReadQuery q,final  DataSource dataSource){
         return (QueryForDataSource) s().createCriteria(QueryForDataSource.class)

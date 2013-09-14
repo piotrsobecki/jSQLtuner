@@ -32,8 +32,8 @@
 
     <bean class="pl.piotrsukiennik.tuner.statement.advisor.WriteQueryAdvisorBuilder">
         <qualifier value="writeQueryAdvisorBuilder"/>
-        <property name="expression" value="execution (* java.sql.PreparedStatement.*(..))"/>
-        <property name="order" value="1"/>
+        <property name="expression" value="execution (int java.sql.PreparedStatement.executeUpdate())"/>
+        <property name="order" value="2"/>
     </bean>
 
     <!-- !QueryAdvisors -->

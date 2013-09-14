@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.cache.model;
 import pl.piotrsukiennik.tuner.cache.model.build.EnterableHolderFactory;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Author: Piotr Sukiennik
@@ -45,14 +45,17 @@ public class HashesHolderManager<P,K> {
     public Collection<K> getRemove(P[] path){
         Holder holder = rootHolder;
         for (P str:path){
-            if (holder instanceof EnterableHolder){
+            if (holder!=null && holder instanceof EnterableHolder){
                 holder = ((EnterableHolder<P,K>)holder).enter(str);
             }
         }
+        if (holder!=null){
+            Collection<K> objects =   holder.get();
+            rootHolder.remove(objects);
+            return objects;
 
-        Collection<K> objects =   holder.get();
-        holder.removeAll();
-        return objects;
+        }
+        return Collections.EMPTY_LIST;
     }
 
 

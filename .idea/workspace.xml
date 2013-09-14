@@ -4,7 +4,7 @@
     <list default="true" id="7038789f-e8df-4153-8cf6-1e2ff971e290" name="Default" comment="" />
     <ignored path="ORM Performance  And NoSQL.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379114317944" ignored="false" />
+    <file path="/Dummy.txt" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379172823028" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/examples/SingleRegionExample.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/neuron/exhibitory/ExhibitoryNeurons.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
     <file path="$PROJECT_DIR$/../Izhikevich_Brain_Model/src/main/java/pl/piotrsukiennik/brain/examples/NoFeedbackMultipleExample.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372111404694" ignored="false" />
@@ -22,7 +22,7 @@
     <file path="/advisor-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372115872002" ignored="false" />
     <file path="/StatementRegisteringAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372116063761" ignored="false" />
     <file path="/root-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373303523389" ignored="false" />
-    <file path="/fragment.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379118538151" ignored="false" />
+    <file path="/fragment.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379175067567" ignored="false" />
     <file path="/Main.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378589745843" ignored="false" />
     <file path="/TunerConfiguration.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1372188623505" ignored="false" />
     <file path="/tuner-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876603027" ignored="false" />
@@ -47,7 +47,7 @@
     <file path="/TablesNamesFinder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373044414970" ignored="false" />
     <file path="/InsertSqlQueryModel.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1373119260177" ignored="false" />
     <file path="/hibernate-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377707643069" ignored="false" />
-    <file path="/queries.sql" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374930364170" ignored="false" />
+    <file path="/queries.sql" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379158587791" ignored="false" />
     <file path="/QueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374931900160" ignored="false" />
     <file path="/StatementsMonitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374931395325" ignored="false" />
     <file path="/StatementsDeregisteringAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374931272030" ignored="false" />
@@ -60,7 +60,7 @@
     <file path="/View.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374267826907" ignored="false" />
     <file path="/ColumnView.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374267861977" ignored="false" />
     <file path="/DeleteQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882284137" ignored="false" />
-    <file path="/SelectQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379122883339" ignored="false" />
+    <file path="/SelectQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379144937770" ignored="false" />
     <file path="/ReadQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378597916665" ignored="false" />
     <file path="/WriteQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913835510" ignored="false" />
     <file path="/CallQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374866674325" ignored="false" />
@@ -90,27 +90,27 @@
     <file path="/Table.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374882081604" ignored="false" />
     <file path="/DbEntity.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374868736778" ignored="false" />
     <file path="/SortableByPosition.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867330054" ignored="false" />
-    <file path="/Values.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374881350900" ignored="false" />
+    <file path="/Values.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379175558872" ignored="false" />
     <file path="/ColumnValue.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374867633011" ignored="false" />
     <file path="/Projection.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374913535154" ignored="false" />
     <file path="/QueryException.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377707853187" ignored="false" />
     <file path="/MappingStatementVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875711419" ignored="false" />
     <file path="/MappingVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374871859897" ignored="false" />
-    <file path="/ParsingVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875775549" ignored="false" />
+    <file path="/ParsingVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379175083397" ignored="false" />
     <file path="/SelectVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374872531457" ignored="false" />
     <file path="/IQuery.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374872428641" ignored="false" />
     <file path="/DoNothingStatementVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876227019" ignored="false" />
     <file path="/DeleteStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374876027811" ignored="false" />
-    <file path="/SelectStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374924713268" ignored="false" />
+    <file path="/SelectStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379159268918" ignored="false" />
     <file path="/InsertStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374924661984" ignored="false" />
-    <file path="/UpdateStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374925145399" ignored="false" />
+    <file path="/UpdateStatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379176356867" ignored="false" />
     <file path="/ParsingSelectVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374874663998" ignored="false" />
-    <file path="/StatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875969843" ignored="false" />
-    <file path="/StatementParserVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374875703262" ignored="false" />
+    <file path="/StatementParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379160830894" ignored="false" />
+    <file path="/StatementParserVisitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379159860423" ignored="false" />
     <file path="/jsqltuner-hibernate-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377628674855" ignored="false" />
     <file path="/Type.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374928458346" ignored="false" />
     <file path="/ValueEntity.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379125232601" ignored="false" />
-    <file path="/FromItemParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379124090997" ignored="false" />
+    <file path="/FromItemParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379175147635" ignored="false" />
     <file path="/ExpresionParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378595784233" ignored="false" />
     <file path="/IntoTableParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374924583140" ignored="false" />
     <file path="/ItemsListParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378594385085" ignored="false" />
@@ -120,32 +120,32 @@
     <file path="/Function.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374928429182" ignored="false" />
     <file path="/AbstractService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374932157475" ignored="false" />
     <file path="/LogServiceImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378589927541" ignored="false" />
-    <file path="/jsqltuner-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378025718006" ignored="false" />
+    <file path="/jsqltuner-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379159807460" ignored="false" />
     <file path="/DataSourceMonitorAspect.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374931345804" ignored="false" />
     <file path="/IQueryParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1374932674233" ignored="false" />
     <file path="/ReadQueryAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378767129275" ignored="false" />
     <file path="/ReadQueryAdvisorBuilder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377620389806" ignored="false" />
     <file path="/QueryAdvisorBuilder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377620421259" ignored="false" />
-    <file path="/DataSourcesManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378641662208" ignored="false" />
+    <file path="/DataSourcesManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379173529332" ignored="false" />
     <file path="/MethodInvocationDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377623277805" ignored="false" />
     <file path="/DataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377626493691" ignored="false" />
-    <file path="/QueryForDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378761757314" ignored="false" />
+    <file path="/QueryForDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379199106385" ignored="false" />
     <file path="/StatementMethodInvocationDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379115807451" ignored="false" />
     <file path="/EntityService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377707311812" ignored="false" />
     <file path="/a.dummy" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379086541365" ignored="false" />
     <file path="/IDataSharder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379115566740" ignored="false" />
-    <file path="/ShardingManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379120960665" ignored="false" />
+    <file path="/ShardingManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379199153608" ignored="false" />
     <file path="/MemcachedDataSharder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1377970724157" ignored="false" />
     <file path="/KeyValueDataSharder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379115667374" ignored="false" />
     <file path="/IShardingManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378032265842" ignored="false" />
-    <file path="/IQueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378331939727" ignored="false" />
-    <file path="/QueryExecutionServiceImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378762361443" ignored="false" />
+    <file path="/IQueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379198844744" ignored="false" />
+    <file path="/QueryExecutionServiceImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379199307693" ignored="false" />
     <file path="/LocalDataSourceMapper.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378771045623" ignored="false" />
     <file path="/IdentifierMetaData.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378024233694" ignored="false" />
     <file path="/IDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378034630373" ignored="false" />
     <file path="/jsqltuner-sharder-context.xml" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378025670276" ignored="false" />
     <file path="/KeyValueLocalService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378025657563" ignored="false" />
-    <file path="/QueryExecutionServiceWrapper.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378769794035" ignored="false" />
+    <file path="/QueryExecutionServiceWrapper.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379199127846" ignored="false" />
     <file path="/StatementDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378032427873" ignored="false" />
     <file path="/AbstractDataSource.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379120895490" ignored="false" />
     <file path="/ConnectionDataSourceMetaData.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378584867057" ignored="false" />
@@ -158,23 +158,30 @@
     <file path="/SelectIntoTableParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378593424075" ignored="false" />
     <file path="/CollectionUtils.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1378593212662" ignored="false" />
     <file path="/QueryHashesHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379012874128" ignored="false" />
-    <file path="/CacheManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379120340774" ignored="false" />
+    <file path="/CacheManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379174548755" ignored="false" />
     <file path="/Maps.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379013602977" ignored="false" />
     <file path="/Objects.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379013553338" ignored="false" />
-    <file path="/Holder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379086839310" ignored="false" />
+    <file path="/Holder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379174059970" ignored="false" />
     <file path="/QueriesHashesHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379016050660" ignored="false" />
     <file path="/EnterableQueriesHashesHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379015389564" ignored="false" />
-    <file path="/HashesHolderManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379086919188" ignored="false" />
+    <file path="/HashesHolderManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379176894152" ignored="false" />
     <file path="/HolderBuilder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379015915843" ignored="false" />
     <file path="/HolderBuilderImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379018419639" ignored="false" />
-    <file path="/HolderImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379086862520" ignored="false" />
-    <file path="/EnterableHolderImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379023023760" ignored="false" />
+    <file path="/HolderImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379174095287" ignored="false" />
+    <file path="/EnterableHolderImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379173975109" ignored="false" />
     <file path="/HolderFactory.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379018961444" ignored="false" />
     <file path="/EnterableHolderFactory.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379020522478" ignored="false" />
-    <file path="/EnterableHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379022990859" ignored="false" />
+    <file path="/EnterableHolder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379173777424" ignored="false" />
     <file path="/CacheManagerTest.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379023228308" ignored="false" />
-    <file path="/SelectItemParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379125043694" ignored="false" />
+    <file path="/SelectItemParser.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379145036926" ignored="false" />
     <file path="/QueryContextManager.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379124051545" ignored="false" />
+    <file path="/ProjectionsAware.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379144867783" ignored="false" />
+    <file path="/SQLQueryExecutionService.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379155825997" ignored="false" />
+    <file path="/QueryCompletionListenerImpl.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379160537243" ignored="false" />
+    <file path="/WriteQueryAdvice.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379173589388" ignored="false" />
+    <file path="/WriteQueryAdvisorBuilder.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379173540779" ignored="false" />
+    <file path="/ParserUtils.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379174925028" ignored="false" />
+    <file path="/Visitor.java" changelist="7038789f-e8df-4153-8cf6-1e2ff971e290" time="1379175060022" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +201,6 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -247,21 +253,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/advisor/WriteQueryAdvice.java" line="20" class="pl.piotrsukiennik.tuner.statement.advisor.WriteQueryAdvice" package="pl.piotrsukiennik.tuner.statement.advisor">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/InnerStatementInterceptingAdvice.java" line="22" class="pl.piotrsukiennik.tuner.statement.InnerStatementInterceptingAdvice" package="pl.piotrsukiennik.tuner.statement">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -278,6 +269,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -287,99 +279,100 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ShardingManager.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataSourcesManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/DataSourcesManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="62" selection-start="2284" selection-end="2284" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShardingManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/ShardingManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="36" selection-start="992" selection-end="992" vertical-scroll-proportion="0.2576419">
+            <state line="63" column="18" selection-start="2291" selection-end="2291" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CacheManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/CacheManager.java">
+      <file leaf-file-name="QueryExecutionServiceWrapper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/QueryExecutionServiceWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="25" selection-start="2383" selection-end="2383" vertical-scroll-proportion="0.0">
+            <state line="32" column="0" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1165#1177#0" expanded="true" />
+                <element signature="e#1623#1635#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReadQuery.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/ReadQuery.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="22" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IQueryExecutionService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/IQueryExecutionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="0" selection-start="1029" selection-end="1146" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryForDataSource.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/execution/QueryForDataSource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="206" selection-start="746" selection-end="746" vertical-scroll-proportion="0.53432834">
+              <folding>
+                <marker date="1379199105904" expanded="true" signature="496:539" placeholder="CALL updateQ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryExecutionServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/QueryExecutionServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="96" column="60" selection-start="3997" selection-end="3997" vertical-scroll-proportion="-0.68">
+              <folding>
+                <element signature="e#3807#3814#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLQueryExecutionService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/service/SQLQueryExecutionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="0" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HashesHolderManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/model/HashesHolderManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="45" selection-start="1820" selection-end="1820" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2948#2961#0" expanded="true" />
-                <element signature="e#3091#3098#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectItemParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectItemParser.java">
+      <file leaf-file-name="ReadQueryAdvice.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/advisor/ReadQueryAdvice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="2542" selection-end="2542" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryContextManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/query/QueryContextManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="35" selection-start="2676" selection-end="2676" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#2256#2277#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectBodyParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectBodyParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ValueEntity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/ValueEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="30" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SchemaServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/SchemaServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="49" selection-start="8301" selection-end="8301" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Column.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/schema/Column.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="25" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FromItemParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/FromItemParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="11" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectStatementParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/statement/SelectStatementParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+            <state line="26" column="26" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -410,29 +403,29 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/model/HashesHolderManager.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/IDataSource.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/IDataSharder.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/KeyValueDataSharder.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/StatementMethodInvocationDataSource.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectBodyParser.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/CacheManager.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/AbstractDataSource.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/ShardingManager.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/SelectQuery.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/query/QueryContextManager.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/ParserUtils.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/statement/Visitor.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/statement/ParsingVisitor.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/FromItemParser.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/schema/Column.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/SchemaServiceImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectItemParser.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/ValueEntity.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/other/ColumnValue.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/other/Values.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/statement/UpdateStatementParser.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/model/HashesHolderManager.java" />
+        <option value="$PROJECT_DIR$/test/src/main/resources/queries.sql" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/ReadQuery.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/IQueryExecutionService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/execution/QueryForDataSource.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/QueryExecutionServiceWrapper.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/ShardingManager.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/QueryExecutionServiceImpl.java" />
       </list>
     </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:\apache-maven-3.0.4" />
+        <option name="mavenHome" value="C:\Program Files\apache-maven-3.0.5" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -875,6 +868,14 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -903,6 +904,116 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="statement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="statement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="statement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="advisor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -971,6 +1082,52 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="persistance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persistance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transactional" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1356,6 +1513,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="persistance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="parser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1479,6 +1678,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="element" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="execution" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1706,7 +1939,75 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="cache" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ORM Performance  And NoSQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jSQLtuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ai" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1740,7 +2041,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.lastSelected" value="MavenSettings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
     <property name="project.structure.side.proportion" value="0.40440324" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -1756,11 +2057,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement" />
+      <recent name="pl.piotrsukiennik.tuner.persistance.model" />
       <recent name="pl.piotrsukiennik.tuner.test.query" />
       <recent name="pl.piotrsukiennik.tuner.cache.model" />
       <recent name="pl.piotrsukiennik.tuner.util.holder" />
-      <recent name="pl.piotrsukiennik.tuner.datasources.keyvalue.local" />
-      <recent name="pl.piotrsukiennik.tuner.datasources.shard" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\SERIES 9\Documents\GitHub\jSQLtuner\core\src\main\resources\pl\piotrsukiennik\tuner" />
@@ -2088,18 +2389,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292011" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22522523" sideWeight="0.28236914" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32506886" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12934363" sideWeight="0.6955923" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12934363" sideWeight="0.77272725" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30440772" sideWeight="0.7245817" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42699724" sideWeight="0.7245817" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30440772" sideWeight="0.27541828" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6046832" sideWeight="0.27541828" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2109,10 +2410,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14671814" sideWeight="0.86088157" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14671814" sideWeight="0.57300276" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27992278" sideWeight="0.6955923" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2803532" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27992278" sideWeight="0.57300276" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27961433" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2224,125 +2525,124 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/SelectQuery.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/manager/QueryCompletionListenerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="29" selection-start="3039" selection-end="3039" vertical-scroll-proportion="-7.96">
+        <state line="22" column="46" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/IQueryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="843" selection-end="843" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/QueryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="40" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/main/resources/queries.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="76" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/advisor/WriteQueryAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="40" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/advisor/ReadQueryAdvisorBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/statement/advisor/ReadQueryAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="26" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/model/HashesHolderManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="45" selection-start="1820" selection-end="1820" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectIntoTableParser.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/DataSourcesManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="661" selection-end="661" vertical-scroll-proportion="0.0">
+        <state line="57" column="62" selection-start="2284" selection-end="2284" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/ItemsListParser.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/ReadQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0">
+        <state line="13" column="22" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/InsertIntoTableParser.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/IQueryExecutionService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="37" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0">
+        <state line="23" column="0" selection-start="1029" selection-end="1146" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/ExpresionParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="13" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/DeleteIntoTableParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/statement/SelectStatementParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/query/QueryContextManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="35" selection-start="2676" selection-end="2676" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#2256#2277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/schema/Column.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="25" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/SchemaServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="49" selection-start="8301" selection-end="8301" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/FromItemParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="11" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/ValueEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="30" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectItemParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="2542" selection-end="2542" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/parser/jsqlqueryparser/element/SelectBodyParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/cache/CacheManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="25" selection-start="2383" selection-end="2383" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2948#2961#0" expanded="true" />
-            <element signature="e#3091#3098#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/datasources/shard/ShardingManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="36" selection-start="992" selection-end="992" vertical-scroll-proportion="0.2576419">
+        <state line="63" column="18" selection-start="2291" selection-end="2291" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/main/java/pl/piotrsukiennik/tuner/test/service/SQLQueryExecutionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/QueryExecutionServiceWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="0" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1165#1177#0" expanded="true" />
+            <element signature="e#1623#1635#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/service/transactional/QueryExecutionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="60" selection-start="3997" selection-end="3997" vertical-scroll-proportion="-0.68">
+          <folding>
+            <element signature="e#3807#3814#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/pl/piotrsukiennik/tuner/persistance/model/query/execution/QueryForDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="206" selection-start="746" selection-end="746" vertical-scroll-proportion="0.53432834">
+          <folding>
+            <marker date="1379199105904" expanded="true" signature="496:539" placeholder="CALL updateQ..." />
+          </folding>
         </state>
       </provider>
     </entry>

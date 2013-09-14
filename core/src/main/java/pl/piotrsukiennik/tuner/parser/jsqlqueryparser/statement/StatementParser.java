@@ -24,8 +24,8 @@ public abstract class StatementParser<T extends Query> extends ParsingVisitor<T>
 
 
 
-    protected StatementParser(QueryContextManager queryContextManager,Statement statement){
-        super(queryContextManager);
+    protected StatementParser(QueryContextManager queryContextManager,Statement statement, T query){
+        super(queryContextManager,query);
         init(statement);
         statement.accept(this);
     }

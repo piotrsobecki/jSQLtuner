@@ -20,12 +20,16 @@ import javax.persistence.*;
 )
 })
 @NamedQueries({
-        @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY,query = "DELETE FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND q.dataSource = (:dataSource)"),
+        @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERIES,query = "DELETE FROM QueryForDataSource q WHERE q.query in (:queries) AND q.dataSource in (:dataSources)"),
+        @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERY,query = "DELETE FROM QueryForDataSource q WHERE q.query = (:query) AND q.dataSource in (:dataSources)"),
+        @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY,query = "DELETE FROM QueryForDataSource q WHERE q.query = (:query) AND q.dataSource = (:dataSource)"),
     @NamedQuery(name = QueryForDataSource.GET_DATASOURCE_FOR_QUERY,query = "SELECT q.dataSource FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo"),
    @NamedQuery(name = QueryForDataSource.GET_FOR_QUERY,query = "FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo")
 })
 public class QueryForDataSource extends ValueEntity {
 
+    public static final String  REMOVE_DATASOURCES_FOR_QUERIES = "removeDataSourcesForQueries";
+    public static final String  REMOVE_DATASOURCES_FOR_QUERY = "removeDataSourcesForQuery";
     public static final String  REMOVE_DATASOURCE_FOR_QUERY = "removeDataSourceForQuery";
     public static final String  GET_DATASOURCE_FOR_QUERY = "getDataSourceForQuery";
     public static final String  GET_FOR_QUERY = "getForQuery";

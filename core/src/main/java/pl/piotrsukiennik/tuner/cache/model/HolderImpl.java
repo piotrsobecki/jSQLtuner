@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.cache.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,4 +37,13 @@ public class HolderImpl<T> implements Holder<T> {
         root.clear();
     }
 
+    @Override
+    public void remove(Collection<T> objects) {
+        root.removeAll(objects);
+    }
+
+    @Override
+    public void remove(T... objects){
+        this.remove(Arrays.asList(objects));
+    }
 }

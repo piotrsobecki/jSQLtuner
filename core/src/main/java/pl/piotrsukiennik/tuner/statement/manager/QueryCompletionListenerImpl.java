@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.statement.manager;
 
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.query.WriteQuery;
 import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 
 import javax.annotation.Resource;
@@ -18,6 +19,9 @@ public class QueryCompletionListenerImpl implements QueryCompletionListener {
 
     @Override
     public void queryCompleted(Query query) {
+        if (query instanceof WriteQuery){
+            servicesHolder.getQueryService().submit(query);
+        }
     }
 
     @Override

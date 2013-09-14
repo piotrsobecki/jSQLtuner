@@ -18,7 +18,7 @@ import java.util.Set;
  * Time: 20:54
  */
 @Entity
-public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAware, JoinsAware{
+public class SelectQuery extends ReadQuery implements ConditionQuery, ProjectionsAware, JoinsAware{
 
 
     private Set<Projection> projections;

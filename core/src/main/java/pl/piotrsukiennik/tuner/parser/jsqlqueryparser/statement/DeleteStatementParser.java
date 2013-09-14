@@ -16,7 +16,7 @@ import pl.piotrsukiennik.tuner.query.QueryContextManager;
  */
 public class DeleteStatementParser extends StatementParser<DeleteQuery> {
     public DeleteStatementParser(QueryContextManager queryContextManager,Delete delete) {
-        super(queryContextManager,delete);
+        super(queryContextManager,delete,new DeleteQuery());
     }
 
     @Override
@@ -31,8 +31,4 @@ public class DeleteStatementParser extends StatementParser<DeleteQuery> {
     }
 
 
-    protected void init(Statement o) {
-        setQuery(new DeleteQuery());
-        super.init(o);
-    }
 }

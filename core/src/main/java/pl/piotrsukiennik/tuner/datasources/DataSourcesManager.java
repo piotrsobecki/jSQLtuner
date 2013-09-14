@@ -51,6 +51,10 @@ public class DataSourcesManager {
         return dataRetrieval.getResultSet();
     }
 
+    public void invalidate(Query query){
+        shardingManager.delete(query);
+    }
+
     public boolean isShardable(Query query){
         return query instanceof SelectQuery;
     }

@@ -4,6 +4,7 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.FromItemVisitor;
 import net.sf.jsqlparser.statement.select.SubJoin;
 import net.sf.jsqlparser.statement.select.SubSelect;
+import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.Visitor;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SourcesAware;
@@ -17,25 +18,20 @@ import pl.piotrsukiennik.tuner.util.QueryUtils;
  * Date: 27.07.13
  * Time: 13:24
  */
-public class FromItemParser implements FromItemVisitor {
+public class FromItemParser extends Visitor implements FromItemVisitor {
 
 
     private Query sourceQuery;
-    private QueryContextManager queryContextManager;
 
     public FromItemParser(QueryContextManager queryContextManager, Query sourceQuery) {
+        super(queryContextManager);
         this.sourceQuery=sourceQuery;
-        this.queryContextManager=queryContextManager;
     }
 
 
     @Override
     public void visit(Table tableName) {
-        TableSource tableSource = new TableSource();
-        tableSource.setAlias(tableName.getAlias());
-        tableSource.setValue(tableName.getWholeTableName() + (tableName.getAlias() == null ? "" : (" " + tableName.getAlias())));
-        tableSource.setTable(queryContextManager.getTable(tableName.getWholeTableName()));
-        queryContextManager.putTableSource(tableSource);
+        TableSource tableSource = parserUtils.getTableSource(tableName);
         if (sourceQuery instanceof SourcesAware){
             QueryUtils.addSource((SourcesAware) sourceQuery,tableSource);
         }

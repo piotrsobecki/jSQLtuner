@@ -21,7 +21,8 @@ public class StatementParserVisitor<T extends Query> extends StatementParser imp
 
 
     public StatementParserVisitor(QueryContextManager queryContextManager,Statement statement) {
-        super(queryContextManager,statement);
+        super(queryContextManager,statement,null);
+
     }
 
     protected void setHash(Query query, Statement statement){

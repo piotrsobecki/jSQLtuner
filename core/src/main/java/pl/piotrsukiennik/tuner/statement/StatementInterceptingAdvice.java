@@ -33,7 +33,6 @@ public class StatementInterceptingAdvice implements InterceptingAdvice<PreparedS
     private @Resource
     DecisionServiceImpl decisionService;
 
-    private @Resource IQueryParser parser;
 
     @Override
     public PreparedStatement invoke(final MethodInvocation methodInvocation) throws Throwable {

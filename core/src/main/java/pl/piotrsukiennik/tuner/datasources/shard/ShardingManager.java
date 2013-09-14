@@ -57,13 +57,16 @@ public class ShardingManager implements IShardingManager{
     @Override
     public void delete(Query query) {
         Collection<SelectQuery> queriesToInvalidate =  cacheManager.getQueriesToInvalidate(query);
-        for (SelectQuery selectQuery: queriesToInvalidate){
-            for (IDataSharder dataSharder : dataSharders) {
-                dataSharder.delete(selectQuery);
-                queryExecutionService.removePossibleDataSource(selectQuery,dataSharder);
+        for (IDataSharder dataSharder : dataSharders) {
+            if (dataSharder instanceof KeyValueDataSharder){
+                for (SelectQuery selectQuery: queriesToInvalidate){
+                    dataSharder.delete(selectQuery);
+                }
+            } else {
+                dataSharder.delete(query);
             }
         }
-
+        queryExecutionService.removePossibleDataSources(queriesToInvalidate,dataSharders);
     }
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Author: Piotr Sukiennik
@@ -15,14 +16,14 @@ import java.util.List;
 @Entity
 @Table(name = "ValuesEntity")
 public class Values extends ValueEntity {
-    private List<ColumnValue> columnValues;
+    private Set<ColumnValue> columnValues;
 
     @OneToMany
-    public List<ColumnValue> getColumnValues() {
+    public Set<ColumnValue> getColumnValues() {
         return columnValues;
     }
 
-    public void setColumnValues(List<ColumnValue> columnValues) {
+    public void setColumnValues(Set<ColumnValue> columnValues) {
         this.columnValues = columnValues;
     }
 }

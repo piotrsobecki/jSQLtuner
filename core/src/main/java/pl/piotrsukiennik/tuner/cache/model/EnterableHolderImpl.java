@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.cache.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,4 +29,27 @@ public class EnterableHolderImpl<P,T> extends HolderImpl<T> implements Enterable
 
     }
 
+    @Override
+    public void remove(T queryHash) {
+        super.remove(queryHash);
+        for (Map.Entry<P,Holder<T>> holder: paths.entrySet()){
+            holder.getValue().remove(queryHash);
+        }
+    }
+
+    @Override
+    public void removeAll() {
+        super.removeAll();
+        for (Map.Entry<P,Holder<T>> holder: paths.entrySet()){
+            holder.getValue().removeAll();
+        }
+    }
+
+    @Override
+    public void remove(T... objects) {
+        super.remove(objects);
+        for (Map.Entry<P,Holder<T>> holder: paths.entrySet()){
+            holder.getValue().remove(objects);
+        }
+    }
 }

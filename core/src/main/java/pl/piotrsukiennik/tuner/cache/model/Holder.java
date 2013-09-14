@@ -10,6 +10,9 @@ import java.util.Collection;
 public interface Holder<T> {
     Collection<T> get();
     void add(T queryHash);
-    void remove(T queryHash);
+    void remove(T object);
     void removeAll();
+    void remove(T... objects);
+    void remove(Collection<T> objects);
+
 }

@@ -7,6 +7,7 @@ import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.SelectExpressionItem;
 import net.sf.jsqlparser.statement.select.SelectItemVisitor;
 import org.hibernate.loader.ColumnEntityAliases;
+import pl.piotrsukiennik.tuner.persistance.model.query.ProjectionsAware;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
@@ -25,12 +26,12 @@ import java.util.List;
  * Date: 14.09.13
  * Time: 02:23
  */
-public class SelectItemParser implements SelectItemVisitor {
+public class SelectItemParser<T extends ProjectionsAware> implements SelectItemVisitor {
 
-    private SelectQuery selectQuery;
+    private T selectQuery;
     private QueryContextManager queryContextManager;
 
-    public SelectItemParser(QueryContextManager queryContextManager,SelectQuery selectQuery) {
+    public SelectItemParser(QueryContextManager queryContextManager,T selectQuery) {
         this.selectQuery = selectQuery;
         this.queryContextManager=queryContextManager;
         if (this.selectQuery.getProjections() == null){

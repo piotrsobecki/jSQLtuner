@@ -14,7 +14,7 @@ import pl.piotrsukiennik.tuner.query.QueryContextManager;
 public class InsertStatementParser extends StatementParser<InsertQuery>  {
 
     public InsertStatementParser(QueryContextManager queryContextManager,Insert insert) {
-        super(queryContextManager,insert);
+        super(queryContextManager,insert,new InsertQuery());
     }
 
     @Override
@@ -28,10 +28,5 @@ public class InsertStatementParser extends StatementParser<InsertQuery>  {
         super.visit(insert);
     }
 
-
-    protected void init(Statement o) {
-        setQuery(new InsertQuery());
-        super.init(o);
-    }
 }
 

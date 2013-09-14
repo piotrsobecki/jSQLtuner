@@ -8,6 +8,7 @@ import pl.piotrsukiennik.tuner.test.model.Test;
 
 import javax.annotation.Resource;
 import javax.inject.Named;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,6 +20,11 @@ import java.util.List;
 @Transactional
 public class SQLQueryExecutionService extends AbstractService {
     public List execute(String query){
-        return s().createSQLQuery(query).list();
+        if (query.toLowerCase().startsWith("select")){
+            return s().createSQLQuery(query).list();
+        } else {
+            s().createSQLQuery(query).executeUpdate();
+            return Collections.EMPTY_LIST;
+        }
     }
 }

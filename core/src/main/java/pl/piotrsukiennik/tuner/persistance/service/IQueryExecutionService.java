@@ -19,5 +19,7 @@ public interface IQueryExecutionService {
     Collection<QueryForDataSource> submit(final ReadQuery query,final  DataSource dataSource, long executionTimeNano);
     QueryForDataSource submitNewDataSourceForQuery(final ReadQuery query,final  DataSource dataSource);
     void removeDataSourceForQuery(final ReadQuery query, final DataSource dataSource);
+    void removeDataSourcesForQuery(final ReadQuery query, final Collection<DataSource> dataSource);
+    void removeDataSourcesForQueries(Collection<? extends  ReadQuery> queries, final Collection<DataSource> dataSource);
 
 }

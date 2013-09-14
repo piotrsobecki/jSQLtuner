@@ -11,6 +11,6 @@ import pl.piotrsukiennik.tuner.persistance.model.query.WriteQuery;
 public class WriteQueryAdvisorBuilder<Q extends WriteQuery> extends QueryAdvisorBuilder<Q> {
     @Override
     public Advisor createAdvisor(Q writeQuery) {
-        return super.createAdvisor(new WriteQueryAdvice(writeQuery));
+        return super.createAdvisor(new WriteQueryAdvice(manager,writeQuery));
     }
 }

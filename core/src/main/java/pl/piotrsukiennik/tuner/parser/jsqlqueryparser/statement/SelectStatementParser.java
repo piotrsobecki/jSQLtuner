@@ -13,7 +13,7 @@ import pl.piotrsukiennik.tuner.query.QueryContextManager;
  */
 public class SelectStatementParser extends StatementParser<SelectQuery>  {
     public SelectStatementParser(QueryContextManager queryContextManager, Select select) {
-        super(queryContextManager,select);
+        super(queryContextManager,select, new SelectQuery());
 
     }
 
@@ -26,9 +26,5 @@ public class SelectStatementParser extends StatementParser<SelectQuery>  {
         super.visit(select);
     }
 
-    @Override
-    protected void init(Object o) {
-        setQuery(new SelectQuery());
-        super.init(o);
-    }
+
 }
