@@ -15,8 +15,6 @@ import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Author: Piotr Sukiennik
@@ -40,7 +38,7 @@ public class DataSourcesManager {
         DataRetrieval dataRetrieval = shardingManager.getData(query);
         if (dataRetrieval == null){
             IDataSource dataSource =  dataSourceMapper.getRootDataSource(query);
-            dataRetrieval=dataSource.getData(query);
+            dataRetrieval=dataSource.get(query);
             dataRetrieval.setDataSource(dataSource);
             if (isShardable(query) &&
                     dataRetrieval.getResultSet() !=null){

@@ -17,6 +17,8 @@ public interface IDataSource {
     void  setPersistedDataSource(DataSource ds);
     DataSource getPersistedDataSource();
     IDataSourceMetaData getMetaData();
-    DataRetrieval getData(ReadQuery query) throws Throwable;
-    void putData(ReadQuery query,Serializable resultSet);
+    DataRetrieval get(ReadQuery query) throws Throwable;
+    void put(ReadQuery query, Serializable resultSet);
+    void delete(Query query);
+    boolean contains(ReadQuery query);
 }

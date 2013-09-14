@@ -28,7 +28,7 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
     }
 
     @Override
-    protected ResultSet get(ReadQuery query) throws Throwable {
+    protected ResultSet getData(ReadQuery query) throws Throwable {
         return (ResultSet)methodInvocation.proceed();
     }
 
@@ -38,6 +38,11 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
 
     public ReadQuery getReadQuery() {
         return readQuery;
+    }
+
+    @Override
+    protected void deleteData(Query query) {
+
     }
 
     @Override

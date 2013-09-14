@@ -212,7 +212,7 @@ public class SchemaServiceImpl extends AbstractService implements ISchemaService
     public Column getColumn(Table tableName, String columnName) {
         Session s = s();
         Column column = (Column) s.createCriteria(Column.class)
-                .add(Restrictions.eq("table.value", tableName))
+                .add(Restrictions.eq("table", tableName))
                 .add(Restrictions.eq("value",columnName))
                 .setMaxResults(1).uniqueResult();
         if (column==null){

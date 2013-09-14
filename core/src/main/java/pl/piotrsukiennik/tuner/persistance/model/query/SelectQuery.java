@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.persistance.model.query;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.OrderByFragment;
@@ -19,16 +21,16 @@ import java.util.Set;
 public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAware, JoinsAware{
 
 
-    private List<Projection> projections;
+    private Set<Projection> projections;
 
 
     private Set<Source> sources;
 
     private Set<Source> joins;
 
-    private List<GroupByFragment> groups;
+    private Set<GroupByFragment> groups;
 
-    private List<OrderByFragment> orders;
+    private Set<OrderByFragment> orders;
 
     private Set<Condition> conditions;
 
@@ -69,15 +71,17 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
 
 
     @ManyToMany(cascade = CascadeType.ALL)
-    public List<Projection> getProjections() {
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Set<Projection> getProjections() {
         return projections;
     }
 
-    public void setProjections(List<Projection> projections) {
+    public void setProjections(Set<Projection> projections) {
         this.projections = projections;
     }
     @JoinTable(name = "SelectQuery_Joins")
     @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public Set<Source> getSources() {
         return sources;
     }
@@ -87,6 +91,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     }
     @JoinTable(name = "SelectQuery_Sources")
     @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public Set<Source> getJoins() {
         return joins;
     }
@@ -96,11 +101,12 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
     }
     @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
-    public List<GroupByFragment> getGroups() {
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Set<GroupByFragment> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<GroupByFragment> groups) {
+    public void setGroups(Set<GroupByFragment> groups) {
         this.groups = groups;
     }
 
@@ -109,11 +115,12 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
 
     @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
-    public List<OrderByFragment> getOrders() {
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Set<OrderByFragment> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<OrderByFragment> orders) {
+    public void setOrders(Set<OrderByFragment> orders) {
         this.orders = orders;
     }
     @ManyToOne(cascade = CascadeType.ALL,optional = true)
@@ -127,6 +134,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, SourcesAwa
 
     @Override
     @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public Set<Condition> getConditions() {
         return conditions;
     }

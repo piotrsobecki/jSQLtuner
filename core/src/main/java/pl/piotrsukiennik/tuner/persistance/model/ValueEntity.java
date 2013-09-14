@@ -38,7 +38,7 @@ public abstract class ValueEntity {
         if (!(o instanceof ValueEntity)) return false;
         ValueEntity that = (ValueEntity) o;
 
-        if (id != that.id) return false;
+        if (id != that.getId() || (id==0 && that.getId()==0)) return false;
 
         return true;
     }

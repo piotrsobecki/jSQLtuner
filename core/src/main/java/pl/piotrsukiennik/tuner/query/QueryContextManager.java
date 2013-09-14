@@ -1,9 +1,11 @@
 package pl.piotrsukiennik.tuner.query;
 
+import pl.piotrsukiennik.tuner.persistance.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.persistance.model.schema.*;
 import pl.piotrsukiennik.tuner.persistance.service.ISchemaService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -49,7 +51,6 @@ public class QueryContextManager {
         }
         return column;
     }
-
     public Table getTable(String tableName) {
         String key = tableName;
         Table table = queryContext.getTables().get(key);
@@ -61,4 +62,17 @@ public class QueryContextManager {
 
     }
 
+    private Map<String,TableSource> tableMap = new HashMap<String, TableSource>();
+
+    public void putTableSource(TableSource tableSource) {
+        if (tableSource.getAlias()==null || tableSource.getAlias().isEmpty()){
+            tableMap.put(tableSource.getTable().getValue(),tableSource);
+        } else {
+            tableMap.put(tableSource.getAlias(),tableSource);
+        }
+
+    }
+    public TableSource getTableSource(String table){
+        return tableMap.get(table);
+    }
 }

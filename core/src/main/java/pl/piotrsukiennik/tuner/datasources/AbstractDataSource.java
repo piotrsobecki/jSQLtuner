@@ -1,20 +1,31 @@
 package pl.piotrsukiennik.tuner.datasources;
 
+import pl.piotrsukiennik.tuner.cache.CacheManager;
+import pl.piotrsukiennik.tuner.datasources.shard.IDataSharder;
+import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.execution.DataSource;
 
+import javax.annotation.Resource;
+import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 26.08.13
  * Time: 22:24
  */
-public abstract class AbstractDataSource implements IDataSource {
+public abstract class AbstractDataSource implements IDataSource , IDataSharder {
 
     private IDataSourceMetaData dataSourceMetaData;
     private DataSource persistedDataSource;
+    private Set<String> supportedQueries = new LinkedHashSet<String>();
+
+
     protected AbstractDataSource(IDataSourceMetaData dataSourceMetaData) {
         this.dataSourceMetaData = dataSourceMetaData;
     }
@@ -31,17 +42,37 @@ public abstract class AbstractDataSource implements IDataSource {
     }
 
     @Override
-    public final DataRetrieval getData(ReadQuery query) throws Throwable {
+    public final DataRetrieval get(ReadQuery query) throws Throwable{
         DataRetrieval dataRetrieval = new DataRetrieval();
         long start = System.nanoTime();
-        ResultSet resultSet = get(query);
+        ResultSet resultSet = getData(query);
         long end = System.nanoTime();
         dataRetrieval.setExecutionTimeNano(end - start);
         dataRetrieval.setResultSet(resultSet);
         return dataRetrieval;
     }
 
-    protected abstract ResultSet get(ReadQuery query) throws Throwable;
+    @Override
+    public void put(ReadQuery query, Serializable data) {
+        putData(query,data);
+        supportedQueries.add(query.getHash());
+
+    }
+
+    @Override
+    public boolean contains(ReadQuery query) {
+        return supportedQueries.contains(query.getHash());
+    }
+
+    @Override
+    public void delete(Query query) {
+
+        deleteData(query);
+    }
+
+    protected abstract ResultSet getData(ReadQuery query) throws Throwable;
+    protected abstract void deleteData(Query query);
+    protected abstract void putData(ReadQuery query, Serializable data);
 
     @Override
     public boolean equals(Object o) {

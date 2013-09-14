@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.persistance.model.schema;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ public class Column extends ValueEntity {
     private Table table;
 
     @ManyToOne(cascade = CascadeType.ALL,optional = false)
+    @Fetch(FetchMode.JOIN)
     public Table getTable() {
         return table;
     }

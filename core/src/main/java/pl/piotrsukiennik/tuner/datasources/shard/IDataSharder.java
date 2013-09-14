@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.datasources.shard;
 
+import pl.piotrsukiennik.tuner.datasources.DataRetrieval;
 import pl.piotrsukiennik.tuner.datasources.IDataSource;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
@@ -14,8 +15,8 @@ import java.io.Serializable;
  * Time: 18:57
  */
 public interface IDataSharder extends IDataSource{
-    CachedRowSet get(ReadQuery query);
+    DataRetrieval get(ReadQuery query) throws Throwable;
     boolean contains(ReadQuery query);
-    void putData(ReadQuery query, Serializable data);
+    void put(ReadQuery query, Serializable data);
     void delete(Query query);
 }

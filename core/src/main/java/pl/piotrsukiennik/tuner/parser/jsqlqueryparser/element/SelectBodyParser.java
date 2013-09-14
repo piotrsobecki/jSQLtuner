@@ -1,17 +1,22 @@
 package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element;
 
 import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.SelectItem;
 import net.sf.jsqlparser.statement.select.Union;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.ParsingVisitor;
+import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 26.07.13
  * Time: 22:54
  */
-public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor implements net.sf.jsqlparser.statement.select.SelectVisitor {
+public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> implements net.sf.jsqlparser.statement.select.SelectVisitor {
     public SelectBodyParser(QueryContextManager queryContextManager, T query) {
         super(queryContextManager,query);
     }
@@ -22,6 +27,12 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor impl
         ExpresionParser expresionParser = new ExpresionParser(queryContextManager,query);
         if (plainSelect.getFromItem()!=null){
             plainSelect.getFromItem().accept(fromItemParser);
+        }
+
+        List<SelectItem> selectItems = plainSelect.getSelectItems();
+        SelectItemParser selectItemParser =  new SelectItemParser(queryContextManager,query);
+        for (SelectItem selectItem: selectItems){
+            selectItem.accept(selectItemParser);
         }
 
         if (plainSelect.getHaving()!=null){
@@ -38,6 +49,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor impl
                 plainSelect.getInto().accept(fromItemParser);
             }
         }
+
         init(plainSelect);
 
     }
