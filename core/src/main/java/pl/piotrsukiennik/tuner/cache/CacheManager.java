@@ -57,20 +57,18 @@ public class CacheManager {
     }
     public Collection<SelectQuery> getQueriesToInvalidate(Query query){
         if (query instanceof UpdateQuery){
-            UpdateQuery writeQuery = (UpdateQuery)query;
+            UpdateQuery updateQuery = (UpdateQuery)query;
             Collection<SelectQuery> queriesToInvalidate = new LinkedHashSet<SelectQuery>();
-            if (((UpdateQuery) query).getValues()!=null){
-                for (Values values: writeQuery.getValues()){
-                    Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
-                    for(ColumnValue columnValue: values.getColumnValues()){
-                        tablesToStarInvalidate.add(columnValue.getColumn().getTable());
-                        String[] path1 = getPath(columnValue.getColumn());
-                        queriesToInvalidate.addAll(hashesHolderManager.getRemove(path1));
-                    }
-                    for (Table table:tablesToStarInvalidate){
-                        String[] path2 = getStarPath(table);
-                        queriesToInvalidate.addAll(hashesHolderManager.getRemove(path2));
-                    }
+            if (updateQuery.getColumnValues()!=null){
+                Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
+                for(ColumnValue columnValue: updateQuery.getColumnValues()){
+                    tablesToStarInvalidate.add(columnValue.getColumn().getTable());
+                    String[] path1 = getPath(columnValue.getColumn());
+                    queriesToInvalidate.addAll(hashesHolderManager.getRemove(path1));
+                }
+                for (Table table:tablesToStarInvalidate){
+                    String[] path2 = getStarPath(table);
+                    queriesToInvalidate.addAll(hashesHolderManager.getRemove(path2));
                 }
                 return queriesToInvalidate;
             }

@@ -4,6 +4,8 @@ import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 
@@ -13,6 +15,7 @@ import javax.persistence.ManyToOne;
  * Time: 20:57
  */
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class GroupByFragment extends ValueEntity implements SortableByPosition{
     private Projection projection;
     private int position;

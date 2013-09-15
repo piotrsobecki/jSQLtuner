@@ -3,8 +3,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.other;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.schema.Column;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -12,10 +11,11 @@ import javax.persistence.ManyToOne;
  * Time: 21:10
  */
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class ColumnValue extends ValueEntity {
     private Column column;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Column getColumn() {
         return column;
     }

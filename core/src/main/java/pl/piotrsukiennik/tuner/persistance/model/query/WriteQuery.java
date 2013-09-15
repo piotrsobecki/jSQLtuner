@@ -1,8 +1,7 @@
 package pl.piotrsukiennik.tuner.persistance.model.query;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Author: Piotr Sukiennik
@@ -12,13 +11,14 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public abstract class WriteQuery extends Query {
-    private long rowsAffected;
+    private Set<WriteQueryExecution> writeQueryExecutions;
 
-    public long getRowsAffected() {
-        return rowsAffected;
+    @OneToMany(cascade = CascadeType.ALL)
+    public Set<WriteQueryExecution> getWriteQueryExecutions() {
+        return writeQueryExecutions;
     }
 
-    public void setRowsAffected(long rowsAffected) {
-        this.rowsAffected = rowsAffected;
+    public void setWriteQueryExecutions(Set<WriteQueryExecution> writeQueryExecutions) {
+        this.writeQueryExecutions = writeQueryExecutions;
     }
 }

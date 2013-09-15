@@ -7,10 +7,13 @@ import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
 import net.sf.jsqlparser.expression.operators.relational.*;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SourcesAware;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.SubQuerySource;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Database;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Schema;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Table;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
 import pl.piotrsukiennik.tuner.util.QueryUtils;
 
@@ -19,240 +22,250 @@ import pl.piotrsukiennik.tuner.util.QueryUtils;
  * Date: 27.07.13
  * Time: 13:25
  */
-public class ExpresionParser implements ExpressionVisitor {
+public class ValueEntityExpresionParser implements ExpressionVisitor {
 
-    private Query sourceQuery;
+    private ValueEntity valueEntity;
     private QueryContextManager queryContextManager;
 
-    public ExpresionParser(QueryContextManager queryContextManager, Query sourceQuery) {
-        this.sourceQuery=sourceQuery;
+    public ValueEntityExpresionParser(QueryContextManager queryContextManager, ValueEntity valueEntity) {
+        this.valueEntity = valueEntity;
         this.queryContextManager=queryContextManager;
     }
 
 
-    protected void process(BinaryExpression binaryExpression){
-        ExpresionParser leftExpresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        ExpresionParser rightExpresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        binaryExpression.getLeftExpression().accept(leftExpresionParser);
-        binaryExpression.getRightExpression().accept(rightExpresionParser);
-
-    }
-
     @Override
     public void visit(NullValue nullValue) {
-
+     valueEntity.setValue(null);
     }
 
     @Override
     public void visit(Function function) {
-
+        valueEntity.setValue(function.toString());
     }
 
     @Override
     public void visit(InverseExpression inverseExpression) {
-        inverseExpression.getExpression().accept(this);
+        ValueEntityExpresionParser valueEntityExpresionParser = new ValueEntityExpresionParser(queryContextManager,valueEntity);
+        inverseExpression.getExpression().accept(valueEntityExpresionParser);
+        valueEntity.setValue("Inverse "+valueEntity.getValue());
     }
 
     @Override
     public void visit(JdbcParameter jdbcParameter) {
+        valueEntity.setValue(jdbcParameter.toString());
 
     }
 
     @Override
     public void visit(DoubleValue doubleValue) {
+        valueEntity.setValue(Double.toString(doubleValue.getValue()));
 
     }
 
     @Override
     public void visit(LongValue longValue) {
+        valueEntity.setValue(Long.toString(longValue.getValue()));
+
     }
 
     @Override
     public void visit(DateValue dateValue) {
+        valueEntity.setValue(dateValue.getValue().toString());
+
     }
 
     @Override
     public void visit(TimeValue timeValue) {
+        valueEntity.setValue(timeValue.getValue().toString());
 
     }
 
     @Override
     public void visit(TimestampValue timestampValue) {
+        valueEntity.setValue(timestampValue.getValue().toString());
 
     }
 
     @Override
     public void visit(Parenthesis parenthesis) {
-
+        valueEntity.setValue(parenthesis.toString());
     }
 
     @Override
     public void visit(StringValue stringValue) {
+        valueEntity.setValue(stringValue.getValue());
     }
 
     @Override
     public void visit(Addition addition) {
-        process(addition);
+        valueEntity.setValue(addition.getStringExpression());
+
     }
 
     @Override
     public void visit(Division division) {
-       process(division);
+        valueEntity.setValue(division.getStringExpression());
+
     }
 
     @Override
     public void visit(Multiplication multiplication) {
-        process(multiplication);
+        valueEntity.setValue(multiplication.getStringExpression());
+
     }
 
     @Override
     public void visit(Subtraction subtraction) {
-        process(subtraction);
+        valueEntity.setValue(subtraction.getStringExpression());
+
     }
 
     @Override
     public void visit(AndExpression andExpression) {
-          process(andExpression);
+        valueEntity.setValue(andExpression.getStringExpression());
+
     }
 
     @Override
     public void visit(OrExpression orExpression) {
-        process(orExpression);
+        valueEntity.setValue(orExpression.getStringExpression());
+
+
     }
 
     @Override
     public void visit(Between between) {
+        valueEntity.setValue(between.toString());
 
-        ExpresionParser leftExpresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        ExpresionParser startExpresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        ExpresionParser endExpresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        between.getLeftExpression().accept(leftExpresionParser);
-        between.getBetweenExpressionStart().accept(startExpresionParser);
-        between.getBetweenExpressionEnd().accept(endExpresionParser);
 
     }
 
     @Override
     public void visit(EqualsTo equalsTo) {
-        process(equalsTo);
+        valueEntity.setValue(equalsTo.getStringExpression());
+
     }
 
     @Override
     public void visit(GreaterThan greaterThan) {
-        process(greaterThan);
+        valueEntity.setValue(greaterThan.getStringExpression());
+
     }
 
     @Override
     public void visit(GreaterThanEquals greaterThanEquals) {
-        process(greaterThanEquals);
+        valueEntity.setValue(greaterThanEquals.getStringExpression());
+
     }
 
     @Override
     public void visit(InExpression inExpression) {
-        ExpresionParser expresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        inExpression.getLeftExpression().accept(expresionParser);
-        ItemsListParser itemsListParser = new ItemsListParser(queryContextManager,sourceQuery);
-        inExpression.getItemsList().accept(itemsListParser);
+        valueEntity.setValue(inExpression.toString());
+
     }
 
     @Override
     public void visit(IsNullExpression isNullExpression) {
-        ExpresionParser expresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        isNullExpression.getLeftExpression().accept(expresionParser);
+        valueEntity.setValue(isNullExpression.toString());
+
     }
 
     @Override
     public void visit(LikeExpression likeExpression) {
-        process(likeExpression);
+        valueEntity.setValue(likeExpression.getStringExpression());
+
     }
 
     @Override
     public void visit(MinorThan minorThan) {
-        process(minorThan);
+        valueEntity.setValue(minorThan.getStringExpression());
+
     }
 
     @Override
     public void visit(MinorThanEquals minorThanEquals) {
-        process(minorThanEquals);
+        valueEntity.setValue(minorThanEquals.getStringExpression());
+
     }
 
     @Override
     public void visit(NotEqualsTo notEqualsTo) {
-        process(notEqualsTo);
+        valueEntity.setValue(notEqualsTo.getStringExpression());
+
     }
 
     @Override
     public void visit(Column tableColumn) {
-        queryContextManager.getColumn(tableColumn.getTable().getName(),tableColumn.getColumnName());
+        pl.piotrsukiennik.tuner.persistance.model.schema.Column col = queryContextManager.getColumn(tableColumn.getTable().getWholeTableName(), tableColumn.getColumnName());
+        Table table = col.getTable();
+        Schema schema = table.getSchema();
+        Database database = schema.getDatabase();
+        valueEntity.setValue(database.getValue()+"."+schema.getValue()+"."+table.getValue()+"."+col.getValue());
     }
 
     @Override
     public void visit(SubSelect subSelect) {
-        SubQuerySource subQuerySource = new SubQuerySource();
-        subQuerySource.setAlias(subSelect.getAlias());
-        subQuerySource.setValue(subSelect.getSelectBody().toString());
+        valueEntity.setValue(subSelect.toString());
 
-        SelectQuery selectQuery = new SelectQuery();
-        selectQuery.setParentQuery(sourceQuery);
-        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>(queryContextManager,selectQuery);
-        subSelect.getSelectBody().accept(selectBodyParser);
-        subQuerySource.setSelectQuery(selectQuery);
-        if (sourceQuery instanceof SourcesAware){
-            QueryUtils.addSource((SourcesAware) sourceQuery, subQuerySource);
-        }
     }
 
     @Override
     public void visit(CaseExpression caseExpression) {
+        valueEntity.setValue(caseExpression.toString());
 
     }
 
     @Override
     public void visit(WhenClause whenClause) {
+        valueEntity.setValue(whenClause.toString());
 
     }
 
     @Override
     public void visit(ExistsExpression existsExpression) {
-        ExpresionParser expresionParser = new ExpresionParser(queryContextManager,sourceQuery);
-        existsExpression.getRightExpression().accept(expresionParser);
+        valueEntity.setValue(existsExpression.getStringExpression());
+
     }
 
     @Override
     public void visit(AllComparisonExpression allComparisonExpression) {
-        SubSelect subSelect = allComparisonExpression.GetSubSelect();
-        visit(subSelect);
+        valueEntity.setValue(allComparisonExpression.GetSubSelect().toString());
+
     }
 
     @Override
     public void visit(AnyComparisonExpression anyComparisonExpression) {
-        SubSelect subSelect = anyComparisonExpression.GetSubSelect();
-        visit(subSelect);
+        valueEntity.setValue(anyComparisonExpression.GetSubSelect().toString());
+
     }
 
     @Override
     public void visit(Concat concat) {
+        valueEntity.setValue(concat.getStringExpression());
 
     }
 
     @Override
     public void visit(Matches matches) {
-        process(matches);
+        valueEntity.setValue(matches.getStringExpression());
 
     }
 
     @Override
     public void visit(BitwiseAnd bitwiseAnd) {
-        process(bitwiseAnd);
+        valueEntity.setValue(bitwiseAnd.getStringExpression());
+
     }
 
     @Override
     public void visit(BitwiseOr bitwiseOr) {
-        process(bitwiseOr);
+        valueEntity.setValue(bitwiseOr.getStringExpression());
+
     }
 
     @Override
     public void visit(BitwiseXor bitwiseXor) {
-        process(bitwiseXor);
+        valueEntity.setValue(bitwiseXor.getStringExpression());
+
     }
 }

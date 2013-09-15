@@ -1,10 +1,13 @@
 package pl.piotrsukiennik.tuner.persistance.model.query;
 
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.persistance.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.Values;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 /**
@@ -14,12 +17,11 @@ import java.util.Set;
  */
 @Entity
 public class UpdateQuery extends WriteQuery implements ConditionQuery{
-    private Set<Values> values;
-
+    private Set<ColumnValue> columnValues;
     private Set<Condition> conditions;
 
     @Override
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     public Set<Condition> getConditions() {
         return conditions;
     }
@@ -28,12 +30,14 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery{
     public void setConditions(Set<Condition> conditions) {
         this.conditions = conditions;
     }
-    @ManyToMany
-    public Set<Values> getValues() {
-        return values;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public Set<ColumnValue> getColumnValues() {
+        return columnValues;
     }
 
-    public void setValues(Set<Values> values) {
-        this.values = values;
+    public void setColumnValues(Set<ColumnValue> columnValues) {
+        this.columnValues = columnValues;
     }
+
 }

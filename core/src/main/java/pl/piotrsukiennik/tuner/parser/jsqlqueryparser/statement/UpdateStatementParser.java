@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.update.Update;
+import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.ValueEntityExpresionParser;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.UpdateQuery;
@@ -30,7 +31,6 @@ public class  UpdateStatementParser<U extends UpdateQuery> extends StatementPars
         TableSource tableSource = parserUtils.getTableSource(update.getTable());
         List<Column> columnList = update.getColumns();
         List<Expression> values = update.getExpressions();
-        Values valuesCol = new Values();
         Set<ColumnValue> valueEntities = new LinkedHashSet<ColumnValue>();
         for (int i=0; i<columnList.size(); i++){
             Column column = columnList.get(i);
@@ -40,15 +40,11 @@ public class  UpdateStatementParser<U extends UpdateQuery> extends StatementPars
 
             ColumnValue columnValue = new ColumnValue();
             columnValue.setColumn(column1);
-            columnValue.setValue(expression.toString());
+            ValueEntityExpresionParser parser = new ValueEntityExpresionParser(queryContextManager,columnValue);
+            expression.accept(parser);
             valueEntities.add(columnValue);
-
         }
-        valuesCol.setColumnValues(valueEntities);
-        if (query.getValues()==null){
-            query.setValues(new LinkedHashSet<Values>());
-        }
-        query.getValues().add(valuesCol);
+        query.setColumnValues(valueEntities);
         super.visit(update);
     }
 

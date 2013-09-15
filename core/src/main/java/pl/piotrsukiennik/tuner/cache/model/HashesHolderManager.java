@@ -53,7 +53,6 @@ public class HashesHolderManager<P,K> {
             Collection<K> objects =   holder.get();
             rootHolder.remove(objects);
             return objects;
-
         }
         return Collections.EMPTY_LIST;
     }

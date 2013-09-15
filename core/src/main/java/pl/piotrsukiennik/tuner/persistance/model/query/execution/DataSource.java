@@ -3,6 +3,8 @@ package pl.piotrsukiennik.tuner.persistance.model.query.execution;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  * Author: Piotr Sukiennik
@@ -10,6 +12,7 @@ import javax.persistence.Entity;
  * Time: 20:00
  */
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class DataSource extends ValueEntity {
     private String identifier;
     private String clazz;

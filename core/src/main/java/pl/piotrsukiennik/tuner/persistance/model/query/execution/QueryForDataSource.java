@@ -13,6 +13,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @NamedNativeQueries({
 @NamedNativeQuery(
         name = QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS,

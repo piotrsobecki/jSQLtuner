@@ -31,6 +31,14 @@ public abstract class ValueEntity {
         this.value = value;
     }
 
+    @PrePersist
+    @PreUpdate
+    protected final void initValue(){
+        if (value==null){
+            value=this.toString();
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

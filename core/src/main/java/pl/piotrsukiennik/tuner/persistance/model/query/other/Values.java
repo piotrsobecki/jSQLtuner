@@ -2,9 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.other;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -15,15 +13,28 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "ValuesEntity")
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Values extends ValueEntity {
     private Set<ColumnValue> columnValues;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public Set<ColumnValue> getColumnValues() {
         return columnValues;
     }
 
     public void setColumnValues(Set<ColumnValue> columnValues) {
         this.columnValues = columnValues;
+    }
+
+    @Override
+    public String toString() {
+
+        String out = "";
+        String comma="";
+        for (ColumnValue columnValue: columnValues){
+            out += comma+columnValue.getColumn().getValue() +"="+columnValue.getValue();
+            comma=",";
+        }
+        return out;
     }
 }
