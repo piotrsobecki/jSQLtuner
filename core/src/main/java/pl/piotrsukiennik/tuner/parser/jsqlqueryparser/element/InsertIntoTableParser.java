@@ -22,11 +22,13 @@ public class InsertIntoTableParser implements IntoTableVisitor {
     }
     @Override
     public void visit(Table tableName) {
+        throw new RuntimeException("NOT SUPPORTED");
+/*
         TableSource tableSource = new TableSource();
         tableSource.setAlias(tableName.getAlias());
         tableSource.setValue(tableName.getWholeTableName() + tableName.getAlias() == null ? "" : (" " + tableName.getAlias()));
         tableSource.setTable(queryContextManager.getTable(tableName.getWholeTableName()));
-        sourceQuery.setTableSource(tableSource);
+        sourceQuery.setTable(tableSource);*/
     }
 
 }

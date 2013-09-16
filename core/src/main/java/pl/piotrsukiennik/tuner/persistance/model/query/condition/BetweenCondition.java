@@ -11,11 +11,13 @@ import javax.persistence.ManyToOne;
  * Time: 21:10
  */
 @Entity
-public class PairCondition extends Condition {
+public class BetweenCondition extends Condition {
 
     private Condition leftCondition;
 
-    private Condition rightCondition;
+    private Condition startCondition;
+
+    private Condition endCondition;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -28,13 +30,20 @@ public class PairCondition extends Condition {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public Condition getRightCondition() {
-        return rightCondition;
+    public Condition getStartCondition() {
+        return startCondition;
     }
 
-    public void setRightCondition(Condition rightCondition) {
-        this.rightCondition = rightCondition;
+    public void setStartCondition(Condition startCondition) {
+        this.startCondition = startCondition;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getEndCondition() {
+        return endCondition;
+    }
 
+    public void setEndCondition(Condition endCondition) {
+        this.endCondition = endCondition;
+    }
 }

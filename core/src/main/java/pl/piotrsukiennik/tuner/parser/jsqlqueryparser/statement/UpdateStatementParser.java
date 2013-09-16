@@ -3,6 +3,8 @@ package pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.update.Update;
+import org.springframework.expression.ExpressionParser;
+import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.ValueEntityExpresionParser;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
@@ -32,6 +34,7 @@ public class  UpdateStatementParser<U extends UpdateQuery> extends StatementPars
         List<Column> columnList = update.getColumns();
         List<Expression> values = update.getExpressions();
         Set<ColumnValue> valueEntities = new LinkedHashSet<ColumnValue>();
+
         for (int i=0; i<columnList.size(); i++){
             Column column = columnList.get(i);
             Expression expression = values.get(i);
@@ -44,6 +47,11 @@ public class  UpdateStatementParser<U extends UpdateQuery> extends StatementPars
             expression.accept(parser);
             valueEntities.add(columnValue);
         }
+
+
+        ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
+        update.getWhere().accept(expresionParser);
+        query.setWhereCondition(expresionParser.getCondition());
         query.setColumnValues(valueEntities);
         super.visit(update);
     }

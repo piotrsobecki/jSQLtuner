@@ -27,4 +27,9 @@ public class ParserUtils {
         queryContextManager.putTableSource(tableSource);
         return tableSource;
     }
+
+    public TableSource getTableSource(net.sf.jsqlparser.schema.Column column) {
+        return queryContextManager.getTableSource(column.getTable().getWholeTableName());
+    }
+
 }

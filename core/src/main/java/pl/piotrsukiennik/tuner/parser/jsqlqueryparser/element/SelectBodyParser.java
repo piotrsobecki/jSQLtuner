@@ -24,7 +24,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
     @Override
     public void visit(PlainSelect plainSelect) {
         FromItemParser fromItemParser = new FromItemParser(queryContextManager,query);
-        ExpresionParser expresionParser = new ExpresionParser(queryContextManager,query);
+        ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
         if (plainSelect.getFromItem()!=null){
             plainSelect.getFromItem().accept(fromItemParser);
         }
@@ -41,6 +41,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
 
         if (plainSelect.getWhere()!=null){
             plainSelect.getWhere().accept(expresionParser);
+            query.setWhereCondition(expresionParser.getCondition());
         }
 
         if (query instanceof SelectQuery){

@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.source;
 
 import pl.piotrsukiennik.tuner.persistance.model.schema.Table;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class TableSource extends Source{
     private Table table;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Table getTable() {
         return table;
     }

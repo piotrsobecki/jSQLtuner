@@ -72,8 +72,21 @@ public class CacheManager {
                 }
                 return queriesToInvalidate;
             }
+        }   else if (query instanceof InsertQuery){
+            InsertQuery insertQuery = ((InsertQuery)query);
+            String[] path = getPath(insertQuery.getTable());
+            return hashesHolderManager.getRemove(path);
+        }   else if (query instanceof DeleteQuery){
+            DeleteQuery deleteQuery = ((DeleteQuery)query);
+            String[] path = getPath(deleteQuery.getTableSource().getTable());
+            return hashesHolderManager.getRemove(path);
         }
         return Collections.EMPTY_LIST;
+    }
+    protected String[] getPath(Table table){
+        Schema schema = table.getSchema();
+        Database database = schema.getDatabase();
+        return  new String[]{database.getValue(),schema.getValue(),table.getValue()};
     }
     protected String[] getPath(Column column){
         Table table =  column.getTable();

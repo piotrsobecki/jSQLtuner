@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query;
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.TableSource;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -17,9 +18,7 @@ import java.util.Set;
 public class DeleteQuery extends WriteQuery implements ConditionQuery{
     private TableSource tableSource;
 
-    private Set<Condition> conditions;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public TableSource getTableSource() {
         return tableSource;
     }
@@ -28,14 +27,15 @@ public class DeleteQuery extends WriteQuery implements ConditionQuery{
         this.tableSource = tableSource;
     }
 
-    @Override
-    @ManyToMany
-    public Set<Condition> getConditions() {
-        return conditions;
+    private Condition whereCondition;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getWhereCondition() {
+        return whereCondition;
     }
 
-    @Override
-    public void setConditions(Set<Condition> conditions) {
-        this.conditions = conditions;
+    public void setWhereCondition(Condition whereCondition) {
+        this.whereCondition = whereCondition;
     }
 }

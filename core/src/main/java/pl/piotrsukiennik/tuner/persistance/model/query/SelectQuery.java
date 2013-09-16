@@ -32,13 +32,11 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
 
     private Set<OrderByFragment> orders;
 
-    private Set<Condition> conditions;
-
     private Query parentQuery;
 
     private Boolean distinctFragment;
 
-
+    private Condition whereCondition;
 
     private int limitFrom;
 
@@ -132,15 +130,15 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
         this.parentQuery = parentQuery;
     }
 
-    @Override
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    public Set<Condition> getConditions() {
-        return conditions;
+
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getWhereCondition() {
+        return whereCondition;
     }
 
-    @Override
-    public void setConditions(Set<Condition> conditions) {
-        this.conditions = conditions;
+    public void setWhereCondition(Condition whereCondition) {
+        this.whereCondition = whereCondition;
     }
 }

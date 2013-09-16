@@ -4,10 +4,7 @@ import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.Values;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -18,17 +15,17 @@ import java.util.Set;
 @Entity
 public class UpdateQuery extends WriteQuery implements ConditionQuery{
     private Set<ColumnValue> columnValues;
-    private Set<Condition> conditions;
+    private Condition whereCondition;
 
-    @Override
-    @ManyToMany(cascade = CascadeType.ALL)
-    public Set<Condition> getConditions() {
-        return conditions;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getWhereCondition() {
+        return whereCondition;
     }
 
-    @Override
-    public void setConditions(Set<Condition> conditions) {
-        this.conditions = conditions;
+    public void setWhereCondition(Condition whereCondition) {
+        this.whereCondition = whereCondition;
     }
 
     @OneToMany(cascade = CascadeType.ALL)

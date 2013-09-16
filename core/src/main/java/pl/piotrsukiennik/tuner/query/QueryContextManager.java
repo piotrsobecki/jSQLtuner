@@ -16,9 +16,9 @@ import java.util.Map;
 public class QueryContextManager {
     private static final String STRIP_TOKENS = "[` !@#$%^&*();'?><_+-=]";
     private Map<String,TableSource> tableMap = new HashMap<String, TableSource>();
-    private QueryContext queryContext;
-    private ISchemaService schemaService;
-
+    protected QueryContext queryContext;
+    protected ISchemaService schemaService;
+    protected TableSource lastAttachedTableSource;
 
 
 
@@ -56,6 +56,18 @@ public class QueryContextManager {
             return schema;
         }
     }
+
+    public Column getColumn(Table table, String columnName) {
+        String columnNameCorrected = correctName(columnName);
+        String key = table.getValue()+" "+columnName;
+        Column column = queryContext.getColumns().get(key);
+        if (column==null){
+            column = schemaService.getColumn(table,columnNameCorrected);
+            queryContext.getColumns().put(key,column);
+        }
+        return column;
+    }
+
     public Column getColumn(String tableName, String columnName) {
         String tableNameCorrected = correctName(tableName);
 
@@ -90,9 +102,14 @@ public class QueryContextManager {
         } else {
             tableMap.put(tableSource.getAlias(),tableSource);
         }
+        lastAttachedTableSource=tableSource;
 
     }
     public TableSource getTableSource(String table){
         return tableMap.get(table);
+    }
+
+    public TableSource getLastAttachedTableSource() {
+        return lastAttachedTableSource;
     }
 }

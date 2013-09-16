@@ -2,9 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.condition;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -13,7 +11,25 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-public abstract class Condition extends ValueEntity {
+public class Condition extends ValueEntity {
+    private ConditionOperator operator;
 
+    @Enumerated(EnumType.STRING)
+    public ConditionOperator getOperator() {
+        return operator;
+    }
 
+    public void setOperator(ConditionOperator operator) {
+        this.operator = operator;
+    }
+
+    private boolean inverse;
+
+    public boolean isInverse() {
+        return inverse;
+    }
+
+    public void setInverse(boolean inverse) {
+        this.inverse = inverse;
+    }
 }

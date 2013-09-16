@@ -7,6 +7,8 @@ import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.FromItemParser;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.element.InsertIntoTableParser;
 import pl.piotrsukiennik.tuner.persistance.model.query.DeleteQuery;
+import pl.piotrsukiennik.tuner.persistance.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Table;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 /**
@@ -21,12 +23,13 @@ public class DeleteStatementParser extends StatementParser<DeleteQuery> {
 
     @Override
     public void visit(Delete delete) {
-        FromItemParser fromItemParser = new FromItemParser(queryContextManager,query);
-        DeleteIntoTableParser deleteIntoTableParser = new DeleteIntoTableParser(queryContextManager,query);
-        ExpresionParser expresionParser = new ExpresionParser(queryContextManager,query);
-        delete.getTable().accept(deleteIntoTableParser);
-        delete.getTable().accept(fromItemParser);
-        delete.getWhere().accept(expresionParser);
+        TableSource tableSource = parserUtils.getTableSource(delete.getTable());
+        query.setTableSource(tableSource);
+        if (delete.getWhere()!=null){
+            ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
+            delete.getWhere().accept(expresionParser);
+            query.setWhereCondition(expresionParser.getCondition());
+        }
         super.visit(delete);
     }
 

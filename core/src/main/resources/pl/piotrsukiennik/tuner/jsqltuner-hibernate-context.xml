@@ -20,9 +20,9 @@
         <property name="packagesToScan" value="pl.piotrsukiennik.tuner.persistance.model.*"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
             </props>
         </property>
     </bean>
