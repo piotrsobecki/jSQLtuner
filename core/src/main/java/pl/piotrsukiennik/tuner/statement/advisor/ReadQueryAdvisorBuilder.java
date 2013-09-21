@@ -17,6 +17,6 @@ public class ReadQueryAdvisorBuilder<Q extends SelectQuery> extends QueryAdvisor
 
     @Override
     public Advisor createAdvisor(Q readQuery) {
-        return super.createAdvisor(new ReadQueryAdvice(manager,readQuery));
+        return super.createAdvisor(new ReadQueryAdvice(servicesHolder,manager,readQuery));
     }
 }

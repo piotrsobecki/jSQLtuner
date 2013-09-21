@@ -36,7 +36,7 @@ public class InsertItemsListParser implements ItemsListVisitor {
         InsertAsSelectQuery insertAsSelectQuery = new InsertAsSelectQuery();
         SelectQuery selectQuery = new SelectQuery();
         selectQuery.setParentQuery(insertAsSelectQuery);
-        FromItemParser fromItemParser = new FromItemParser(queryContextManager,selectQuery);
+        FromItemParser fromItemParser = new FromItemParser(queryContextManager);
         ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
         subSelect.accept(fromItemParser);
         subSelect.accept(expresionParser);

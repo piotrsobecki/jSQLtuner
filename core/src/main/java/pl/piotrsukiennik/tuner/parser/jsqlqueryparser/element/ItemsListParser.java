@@ -34,10 +34,13 @@ public class ItemsListParser implements ItemsListVisitor {
     public void visit(SubSelect subSelect) {
         SelectQuery selectQuery = new SelectQuery();
         selectQuery.setParentQuery(sourceQuery);
-        FromItemParser fromItemParser = new FromItemParser(queryContextManager,selectQuery);
+        FromItemParser fromItemParser = new FromItemParser(queryContextManager);
         ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
         subSelect.accept(fromItemParser);
         subSelect.accept(expresionParser);
+        //TODO
+
+
 
     }
 
@@ -47,8 +50,9 @@ public class ItemsListParser implements ItemsListVisitor {
         Set<ColumnValue> columnValues = new LinkedHashSet<ColumnValue>();
         for (Expression ex: expressions){
             ColumnValue columnValue = new ColumnValue();
-            ValueEntityExpresionParser expresionParser = new ValueEntityExpresionParser(queryContextManager, columnValue);
+            ExpresionParser expresionParser = new ExpresionParser(queryContextManager);
             ex.accept(expresionParser);
+            columnValue.setCondition(expresionParser.getCondition());
             columnValues.add(columnValue);
         }
 

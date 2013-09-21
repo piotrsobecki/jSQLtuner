@@ -4,6 +4,7 @@ import java.sql.Statement;
 import org.aopalliance.intercept.MethodInvocation;
 import pl.piotrsukiennik.tuner.datasources.*;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 
 import java.sql.ResultSet;
 
@@ -17,16 +18,21 @@ public class ReadQueryAdvice extends QueryAdvice<SelectQuery,ResultSet> {
     private DataSourcesManager manager;
 
 
-    public ReadQueryAdvice(DataSourcesManager dataSourcesManager, SelectQuery query) {
-        super(query);
+    public ReadQueryAdvice(ServicesHolder servicesHolder, DataSourcesManager dataSourcesManager, SelectQuery query) {
+        super(servicesHolder,query);
         this.manager = dataSourcesManager;
     }
 
     @Override
     public ResultSet invoke(final MethodInvocation methodInvocation) throws Throwable {
-        manager.setDataForQuery(query
-                ,new StatementMethodInvocationDataSource((Statement)methodInvocation.getThis(),methodInvocation,query));
-        return manager.getData(query);
+        try{
+            manager.setDataForQuery(query
+                    ,new StatementMethodInvocationDataSource((Statement)methodInvocation.getThis(),methodInvocation,query));
+            return manager.getData(query);
+        }catch (Exception e){
+            servicesHolder.getLogService().logException(query.getValue(), e);
+            throw e;
+        }
     }
 
 

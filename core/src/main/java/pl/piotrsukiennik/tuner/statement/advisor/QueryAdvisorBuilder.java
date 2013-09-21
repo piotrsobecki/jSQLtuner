@@ -5,6 +5,7 @@ import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
 import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
 import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
 
 import javax.annotation.Resource;
 
@@ -15,7 +16,8 @@ import javax.annotation.Resource;
  */
 public abstract class QueryAdvisorBuilder<Q extends Query> {
 
-    protected  @Resource  DataSourcesManager manager;
+    protected @Resource  ServicesHolder servicesHolder;
+    protected @Resource  DataSourcesManager manager;
     private String expression;
     private Integer order;
 

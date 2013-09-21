@@ -19,7 +19,6 @@ public abstract class ParsingVisitor<T extends Query> extends Visitor{
     }
     public ParsingVisitor(QueryContextManager queryContextManager, T query) {
         super(queryContextManager);
-
         this.query = query;
     }
 

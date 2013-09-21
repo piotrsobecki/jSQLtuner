@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.projection;
 
 import pl.piotrsukiennik.tuner.persistance.model.schema.Function;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class FunctionProjection extends ColumnProjection {
     private Function function;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Function getFunction() {
         return function;
     }

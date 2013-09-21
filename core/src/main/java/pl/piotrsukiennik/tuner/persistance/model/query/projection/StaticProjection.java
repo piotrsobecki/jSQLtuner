@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.projection;
 
 import pl.piotrsukiennik.tuner.persistance.model.schema.Type;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class StaticProjection extends Projection {
     private Type type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Type getType() {
         return type;
     }

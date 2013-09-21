@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.source;
 
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class SubQuerySource extends Source{
     private SelectQuery selectQuery;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public SelectQuery getSelectQuery() {
         return selectQuery;
     }

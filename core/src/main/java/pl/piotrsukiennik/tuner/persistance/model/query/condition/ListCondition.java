@@ -14,7 +14,6 @@ public class ListCondition extends Condition {
     private Set<Condition> subConditions;
 
     @ManyToMany(cascade = CascadeType.ALL)
-
     public Set<Condition> getSubConditions() {
         return subConditions;
     }

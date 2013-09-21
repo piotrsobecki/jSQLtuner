@@ -10,9 +10,7 @@ import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.parser.jsqlqueryparser.statement.Visitor;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.*;
-import pl.piotrsukiennik.tuner.persistance.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.SubQuerySource;
-import pl.piotrsukiennik.tuner.persistance.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.query.QueryContextManager;
 
 import java.util.LinkedHashSet;
@@ -242,23 +240,8 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     @Override
     public void visit(Column tableColumn) {
-        TableSource tableSource =null;
-
-        if (tableColumn.getTable().getName()==null){
-            tableSource = queryContextManager.getLastAttachedTableSource();
-        }else {
-            tableSource =  parserUtils.getTableSource(tableColumn);
-        }
-        if (tableSource==null){
-            throw new RuntimeException("Null tableSource exception");
-        }
-
-        pl.piotrsukiennik.tuner.persistance.model.schema.Column col = queryContextManager.getColumn(tableSource.getTable(), tableColumn.getColumnName());
         ProjectionValueCondition projectionValueCondition = new ProjectionValueCondition();
-        ColumnProjection columnProjection = new ColumnProjection();
-        columnProjection.setColumn(col);
-        columnProjection.setSource(tableSource);
-        projectionValueCondition.setProjection(columnProjection);
+        projectionValueCondition.setProjection(parserUtils.getColumnProjection(tableColumn));
         condition=projectionValueCondition;
     }
 

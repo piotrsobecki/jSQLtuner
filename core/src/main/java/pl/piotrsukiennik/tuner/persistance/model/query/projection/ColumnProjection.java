@@ -2,10 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.projection;
 
 import pl.piotrsukiennik.tuner.persistance.model.schema.Column;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -17,7 +14,7 @@ import javax.persistence.ManyToOne;
 public class ColumnProjection extends SourceProjection{
     private Column column;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Column getColumn() {
         return column;
     }

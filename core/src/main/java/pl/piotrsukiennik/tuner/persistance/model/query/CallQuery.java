@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query;
 
 import pl.piotrsukiennik.tuner.persistance.model.schema.Procedure;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class CallQuery extends Query{
     private Procedure procedure;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Procedure getProcedure() {
         return procedure;
     }

@@ -24,15 +24,4 @@ public class RowSet {
         return rowSet.size();
     }
 
-    public static int size(ResultSet rowSet){
-        int rows =0;
-        try{
-            rowSet.last();
-            rows = rowSet.getRow();
-            rowSet.first();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return rows;
-    }
 }

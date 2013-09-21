@@ -3,10 +3,7 @@ package pl.piotrsukiennik.tuner.persistance.model.query.other;
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 
 /**
@@ -20,7 +17,7 @@ public class GroupByFragment extends ValueEntity implements SortableByPosition{
     private Projection projection;
     private int position;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Projection getProjection() {
         return projection;
     }

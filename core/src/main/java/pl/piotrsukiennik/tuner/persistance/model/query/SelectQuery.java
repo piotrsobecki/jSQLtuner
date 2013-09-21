@@ -3,13 +3,14 @@ package pl.piotrsukiennik.tuner.persistance.model.query;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
-import pl.piotrsukiennik.tuner.persistance.model.query.other.GroupByFragment;
+import pl.piotrsukiennik.tuner.persistance.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.persistance.model.query.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.persistance.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.persistance.model.query.source.Source;
+import pl.piotrsukiennik.tuner.persistance.model.schema.Table;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,47 +24,50 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
 
     private Set<Projection> projections;
 
-
     private Set<Source> sources;
 
-    private Set<Source> joins;
+    private Set<JoinFragment> joins;
 
-    private Set<GroupByFragment> groups;
+    private Set<ColumnProjection> groups;
 
     private Set<OrderByFragment> orders;
 
     private Query parentQuery;
 
-    private Boolean distinctFragment;
+    private boolean distinctFragment;
 
     private Condition whereCondition;
 
-    private int limitFrom;
+    private Condition havingCondition;
 
-    private int limitTo;
+    private Table intoTable;
+
+    private long limitFrom;
+
+    private long limitTo;
 
 
-    public int getLimitFrom() {
+    public long getLimitFrom() {
         return limitFrom;
     }
 
-    public void setLimitFrom(int limitFrom) {
+    public void setLimitFrom(long limitFrom) {
         this.limitFrom = limitFrom;
     }
 
-    public int getLimitTo() {
+    public long getLimitTo() {
         return limitTo;
     }
 
-    public void setLimitTo(int limitTo) {
+    public void setLimitTo(long limitTo) {
         this.limitTo = limitTo;
     }
 
-    public Boolean getDistinctFragment() {
+    public boolean getDistinctFragment() {
         return distinctFragment;
     }
 
-    public void setDistinctFragment(Boolean distinctFragment) {
+    public void setDistinctFragment(boolean distinctFragment) {
         this.distinctFragment = distinctFragment;
     }
 
@@ -90,26 +94,23 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
     @JoinTable(name = "SelectQuery_Sources")
     @ManyToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    public Set<Source> getJoins() {
+    public Set<JoinFragment> getJoins() {
         return joins;
     }
 
-    public void setJoins(Set<Source> joins) {
+    public void setJoins(Set<JoinFragment> joins) {
         this.joins = joins;
     }
     @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
     @LazyCollection(LazyCollectionOption.FALSE)
-    public Set<GroupByFragment> getGroups() {
+    public Set<ColumnProjection> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<GroupByFragment> groups) {
+    public void setGroups(Set<ColumnProjection> groups) {
         this.groups = groups;
     }
-
-
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value = "position ASC")
@@ -131,7 +132,14 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
     }
 
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Table getIntoTable() {
+        return intoTable;
+    }
 
+    public void setIntoTable(Table intoTable) {
+        this.intoTable = intoTable;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
     public Condition getWhereCondition() {
@@ -140,5 +148,14 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
 
     public void setWhereCondition(Condition whereCondition) {
         this.whereCondition = whereCondition;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getHavingCondition() {
+        return havingCondition;
+    }
+
+    public void setHavingCondition(Condition havingCondition) {
+        this.havingCondition = havingCondition;
     }
 }

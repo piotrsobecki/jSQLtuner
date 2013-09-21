@@ -1,12 +1,9 @@
 package pl.piotrsukiennik.tuner.persistance.model.query.other;
 
 import pl.piotrsukiennik.tuner.persistance.model.ValueEntity;
-import pl.piotrsukiennik.tuner.persistance.model.query.projection.Projection;
+import pl.piotrsukiennik.tuner.persistance.model.query.condition.Condition;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -16,17 +13,32 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class OrderByFragment extends ValueEntity implements SortableByPosition {
-    private Projection projection;
+    public enum Order{ASC,DESC}
+
+    private Condition orderByExpression;
+    private Order orderDirection;
     private int position;
 
-    @ManyToOne
-    public Projection getProjection() {
-        return projection;
+
+    @Enumerated(value = EnumType.STRING)
+    public Order getOrderDirection() {
+        return orderDirection;
     }
 
-    public void setProjection(Projection projection) {
-        this.projection = projection;
+    public void setOrderDirection(Order orderDirection) {
+        this.orderDirection = orderDirection;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Condition getOrderByExpression() {
+        return orderByExpression;
+    }
+
+    public void setOrderByExpression(Condition orderByExpression) {
+        this.orderByExpression = orderByExpression;
+    }
+
+
 
     @Override
     public int getPosition() {

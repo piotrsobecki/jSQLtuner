@@ -10,6 +10,7 @@ import javax.persistence.*;
  * Time: 21:10
  */
 @Entity
+@Table(name = "ConditionEntity")
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Condition extends ValueEntity {
     private ConditionOperator operator;
