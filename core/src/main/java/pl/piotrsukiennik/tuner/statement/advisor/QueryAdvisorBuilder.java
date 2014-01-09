@@ -18,6 +18,7 @@ public abstract class QueryAdvisorBuilder<Q extends Query> {
 
     protected @Resource  ServicesHolder servicesHolder;
     protected @Resource  DataSourcesManager manager;
+
     private String expression;
     private Integer order;
 

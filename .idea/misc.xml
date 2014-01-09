@@ -26,6 +26,9 @@
     <option name="priority" value="Medium" />
   </component>
   <component name="IdProvider" IDEtalkID="008D2EC12A345F4E0A7F10290C36FC33" />
+  <component name="IvyProjectSettings">
+    <dependencies />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>

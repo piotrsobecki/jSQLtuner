@@ -1,8 +1,6 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.springframework.aop.Advisor;
-import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
-import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
 
 import javax.annotation.Resource;

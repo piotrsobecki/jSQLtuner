@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component(value = "KeyValueLocalService")
 public class KeyValueLocalService implements IKeyValueService{
-    private Cache<Object,Object> cache= CacheBuilder.newBuilder().
+    private Cache<String,Object> cache= CacheBuilder.newBuilder().
             expireAfterAccess(30, TimeUnit.DAYS).
             maximumSize(1000).
             build();
