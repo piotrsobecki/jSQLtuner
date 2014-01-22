@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner.service.cache.model;
 
-import pl.piotrsukiennik.tuner.service.cache.model.build.EnterableHolderFactory;
-
 import java.util.Collection;
 import java.util.Collections;
 

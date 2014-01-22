@@ -14,7 +14,7 @@ import pl.piotrsukiennik.tuner.model.schema.Database;
 import pl.piotrsukiennik.tuner.model.schema.Schema;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.cache.model.HashesHolderManager;
-import pl.piotrsukiennik.tuner.service.cache.model.build.EnterableHolderFactory;
+import pl.piotrsukiennik.tuner.service.cache.model.EnterableHolderFactory;
 
 import java.util.Collection;
 import java.util.Collections;
