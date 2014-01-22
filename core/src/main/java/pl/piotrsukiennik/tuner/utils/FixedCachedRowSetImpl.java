@@ -19,7 +19,6 @@ public class FixedCachedRowSetImpl extends CachedRowSetImpl {
 
     private static final long serialVersionUID = -9067504047398250113L;
 
-    private RowSetMetaDataImpl RowSetMD;
 
     public FixedCachedRowSetImpl() throws SQLException {
         super();
@@ -31,16 +30,13 @@ public class FixedCachedRowSetImpl extends CachedRowSetImpl {
 
 
     private int getColIdxByName( String name ) throws SQLException {
-        RowSetMD = (RowSetMetaDataImpl) this.getMetaData();
-        int cols = RowSetMD.getColumnCount();
-
+        RowSetMetaDataImpl rowSetMetaData = (RowSetMetaDataImpl) this.getMetaData();
+        int cols = rowSetMetaData.getColumnCount();
         for ( int i = 1; i <= cols; ++i ) {
-            String colName = RowSetMD.getColumnLabel( i );
-            if ( colName != null )
-                if ( name.equalsIgnoreCase( colName ) )
-                    return ( i );
-                else
-                    continue;
+            String colName = rowSetMetaData.getColumnLabel( i );
+            if ( colName != null && colName.equalsIgnoreCase( name ) ) {
+                return i;
+            }
         }
         throw new SQLException( resBundle.handleGetObject( "cachedrowsetimpl.invalcolnm" ).toString() );
     }

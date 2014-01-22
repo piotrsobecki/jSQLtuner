@@ -15,11 +15,6 @@ import javax.persistence.ManyToOne;
 @javax.persistence.Table(name = "TableEntity")
 public class Table extends ValueEntity {
 
-
-    public Table() {
-        int a = 1;
-    }
-
     private Schema schema;
 
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)

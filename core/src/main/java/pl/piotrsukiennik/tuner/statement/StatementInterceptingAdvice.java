@@ -1,7 +1,6 @@
 package pl.piotrsukiennik.tuner.statement;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.aop.framework.ReflectiveMethodInvocation;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.IDecisionService;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
@@ -33,7 +32,7 @@ public class StatementInterceptingAdvice implements InterceptingAdvice<PreparedS
         catch ( Throwable throwable ) {
             throw new PreparedStatementInterceptException( throwable );
         }
-        return decisionService.proceed( preparedStatement, (Connection) ( ( (ReflectiveMethodInvocation) methodInvocation ) ).getThis(), queryString );
+        return decisionService.proceed( preparedStatement, (Connection) methodInvocation.getThis(), queryString );
 
     }
 

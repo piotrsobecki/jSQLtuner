@@ -36,7 +36,7 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
         }
         catch ( SQLException s ) {
             if ( LOG.isTraceEnabled() ) {
-                LOG.trace( s );
+                LOG.trace( "Exception occured while trying to retreive identifier for connection datasource", s );
             }
             return DEFAULT_IDENTIFIER;
         }

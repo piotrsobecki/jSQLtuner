@@ -81,12 +81,12 @@ class CacheManagerServiceImpl implements CacheManagerService {
             }
         }
         else if ( query instanceof InsertQuery ) {
-            InsertQuery insertQuery = ( (InsertQuery) query );
+            InsertQuery insertQuery = (InsertQuery) query;
             String[] path = getPath( insertQuery.getTable() );
             return hashesHolderManager.getRemove( path );
         }
         else if ( query instanceof DeleteQuery ) {
-            DeleteQuery deleteQuery = ( (DeleteQuery) query );
+            DeleteQuery deleteQuery = (DeleteQuery) query;
             String[] path = getPath( deleteQuery.getTableSource().getTable() );
             return hashesHolderManager.getRemove( path );
         }

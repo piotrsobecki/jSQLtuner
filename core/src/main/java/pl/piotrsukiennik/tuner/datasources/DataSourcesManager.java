@@ -10,7 +10,6 @@ import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.QueryForDataSource;
 import pl.piotrsukiennik.tuner.service.LocalDataSourceService;
 import pl.piotrsukiennik.tuner.service.QueryExecutionService;
 import pl.piotrsukiennik.tuner.utils.RowSet;
@@ -19,7 +18,6 @@ import javax.annotation.Resource;
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
@@ -55,7 +53,7 @@ public class DataSourcesManager {
         }
         catch ( DataRetrievalException t ) {
             if ( LOG.isWarnEnabled() ) {
-                LOG.warn( t );
+                LOG.warn( "No data could be retreived using sharding manager.", t );
             }
             IDataSource dataSource = dataSourceMapper.getRootDataSource( query );
             dataRetrieval = dataSource.get( query );
@@ -76,7 +74,7 @@ public class DataSourcesManager {
             throw new DataRetrievalException( "Data Sources Manager could not obtain ResultSet" );
         }
         else {
-            Collection<QueryForDataSource> queries = executionService.submit( query, dataRetrieval );
+            executionService.submit( query, dataRetrieval );
         }
         return dataRetrieval.getResultSet();
     }

@@ -1,6 +1,5 @@
 package pl.piotrsukiennik.tuner.persistance.transactional;
 
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +43,6 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Database getDatabase( String databaseName ) {
-        Session s = s();
         Database database = (Database) s().createCriteria( Database.class )
          .add( Restrictions.eq( VALUE, databaseName ) )
          .setMaxResults( 1 ).uniqueResult();
@@ -71,7 +69,6 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Function getFunction( Database database, String functionName ) {
-        Session s = s();
         Function function = (Function) s().createCriteria( Function.class )
          .add( Restrictions.eq( DATABASE, database ) )
          .add( Restrictions.eq( VALUE, functionName ) )
@@ -99,7 +96,6 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Type getType( Database database, String typeName ) {
-        Session s = s();
         Type type = (Type) s().createCriteria( Type.class )
          .add( Restrictions.eq( DATABASE, database ) )
          .add( Restrictions.eq( VALUE, typeName ) )
@@ -128,8 +124,7 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Schema getSchema( Database database, String schemaName ) {
-        Session s = s();
-        Schema schema = (Schema) s.createCriteria( Schema.class )
+        Schema schema = (Schema) s().createCriteria( Schema.class )
          .add( Restrictions.eq( DATABASE, database ) )
          .add( Restrictions.eq( VALUE, schemaName ) )
          .setMaxResults( 1 ).uniqueResult();
@@ -170,8 +165,7 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Table getTable( Schema schema, String tableName ) {
-        Session s = s();
-        Table table = (Table) s.createCriteria( Table.class )
+        Table table = (Table) s().createCriteria( Table.class )
          .add( Restrictions.eq( SCHEMA, schema ) )
          .add( Restrictions.eq( VALUE, tableName ) )
          .setMaxResults( 1 ).uniqueResult();
@@ -227,8 +221,7 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     @Override
     public Column getColumn( Table tableName, String columnName ) {
-        Session s = s();
-        Column column = (Column) s.createCriteria( Column.class )
+        Column column = (Column) s().createCriteria( Column.class )
          .add( Restrictions.eq( TABLE, tableName ) )
          .add( Restrictions.eq( VALUE, columnName ) )
          .setMaxResults( 1 ).uniqueResult();

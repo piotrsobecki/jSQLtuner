@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,8 +60,7 @@ class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
 
     @Override
     public DataSource getDataSource( String identifier ) {
-        Session session = s();
-        DataSource dataSource = (DataSource) session.createCriteria( DataSource.class )
+        DataSource dataSource = (DataSource) s().createCriteria( DataSource.class )
          .add( Restrictions.eq( "identifier", identifier ) ).setMaxResults( 1 ).uniqueResult();
         if ( dataSource == null ) {
             dataSource = new DataSource();
@@ -120,7 +118,6 @@ class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
     }
 
     public QueryForDataSource submitNewDataSourceForQuery( final ReadQuery q, final DataSource dataSource ) {
-        Session session = s();
         ReadQuery persistedQuery = queryService.submit( q );
         QueryForDataSource queryForDataSource = getQueryForDataSource( persistedQuery, dataSource );
         if ( queryForDataSource == null ) {
@@ -132,7 +129,6 @@ class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
             queryForDataSource = initNew( queryForDataSource, persistedQuery, dataSource );
             update( queryForDataSource );
         }
-        session.flush();
         refreshRoulette( persistedQuery );
         sourceMultiValueMap.put( persistedQuery.getHash(), queryForDataSource );
         return queryForDataSource;
@@ -143,7 +139,6 @@ class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
 
         Collection<QueryForDataSource> queryForDataSourceCollection = sourceMultiValueMap.get( persistedQuery.getHash() );
         Collection<QueryForDataSource> filtered = Collections2.filter( queryForDataSourceCollection, new PredicateQueryDataSource( dataSource ) );
-        Session session = s();
         if ( filtered.isEmpty() ) {
             QueryForDataSource queryForDataSource = getQueryForDataSource( persistedQuery, dataSource );
             if ( queryForDataSource == null ) {
