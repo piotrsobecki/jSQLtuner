@@ -1,6 +1,7 @@
 package pl.piotrsukiennik.tuner;
 
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
@@ -19,7 +20,7 @@ public interface IDataSource {
 
     IDataSourceMetaData getMetaData();
 
-    DataRetrieval get( ReadQuery query ) throws Throwable;
+    DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
 
     void put( ReadQuery query, CachedRowSet resultSet );
 

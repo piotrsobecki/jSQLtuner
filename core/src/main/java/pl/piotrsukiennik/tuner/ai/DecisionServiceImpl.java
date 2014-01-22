@@ -8,7 +8,6 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.service.QueryParserService;
 import pl.piotrsukiennik.tuner.statement.PreparedStatementProxyCreator;
 import pl.piotrsukiennik.tuner.statement.manager.QueryInitializationListener;
-import pl.piotrsukiennik.tuner.statement.manager.StatementRegister;
 import pl.piotrsukiennik.tuner.utils.OrderedComparator;
 import pl.piotrsukiennik.tuner.utils.Statements;
 
@@ -28,17 +27,11 @@ import java.util.TreeSet;
 @Service
 public class DecisionServiceImpl implements IDecisionService {
 
-    private
     @Resource
-    StatementRegister register;
+    private QueryParserService parser;
 
-    private
     @Resource
-    QueryParserService parser;
-
-    private
-    @Resource
-    PreparedStatementProxyCreator preparedStatementProxyCreator;
+    private PreparedStatementProxyCreator preparedStatementProxyCreator;
 
 
     private Collection<QueryInitializationListener> listeners;
@@ -54,16 +47,16 @@ public class DecisionServiceImpl implements IDecisionService {
 
     @Override
     public boolean checkProceed( IQuery query ) {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
+        return true;
     }
 
-    public PreparedStatement proceed( PreparedStatement source, Query query ) throws Throwable {
+    public PreparedStatement proceed( PreparedStatement source, Query query ) {
 
         return preparedStatementProxyCreator.create( query, source );
     }
 
 
-    public PreparedStatement proceed( PreparedStatement source, Connection connection, String queryString ) throws Throwable {
+    public PreparedStatement proceed( PreparedStatement source, Connection connection, String queryString ) {
         String schema = Statements.getSchema( connection );
         if ( checkToProxy( schema ) ) {
             Query query = parser.parse( schema, schema, queryString );

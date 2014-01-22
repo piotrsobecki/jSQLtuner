@@ -15,6 +15,6 @@ public interface IDecisionService {
 
     boolean checkProceed( IQuery query );
 
-    PreparedStatement proceed( PreparedStatement source, Connection connection, String query ) throws Throwable;
+    PreparedStatement proceed( PreparedStatement source, Connection connection, String query );
 
 }

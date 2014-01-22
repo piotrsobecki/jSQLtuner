@@ -54,11 +54,4 @@ public class DataRetrieval {
         this.rows = rows;
     }
 
-    /* public IDataSource getDataSource() {
-        return dataSource;
-    }*/
-    /*public void setDataSource(IDataSource dataSource) {
-        this.dataSource = dataSource;
-    }*/
-
 }

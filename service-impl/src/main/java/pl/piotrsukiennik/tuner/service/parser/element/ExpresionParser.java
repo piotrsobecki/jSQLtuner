@@ -54,14 +54,14 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( NullValue nullValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.NullValue );
+        condition.setOperator( ConditionOperator.NULL_VALUE );
 
     }
 
     @Override
     public void visit( Function function ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.Function );
+        condition.setOperator( ConditionOperator.FUNCTION );
         condition.setValue( function.toString() );
     }
 
@@ -75,7 +75,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( JdbcParameter jdbcParameter ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.JdbcParameter );
+        condition.setOperator( ConditionOperator.JDBC_PARAMETER );
         condition.setValue( jdbcParameter.toString() );
 
     }
@@ -83,7 +83,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( DoubleValue doubleValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.DoubleValue );
+        condition.setOperator( ConditionOperator.DOUBLE_VALUE );
         condition.setValue( Double.toString( doubleValue.getValue() ) );
 
     }
@@ -91,7 +91,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( LongValue longValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LongValue );
+        condition.setOperator( ConditionOperator.LONG_VALUE );
         condition.setValue( Long.toString( longValue.getValue() ) );
 
     }
@@ -99,7 +99,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( DateValue dateValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LongValue );
+        condition.setOperator( ConditionOperator.DATE_VALUE );
         condition.setValue( dateValue.getValue().toString() );
 
     }
@@ -107,7 +107,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( TimeValue timeValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LongValue );
+        condition.setOperator( ConditionOperator.TIME_VALUE );
         condition.setValue( timeValue.getValue().toString() );
 
     }
@@ -115,7 +115,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( TimestampValue timestampValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LongValue );
+        condition.setOperator( ConditionOperator.TIMESTAMP_VALUE );
         condition.setValue( timestampValue.getValue().toString() );
 
     }
@@ -123,7 +123,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( Parenthesis parenthesis ) {
         SubCondition subCondition = new SubCondition();
-        subCondition.setOperator( ConditionOperator.Parenthesis );
+        subCondition.setOperator( ConditionOperator.PARENTHESIS );
 
         ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
         parenthesis.getExpression().accept( expresionParser );
@@ -135,39 +135,39 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( StringValue stringValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LongValue );
+        condition.setOperator( ConditionOperator.LONG_VALUE );
         condition.setValue( stringValue.getValue() );
 
     }
 
     @Override
     public void visit( Addition addition ) {
-        process( ConditionOperator.Addition, addition );
+        process( ConditionOperator.ADDITION, addition );
     }
 
     @Override
     public void visit( Division division ) {
-        process( ConditionOperator.Division, division );
+        process( ConditionOperator.DIVISION, division );
     }
 
     @Override
     public void visit( Multiplication multiplication ) {
-        process( ConditionOperator.Multiplication, multiplication );
+        process( ConditionOperator.MULTIPLICATION, multiplication );
     }
 
     @Override
     public void visit( Subtraction subtraction ) {
-        process( ConditionOperator.Subtraction, subtraction );
+        process( ConditionOperator.SUBTRACTION, subtraction );
     }
 
     @Override
     public void visit( AndExpression andExpression ) {
-        process( ConditionOperator.And, andExpression );
+        process( ConditionOperator.AND, andExpression );
     }
 
     @Override
     public void visit( OrExpression orExpression ) {
-        process( ConditionOperator.Or, orExpression );
+        process( ConditionOperator.OR, orExpression );
     }
 
     @Override
@@ -189,17 +189,17 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     @Override
     public void visit( EqualsTo equalsTo ) {
-        process( ConditionOperator.EqualsTo, equalsTo );
+        process( ConditionOperator.EQUALS_TO, equalsTo );
     }
 
     @Override
     public void visit( GreaterThan greaterThan ) {
-        process( ConditionOperator.GreaterThan, greaterThan );
+        process( ConditionOperator.GREATER_THAN, greaterThan );
     }
 
     @Override
     public void visit( GreaterThanEquals greaterThanEquals ) {
-        process( ConditionOperator.GreaterThanEquals, greaterThanEquals );
+        process( ConditionOperator.GREATER_THAN_EQUALS, greaterThanEquals );
     }
 
     @Override
@@ -208,7 +208,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         inExpression.getLeftExpression().accept( expresionParser );
 
         SubCondition subCondition = new SubCondition();
-        subCondition.setOperator( ConditionOperator.In );
+        subCondition.setOperator( ConditionOperator.IN );
         subCondition.setSubCondition( expresionParser.getCondition() );
         subCondition.setValue( inExpression.getItemsList().toString() );
         condition = subCondition;
@@ -220,28 +220,28 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         isNullExpression.getLeftExpression().accept( expresionParser );
         SubCondition subCondition = new SubCondition();
         subCondition.setSubCondition( expresionParser.getCondition() );
-        subCondition.setOperator( ConditionOperator.IsNull );
+        subCondition.setOperator( ConditionOperator.IS_NULL );
         condition = subCondition;
     }
 
     @Override
     public void visit( LikeExpression likeExpression ) {
-        process( ConditionOperator.Like, likeExpression );
+        process( ConditionOperator.LIKE, likeExpression );
     }
 
     @Override
     public void visit( MinorThan minorThan ) {
-        process( ConditionOperator.MinorThan, minorThan );
+        process( ConditionOperator.MINOR_THAN, minorThan );
     }
 
     @Override
     public void visit( MinorThanEquals minorThanEquals ) {
-        process( ConditionOperator.MinorThanEquals, minorThanEquals );
+        process( ConditionOperator.MINOR_THAN_EQUALS, minorThanEquals );
     }
 
     @Override
     public void visit( NotEqualsTo notEqualsTo ) {
-        process( ConditionOperator.NotEqualsTo, notEqualsTo );
+        process( ConditionOperator.NOT_EQUALS_TO, notEqualsTo );
     }
 
     @Override
@@ -272,7 +272,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     public void visit( CaseExpression caseExpression ) {
 
         ListCondition listCondition = new ListCondition();
-        listCondition.setOperator( ConditionOperator.Case );
+        listCondition.setOperator( ConditionOperator.CASE );
         listCondition.setSubConditions( new LinkedHashSet<Condition>() );
 
         ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
@@ -306,7 +306,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         whenClause.getThenExpression().accept( expresionParser );
         pairCondition.setRightCondition( expresionParser.getCondition() );
 
-        pairCondition.setOperator( ConditionOperator.WhenClause );
+        pairCondition.setOperator( ConditionOperator.WHEN_CLAUSE );
 
         condition = pairCondition;
     }
@@ -314,7 +314,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( ExistsExpression existsExpression ) {
         SubCondition subCondition = new SubCondition();
-        subCondition.setOperator( ConditionOperator.Exists );
+        subCondition.setOperator( ConditionOperator.EXISTS );
 
         ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
         existsExpression.getRightExpression().accept( expresionParser );
@@ -329,39 +329,39 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     public void visit( AllComparisonExpression allComparisonExpression ) {
         SubSelect subSelect = allComparisonExpression.GetSubSelect();
         visit( subSelect );
-        condition.setOperator( ConditionOperator.AllComparison );
+        condition.setOperator( ConditionOperator.ALL_COMPARISON );
     }
 
     @Override
     public void visit( AnyComparisonExpression anyComparisonExpression ) {
         SubSelect subSelect = anyComparisonExpression.GetSubSelect();
         visit( subSelect );
-        condition.setOperator( ConditionOperator.AnyComparison );
+        condition.setOperator( ConditionOperator.ANY_COMPARISON );
 
     }
 
     @Override
     public void visit( Concat concat ) {
-        process( ConditionOperator.Concat, concat );
+        process( ConditionOperator.CONCAT, concat );
     }
 
     @Override
     public void visit( Matches matches ) {
-        process( ConditionOperator.Matches, matches );
+        process( ConditionOperator.MATCHES, matches );
     }
 
     @Override
     public void visit( BitwiseAnd bitwiseAnd ) {
-        process( ConditionOperator.BitwiseAnd, bitwiseAnd );
+        process( ConditionOperator.BITWISE_AND, bitwiseAnd );
     }
 
     @Override
     public void visit( BitwiseOr bitwiseOr ) {
-        process( ConditionOperator.BitwiseOr, bitwiseOr );
+        process( ConditionOperator.BITWISE_OR, bitwiseOr );
     }
 
     @Override
     public void visit( BitwiseXor bitwiseXor ) {
-        process( ConditionOperator.BitwiseXor, bitwiseXor );
+        process( ConditionOperator.BITWISE_XOR, bitwiseXor );
     }
 }

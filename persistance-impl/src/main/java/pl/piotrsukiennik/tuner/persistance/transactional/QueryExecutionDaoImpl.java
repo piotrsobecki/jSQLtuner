@@ -28,10 +28,8 @@ import java.util.LinkedHashSet;
 @Transactional(value = "jsqlTunerTransactionManager")
 class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
 
-
-    private
     @Resource
-    QueryDao queryService;
+    private QueryDao queryService;
 
     private class PredicateQueryDataSource implements Predicate<QueryForDataSource> {
 

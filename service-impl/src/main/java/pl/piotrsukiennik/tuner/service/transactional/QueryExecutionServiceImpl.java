@@ -25,10 +25,8 @@ import java.util.Iterator;
 @Transactional(value = "jsqlTunerTransactionManager")
 class QueryExecutionServiceImpl implements QueryExecutionService {
 
-
-    private
     @Resource
-    LocalDataSourceService dataSourceMapper;
+    private LocalDataSourceService dataSourceMapper;
 
     @Override
     public void removePossibleDataSources( Collection<? extends ReadQuery> queries,

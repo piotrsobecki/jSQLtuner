@@ -10,10 +10,8 @@ import java.sql.Connection;
 @Component
 public class StatementsDeregisteringAdvice implements MethodBeforeAdvice {
 
-
-    private
     @Resource
-    StatementsMonitor statementsMonitor;
+    private StatementsMonitor statementsMonitor;
 
     @Override
     public void before( final Method method, final Object[] args, final Object target ) throws Throwable {

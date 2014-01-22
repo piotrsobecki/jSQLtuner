@@ -14,8 +14,8 @@ import javax.annotation.Resource;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/jsqltuner-test-root-context.xml" } )
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/jsqltuner-test-root-context.xml" })
 public class QueriesTest {
 
 
@@ -24,9 +24,9 @@ public class QueriesTest {
     SQLQueryExecutionService queryExecutionService;
 
     @Test
-    @Repeat( 10 )
+    @Repeat(10)
     public void runTestQueries() {
-        Utils.processEachLine(getClass().getClassLoader(),
+        Utils.processEachLine( getClass().getClassLoader(),
          "jsqltuner-test-queries.sql", new Utils.StringProcessor() {
             @Override
             public void process( String line ) {

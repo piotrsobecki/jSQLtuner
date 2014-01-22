@@ -25,9 +25,8 @@ import java.io.StringReader;
 @Transactional(value = "jsqlTunerTransactionManager")
 class QueryParserServiceImpl implements QueryParserService {
 
-    private
     @Resource
-    QueryElementParserService queryElementParserService;
+    private QueryElementParserService queryElementParserService;
 
     protected String getQueryHash( String databaseStr, String schemaStr, Statement statement ) {
         return HashGenerators.MD5.getHash( databaseStr + "." + schemaStr + "." + statement.toString() );

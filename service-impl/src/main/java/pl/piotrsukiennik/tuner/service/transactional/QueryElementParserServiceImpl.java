@@ -23,7 +23,7 @@ import pl.piotrsukiennik.tuner.service.query.QueryContext;
  * Time: 18:07
  */
 @Service
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 public class QueryElementParserServiceImpl implements QueryElementParserService {
 
 

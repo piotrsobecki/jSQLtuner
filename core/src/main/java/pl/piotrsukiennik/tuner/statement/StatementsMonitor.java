@@ -3,6 +3,8 @@ package pl.piotrsukiennik.tuner.statement;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.statement.manager.StatementLiveCycleListener;
@@ -17,8 +19,10 @@ import java.util.List;
 @Component
 public class StatementsMonitor {
 
-    private
+    private static final Log LOG = LogFactory.getLog( StatementsMonitor.class );
+
     @Resource
+    private
     List<StatementLiveCycleListener> listeners;
 
     private ListMultimap<Connection, StatementHolder> statements = Multimaps.synchronizedListMultimap( ArrayListMultimap.<Connection, StatementHolder>create() );
@@ -72,9 +76,9 @@ public class StatementsMonitor {
             }
         }
         else {
-            //if (LOG.isWarnEnabled()) {
-            //LOG.warn("No statement '" + holderIN + "' to cancel. Possibly already been removed.");
-            //}
+            if ( LOG.isWarnEnabled() ) {
+                LOG.warn( String.format( "No statement '%s' to cancel. Possibly already been removed.", holderIN ) );
+            }
         }
     }
 }

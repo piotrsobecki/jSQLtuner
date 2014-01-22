@@ -4,6 +4,7 @@ import pl.piotrsukiennik.tuner.IDataSharder;
 import pl.piotrsukiennik.tuner.IDataSource;
 import pl.piotrsukiennik.tuner.IDataSourceMetaData;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
@@ -11,6 +12,7 @@ import pl.piotrsukiennik.tuner.utils.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -46,11 +48,19 @@ public abstract class AbstractDataSource implements IDataSource, IDataSharder {
     }
 
     @Override
-    public final DataRetrieval get( ReadQuery query ) throws Throwable {
+    public final DataRetrieval get( ReadQuery query ) throws DataRetrievalException {
         DataRetrieval dataRetrieval = new DataRetrieval();
         long start = System.nanoTime();
         ResultSet resultSet = getData( query );
-        resultSet = RowSet.clone( resultSet );
+        if ( resultSet == null ) {
+            throw new DataRetrievalException( "No data found for query" );
+        }
+        try {
+            resultSet = RowSet.clone( resultSet );
+        }
+        catch ( SQLException e ) {
+            throw new DataRetrievalException( e );
+        }
         long end = System.nanoTime();
         dataRetrieval.setExecutionTimeNano( end - start );
         dataRetrieval.setResultSet( resultSet );
@@ -76,7 +86,7 @@ public abstract class AbstractDataSource implements IDataSource, IDataSharder {
         deleteData( query );
     }
 
-    protected abstract ResultSet getData( ReadQuery query ) throws Throwable;
+    protected abstract ResultSet getData( ReadQuery query ) throws DataRetrievalException;
 
     protected abstract void deleteData( Query query );
 

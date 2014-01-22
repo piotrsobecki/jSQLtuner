@@ -67,12 +67,6 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
         if ( expression instanceof Column ) {
             Column column = ( (Column) expression );
             QueryUtils.addProjection( selectQuery, queryElementParserService.getColumnProjection( queryContext, column ) );
-           /* ColumnProjection columnProjection = new ColumnProjection();
-            TableSource tableSource = queryContextDto.getTableSource( column.getTable().getWholeTableName() );
-            pl.piotrsukiennik.tuner.model.schema.Column columnPersisted = queryContextDto.getColumn( tableSource.getTable(), column.getColumnName() );
-            columnProjection.setSource( tableSource );
-            columnProjection.setColumn( columnPersisted );
-            addProjection( columnProjection );*/
         }
     }
 }

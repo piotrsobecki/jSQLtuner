@@ -33,6 +33,14 @@ public class StatementHolder {
         this.statement = statement;
     }
 
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql( String sql ) {
+        this.sql = sql;
+    }
+
     public Statement getStmtRef() {
         return statement;
     }

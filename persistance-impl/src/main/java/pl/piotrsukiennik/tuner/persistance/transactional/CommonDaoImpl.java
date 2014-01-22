@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.persistance.CommonDao;
  * Time: 15:01
  */
 @Repository
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 class CommonDaoImpl extends CrudDaoImpl implements CommonDao {
 
 }

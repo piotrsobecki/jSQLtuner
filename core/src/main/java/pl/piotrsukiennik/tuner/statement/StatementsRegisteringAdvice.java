@@ -10,9 +10,8 @@ import java.sql.Statement;
 @Component
 public class StatementsRegisteringAdvice implements AfterReturningAdvice {
 
-    private
     @Resource
-    StatementsMonitor statementsMonitor;
+    private StatementsMonitor statementsMonitor;
 
     @Override
     public void afterReturning( final Object returnValue, final Method method, final Object[] args, final Object target )

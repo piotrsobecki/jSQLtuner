@@ -3,10 +3,13 @@ package pl.piotrsukiennik.tuner.statement.advisor;
 import org.aopalliance.intercept.MethodInvocation;
 import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
 import pl.piotrsukiennik.tuner.datasources.StatementMethodInvocationDataSource;
+import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
+import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.persistance.DaoHolder;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -25,15 +28,14 @@ public class ReadQueryAdvice extends QueryAdvice<SelectQuery, ResultSet> {
     }
 
     @Override
-    public ResultSet invoke( final MethodInvocation methodInvocation ) throws Throwable {
+    public ResultSet invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
         try {
-            manager.setDataForQuery( query
-             , new StatementMethodInvocationDataSource( (Statement) methodInvocation.getThis(), methodInvocation, query ) );
+            manager.setDataForQuery( query, new StatementMethodInvocationDataSource( (Statement) methodInvocation.getThis(), methodInvocation, query ) );
             return manager.getData( query );
         }
-        catch ( Exception e ) {
+        catch ( SQLException | DataRetrievalException e ) {
             DaoHolder.getLogDao().logException( query.getValue(), e );
-            throw e;
+            throw new PreparedStatementInterceptException( e );
         }
     }
 

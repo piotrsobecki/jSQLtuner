@@ -10,11 +10,11 @@ import javax.persistence.*;
  * Time: 20:58
  */
 @Entity
-@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ColumnProjection extends SourceProjection {
     private Column column;
 
-    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Column getColumn() {
         return column;
     }

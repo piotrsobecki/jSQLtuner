@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class CollectionUtils {
 
+    private CollectionUtils() {
+
+    }
+
     public static <T> Set<T> createNewLinkedHashSetIfNull( Set<T> in ) {
         if ( in == null ) {
             return new LinkedHashSet<T>();

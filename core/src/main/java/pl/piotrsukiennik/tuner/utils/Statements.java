@@ -1,5 +1,8 @@
 package pl.piotrsukiennik.tuner.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,6 +13,11 @@ import java.sql.SQLException;
  * Time: 14:16
  */
 public class Statements {
+
+    private static final Log LOG = LogFactory.getLog( Statements.class );
+
+    private static final String DEFAULT_SCHEMA_NAME = "";
+
     private Statements() {
     }
 
@@ -18,8 +26,10 @@ public class Statements {
             return connection.getCatalog();
         }
         catch ( SQLException e ) {
-            e.printStackTrace();
-            return "";
+            if ( LOG.isErrorEnabled() ) {
+                LOG.error( "Could not obtain schema name from connection. ", e );
+            }
+            return DEFAULT_SCHEMA_NAME;
         }
     }
 
@@ -28,8 +38,10 @@ public class Statements {
             return getSchema( preparedStatement.getConnection() );
         }
         catch ( SQLException e ) {
-            e.printStackTrace();
-            return "";
+            if ( LOG.isErrorEnabled() ) {
+                LOG.error( "Could not obtain schema name from preparedStatement. ", e );
+            }
+            return DEFAULT_SCHEMA_NAME;
         }
     }
 }

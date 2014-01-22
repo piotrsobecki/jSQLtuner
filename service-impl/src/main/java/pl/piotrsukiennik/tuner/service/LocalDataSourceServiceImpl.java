@@ -18,9 +18,8 @@ import java.util.*;
 @Service
 class LocalDataSourceServiceImpl implements LocalDataSourceService {
 
-    private
     @Resource
-    Set<IDataSource> dataSourceList;
+    private Set<IDataSource> dataSourceList;
 
     private Map<String, IDataSource> rootDataSources = new LinkedHashMap<String, IDataSource>();
 

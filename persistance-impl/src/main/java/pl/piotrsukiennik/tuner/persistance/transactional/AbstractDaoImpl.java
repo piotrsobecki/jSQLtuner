@@ -10,12 +10,11 @@ import javax.annotation.Resource;
  * @author Piotr Sukiennik
  * @date 14.01.14
  */
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 public abstract class AbstractDaoImpl {
 
-    private
-    @Resource(name = "jsqlTunerSessionFactory")
-    SessionFactory sessionFactory;
+    @Resource( name = "jsqlTunerSessionFactory" )
+    private SessionFactory sessionFactory;
 
 
     protected Session s() {

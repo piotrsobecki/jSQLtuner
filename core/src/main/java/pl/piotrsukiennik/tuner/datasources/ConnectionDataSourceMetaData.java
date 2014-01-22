@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.datasources;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import pl.piotrsukiennik.tuner.IDataSourceMetaData;
 
 import java.sql.Connection;
@@ -11,7 +13,10 @@ import java.sql.SQLException;
  * Time: 21:15
  */
 public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
-    private final static String EXCEPTION_FORMAT = "%s.getIdentifier() Exception";
+
+    private static final Log LOG = LogFactory.getLog( ConnectionDataSourceMetaData.class );
+
+    public static final String DEFAULT_IDENTIFIER = "ConnectionDataSource";
 
     private Connection connection;
 
@@ -30,7 +35,10 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
             return identifier = connection.getMetaData().getURL();
         }
         catch ( SQLException s ) {
-            return "";
+            if ( LOG.isTraceEnabled() ) {
+                LOG.trace( s );
+            }
+            return DEFAULT_IDENTIFIER;
         }
     }
 }

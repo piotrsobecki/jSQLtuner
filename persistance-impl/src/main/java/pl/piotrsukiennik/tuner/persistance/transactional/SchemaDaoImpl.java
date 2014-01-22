@@ -13,14 +13,40 @@ import pl.piotrsukiennik.tuner.persistance.SchemaDao;
  * Time: 20:03
  */
 @Repository
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
+
+    private static final String DATABASE = "database";
+
+    private static final String SCHEMA = "schema";
+
+    private static final String TABLE = "table";
+
+    private static final String VALUE = "value";
+
+    private static final String JOIN_CONNECTOR = ".";
+
+    private static final String DATABASE_VALUE = DATABASE + JOIN_CONNECTOR + VALUE;
+
+    private static final String SCHEMA_VALUE = SCHEMA + JOIN_CONNECTOR + VALUE;
+
+    private static final String TABLE_VALUE = TABLE + JOIN_CONNECTOR + VALUE;
+
+    private static final String SCHEMA_DATABASE = SCHEMA + JOIN_CONNECTOR + DATABASE;
+
+    private static final String SCHEMA_DATABASE_VALUE = SCHEMA + JOIN_CONNECTOR + DATABASE_VALUE;
+
+    private static final String TABLE_SCHEMA_VALUE = TABLE + JOIN_CONNECTOR + SCHEMA_VALUE;
+
+    private static final String TABLE_SCHEMA_DATABASE = TABLE + JOIN_CONNECTOR + SCHEMA_DATABASE;
+
+    private static final String TABLE_SCHEMA_DATABASE_VALUE = TABLE + JOIN_CONNECTOR + SCHEMA_DATABASE_VALUE;
 
     @Override
     public Database getDatabase( String databaseName ) {
         Session s = s();
         Database database = (Database) s().createCriteria( Database.class )
-         .add( Restrictions.eq( "value", databaseName ) )
+         .add( Restrictions.eq( VALUE, databaseName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( database == null ) {
             database = new Database();
@@ -34,8 +60,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Function getFunction( String database, String functionName ) {
         Function function = (Function) s().createCriteria( Function.class )
-         .add( Restrictions.eq( "database.value", database ) )
-         .add( Restrictions.eq( "value", functionName ) )
+         .add( Restrictions.eq( DATABASE_VALUE, database ) )
+         .add( Restrictions.eq( VALUE, functionName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( function == null ) {
             function = getFunction( getDatabase( database ), functionName );
@@ -47,8 +73,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     public Function getFunction( Database database, String functionName ) {
         Session s = s();
         Function function = (Function) s().createCriteria( Function.class )
-         .add( Restrictions.eq( "database", database ) )
-         .add( Restrictions.eq( "value", functionName ) )
+         .add( Restrictions.eq( DATABASE, database ) )
+         .add( Restrictions.eq( VALUE, functionName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( function == null ) {
             function = new Function();
@@ -62,8 +88,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Type getType( String database, String typeName ) {
         Type type = (Type) s().createCriteria( Type.class )
-         .add( Restrictions.eq( "database.value", database ) )
-         .add( Restrictions.eq( "value", typeName ) )
+         .add( Restrictions.eq( DATABASE_VALUE, database ) )
+         .add( Restrictions.eq( VALUE, typeName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( type == null ) {
             type = getType( getDatabase( database ), typeName );
@@ -75,8 +101,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     public Type getType( Database database, String typeName ) {
         Session s = s();
         Type type = (Type) s().createCriteria( Type.class )
-         .add( Restrictions.eq( "database", database ) )
-         .add( Restrictions.eq( "value", typeName ) )
+         .add( Restrictions.eq( DATABASE, database ) )
+         .add( Restrictions.eq( VALUE, typeName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( type == null ) {
             type = new Type();
@@ -91,8 +117,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Schema getSchema( String database, String schemaName ) {
         Schema schema = (Schema) s().createCriteria( Schema.class )
-         .add( Restrictions.eq( "database.value", database ) )
-         .add( Restrictions.eq( "value", schemaName ) )
+         .add( Restrictions.eq( DATABASE_VALUE, database ) )
+         .add( Restrictions.eq( VALUE, schemaName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( schema == null ) {
             schema = getSchema( getDatabase( database ), schemaName );
@@ -104,8 +130,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     public Schema getSchema( Database database, String schemaName ) {
         Session s = s();
         Schema schema = (Schema) s.createCriteria( Schema.class )
-         .add( Restrictions.eq( "database", database ) )
-         .add( Restrictions.eq( "value", schemaName ) )
+         .add( Restrictions.eq( DATABASE, database ) )
+         .add( Restrictions.eq( VALUE, schemaName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( schema == null ) {
             schema = new Schema();
@@ -119,9 +145,9 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Table getTable( String database, String schema, String tableName ) {
         Table table = (Table) s().createCriteria( Table.class )
-         .add( Restrictions.eq( "schema.database.value", database ) )
-         .add( Restrictions.eq( "schema.value", schema ) )
-         .add( Restrictions.eq( "value", tableName ) )
+         .add( Restrictions.eq( SCHEMA_DATABASE_VALUE, database ) )
+         .add( Restrictions.eq( SCHEMA_VALUE, schema ) )
+         .add( Restrictions.eq( VALUE, tableName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( table == null ) {
             table = getTable( getDatabase( database ), schema, tableName );
@@ -132,9 +158,9 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Table getTable( Database database, String schema, String tableName ) {
         Table table = (Table) s().createCriteria( Table.class )
-         .add( Restrictions.eq( "schema.database", database ) )
-         .add( Restrictions.eq( "schema.value", schema ) )
-         .add( Restrictions.eq( "value", tableName ) )
+         .add( Restrictions.eq( SCHEMA_DATABASE, database ) )
+         .add( Restrictions.eq( SCHEMA_VALUE, schema ) )
+         .add( Restrictions.eq( VALUE, tableName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( table == null ) {
             table = getTable( getSchema( database, schema ), tableName );
@@ -146,8 +172,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     public Table getTable( Schema schema, String tableName ) {
         Session s = s();
         Table table = (Table) s.createCriteria( Table.class )
-         .add( Restrictions.eq( "schema", schema ) )
-         .add( Restrictions.eq( "value", tableName ) )
+         .add( Restrictions.eq( SCHEMA, schema ) )
+         .add( Restrictions.eq( VALUE, tableName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( table == null ) {
             table = new Table();
@@ -161,10 +187,10 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Column getColumn( String database, String schema, String tableName, String columnName ) {
         Column column = (Column) s().createCriteria( Column.class )
-         .add( Restrictions.eq( "table.schema.database.value", database ) )
-         .add( Restrictions.eq( "table.schema.value", schema ) )
-         .add( Restrictions.eq( "table.value", tableName ) )
-         .add( Restrictions.eq( "value", columnName ) )
+         .add( Restrictions.eq( TABLE_SCHEMA_DATABASE_VALUE, database ) )
+         .add( Restrictions.eq( TABLE_SCHEMA_VALUE, schema ) )
+         .add( Restrictions.eq( TABLE_VALUE, tableName ) )
+         .add( Restrictions.eq( VALUE, columnName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( column == null ) {
             column = getColumn( getDatabase( database ), schema, tableName, columnName );
@@ -175,10 +201,10 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Column getColumn( Database database, String schema, String tableName, String columnName ) {
         Column column = (Column) s().createCriteria( Column.class )
-         .add( Restrictions.eq( "table.schema.database", database ) )
-         .add( Restrictions.eq( "table.schema.value", schema ) )
-         .add( Restrictions.eq( "table.value", tableName ) )
-         .add( Restrictions.eq( "value", columnName ) )
+         .add( Restrictions.eq( TABLE_SCHEMA_DATABASE, database ) )
+         .add( Restrictions.eq( TABLE_SCHEMA_VALUE, schema ) )
+         .add( Restrictions.eq( TABLE_VALUE, tableName ) )
+         .add( Restrictions.eq( VALUE, columnName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( column == null ) {
             column = getColumn( getSchema( database, schema ), tableName, columnName );
@@ -189,9 +215,9 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     @Override
     public Column getColumn( Schema schema, String tableName, String columnName ) {
         Column column = (Column) s().createCriteria( Column.class )
-         .add( Restrictions.eq( "table.schema.value", schema ) )
-         .add( Restrictions.eq( "table.value", tableName ) )
-         .add( Restrictions.eq( "value", columnName ) )
+         .add( Restrictions.eq( TABLE_SCHEMA_VALUE, schema ) )
+         .add( Restrictions.eq( TABLE_VALUE, tableName ) )
+         .add( Restrictions.eq( VALUE, columnName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( column == null ) {
             column = getColumn( getTable( schema, tableName ), columnName );
@@ -203,8 +229,8 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     public Column getColumn( Table tableName, String columnName ) {
         Session s = s();
         Column column = (Column) s.createCriteria( Column.class )
-         .add( Restrictions.eq( "table", tableName ) )
-         .add( Restrictions.eq( "value", columnName ) )
+         .add( Restrictions.eq( TABLE, tableName ) )
+         .add( Restrictions.eq( VALUE, columnName ) )
          .setMaxResults( 1 ).uniqueResult();
         if ( column == null ) {
             column = new Column();

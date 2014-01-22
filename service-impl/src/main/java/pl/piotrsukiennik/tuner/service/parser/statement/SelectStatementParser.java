@@ -23,7 +23,6 @@ public class SelectStatementParser extends StatementParser<SelectQuery> {
         SelectBody selectBody = select.getSelectBody();
         SelectBodyParser<SelectQuery> parsingVisitor = new SelectBodyParser<SelectQuery>( queryElementParserService, getQueryContext(), query );
         selectBody.accept( parsingVisitor );
-        //select.getWithItemsList();
         super.visit( select );
     }
 

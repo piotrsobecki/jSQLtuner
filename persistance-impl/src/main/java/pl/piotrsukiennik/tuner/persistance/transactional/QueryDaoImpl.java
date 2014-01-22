@@ -19,7 +19,7 @@ import pl.piotrsukiennik.tuner.persistance.QueryDao;
  * Time: 15:31
  */
 @Repository
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 class QueryDaoImpl extends CrudDaoImpl implements QueryDao {
 
 

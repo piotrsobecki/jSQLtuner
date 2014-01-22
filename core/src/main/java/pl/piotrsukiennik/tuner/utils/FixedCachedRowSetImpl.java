@@ -207,7 +207,7 @@ public class FixedCachedRowSetImpl extends CachedRowSetImpl {
     }
 
     @Override
-    public void updateBytes( String columnName, byte x[] ) throws SQLException {
+    public void updateBytes( String columnName, byte[] x ) throws SQLException {
         updateBytes( getColIdxByName( columnName ), x );
     }
 

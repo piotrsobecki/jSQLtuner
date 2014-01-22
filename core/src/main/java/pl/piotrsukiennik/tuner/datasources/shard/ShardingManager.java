@@ -1,10 +1,13 @@
 package pl.piotrsukiennik.tuner.datasources.shard;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.IDataSharder;
 import pl.piotrsukiennik.tuner.IDataSource;
 import pl.piotrsukiennik.tuner.IShardingManager;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
@@ -25,33 +28,37 @@ import java.util.List;
 @Component
 public class ShardingManager implements IShardingManager {
 
-    private
+
+    private static final Log LOG = LogFactory.getLog( ShardingManager.class );
+
     @Resource
+    private
     List<IDataSharder> dataSharders;
 
-    private
     @Resource
+    private
     QueryExecutionService queryExecutionService;
 
-    private
     @Resource
+    private
     CacheManagerService cacheManagerService;
 
 
     @Override
-    public DataRetrieval getData( ReadQuery query ) {
+    public DataRetrieval getData( ReadQuery query ) throws DataRetrievalException {
         IDataSource dataSource = queryExecutionService.getDataSourceForQuery( query );
         if ( dataSource != null ) {
-            try {
-                DataRetrieval dataRetrieval = dataSource.get( query );
-                dataRetrieval.setDataSourceIdentifier( dataSource.getMetaData().getIdentifier() );
-                return dataRetrieval;
+            DataRetrieval dataRetrieval = dataSource.get( query );
+            dataRetrieval.setDataSourceIdentifier( dataSource.getMetaData().getIdentifier() );
+            if ( LOG.isInfoEnabled() ) {
+                LOG.info( String.format( "Retreived Data for (%s) using dataSource (%s)", query.getValue(), dataRetrieval.getDataSourceIdentifier() ) );
             }
-            catch ( Throwable t ) {
-                t.printStackTrace();
-            }
+            return dataRetrieval;
+
         }
-        return null;
+        else {
+            throw new DataRetrievalException( "Could Not Find DataSource for query" );
+        }
     }
 
     @Override

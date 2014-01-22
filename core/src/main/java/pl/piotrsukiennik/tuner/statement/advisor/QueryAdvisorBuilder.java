@@ -15,9 +15,8 @@ import javax.annotation.Resource;
  */
 public abstract class QueryAdvisorBuilder<Q extends Query> {
 
-    protected
     @Resource
-    DataSourcesManager manager;
+    protected DataSourcesManager manager;
 
     private String expression;
 

@@ -18,8 +18,8 @@ import java.util.List;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/jsqltuner-test-root-context.xml" } )
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/jsqltuner-test-root-context.xml" })
 public class HibernateEntitiesTest {
 
 
@@ -28,30 +28,27 @@ public class HibernateEntitiesTest {
     EntityService entityService;
 
 
-
     @Before
-    public void setupBefore(){
+    public void setupBefore() {
         TestEntity t1 = entityService.saveTestEntry( "test1" );
         TestEntity t2 = entityService.saveTestEntry( "test2" );
     }
 
     @After
-    public void setupAfter(){
+    public void setupAfter() {
         List<TestEntity> t1 = entityService.getTestEntities();
-        for (TestEntity t: t1){
+        for ( TestEntity t : t1 ) {
             entityService.deleteTestEntry( t );
         }
     }
 
 
-
     @Test
-    @Repeat( 10 )
+    @Repeat(10)
     public void testCacheClear() {
 
         List<TestEntity> testEntities = entityService.getTestEntities();
         Assert.assertEquals( 2, testEntities.size() );
-
 
         TestEntity t3 = entityService.saveTestEntry( "test3" );
 
@@ -67,8 +64,8 @@ public class HibernateEntitiesTest {
 
     @Test
     public void testGetSingle() {
-        List<TestEntity> testEntities = entityService.getTestEntries("test1");
-        Assert.assertEquals( 1,testEntities.size() );
+        List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
+        Assert.assertEquals( 1, testEntities.size() );
         Assert.assertNotNull( testEntities.get( 0 ) );
         Assert.assertNotNull( testEntities.get( 0 ).getId() );
         Assert.assertNotNull( testEntities.get( 0 ).getString() );
@@ -77,18 +74,18 @@ public class HibernateEntitiesTest {
     @Test
     public void testGetNull() {
         TestEntity testEntity2 = entityService.getTestEntry( 9999 );
-        Assert.assertNull(testEntity2 );
+        Assert.assertNull( testEntity2 );
     }
 
     //TODO
     //@Test
     public void testGetDifferentValues() {
-        List<TestEntity> testEntities = entityService.getTestEntries("test1");
+        List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
         TestEntity testEntity = testEntities.get( 0 );
         Assert.assertNotNull( testEntity );
-        Assert.assertEquals( "test1", testEntity.getString());
+        Assert.assertEquals( "test1", testEntity.getString() );
 
         List<TestEntity> testEntitiesEmpty = entityService.getTestEntries( "test999" );
-        Assert.assertEquals(0, testEntitiesEmpty.size() );
+        Assert.assertEquals( 0, testEntitiesEmpty.size() );
     }
 }

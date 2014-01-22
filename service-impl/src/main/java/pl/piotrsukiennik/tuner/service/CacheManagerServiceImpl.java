@@ -13,8 +13,8 @@ import pl.piotrsukiennik.tuner.model.schema.Column;
 import pl.piotrsukiennik.tuner.model.schema.Database;
 import pl.piotrsukiennik.tuner.model.schema.Schema;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.cache.model.HashesHolderManager;
 import pl.piotrsukiennik.tuner.service.cache.model.EnterableHolderFactory;
+import pl.piotrsukiennik.tuner.service.cache.model.HashesHolderManager;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +28,7 @@ import java.util.Set;
  */
 @Service
 class CacheManagerServiceImpl implements CacheManagerService {
+    public static final String STAR_PROJECTION_COLUMN_NAME = "*";
 
     private HashesHolderManager<String, SelectQuery> hashesHolderManager;
 

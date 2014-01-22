@@ -10,7 +10,6 @@ import java.util.Collection;
  * @date 14.01.14
  */
 public interface CacheManagerService {
-    String STAR_PROJECTION_COLUMN_NAME = "*";
 
     void putCachedQuery( SelectQuery query );
 

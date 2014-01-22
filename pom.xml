@@ -8,6 +8,7 @@
     <version>${jsqltuner.version}</version>
     <name>jSQLtuner</name>
     <properties>
+        <java.version>1.7</java.version>
         <jsqltuner.version>1.5-SNAPSHOT</jsqltuner.version>
         <google.guava.version>14.0.1</google.guava.version>
         <spring.version>3.2.2.RELEASE</spring.version>
@@ -31,7 +32,8 @@
     </organization>
     <scm>
         <connection>scm:git:git://github.com/piotrsukiennik/jSQLtuner.git</connection>
-        <developerConnection>scm:git:https://piotrsukiennik@github.com/piotrsukiennik/jSQLtuner.git </developerConnection>
+        <developerConnection>scm:git:https://piotrsukiennik@github.com/piotrsukiennik/jSQLtuner.git
+        </developerConnection>
         <url>https://github.com/piotrsukiennik/jSQLtuner</url>
     </scm>
     <ciManagement>
@@ -73,6 +75,20 @@
         <module>persistance-impl</module>
         <module>utils</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
