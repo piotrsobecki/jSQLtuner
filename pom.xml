@@ -14,7 +14,6 @@
         <aspectj.version>1.7.2</aspectj.version>
     </properties>
     <modules>
-        <module>test</module>
         <module>api</module>
         <module>core</module>
         <module>model</module>
