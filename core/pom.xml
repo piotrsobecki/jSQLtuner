@@ -5,13 +5,14 @@
     <parent>
         <artifactId>tuner</artifactId>
         <groupId>pl.piotrsukiennik</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${jsqltuner.version}</version>
     </parent>
-    <version>1.4-SNAPSHOT</version>
+    <version>${jsqltuner.version}</version>
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
+    <name>jSQLtuner :: core</name>
     <repositories>
         <repository>
             <id>spy</id>
@@ -24,17 +25,37 @@
         </repository>
     </repositories>
     <build>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                </includes>
-            </testResource>
-        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/unit/*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>Integration Tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/integration/*.java</include>
+                                <include>**/unit/*.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>

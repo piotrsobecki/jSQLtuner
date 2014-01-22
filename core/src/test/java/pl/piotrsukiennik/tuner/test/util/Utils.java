@@ -19,8 +19,8 @@ public class Utils {
     }
 
 
-    public static void processEachLine( String classPathFile, StringProcessor doWithEachLine ) {
-        InputStream inputStream = Utils.class.getClassLoader().getResourceAsStream( classPathFile );
+    public static void processEachLine( ClassLoader classLoader, String classPathFile, StringProcessor doWithEachLine ) {
+        InputStream inputStream = classLoader.getResourceAsStream( classPathFile );
         InputStreamReader inputStreamReader = new InputStreamReader( inputStream );
         BufferedReader bufferedReader = new BufferedReader( inputStreamReader );
         String line = null;

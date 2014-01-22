@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.junit;
+package pl.piotrsukiennik.tuner.junit.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,8 @@ public class QueriesTest {
     @Test
     @Repeat( 10 )
     public void runTestQueries() {
-        Utils.processEachLine( "jsqltuner-test-queries.sql", new Utils.StringProcessor() {
+        Utils.processEachLine(getClass().getClassLoader(),
+         "jsqltuner-test-queries.sql", new Utils.StringProcessor() {
             @Override
             public void process( String line ) {
                 try {

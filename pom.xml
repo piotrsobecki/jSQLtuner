@@ -2,17 +2,67 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>pl.piotrsukiennik</groupId>
     <artifactId>tuner</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${jsqltuner.version}</version>
+    <name>jSQLtuner</name>
     <properties>
+        <jsqltuner.version>1.5-SNAPSHOT</jsqltuner.version>
         <google.guava.version>14.0.1</google.guava.version>
         <spring.version>3.2.2.RELEASE</spring.version>
         <hibernate.version>4.2.2.Final</hibernate.version>
         <aspectj.version>1.7.2</aspectj.version>
     </properties>
+    <developers>
+        <developer>
+            <name>Piotr Sukiennik</name>
+            <organizationUrl>http://piotrsukiennik.pl</organizationUrl>
+            <email>piotrsukiennik@gmail.com</email>
+            <roles>
+                <role>owner</role>
+                <role>architect</role>
+            </roles>
+        </developer>
+    </developers>
+    <organization>
+        <name>Inżynieria Oprogramowania Piotr Sukiennik</name>
+        <url>http://piotrsukiennik.pl</url>
+    </organization>
+    <scm>
+        <connection>scm:git:git://github.com/piotrsukiennik/jSQLtuner.git</connection>
+        <developerConnection>scm:git:https://piotrsukiennik@github.com/piotrsukiennik/jSQLtuner.git </developerConnection>
+        <url>https://github.com/piotrsukiennik/jSQLtuner</url>
+    </scm>
+    <ciManagement>
+        <system>jenkins</system>
+        <url>http://jenkins.piotrsukiennik.pl</url>
+    </ciManagement>
+    <issueManagement>
+        <system>redmine</system>
+        <url>http://redmine.piotrsukiennik.pl/projects/jsqltuner</url>
+    </issueManagement>
+    <inceptionYear>2014</inceptionYear>
+    <distributionManagement>
+        <repository>
+            <id>nexus-piotrsukiennik</id>
+            <name>Piotr Sukiennik Releases</name>
+            <url>http://nexus.piotrsukiennik.pl/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-piotrsukiennik</id>
+            <name>Piotr Sukiennik Snapshots</name>
+            <url>http://nexus.piotrsukiennik.pl/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>maven-piotrsukiennik</id>
+            <name>Public Maven Repository</name>
+            <url>http://nexus.piotrsukiennik.pl/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>api</module>
         <module>core</module>

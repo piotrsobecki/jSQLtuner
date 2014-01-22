@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.junit;
+package pl.piotrsukiennik.tuner.junit.integration;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -80,7 +80,8 @@ public class HibernateEntitiesTest {
         Assert.assertNull(testEntity2 );
     }
 
-    @Test
+    //TODO
+    //@Test
     public void testGetDifferentValues() {
         List<TestEntity> testEntities = entityService.getTestEntries("test1");
         TestEntity testEntity = testEntities.get( 0 );

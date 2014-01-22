@@ -6,12 +6,12 @@
     <parent>
         <groupId>pl.piotrsukiennik</groupId>
         <artifactId>tuner</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${jsqltuner.version}</version>
     </parent>
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>model</artifactId>
-    <version>1.4-SNAPSHOT</version>
-    <name>model</name>
+    <version>${jsqltuner.version}</version>
+    <name>jSQLtuner :: model</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
