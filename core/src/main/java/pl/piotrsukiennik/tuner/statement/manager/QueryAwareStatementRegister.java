@@ -1,14 +1,13 @@
 package pl.piotrsukiennik.tuner.statement.manager;
 
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.statement.StatementHolder;
-import pl.piotrsukiennik.tuner.util.OrderedComparator;
+import pl.piotrsukiennik.tuner.utils.OrderedComparator;
 
 import javax.annotation.Resource;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -19,23 +18,23 @@ import java.util.TreeSet;
 @Component
 public class QueryAwareStatementRegister extends StatementRegister implements QueryInitializationListener {
 
-    private  Collection<QueryCompletionListener> invalidationListeners;
+    private Collection<QueryCompletionListener> invalidationListeners;
 
     @Override
-    public void onRemoveStatement(StatementHolder statementHolder) {
-        super.onRemoveStatement(statementHolder);
-        if (statementHolder.getQuery()!=null){
-            for (QueryCompletionListener queryInvalidationListener: invalidationListeners){
-                queryInvalidationListener.queryCompleted(statementHolder.getQuery());
+    public void onRemoveStatement( StatementHolder statementHolder ) {
+        super.onRemoveStatement( statementHolder );
+        if ( statementHolder.getQuery() != null ) {
+            for ( QueryCompletionListener queryInvalidationListener : invalidationListeners ) {
+                queryInvalidationListener.queryCompleted( statementHolder.getQuery() );
             }
         }
     }
 
     @Override
-    public void onNewQuery(Query query, Statement statement) {
-        StatementHolder statementHolder = get(statement);
-        if (statementHolder!=null){
-            statementHolder.setQuery(query);
+    public void onNewQuery( Query query, Statement statement ) {
+        StatementHolder statementHolder = get( statement );
+        if ( statementHolder != null ) {
+            statementHolder.setQuery( query );
         }
     }
 
@@ -45,15 +44,14 @@ public class QueryAwareStatementRegister extends StatementRegister implements Qu
     }
 
 
-
     public Collection<QueryCompletionListener> getInvalidationListeners() {
         return invalidationListeners;
     }
 
     @Resource
-    public void setInvalidationListeners(Collection<QueryCompletionListener> invalidationListeners) {
-        TreeSet<QueryCompletionListener> treeSet = new TreeSet<QueryCompletionListener>(new OrderedComparator());
-        treeSet.addAll(invalidationListeners);
+    public void setInvalidationListeners( Collection<QueryCompletionListener> invalidationListeners ) {
+        TreeSet<QueryCompletionListener> treeSet = new TreeSet<QueryCompletionListener>( new OrderedComparator() );
+        treeSet.addAll( invalidationListeners );
         this.invalidationListeners = invalidationListeners;
     }
 }

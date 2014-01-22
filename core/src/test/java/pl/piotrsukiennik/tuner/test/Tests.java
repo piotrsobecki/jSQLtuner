@@ -1,8 +1,9 @@
 package pl.piotrsukiennik.tuner.test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import pl.piotrsukiennik.tuner.test.query.CacheManagerTest;
+import pl.piotrsukiennik.tuner.test.query.CacheManagerServiceTest;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,6 +12,6 @@ import pl.piotrsukiennik.tuner.test.query.CacheManagerTest;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({ CacheManagerTest.class})
+@SuiteClasses({ CacheManagerServiceTest.class })
 public class Tests {
 }

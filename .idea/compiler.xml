@@ -22,8 +22,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="api" />
         <module name="core" />
+        <module name="model" />
+        <module name="persistance" />
+        <module name="persistance-impl" />
+        <module name="service" />
+        <module name="service-impl" />
+        <module name="servie" />
         <module name="test" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
   </component>

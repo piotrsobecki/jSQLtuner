@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.springframework.aop.Advisor;
-import pl.piotrsukiennik.tuner.persistance.model.query.WriteQuery;
+import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 
 /**
  * Author: Piotr Sukiennik
@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.persistance.model.query.WriteQuery;
  */
 public class WriteQueryAdvisorBuilder<Q extends WriteQuery> extends QueryAdvisorBuilder<Q> {
     @Override
-    public Advisor createAdvisor(Q writeQuery) {
-        return super.createAdvisor(new WriteQueryAdvice(servicesHolder,manager,writeQuery));
+    public Advisor createAdvisor( Q writeQuery ) {
+        return super.createAdvisor( new WriteQueryAdvice( manager, writeQuery ) );
     }
 }

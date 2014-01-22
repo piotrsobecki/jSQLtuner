@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.statement;
 
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.Query;
 
 import java.sql.Statement;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,23 +11,29 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Time: 18:19
  */
 public class StatementHolder {
-    private static AtomicInteger atomicInteger = new AtomicInteger(0);
+    private static AtomicInteger atomicInteger = new AtomicInteger( 0 );
+
     private Integer id;
+
     private String sql;
+
     private Statement statement;
+
     private Query query;
+
     private long timestamp = System.currentTimeMillis();
 
-    public StatementHolder(Integer id){
-        this.id=id;
+    public StatementHolder( Integer id ) {
+        this.id = id;
     }
 
-    public StatementHolder(String sql, Statement statement) {
-        this.id=atomicInteger.incrementAndGet();
+    public StatementHolder( String sql, Statement statement ) {
+        this.id = atomicInteger.incrementAndGet();
         this.sql = sql;
         this.statement = statement;
     }
-    public Statement getStmtRef(){
+
+    public Statement getStmtRef() {
         return statement;
     }
 
@@ -39,18 +45,21 @@ public class StatementHolder {
         return query;
     }
 
-    public void setQuery(Query query) {
+    public void setQuery( Query query ) {
         this.query = query;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals( Object o ) {
+        if ( this == o )
+            return true;
+        if ( o == null || getClass() != o.getClass() )
+            return false;
 
         StatementHolder that = (StatementHolder) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if ( id != null ? !id.equals( that.id ) : that.id != null )
+            return false;
 
         return true;
     }

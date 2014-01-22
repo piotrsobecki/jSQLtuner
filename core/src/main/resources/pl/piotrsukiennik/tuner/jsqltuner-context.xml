@@ -7,19 +7,21 @@
 
 
     <context:annotation-config/>
-    <import resource="jsqltuner-hibernate-context.xml" />
-    <import resource="jsqltuner-sharder-context.xml" />
+
+    <import resource="classpath*:jsqltuner-services-context.xml"/>
+    <import resource="jsqltuner-datasources-context.xml"/>
 
 
-    <context:component-scan base-package="pl.piotrsukiennik.tuner">
-        <context:exclude-filter type="annotation" expression="org.springframework.context.annotation.Configuration"/>
-    </context:component-scan>
     <aop:config/>
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
     <bean name="jsqltunerIgnoreSchema" class="java.lang.String">
         <constructor-arg value="jsqltuner"/>
     </bean>
+
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.statement"/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.ai"/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.utils"/>
 
 
     <!-- QueryAdvisors -->
@@ -39,13 +41,9 @@
     <!-- !QueryAdvisors -->
 
 
-
-
-
-
     <!-- StatementsAdvisors -->
 
-    <bean id="statementsInterceptingAdvisor"  class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+    <bean id="statementsInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
         <property name="advice" ref="statementInterceptingAdvice"/>
@@ -53,10 +51,10 @@
     </bean>
 
 
-    <bean id="statementsRegisteringAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor" >
+    <bean id="statementsRegisteringAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (java.sql.* java.sql.Connection.*(..))"/>
-        <property name="advice" ref="statementsRegisteringAdvice" />
+        <property name="advice" ref="statementsRegisteringAdvice"/>
         <property name="order" value="100"/>
     </bean>
 

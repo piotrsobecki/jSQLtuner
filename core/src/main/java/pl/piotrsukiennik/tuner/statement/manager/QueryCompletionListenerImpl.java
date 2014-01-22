@@ -1,11 +1,9 @@
 package pl.piotrsukiennik.tuner.statement.manager;
 
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
-import pl.piotrsukiennik.tuner.persistance.model.query.WriteQuery;
-import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
-
-import javax.annotation.Resource;
+import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.WriteQuery;
+import pl.piotrsukiennik.tuner.persistance.DaoHolder;
 
 /**
  * Author: Piotr Sukiennik
@@ -15,12 +13,11 @@ import javax.annotation.Resource;
 @Component
 public class QueryCompletionListenerImpl implements QueryCompletionListener {
 
-    private @Resource ServicesHolder servicesHolder;
 
     @Override
-    public void queryCompleted(Query query) {
-        if (query instanceof WriteQuery){
-            servicesHolder.getQueryService().submit(query);
+    public void queryCompleted( Query query ) {
+        if ( query instanceof WriteQuery ) {
+            DaoHolder.getQueryDao().submit( query );
         }
     }
 

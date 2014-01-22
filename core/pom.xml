@@ -12,18 +12,7 @@
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <properties>
-        <spring.version>3.2.2.RELEASE</spring.version>
-        <aspectj.version>1.7.2</aspectj.version>
-    </properties>
     <repositories>
-
-        <repository>
-            <id>EclipseLink Repo</id>
-            <!-- note that ampersands in this URL are escaped because this is in an
-            xml file - un-escape them to use in browser -->
-            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
-        </repository>
         <repository>
             <id>spy</id>
             <name>Spy Repository</name>
@@ -36,9 +25,32 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>service-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>utils</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -47,17 +59,7 @@
             <version>1.9.13</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.2.2.Final</version>
-        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -65,18 +67,6 @@
         </dependency>
 
         <!---->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>0.8.0</version>
-        </dependency>
 
 
         <!--Memcached-->
@@ -102,29 +92,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring AOP + AspectJ -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>2.2.2</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -135,25 +102,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0.1</version>
+            <version>${google.guava.version}</version>
         </dependency>
-
     </dependencies>
-    <build>
-
-       <!-- <plugins>
-        <plugin>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr3-maven-plugin</artifactId>
-            <version>3.5</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>antlr</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        </plugins>-->
-    </build>
 </project>

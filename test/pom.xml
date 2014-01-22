@@ -13,12 +13,19 @@
     <properties>
         <spring.version>3.2.2.RELEASE</spring.version>
         <aspectj.version>1.7.2</aspectj.version>
+        <jsqltuner.version>1.4-SNAPSHOT</jsqltuner.version>
+
     </properties>
     <dependencies>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>api</artifactId>
+            <version>${jsqltuner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>core</artifactId>
-            <version>1.4-SNAPSHOT</version>
+            <version>${jsqltuner.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

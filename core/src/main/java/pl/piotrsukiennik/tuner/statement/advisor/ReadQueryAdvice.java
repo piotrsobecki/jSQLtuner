@@ -1,36 +1,38 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
-import java.sql.Statement;
 import org.aopalliance.intercept.MethodInvocation;
-import pl.piotrsukiennik.tuner.datasources.*;
-import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
+import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
+import pl.piotrsukiennik.tuner.datasources.StatementMethodInvocationDataSource;
+import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.persistance.DaoHolder;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 28.07.13
  * Time: 15:58
  */
-public class ReadQueryAdvice extends QueryAdvice<SelectQuery,ResultSet> {
+public class ReadQueryAdvice extends QueryAdvice<SelectQuery, ResultSet> {
 
     private DataSourcesManager manager;
 
 
-    public ReadQueryAdvice(ServicesHolder servicesHolder, DataSourcesManager dataSourcesManager, SelectQuery query) {
-        super(servicesHolder,query);
+    public ReadQueryAdvice( DataSourcesManager dataSourcesManager, SelectQuery query ) {
+        super( query );
         this.manager = dataSourcesManager;
     }
 
     @Override
-    public ResultSet invoke(final MethodInvocation methodInvocation) throws Throwable {
-        try{
-            manager.setDataForQuery(query
-                    ,new StatementMethodInvocationDataSource((Statement)methodInvocation.getThis(),methodInvocation,query));
-            return manager.getData(query);
-        }catch (Exception e){
-            servicesHolder.getLogService().logException(query.getValue(), e);
+    public ResultSet invoke( final MethodInvocation methodInvocation ) throws Throwable {
+        try {
+            manager.setDataForQuery( query
+             , new StatementMethodInvocationDataSource( (Statement) methodInvocation.getThis(), methodInvocation, query ) );
+            return manager.getData( query );
+        }
+        catch ( Exception e ) {
+            DaoHolder.getLogDao().logException( query.getValue(), e );
             throw e;
         }
     }
@@ -40,7 +42,7 @@ public class ReadQueryAdvice extends QueryAdvice<SelectQuery,ResultSet> {
         return manager;
     }
 
-    public void setManager(DataSourcesManager manager) {
+    public void setManager( DataSourcesManager manager ) {
         this.manager = manager;
     }
 }

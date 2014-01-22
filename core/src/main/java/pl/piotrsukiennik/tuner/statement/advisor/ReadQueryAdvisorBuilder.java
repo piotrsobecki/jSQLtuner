@@ -1,9 +1,7 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.springframework.aop.Advisor;
-import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
-
-import javax.annotation.Resource;
+import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 
 /**
  * Author: Piotr Sukiennik
@@ -14,7 +12,7 @@ public class ReadQueryAdvisorBuilder<Q extends SelectQuery> extends QueryAdvisor
 
 
     @Override
-    public Advisor createAdvisor(Q readQuery) {
-        return super.createAdvisor(new ReadQueryAdvice(servicesHolder,manager,readQuery));
+    public Advisor createAdvisor( Q readQuery ) {
+        return super.createAdvisor( new ReadQueryAdvice( manager, readQuery ) );
     }
 }

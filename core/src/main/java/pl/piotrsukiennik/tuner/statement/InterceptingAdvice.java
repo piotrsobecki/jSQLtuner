@@ -5,5 +5,5 @@ import org.aopalliance.intercept.MethodInvocation;
 
 public interface InterceptingAdvice<T> extends MethodInterceptor {
     @Override
-    T invoke(MethodInvocation methodInvocation) throws Throwable;
+    T invoke( MethodInvocation methodInvocation ) throws Throwable;
 }

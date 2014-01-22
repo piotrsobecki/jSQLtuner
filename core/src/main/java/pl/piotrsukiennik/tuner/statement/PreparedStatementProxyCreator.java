@@ -1,12 +1,13 @@
 package pl.piotrsukiennik.tuner.statement;
 
 
-import com.mysql.jdbc.JDBC4PreparedStatement;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.persistance.model.query.*;
+import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 import pl.piotrsukiennik.tuner.statement.advisor.QueryAdvisorBuilder;
 import pl.piotrsukiennik.tuner.statement.advisor.ReadQueryAdvisorBuilder;
 import pl.piotrsukiennik.tuner.statement.advisor.WriteQueryAdvisorBuilder;
@@ -35,30 +36,30 @@ public class PreparedStatementProxyCreator {
     private List<ReadQueryAdvisorBuilder<SelectQuery>> readQueryAdvisors;
 
 
-    public  <PS extends PreparedStatement> PS create(Query query, PS source){
-        if (query instanceof SelectQuery){
-            return attachAdvisors(readQueryAdvisors,(SelectQuery)query,source);
-        }   else if (query instanceof WriteQuery) {
-            return attachAdvisors(writeQueryAdvisors, (WriteQuery) query, source);
+    public <PS extends PreparedStatement> PS create( Query query, PS source ) {
+        if ( query instanceof SelectQuery ) {
+            return attachAdvisors( readQueryAdvisors, (SelectQuery) query, source );
+        }
+        else if ( query instanceof WriteQuery ) {
+            return attachAdvisors( writeQueryAdvisors, (WriteQuery) query, source );
         }
         return source;
     }
 
 
-
-    public <PS extends PreparedStatement,Q extends  Query, QAB extends QueryAdvisorBuilder<Q>> PS attachAdvisors(List<QAB> advisorBuilders, Q query, PS source){
+    public <PS extends PreparedStatement, Q extends Query, QAB extends QueryAdvisorBuilder<Q>> PS attachAdvisors( List<QAB> advisorBuilders, Q query, PS source ) {
         List<Advisor> advisors = new ArrayList<Advisor>();
-        for (QAB advisorContext: advisorBuilders){
-            advisors.add(advisorContext.createAdvisor(query));
+        for ( QAB advisorContext : advisorBuilders ) {
+            advisors.add( advisorContext.createAdvisor( query ) );
         }
-        return proxy(source,advisors);
+        return proxy( source, advisors );
     }
 
-    public <PS extends PreparedStatement> PS proxy(PS source, Collection<Advisor> advisors){
-        ProxyFactory proxyFactory = new ProxyFactory(source);
-        for (Advisor advisor: advisors){
-            proxyFactory.addAdvisor(advisor);
+    public <PS extends PreparedStatement> PS proxy( PS source, Collection<Advisor> advisors ) {
+        ProxyFactory proxyFactory = new ProxyFactory( source );
+        for ( Advisor advisor : advisors ) {
+            proxyFactory.addAdvisor( advisor );
         }
-        return  (PS) proxyFactory.getProxy();
+        return (PS) proxyFactory.getProxy();
     }
 }

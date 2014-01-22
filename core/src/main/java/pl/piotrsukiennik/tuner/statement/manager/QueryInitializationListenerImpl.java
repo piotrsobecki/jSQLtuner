@@ -1,10 +1,8 @@
 package pl.piotrsukiennik.tuner.statement.manager;
 
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
-import pl.piotrsukiennik.tuner.util.holder.Holder;
+import pl.piotrsukiennik.tuner.model.query.Query;
 
-import javax.annotation.Resource;
 import java.sql.Statement;
 
 /**
@@ -15,11 +13,8 @@ import java.sql.Statement;
 @Component
 public class QueryInitializationListenerImpl implements QueryInitializationListener {
 
-    private @Resource
-    Holder servicesHolder;
-
     @Override
-    public void onNewQuery(Query query, Statement statement) {
+    public void onNewQuery( Query query, Statement statement ) {
 
     }
 

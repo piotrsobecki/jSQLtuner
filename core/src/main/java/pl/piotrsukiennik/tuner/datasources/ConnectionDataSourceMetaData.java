@@ -1,11 +1,9 @@
 package pl.piotrsukiennik.tuner.datasources;
 
-import pl.piotrsukiennik.tuner.persistance.service.ILogService;
-import pl.piotrsukiennik.tuner.persistance.service.transactional.LogServiceImpl;
+import pl.piotrsukiennik.tuner.IDataSourceMetaData;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 /**
  * Author: Piotr Sukiennik
@@ -16,20 +14,22 @@ public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
     private final static String EXCEPTION_FORMAT = "%s.getIdentifier() Exception";
 
     private Connection connection;
+
     private String identifier;
-    public ConnectionDataSourceMetaData(Connection connection) {
+
+    public ConnectionDataSourceMetaData( Connection connection ) {
         this.connection = connection;
     }
 
     @Override
     public String getIdentifier() {
-        if (identifier!=null){
+        if ( identifier != null ) {
             return identifier;
         }
-        try{
-            return identifier =  connection.getMetaData().getURL();
+        try {
+            return identifier = connection.getMetaData().getURL();
         }
-        catch (SQLException s){
+        catch ( SQLException s ) {
             return "";
         }
     }

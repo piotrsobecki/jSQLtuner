@@ -1,8 +1,5 @@
 package pl.piotrsukiennik.tuner.statement;
 
-import java.sql.Connection;
-import java.util.List;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.sql.Connection;
+import java.util.List;
 
 @Component
 @Aspect
@@ -29,11 +28,11 @@ class DataSourceMonitorAspect {
     }
 
     @Around(value = "onGetConnectionPointcut()")
-    public Object onNewConnection(final ProceedingJoinPoint pjp) throws Throwable {
-        Connection retVal = (Connection) pjp.proceed(pjp.getArgs());
-        ProxyFactory proxyFactory = new ProxyFactory(retVal);
-        for (Advisor adv : this.advisors) {
-            proxyFactory.addAdvisor(adv);
+    public Object onNewConnection( final ProceedingJoinPoint pjp ) throws Throwable {
+        Connection retVal = (Connection) pjp.proceed( pjp.getArgs() );
+        ProxyFactory proxyFactory = new ProxyFactory( retVal );
+        for ( Advisor adv : this.advisors ) {
+            proxyFactory.addAdvisor( adv );
         }
         retVal = (Connection) proxyFactory.getProxy();
         return retVal;

@@ -1,7 +1,6 @@
 package pl.piotrsukiennik.tuner.datasources;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import pl.piotrsukiennik.tuner.IDataSourceMetaData;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 public class IdentifierMetaData implements IDataSourceMetaData {
     private String identifier;
 
-    public IdentifierMetaData(String identifier) {
+    public IdentifierMetaData( String identifier ) {
         this.identifier = identifier;
     }
 

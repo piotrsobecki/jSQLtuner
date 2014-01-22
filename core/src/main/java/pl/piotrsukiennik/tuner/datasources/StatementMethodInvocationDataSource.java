@@ -1,12 +1,13 @@
 package pl.piotrsukiennik.tuner.datasources;
 
 import org.aopalliance.intercept.MethodInvocation;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
-import pl.piotrsukiennik.tuner.persistance.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.persistance.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
-import java.io.Serializable;
-import java.sql.*;
+import javax.sql.rowset.CachedRowSet;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Author: Piotr Sukiennik
@@ -16,24 +17,30 @@ import java.sql.*;
 public class StatementMethodInvocationDataSource extends AbstractDataSource {
 
     private Statement statement;
+
     private MethodInvocation methodInvocation;
+
     private ReadQuery readQuery;
-    public StatementMethodInvocationDataSource(Statement statement,
-                                               MethodInvocation methodInvocation,
-                                               ReadQuery readQuery) throws SQLException {
-        super(new ConnectionDataSourceMetaData(statement.getConnection()));
+
+    public StatementMethodInvocationDataSource( Statement statement,
+                                                MethodInvocation methodInvocation,
+                                                ReadQuery readQuery ) throws SQLException {
+        super( new ConnectionDataSourceMetaData( statement.getConnection() ) );
         this.statement = statement;
-        this.methodInvocation=methodInvocation;
-        this.readQuery=readQuery;
+        this.methodInvocation = methodInvocation;
+        this.readQuery = readQuery;
     }
 
     @Override
-    protected ResultSet getData(ReadQuery query) throws Throwable {
-        return (ResultSet)methodInvocation.proceed();
+    protected ResultSet getData( ReadQuery query ) throws Throwable {
+        ResultSet resultSet = (ResultSet) methodInvocation.proceed();
+        return resultSet;
     }
 
+
     @Override
-    public void putData(ReadQuery query, Serializable resultSet) {
+    public void putData( ReadQuery query, CachedRowSet resultSet ) {
+
     }
 
     public ReadQuery getReadQuery() {
@@ -41,17 +48,18 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
     }
 
     @Override
-    protected void deleteData(Query query) {
+    protected void deleteData( Query query ) {
 
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (o instanceof StatementMethodInvocationDataSource){
-            ReadQuery oQ = ((StatementMethodInvocationDataSource) o).getReadQuery();
-            return ((getReadQuery().getId()==oQ.getId()) && oQ.getId()!=0)
-                    || getReadQuery().getHash().equals(oQ.getHash());
+    public boolean equals( Object o ) {
+        if ( o == this )
+            return true;
+        if ( o instanceof StatementMethodInvocationDataSource ) {
+            ReadQuery oQ = ( (StatementMethodInvocationDataSource) o ).getReadQuery();
+            return ( ( getReadQuery().getId() == oQ.getId() ) && oQ.getId() != 0 )
+             || getReadQuery().getHash().equals( oQ.getHash() );
         }
         return false;
     }

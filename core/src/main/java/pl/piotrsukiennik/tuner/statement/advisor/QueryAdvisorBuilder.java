@@ -4,8 +4,7 @@ import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
 import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
-import pl.piotrsukiennik.tuner.persistance.model.query.Query;
-import pl.piotrsukiennik.tuner.util.holder.ServicesHolder;
+import pl.piotrsukiennik.tuner.model.query.Query;
 
 import javax.annotation.Resource;
 
@@ -16,17 +15,19 @@ import javax.annotation.Resource;
  */
 public abstract class QueryAdvisorBuilder<Q extends Query> {
 
-    protected @Resource  ServicesHolder servicesHolder;
-    protected @Resource  DataSourcesManager manager;
+    protected
+    @Resource
+    DataSourcesManager manager;
 
     private String expression;
+
     private Integer order;
 
     public String getExpression() {
         return expression;
     }
 
-    public void setExpression(String expression) {
+    public void setExpression( String expression ) {
         this.expression = expression;
     }
 
@@ -34,16 +35,17 @@ public abstract class QueryAdvisorBuilder<Q extends Query> {
         return order;
     }
 
-    public void setOrder(Integer order) {
+    public void setOrder( Integer order ) {
         this.order = order;
     }
-    public abstract Advisor createAdvisor(Q query);
 
-    protected Advisor createAdvisor(Advice advice){
+    public abstract Advisor createAdvisor( Q query );
+
+    protected Advisor createAdvisor( Advice advice ) {
         AspectJExpressionPointcutAdvisor advisor = new AspectJExpressionPointcutAdvisor();
-        advisor.setExpression(expression);
-        advisor.setAdvice(advice);
-        advisor.setOrder(order);
+        advisor.setExpression( expression );
+        advisor.setAdvice( advice );
+        advisor.setOrder( order );
         return advisor;
     }
 }

@@ -13,12 +13,12 @@ import java.sql.PreparedStatement;
 public class ProceedWrapper implements PreparedStatementWrapper {
     private MethodInvocation methodInvocation;
 
-    public ProceedWrapper(MethodInvocation methodInvocation) {
+    public ProceedWrapper( MethodInvocation methodInvocation ) {
         this.methodInvocation = methodInvocation;
     }
 
     @Override
     public PreparedStatement get() throws Throwable {
-        return (PreparedStatement)methodInvocation.proceed();
+        return (PreparedStatement) methodInvocation.proceed();
     }
 }

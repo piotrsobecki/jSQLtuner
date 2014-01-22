@@ -1,9 +1,6 @@
 package pl.piotrsukiennik.tuner.statement.manager;
 
-import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.statement.StatementHolder;
-
-import java.sql.Statement;
 
 /**
  * Author: Piotr Sukiennik
@@ -12,6 +9,7 @@ import java.sql.Statement;
  */
 
 public interface StatementLiveCycleListener {
-     void onNewStatement(StatementHolder statementHolder);
-     void onRemoveStatement(StatementHolder statementHolder);
+    void onNewStatement( StatementHolder statementHolder );
+
+    void onRemoveStatement( StatementHolder statementHolder );
 }
