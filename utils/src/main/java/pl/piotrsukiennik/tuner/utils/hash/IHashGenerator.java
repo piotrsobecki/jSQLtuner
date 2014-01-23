@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.utils;
+package pl.piotrsukiennik.tuner.utils.hash;
 
 /**
  * Author: Piotr Sukiennik

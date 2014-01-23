@@ -11,7 +11,7 @@ import pl.piotrsukiennik.tuner.service.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.QueryParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.StatementParserVisitor;
 import pl.piotrsukiennik.tuner.service.query.QueryContext;
-import pl.piotrsukiennik.tuner.utils.HashGenerators;
+import pl.piotrsukiennik.tuner.utils.hash.HashGenerators;
 
 import javax.annotation.Resource;
 import java.io.StringReader;
@@ -28,10 +28,10 @@ class QueryParserServiceImpl implements QueryParserService {
     @Resource
     private QueryElementParserService queryElementParserService;
 
-    protected String getQueryHash( String databaseStr, String schemaStr, Statement statement ) {
-        return HashGenerators.MD5.getHash( databaseStr + "." + schemaStr + "." + statement.toString() );
-    }
 
+    protected String getQueryHash( String databaseStr, String schemaStr, String query ) {
+        return HashGenerators.MD5.getHash( databaseStr + "." + schemaStr + "." + query );
+    }
 
     @Override
     public Query parse( String databaseStr, String schemaStr, String query ) {
@@ -40,13 +40,14 @@ class QueryParserServiceImpl implements QueryParserService {
             QueryContext queryContext = new QueryContext();
             queryContext.getDatabase( databaseStr );
             queryContext.getSchema( schemaStr );
-            Statement statement = pm.parse( new StringReader( query ) );
-            String queryHash = getQueryHash( databaseStr, schemaStr, statement );
+            String queryHash = getQueryHash( databaseStr, schemaStr, query );
             Query parsedQuery = DaoHolder.getQueryDao().getQueryByHash( queryHash );
             if ( parsedQuery == null ) {
+                Statement statement = pm.parse( new StringReader( query ) );
                 StatementParserVisitor statementParserVisitor = new StatementParserVisitor( queryElementParserService, queryContext, statement );
                 parsedQuery = statementParserVisitor.getQuery();
                 parsedQuery.setHash( queryHash );
+                DaoHolder.getQueryDao().submit( parsedQuery );
             }
             return parsedQuery;
         }

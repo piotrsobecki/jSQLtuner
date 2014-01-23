@@ -94,15 +94,19 @@ public abstract class AbstractDataSource implements IDataSource, IDataSharder {
 
     @Override
     public boolean equals( Object o ) {
-        if ( this == o )
+        if ( this == o ) {
             return true;
-        if ( !( o instanceof AbstractDataSource ) )
+        }
+        if ( !( o instanceof AbstractDataSource ) ) {
             return false;
+        }
         AbstractDataSource that = (AbstractDataSource) o;
-        if ( dataSourceMetaData != null ? !dataSourceMetaData.getIdentifier().equals( that.dataSourceMetaData.getIdentifier() ) :
-         that.dataSourceMetaData != null )
-            return false;
-        return true;
+        if ( dataSourceMetaData != null ) {
+            return dataSourceMetaData.getIdentifier().equals( that.getMetaData().getIdentifier() );
+        }
+        else {
+            return that.dataSourceMetaData != null;
+        }
     }
 
     @Override

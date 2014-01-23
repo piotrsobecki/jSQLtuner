@@ -10,8 +10,6 @@ import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
 import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.query.QueryContext;
 import pl.piotrsukiennik.tuner.service.util.QueryUtils;
@@ -43,21 +41,14 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
     @Override
     public void visit( AllColumns allColumns ) {
         for ( Source source : selectQuery.getSources() ) {
-            StarProjection starProjection = new StarProjection();
-            starProjection.setSource( source );
+            StarProjection starProjection = queryElementParserService.getStarProjection( queryContext, allColumns, source );
             QueryUtils.addProjection( selectQuery, starProjection );
         }
     }
 
     @Override
     public void visit( AllTableColumns allTableColumns ) {
-        StarProjection starProjection = new StarProjection();
-        Table table = queryContext.getTable( allTableColumns.getTable().getWholeTableName() );
-        for ( Source source : selectQuery.getSources() ) {
-            if ( source instanceof TableSource && ( (TableSource) source ).getTable().equals( table ) ) {
-                starProjection.setSource( source );
-            }
-        }
+        StarProjection starProjection = queryElementParserService.getStarProjection( queryContext, allTableColumns );
         QueryUtils.addProjection( selectQuery, starProjection );
     }
 

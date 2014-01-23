@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
 import pl.piotrsukiennik.tuner.service.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.query.QueryContext;
-import pl.piotrsukiennik.tuner.utils.HashGenerators;
+import pl.piotrsukiennik.tuner.utils.hash.HashGenerators;
 
 /**
  * Author: Piotr Sukiennik

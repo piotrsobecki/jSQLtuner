@@ -2,9 +2,7 @@ package pl.piotrsukiennik.tuner.model.query;
 
 import pl.piotrsukiennik.tuner.model.ValueEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -13,7 +11,7 @@ import java.sql.Timestamp;
  * Time: 13:49
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 public abstract class QueryExecution extends ValueEntity {
     private Timestamp timestamp;
 
@@ -23,5 +21,18 @@ public abstract class QueryExecution extends ValueEntity {
 
     public void setTimestamp( Timestamp timestamp ) {
         this.timestamp = timestamp;
+    }
+
+
+    private Query query;
+
+
+    @ManyToOne( cascade = CascadeType.MERGE, optional = false )
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery( Query query ) {
+        this.query = query;
     }
 }

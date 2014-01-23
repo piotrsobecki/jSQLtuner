@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.service;
 import pl.piotrsukiennik.tuner.IDataSource;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.model.query.WriteQueryExecution;
 import pl.piotrsukiennik.tuner.model.query.execution.QueryForDataSource;
 
 import java.util.Collection;
@@ -26,4 +27,7 @@ public interface QueryExecutionService {
                                            DataRetrieval dataRetrieval );
 
     IDataSource getDataSourceForQuery( ReadQuery selectQuery );
+
+
+    void submitWriteQueryExecution( WriteQueryExecution writeQueryExecution );
 }

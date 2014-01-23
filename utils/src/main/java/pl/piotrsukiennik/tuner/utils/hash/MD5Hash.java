@@ -1,10 +1,11 @@
-package pl.piotrsukiennik.tuner.utils;
+package pl.piotrsukiennik.tuner.utils.hash;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Java program to generate MD5 hash or digest for String. In this example
@@ -16,14 +17,13 @@ import java.util.logging.Logger;
  * @author Javin Paul
  */
 public class MD5Hash {
-    private static Logger LOG = Logger.getLogger( MD5Hash.class.getName() );
+    private static Log LOG = LogFactory.getLog( MD5Hash.class );
 
     public static String toMd5( String message ) {
         String digest = null;
         try {
             MessageDigest md = MessageDigest.getInstance( "MD5" );
             byte[] hash = md.digest( message.getBytes( "UTF-8" ) );
-
             //converting byte array to Hexadecimal String
             StringBuilder sb = new StringBuilder( 2 * hash.length );
             for ( byte b : hash ) {
@@ -33,15 +33,11 @@ public class MD5Hash {
             digest = sb.toString();
 
         }
-        catch ( UnsupportedEncodingException ex ) {
-            if ( LOG.isLoggable( Level.SEVERE ) ) {
-                LOG.log( Level.SEVERE, null, ex );
+        catch ( UnsupportedEncodingException | NoSuchAlgorithmException ex ) {
+            if ( LOG.isErrorEnabled() ) {
+                LOG.error( ex );
             }
-        }
-        catch ( NoSuchAlgorithmException ex ) {
-            if ( LOG.isLoggable( Level.SEVERE ) ) {
-                LOG.log( Level.SEVERE, null, ex );
-            }
+            throw new HashGeneratorException( ex );
         }
         return digest;
     }

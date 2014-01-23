@@ -8,7 +8,6 @@ import pl.piotrsukiennik.tuner.model.query.WriteQueryExecution;
 import pl.piotrsukiennik.tuner.persistance.DaoHolder;
 
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
 
 /**
  * Author: Piotr Sukiennik
@@ -24,17 +23,15 @@ public class WriteQueryAdvice extends QueryAdvice<WriteQuery, Object> {
     }
 
     @Override
-    public Object invoke( MethodInvocation methodInvocation ) throws PreparedStatementInterceptException{
+    public Object invoke( MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
         try {
             Object ret = methodInvocation.proceed();
             Integer rowsAffected = (Integer) ret;
             WriteQueryExecution writeQueryExecution = new WriteQueryExecution();
             writeQueryExecution.setRowsAffected( rowsAffected );
             writeQueryExecution.setTimestamp( new Timestamp( System.currentTimeMillis() ) );
-            if ( query.getWriteQueryExecutions() == null ) {
-                query.setWriteQueryExecutions( new LinkedHashSet<WriteQueryExecution>() );
-            }
-            query.getWriteQueryExecutions().add( writeQueryExecution );
+            writeQueryExecution.setQuery( query );
+            DaoHolder.getCommonDao().create( writeQueryExecution );
             if ( rowsAffected > 0 ) {
                 manager.invalidate( query );
             }

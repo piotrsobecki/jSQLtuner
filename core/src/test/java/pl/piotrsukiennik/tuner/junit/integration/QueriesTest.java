@@ -18,10 +18,8 @@ import javax.annotation.Resource;
 @ContextConfiguration(locations = { "/jsqltuner-test-root-context.xml" })
 public class QueriesTest {
 
-
-    private
     @Resource
-    SQLQueryExecutionService queryExecutionService;
+    private SQLQueryExecutionService queryExecutionService;
 
     @Test
     @Repeat(10)

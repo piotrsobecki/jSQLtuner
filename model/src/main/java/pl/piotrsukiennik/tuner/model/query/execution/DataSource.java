@@ -36,21 +36,18 @@ public class DataSource extends ValueEntity {
 
     @Override
     public boolean equals( Object o ) {
-        if ( this == o )
+        if ( this == o ) {
             return true;
-        if ( !( o instanceof DataSource ) )
+        }
+        if ( !( o instanceof DataSource ) ) {
             return false;
-        if ( !super.equals( o ) )
+        }
+        if ( !super.equals( o ) ) {
             return false;
-
+        }
         DataSource that = (DataSource) o;
+        return !( clazz != null ? !clazz.equals( that.clazz ) : that.clazz != null ) && !( identifier != null ? !identifier.equals( that.identifier ) : that.identifier != null );
 
-        if ( clazz != null ? !clazz.equals( that.clazz ) : that.clazz != null )
-            return false;
-        if ( identifier != null ? !identifier.equals( that.identifier ) : that.identifier != null )
-            return false;
-
-        return true;
     }
 
     @Override

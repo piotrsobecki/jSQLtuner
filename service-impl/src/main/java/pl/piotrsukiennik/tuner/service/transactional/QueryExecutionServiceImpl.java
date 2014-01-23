@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.IDataSource;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.model.query.WriteQueryExecution;
 import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
 import pl.piotrsukiennik.tuner.model.query.execution.QueryForDataSource;
 import pl.piotrsukiennik.tuner.persistance.DaoHolder;
@@ -93,4 +94,8 @@ class QueryExecutionServiceImpl implements QueryExecutionService {
         return getLocal( selectQuery, DaoHolder.getQueryExecutionDao().getDataSourceForQuery( selectQuery ) );
     }
 
+    @Override
+    public void submitWriteQueryExecution( WriteQueryExecution writeQueryExecution ) {
+        DaoHolder.getCommonDao().create( writeQueryExecution );
+    }
 }

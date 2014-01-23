@@ -43,16 +43,16 @@ public abstract class ValueEntity {
 
     @Override
     public boolean equals( Object o ) {
-        if ( this == o )
+        if ( this == o ) {
             return true;
-        if ( !( o instanceof ValueEntity ) )
+        }
+        if ( !( o instanceof ValueEntity ) ) {
             return false;
+        }
         ValueEntity that = (ValueEntity) o;
 
-        if ( id != that.getId() || ( id == 0 && that.getId() == 0 ) )
-            return false;
+        return !( id != that.getId() || ( id == 0 && that.getId() == 0 ) );
 
-        return true;
     }
 
     @Override

@@ -1,7 +1,8 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  * Author: Piotr Sukiennik
@@ -11,14 +12,5 @@ import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class WriteQuery extends Query {
-    private Set<WriteQueryExecution> writeQueryExecutions;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    public Set<WriteQueryExecution> getWriteQueryExecutions() {
-        return writeQueryExecutions;
-    }
-
-    public void setWriteQueryExecutions( Set<WriteQueryExecution> writeQueryExecutions ) {
-        this.writeQueryExecutions = writeQueryExecutions;
-    }
 }
