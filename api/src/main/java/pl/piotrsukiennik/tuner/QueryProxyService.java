@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
  * Date: 28.07.13
  * Time: 14:13
  */
-public interface IDecisionService {
+public interface QueryProxyService {
     boolean checkToProxy( String schema );
 
     boolean checkProceed( IQuery query );

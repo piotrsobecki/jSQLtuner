@@ -11,9 +11,9 @@
 
     <bean id="jsqlTunerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           autowire-candidate="false">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/jsqltuner"/>
-        <property name="username" value="root"/>
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:target/db/jsqltuner"/>
+        <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
 
@@ -29,7 +29,7 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
             </props>

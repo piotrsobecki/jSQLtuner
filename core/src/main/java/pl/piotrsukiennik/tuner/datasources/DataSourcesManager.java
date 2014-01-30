@@ -3,15 +3,15 @@ package pl.piotrsukiennik.tuner.datasources;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.IDataSource;
-import pl.piotrsukiennik.tuner.IShardingManager;
+import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.Sharder;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.service.LocalDataSourceService;
-import pl.piotrsukiennik.tuner.service.QueryExecutionService;
+import pl.piotrsukiennik.tuner.service.QueryDataSourceSelectorService;
 import pl.piotrsukiennik.tuner.utils.RowSet;
 
 import javax.annotation.Resource;
@@ -35,14 +35,14 @@ public class DataSourcesManager {
 
     @Resource
     private
-    IShardingManager shardingManager;
+    Sharder shardingManager;
 
     @Resource
     private
-    QueryExecutionService executionService;
+    QueryDataSourceSelectorService executionService;
 
 
-    public void setDataForQuery( ReadQuery query, IDataSource dataSource ) {
+    public void setDataForQuery( ReadQuery query, DataSource dataSource ) {
         dataSourceMapper.setRootDataSource( query, dataSource );
     }
 
@@ -55,7 +55,7 @@ public class DataSourcesManager {
             if ( LOG.isWarnEnabled() ) {
                 LOG.warn( "No data could be retreived using sharding manager.", t );
             }
-            IDataSource dataSource = dataSourceMapper.getRootDataSource( query );
+            DataSource dataSource = dataSourceMapper.getRootDataSource( query );
             dataRetrieval = dataSource.get( query );
             dataRetrieval.setDataSourceIdentifier( dataSource.getMetaData().getIdentifier() );
             if ( isShardable( query ) && dataRetrieval.getResultSet() != null ) {

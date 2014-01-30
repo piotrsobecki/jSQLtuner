@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.junit.integration;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Repeat;
@@ -21,6 +23,33 @@ public class QueriesTest {
     @Resource
     private SQLQueryExecutionService queryExecutionService;
 
+    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id INT, key VARCHAR, value VARCHAR)";
+
+    private static String TEST_TABLE_DROP = "DROP TABLE TestTable";
+
+    @Before
+    public void prepareDB() {
+
+        try {
+            queryExecutionService.execute( TEST_TABLE_CREATE );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    @After
+    public void cleanDB() {
+
+        try {
+            queryExecutionService.execute( TEST_TABLE_DROP );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Test
     @Repeat(10)
     public void runTestQueries() {
@@ -32,7 +61,7 @@ public class QueriesTest {
                     queryExecutionService.execute( line );
                 }
                 catch ( Exception e ) {
-                    e.printStackTrace();
+                    //   e.printStackTrace();
                 }
             }
         } );

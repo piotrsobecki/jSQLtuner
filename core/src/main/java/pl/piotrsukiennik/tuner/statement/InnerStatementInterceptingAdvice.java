@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class InnerStatementInterceptingAdvice implements MethodInterceptor {
     @Override
     public Object invoke( MethodInvocation methodInvocation ) throws Throwable {
-        Object ret = methodInvocation.proceed();
-        return ret;
+        return methodInvocation.proceed();
     }
 }

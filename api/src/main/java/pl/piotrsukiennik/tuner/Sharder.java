@@ -12,7 +12,7 @@ import javax.sql.rowset.CachedRowSet;
  * Date: 31.08.13
  * Time: 18:57
  */
-public interface IShardingManager {
+public interface Sharder {
     void put( ReadQuery query, CachedRowSet data );
 
     void delete( Query query );

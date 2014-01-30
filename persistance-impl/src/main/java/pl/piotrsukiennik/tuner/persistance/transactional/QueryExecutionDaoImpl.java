@@ -9,14 +9,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
-import pl.piotrsukiennik.tuner.model.query.execution.QueryForDataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.execution.QuerySelectionHelper;
 import pl.piotrsukiennik.tuner.persistance.QueryDao;
 import pl.piotrsukiennik.tuner.persistance.QueryExecutionDao;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * Author: Piotr Sukiennik
@@ -30,137 +31,145 @@ class QueryExecutionDaoImpl extends CrudDaoImpl implements QueryExecutionDao {
     @Resource
     private QueryDao queryService;
 
-    private class PredicateQueryDataSource implements Predicate<QueryForDataSource> {
+    private class PredicateQueryDataSource implements Predicate<QuerySelectionHelper> {
 
 
-        private DataSource dataSource;
+        private DataSourceIdentity dataSourceIdentity;
 
-        private PredicateQueryDataSource( DataSource dataSource ) {
+        private PredicateQueryDataSource( DataSourceIdentity dataSourceIdentity ) {
 
-            this.dataSource = dataSource;
+            this.dataSourceIdentity = dataSourceIdentity;
         }
 
         @Override
-        public boolean apply( QueryForDataSource queryForDataSource ) {
-            return queryForDataSource.getDataSource().equals( dataSource );
+        public boolean apply( QuerySelectionHelper querySelectionHelper ) {
+            return querySelectionHelper.getDataSourceIdentity().equals( dataSourceIdentity );
         }
     }
 
 
-    private Multimap<String, QueryForDataSource> sourceMultiValueMap = HashMultimap.create();
+    private Multimap<String, QuerySelectionHelper> sourceMultiValueMap = HashMultimap.create();
 
     @Override
-    public DataSource getDataSourceForQuery( ReadQuery selectQuery ) {
+    public DataSourceIdentity getDataSourceForQuery( ReadQuery selectQuery ) {
         float random = (float) Math.random();
-        DataSource dataSource = (DataSource) s().getNamedQuery( QueryForDataSource.GET_DATASOURCE_FOR_QUERY )
+        DataSourceIdentity dataSourceIdentity = (DataSourceIdentity) s().getNamedQuery( QuerySelectionHelper.GET_DATASOURCE_FOR_QUERY )
          .setString( "queryHash", selectQuery.getHash() )
          .setFloat( "random", random ).setMaxResults( 1 ).uniqueResult();
-        return dataSource;
+        return dataSourceIdentity;
     }
 
     @Override
-    public DataSource getDataSource( String identifier ) {
-        DataSource dataSource = (DataSource) s().createCriteria( DataSource.class )
+    public List<DataSourceIdentity> getDataSourcesForQuery( ReadQuery selectQuery ) {
+        return s().getNamedQuery( QuerySelectionHelper.GET_DATASOURCES_FOR_QUERY )
+         .setString( "queryHash", selectQuery.getHash() ).list();
+
+    }
+
+    @Override
+    public DataSourceIdentity getDataSource( String identifier ) {
+        DataSourceIdentity dataSourceIdentity = (DataSourceIdentity) s().createCriteria( DataSourceIdentity.class )
          .add( Restrictions.eq( "identifier", identifier ) ).setMaxResults( 1 ).uniqueResult();
-        if ( dataSource == null ) {
-            dataSource = new DataSource();
-            dataSource.setIdentifier( identifier );
-            create( dataSource );
+        if ( dataSourceIdentity == null ) {
+            dataSourceIdentity = new DataSourceIdentity();
+            dataSourceIdentity.setIdentifier( identifier );
+            create( dataSourceIdentity );
         }
-        return dataSource;
+        return dataSourceIdentity;
     }
 
     public void refreshRoulette( Query query ) {
-        s().getNamedQuery( QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS ).setLong( "queryId", query.getId() ).executeUpdate();
+        //TODO
+
     }
 
-    public void removeDataSourceForQuery( final ReadQuery query, final DataSource dataSource ) {
+    public void removeDataSourceForQuery( final ReadQuery query, final DataSourceIdentity dataSourceIdentity ) {
         Query queryPersisted = queryService.submit( query );
-        s().getNamedQuery( QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY ).setEntity( "query", queryPersisted ).setEntity( "dataSource", dataSource ).executeUpdate();
+        s().getNamedQuery( QuerySelectionHelper.REMOVE_DATASOURCE_FOR_QUERY ).setEntity( "query", queryPersisted ).setEntity( "dataSource", dataSourceIdentity ).executeUpdate();
         refreshRoulette( query );
     }
 
-    public void removeDataSourcesForQueries( Collection<? extends ReadQuery> queries, final Collection<DataSource> dataSources ) {
-        if ( dataSources == null || dataSources.isEmpty() || queries == null || queries.isEmpty() ) {
+    public void removeDataSourcesForQueries( Collection<? extends ReadQuery> queries, final Collection<DataSourceIdentity> dataSourceIdentities ) {
+        if ( dataSourceIdentities == null || dataSourceIdentities.isEmpty() || queries == null || queries.isEmpty() ) {
             return;
         }
         Collection<Query> queriesPersisted = new LinkedHashSet<Query>();
         for ( ReadQuery readQuery : queries ) {
             queriesPersisted.add( queryService.submit( readQuery ) );
         }
-        s().getNamedQuery( QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERIES ).setParameterList( "queries", queriesPersisted ).setParameterList( "dataSources", dataSources ).executeUpdate();
+        s().getNamedQuery( QuerySelectionHelper.REMOVE_DATASOURCES_FOR_QUERIES ).setParameterList( "queries", queriesPersisted ).setParameterList( "dataSources", dataSourceIdentities ).executeUpdate();
         for ( Query query : queriesPersisted ) {
             refreshRoulette( query );
         }
     }
 
-    public void removeDataSourcesForQuery( final ReadQuery query, final Collection<DataSource> dataSources ) {
-        if ( dataSources == null || dataSources.isEmpty() ) {
+    public void removeDataSourcesForQuery( final ReadQuery query, final Collection<DataSourceIdentity> dataSourceIdentities ) {
+        if ( dataSourceIdentities == null || dataSourceIdentities.isEmpty() ) {
             return;
         }
         Query queryPersisted = queryService.submit( query );
-        s().getNamedQuery( QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERY ).setEntity( "query", queryPersisted ).setParameterList( "dataSource", dataSources ).executeUpdate();
+        s().getNamedQuery( QuerySelectionHelper.REMOVE_DATASOURCES_FOR_QUERY ).setEntity( "query", queryPersisted ).setParameterList( "dataSources", dataSourceIdentities ).executeUpdate();
         refreshRoulette( query );
     }
 
-    public QueryForDataSource getQueryForDataSource( final ReadQuery q, final DataSource dataSource ) {
-        return (QueryForDataSource) s().createCriteria( QueryForDataSource.class )
-         .add( Restrictions.eq( "query", q ) ).add( Restrictions.eq( "dataSource", dataSource ) ).uniqueResult();
+    public QuerySelectionHelper getQueryForDataSource( final ReadQuery q, final DataSourceIdentity dataSourceIdentity ) {
+        return (QuerySelectionHelper) s().createCriteria( QuerySelectionHelper.class )
+         .add( Restrictions.eq( "query", q ) ).add( Restrictions.eq( "dataSourceIdentity", dataSourceIdentity ) ).uniqueResult();
     }
 
-    protected QueryForDataSource initNew( QueryForDataSource queryForDataSource, ReadQuery q, DataSource dataSource ) {
-        queryForDataSource.setExecutions( 0 );
-        queryForDataSource.setAverageExecutionTimeNano( -1 );
-        queryForDataSource.setDataSource( dataSource );
-        queryForDataSource.setQuery( q );
-        return queryForDataSource;
+    protected QuerySelectionHelper initNew( QuerySelectionHelper querySelectionHelper, ReadQuery q, DataSourceIdentity dataSourceIdentity ) {
+        querySelectionHelper.setExecutions( 0 );
+        querySelectionHelper.setAverageExecutionTimeNano( -1 );
+        querySelectionHelper.setDataSourceIdentity( dataSourceIdentity );
+        querySelectionHelper.setQuery( q );
+        return querySelectionHelper;
 
     }
 
-    public QueryForDataSource submitNewDataSourceForQuery( final ReadQuery q, final DataSource dataSource ) {
+    public QuerySelectionHelper submitNewDataSourceForQuery( final ReadQuery q, final DataSourceIdentity dataSourceIdentity ) {
         ReadQuery persistedQuery = queryService.submit( q );
-        QueryForDataSource queryForDataSource = getQueryForDataSource( persistedQuery, dataSource );
-        if ( queryForDataSource == null ) {
-            queryForDataSource = new QueryForDataSource();
-            queryForDataSource = initNew( queryForDataSource, persistedQuery, dataSource );
-            create( queryForDataSource );
+        QuerySelectionHelper querySelectionHelper = getQueryForDataSource( persistedQuery, dataSourceIdentity );
+        if ( querySelectionHelper == null ) {
+            querySelectionHelper = new QuerySelectionHelper();
+            querySelectionHelper = initNew( querySelectionHelper, persistedQuery, dataSourceIdentity );
+            create( querySelectionHelper );
         }
         else {
-            queryForDataSource = initNew( queryForDataSource, persistedQuery, dataSource );
-            update( queryForDataSource );
+            querySelectionHelper = initNew( querySelectionHelper, persistedQuery, dataSourceIdentity );
+            update( querySelectionHelper );
         }
         refreshRoulette( persistedQuery );
-        sourceMultiValueMap.put( persistedQuery.getHash(), queryForDataSource );
-        return queryForDataSource;
+        sourceMultiValueMap.put( persistedQuery.getHash(), querySelectionHelper );
+        return querySelectionHelper;
     }
 
-    public Collection<QueryForDataSource> submit( final ReadQuery q, final DataSource dataSource, long executionTimeNano ) {
+    public Collection<QuerySelectionHelper> submit( final ReadQuery q, final DataSourceIdentity dataSourceIdentity, long executionTimeNano ) {
         ReadQuery persistedQuery = queryService.submit( q );
 
-        Collection<QueryForDataSource> queryForDataSourceCollection = sourceMultiValueMap.get( persistedQuery.getHash() );
-        Collection<QueryForDataSource> filtered = Collections2.filter( queryForDataSourceCollection, new PredicateQueryDataSource( dataSource ) );
+        Collection<QuerySelectionHelper> querySelectionHelperCollection = sourceMultiValueMap.get( persistedQuery.getHash() );
+        Collection<QuerySelectionHelper> filtered = Collections2.filter( querySelectionHelperCollection, new PredicateQueryDataSource( dataSourceIdentity ) );
         if ( filtered.isEmpty() ) {
-            QueryForDataSource queryForDataSource = getQueryForDataSource( persistedQuery, dataSource );
-            if ( queryForDataSource == null ) {
-                queryForDataSource = new QueryForDataSource();
-                queryForDataSource.setExecutions( 1 );
-                queryForDataSource.setAverageExecutionTimeNano( executionTimeNano );
-                queryForDataSource.setDataSource( dataSource );
-                queryForDataSource.setQuery( persistedQuery );
-                queryForDataSource = create( queryForDataSource );
+            QuerySelectionHelper querySelectionHelper = getQueryForDataSource( persistedQuery, dataSourceIdentity );
+            if ( querySelectionHelper == null ) {
+                querySelectionHelper = new QuerySelectionHelper();
+                querySelectionHelper.setExecutions( 1 );
+                querySelectionHelper.setAverageExecutionTimeNano( executionTimeNano );
+                querySelectionHelper.setDataSourceIdentity( dataSourceIdentity );
+                querySelectionHelper.setQuery( persistedQuery );
+                querySelectionHelper = create( querySelectionHelper );
             }
             refreshRoulette( persistedQuery );
-            filtered.add( queryForDataSource );
-            sourceMultiValueMap.put( persistedQuery.getHash(), queryForDataSource );
+            filtered.add( querySelectionHelper );
+            sourceMultiValueMap.put( persistedQuery.getHash(), querySelectionHelper );
         }
         else {
-            for ( QueryForDataSource queryForDataSource : filtered ) {
-                long executions = queryForDataSource.getExecutions();
-                float averageExecution = queryForDataSource.getAverageExecutionTimeNano();
+            for ( QuerySelectionHelper querySelectionHelper : filtered ) {
+                long executions = querySelectionHelper.getExecutions();
+                float averageExecution = querySelectionHelper.getAverageExecutionTimeNano();
                 averageExecution = ( averageExecution * executions + executionTimeNano ) / ( executions + 1 );
-                queryForDataSource.setExecutions( executions + 1 );
-                queryForDataSource.setAverageExecutionTimeNano( averageExecution );
-                update( queryForDataSource );
+                querySelectionHelper.setExecutions( executions + 1 );
+                querySelectionHelper.setAverageExecutionTimeNano( averageExecution );
+                update( querySelectionHelper );
                 refreshRoulette( persistedQuery );
             }
         }

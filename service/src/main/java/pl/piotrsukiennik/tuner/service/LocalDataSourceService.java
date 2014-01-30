@@ -1,8 +1,8 @@
 package pl.piotrsukiennik.tuner.service;
 
-import pl.piotrsukiennik.tuner.IDataSource;
+import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
 
 import java.util.Collection;
 
@@ -11,9 +11,9 @@ import java.util.Collection;
  * @date 13.01.14
  */
 public interface LocalDataSourceService {
-    IDataSource getRootDataSource( Query selectQuery );
+    DataSource getRootDataSource( Query selectQuery );
 
-    void setRootDataSource( Query query, IDataSource dataSource );
+    void setRootDataSource( Query query, DataSource dataSource );
 
-    Collection<IDataSource> getLocal( Query query, DataSource dataSource );
+    Collection<DataSource> getLocal( Query query, DataSourceIdentity dataSourceIdentity );
 }

@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.datasources.keyvalue.memcached;
 
 import net.spy.memcached.MemcachedClient;
-import pl.piotrsukiennik.tuner.IKeyValueService;
+import pl.piotrsukiennik.tuner.KeyValueService;
 
 import java.net.SocketAddress;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * Date: 04.07.13
  * Time: 17:51
  */
-public class KeyValueMemcachedService implements IKeyValueService {
+public class KeyValueMemcachedService implements KeyValueService {
     private static final long MAX_EXPIRATION = TimeUnit.DAYS.toSeconds( 30 );
 
     private MemcachedClient memcachedClient;

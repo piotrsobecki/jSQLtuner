@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.ai;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.IDecisionService;
+import pl.piotrsukiennik.tuner.QueryProxyService;
 import pl.piotrsukiennik.tuner.model.query.IQuery;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.service.QueryParserService;
@@ -25,7 +25,7 @@ import java.util.TreeSet;
  * Time: 14:18
  */
 @Service
-public class DecisionServiceImpl implements IDecisionService {
+public class QueryProxyServiceImpl implements QueryProxyService {
 
     @Resource
     private QueryParserService parser;
@@ -37,7 +37,7 @@ public class DecisionServiceImpl implements IDecisionService {
     private Collection<QueryInitializationListener> listeners;
 
     @Inject
-    @Qualifier("jsqltunerIgnoreSchema")
+    @Qualifier( "jsqltunerIgnoreSchema" )
     private List<String> ignoreSchema;
 
     @Override

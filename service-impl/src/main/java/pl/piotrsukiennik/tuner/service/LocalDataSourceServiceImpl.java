@@ -3,9 +3,9 @@ package pl.piotrsukiennik.tuner.service;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.IDataSource;
+import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -19,11 +19,11 @@ import java.util.*;
 class LocalDataSourceServiceImpl implements LocalDataSourceService {
 
     @Resource
-    private Set<IDataSource> dataSourceList;
+    private Set<DataSource> dataSourceList;
 
-    private Map<String, IDataSource> rootDataSources = new LinkedHashMap<String, IDataSource>();
+    private Map<String, DataSource> rootDataSources = new LinkedHashMap<String, DataSource>();
 
-    private class IdentifierPredicate implements Predicate<IDataSource> {
+    private class IdentifierPredicate implements Predicate<DataSource> {
         private String identifier;
 
         private IdentifierPredicate( String identifier ) {
@@ -31,29 +31,29 @@ class LocalDataSourceServiceImpl implements LocalDataSourceService {
         }
 
         @Override
-        public boolean apply( IDataSource iDataSource ) {
-            return identifier.equalsIgnoreCase( iDataSource.getMetaData().getIdentifier() );
+        public boolean apply( DataSource dataSource ) {
+            return identifier.equalsIgnoreCase( dataSource.getMetaData().getIdentifier() );
         }
     }
 
     @Override
-    public IDataSource getRootDataSource( Query selectQuery ) {
+    public DataSource getRootDataSource( Query selectQuery ) {
         return rootDataSources.get( selectQuery.getHash() );
     }
 
     @Override
-    public void setRootDataSource( Query query, IDataSource dataSource ) {
+    public void setRootDataSource( Query query, DataSource dataSource ) {
         rootDataSources.put( query.getHash(), dataSource );
     }
 
     @Override
-    public Collection<IDataSource> getLocal( Query query, DataSource dataSource ) {
-        if ( dataSource == null ) {
+    public Collection<DataSource> getLocal( Query query, DataSourceIdentity dataSourceIdentity ) {
+        if ( dataSourceIdentity == null ) {
             return Collections.EMPTY_LIST;
         }
-        IdentifierPredicate identifierPredicate = new IdentifierPredicate( dataSource.getIdentifier() );
-        Collection<IDataSource> out = new LinkedHashSet<IDataSource>( Collections2.filter( dataSourceList, identifierPredicate ) );
-        IDataSource rootDS = getRootDataSource( query );
+        IdentifierPredicate identifierPredicate = new IdentifierPredicate( dataSourceIdentity.getIdentifier() );
+        Collection<DataSource> out = new LinkedHashSet<DataSource>( Collections2.filter( dataSourceList, identifierPredicate ) );
+        DataSource rootDS = getRootDataSource( query );
         if ( identifierPredicate.apply( rootDS ) ) {
             out.add( rootDS );
         }

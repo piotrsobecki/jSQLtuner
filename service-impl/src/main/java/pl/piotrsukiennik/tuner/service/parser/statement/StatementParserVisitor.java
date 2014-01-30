@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.StatementVisitor;
 import net.sf.jsqlparser.statement.delete.Delete;
+import net.sf.jsqlparser.statement.drop.Drop;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
@@ -27,6 +28,14 @@ public class StatementParserVisitor<T extends Query> extends StatementParser imp
 
     protected void setHash( Query query, Statement statement ) {
         query.setHash( HashGenerators.MD5.getHash( statement.toString() ) );
+    }
+
+    @Override
+    public void visit( Drop drop ) {
+        //TODO
+        //SelectStatementParser statementParser = new DropStatementParser( queryElementParserService, getQueryContext(), drop );
+        //setHash( statementParser.getQuery(), drop );
+        //setQuery( statementParser.getQuery() );
     }
 
     @Override

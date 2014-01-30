@@ -7,7 +7,7 @@
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.datasources"/>
 
-    <!--  <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSharder">
+    <!--  <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSource>
             <constructor-arg>
                <bean class="pl.piotrsukiennik.tuner.datasources.keyvalue.memcached.KeyValueMemcachedService">
                    <constructor-arg>
@@ -19,7 +19,7 @@
                </bean>
             </constructor-arg>
         </bean>-->
-    <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSharder">
+    <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSource">
         <constructor-arg ref="KeyValueLocalService"/>
     </bean>
 </beans>

@@ -33,8 +33,7 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
     @Override
     protected ResultSet getData( ReadQuery query ) throws DataRetrievalException {
         try {
-            ResultSet resultSet = (ResultSet) methodInvocation.proceed();
-            return resultSet;
+            return (ResultSet) methodInvocation.proceed();
         }
         catch ( Throwable t ) {
             throw new DataRetrievalException( t );
@@ -75,7 +74,6 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + readQuery.hashCode();
-        return result;
+        return 31 * result + readQuery.hashCode();
     }
 }

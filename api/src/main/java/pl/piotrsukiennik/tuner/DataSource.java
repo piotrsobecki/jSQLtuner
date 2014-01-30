@@ -4,7 +4,7 @@ import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
 
@@ -13,12 +13,13 @@ import javax.sql.rowset.CachedRowSet;
  * Date: 26.08.13
  * Time: 22:00
  */
-public interface IDataSource {
-    void setPersistedDataSource( DataSource ds );
+public interface DataSource {
 
-    DataSource getPersistedDataSource();
+    void setDataSourceIdentity( DataSourceIdentity ds );
 
-    IDataSourceMetaData getMetaData();
+    DataSourceIdentity getDataSourceIdentity();
+
+    DataSourceMetaData getMetaData();
 
     DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
 

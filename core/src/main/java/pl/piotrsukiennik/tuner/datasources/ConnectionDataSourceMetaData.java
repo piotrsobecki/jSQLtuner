@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.datasources;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pl.piotrsukiennik.tuner.IDataSourceMetaData;
+import pl.piotrsukiennik.tuner.DataSourceMetaData;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * Date: 26.08.13
  * Time: 21:15
  */
-public class ConnectionDataSourceMetaData implements IDataSourceMetaData {
+public class ConnectionDataSourceMetaData implements DataSourceMetaData {
 
     private static final Log LOG = LogFactory.getLog( ConnectionDataSourceMetaData.class );
 

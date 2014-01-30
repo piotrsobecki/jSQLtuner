@@ -13,20 +13,15 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@NamedNativeQueries({
- @NamedNativeQuery(
-  name = QueryForDataSource.UPDATE_QUERY_EXECUTION_SETTINGS,
-  query = "CALL updateQueryExecutionSettings(:queryId)"
- )
-})
 @NamedQueries({
- @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERIES, query = "DELETE FROM QueryForDataSource q WHERE q.query in (:queries) AND q.dataSource in (:dataSources)"),
- @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCES_FOR_QUERY, query = "DELETE FROM QueryForDataSource q WHERE q.query = (:query) AND q.dataSource in (:dataSources)"),
- @NamedQuery(name = QueryForDataSource.REMOVE_DATASOURCE_FOR_QUERY, query = "DELETE FROM QueryForDataSource q WHERE q.query = (:query) AND q.dataSource = (:dataSource)"),
- @NamedQuery(name = QueryForDataSource.GET_DATASOURCE_FOR_QUERY, query = "SELECT q.dataSource FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo"),
- @NamedQuery(name = QueryForDataSource.GET_FOR_QUERY, query = "FROM QueryForDataSource q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo")
+ @NamedQuery(name = QuerySelectionHelper.REMOVE_DATASOURCES_FOR_QUERIES, query = "DELETE FROM QuerySelectionHelper q WHERE q.query in (:queries) AND q.dataSourceIdentity in (:dataSources)"),
+ @NamedQuery(name = QuerySelectionHelper.REMOVE_DATASOURCES_FOR_QUERY, query = "DELETE FROM QuerySelectionHelper q WHERE q.query = (:query) AND q.dataSourceIdentity in (:dataSources)"),
+ @NamedQuery(name = QuerySelectionHelper.REMOVE_DATASOURCE_FOR_QUERY, query = "DELETE FROM QuerySelectionHelper q WHERE q.query = (:query) AND q.dataSourceIdentity = (:dataSource)"),
+ @NamedQuery(name = QuerySelectionHelper.GET_DATASOURCE_FOR_QUERY, query = "SELECT q.dataSourceIdentity FROM QuerySelectionHelper q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo"),
+ @NamedQuery(name = QuerySelectionHelper.GET_DATASOURCES_FOR_QUERY, query = "SELECT q.dataSourceIdentity FROM QuerySelectionHelper q WHERE q.query.hash = (:queryHash)"),
+ @NamedQuery(name = QuerySelectionHelper.GET_FOR_QUERY, query = "FROM QuerySelectionHelper q WHERE q.query.hash = (:queryHash) AND (:random) BETWEEN q.rouletteShareFrom AND q.rouletteShareTo")
 })
-public class QueryForDataSource extends ValueEntity {
+public class QuerySelectionHelper extends ValueEntity {
 
     public static final String REMOVE_DATASOURCES_FOR_QUERIES = "removeDataSourcesForQueries";
 
@@ -36,13 +31,13 @@ public class QueryForDataSource extends ValueEntity {
 
     public static final String GET_DATASOURCE_FOR_QUERY = "getDataSourceForQuery";
 
-    public static final String GET_FOR_QUERY = "getForQuery";
+    public static final String GET_DATASOURCES_FOR_QUERY = "getDataSourcesForQuery";
 
-    public static final String UPDATE_QUERY_EXECUTION_SETTINGS = "updateQueryExecutionSettings";
+    public static final String GET_FOR_QUERY = "getForQuery";
 
     private ReadQuery query;
 
-    private DataSource dataSource;
+    private DataSourceIdentity dataSourceIdentity;
 
     private float averageExecutionTimeNano;
 
@@ -65,12 +60,12 @@ public class QueryForDataSource extends ValueEntity {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    public DataSource getDataSource() {
-        return dataSource;
+    public DataSourceIdentity getDataSourceIdentity() {
+        return dataSourceIdentity;
     }
 
-    public void setDataSource( DataSource dataSource ) {
-        this.dataSource = dataSource;
+    public void setDataSourceIdentity( DataSourceIdentity dataSourceIdentity ) {
+        this.dataSourceIdentity = dataSourceIdentity;
     }
 
     public float getAverageExecutionTimeNano() {

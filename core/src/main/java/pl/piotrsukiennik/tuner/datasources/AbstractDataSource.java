@@ -1,13 +1,13 @@
 package pl.piotrsukiennik.tuner.datasources;
 
-import pl.piotrsukiennik.tuner.IDataSharder;
-import pl.piotrsukiennik.tuner.IDataSource;
-import pl.piotrsukiennik.tuner.IDataSourceMetaData;
+import pl.piotrsukiennik.tuner.DataSharder;
+import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.DataSourceMetaData;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.utils.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
@@ -21,29 +21,29 @@ import java.util.Set;
  * Date: 26.08.13
  * Time: 22:24
  */
-public abstract class AbstractDataSource implements IDataSource, IDataSharder {
+public abstract class AbstractDataSource implements DataSource, DataSharder {
 
-    private IDataSourceMetaData dataSourceMetaData;
+    private DataSourceMetaData dataSourceMetaData;
 
-    private DataSource persistedDataSource;
+    private DataSourceIdentity dataSourceIdentity;
 
     private Set<String> supportedQueries = new LinkedHashSet<String>();
 
 
-    protected AbstractDataSource( IDataSourceMetaData dataSourceMetaData ) {
+    protected AbstractDataSource( DataSourceMetaData dataSourceMetaData ) {
         this.dataSourceMetaData = dataSourceMetaData;
     }
 
-    public DataSource getPersistedDataSource() {
-        return persistedDataSource;
+    public DataSourceIdentity getDataSourceIdentity() {
+        return dataSourceIdentity;
     }
 
-    public void setPersistedDataSource( DataSource persistedDataSource ) {
-        this.persistedDataSource = persistedDataSource;
+    public void setDataSourceIdentity( DataSourceIdentity persistedDataSourceIdentity ) {
+        this.dataSourceIdentity = persistedDataSourceIdentity;
     }
 
     @Override
-    public IDataSourceMetaData getMetaData() {
+    public DataSourceMetaData getMetaData() {
         return dataSourceMetaData;
     }
 
@@ -112,7 +112,7 @@ public abstract class AbstractDataSource implements IDataSource, IDataSharder {
     @Override
     public int hashCode() {
         int result = dataSourceMetaData != null ? dataSourceMetaData.hashCode() : 0;
-        result = 31 * result + ( persistedDataSource != null ? persistedDataSource.hashCode() : 0 );
+        result = 31 * result + ( dataSourceIdentity != null ? dataSourceIdentity.hashCode() : 0 );
         return result;
     }
 }

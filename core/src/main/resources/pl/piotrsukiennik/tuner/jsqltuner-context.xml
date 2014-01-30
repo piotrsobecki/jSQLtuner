@@ -15,7 +15,13 @@
     <aop:config/>
     <aop:aspectj-autoproxy/>
 
-    <bean name="jsqltunerIgnoreSchema" class="java.lang.String">
+    <bean class="java.lang.String">
+        <qualifier value="jsqltunerIgnoreSchema"/>
+        <constructor-arg value="JSQLTUNER"/>
+    </bean>
+
+    <bean class="java.lang.String">
+        <qualifier value="jsqltunerIgnoreSchema"/>
         <constructor-arg value="jsqltuner"/>
     </bean>
 
@@ -58,7 +64,7 @@
         <property name="order" value="100"/>
     </bean>
 
-    <bean id="statementsDeregisteringeAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+    <bean id="statementsDeregisteringAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionQualifier"/>
         <property name="expression" value="execution (* java.sql.Connection.close(..))"/>
         <property name="advice" ref="statementsDeregisteringAdvice"/>

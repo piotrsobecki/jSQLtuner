@@ -1,10 +1,11 @@
 package pl.piotrsukiennik.tuner.persistance;
 
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSource;
-import pl.piotrsukiennik.tuner.model.query.execution.QueryForDataSource;
+import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.execution.QuerySelectionHelper;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Author: Piotr Sukiennik
@@ -13,18 +14,20 @@ import java.util.Collection;
  */
 public interface QueryExecutionDao {
 
-    DataSource getDataSourceForQuery( ReadQuery selectQuery );
+    DataSourceIdentity getDataSourceForQuery( ReadQuery selectQuery );
 
-    DataSource getDataSource( String identifier );
+    List<DataSourceIdentity> getDataSourcesForQuery( ReadQuery selectQuery );
 
-    Collection<QueryForDataSource> submit( final ReadQuery query, final DataSource dataSource, long executionTimeNano );
+    DataSourceIdentity getDataSource( String identifier );
 
-    QueryForDataSource submitNewDataSourceForQuery( final ReadQuery query, final DataSource dataSource );
+    Collection<QuerySelectionHelper> submit( final ReadQuery query, final DataSourceIdentity dataSourceIdentity, long executionTimeNano );
 
-    void removeDataSourceForQuery( final ReadQuery query, final DataSource dataSource );
+    QuerySelectionHelper submitNewDataSourceForQuery( final ReadQuery query, final DataSourceIdentity dataSourceIdentity );
 
-    void removeDataSourcesForQuery( final ReadQuery query, final Collection<DataSource> dataSource );
+    void removeDataSourceForQuery( final ReadQuery query, final DataSourceIdentity dataSourceIdentity );
 
-    void removeDataSourcesForQueries( Collection<? extends ReadQuery> queries, final Collection<DataSource> dataSource );
+    void removeDataSourcesForQuery( final ReadQuery query, final Collection<DataSourceIdentity> dataSourceIdentity );
+
+    void removeDataSourcesForQueries( Collection<? extends ReadQuery> queries, final Collection<DataSourceIdentity> dataSourceIdentity );
 
 }

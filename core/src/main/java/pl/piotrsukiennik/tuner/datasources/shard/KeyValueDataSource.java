@@ -2,7 +2,7 @@
 
 package pl.piotrsukiennik.tuner.datasources.shard;
 
-import pl.piotrsukiennik.tuner.IKeyValueService;
+import pl.piotrsukiennik.tuner.KeyValueService;
 import pl.piotrsukiennik.tuner.datasources.AbstractDataSource;
 import pl.piotrsukiennik.tuner.datasources.IdentifierMetaData;
 import pl.piotrsukiennik.tuner.model.query.Query;
@@ -15,10 +15,10 @@ import javax.sql.rowset.CachedRowSet;
  * Date: 31.08.13
  * Time: 19:17
  */
-public class KeyValueDataSharder extends AbstractDataSource {
-    private IKeyValueService keyValueService;
+public class KeyValueDataSource extends AbstractDataSource {
+    private KeyValueService keyValueService;
 
-    public KeyValueDataSharder( IKeyValueService keyValueService ) {
+    public KeyValueDataSource( KeyValueService keyValueService ) {
         super( new IdentifierMetaData( keyValueService.getIdentifier() ) );
         this.keyValueService = keyValueService;
     }
@@ -26,8 +26,7 @@ public class KeyValueDataSharder extends AbstractDataSource {
     @Override
     public CachedRowSet getData( ReadQuery query ) {
         String key = getKey( query.getHash() );
-        CachedRowSet cachedRowSet = (CachedRowSet) keyValueService.get( key );
-        return cachedRowSet;
+        return (CachedRowSet) keyValueService.get( key );
     }
 
     @Override

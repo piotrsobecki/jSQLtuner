@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.datasources.keyvalue.local;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.IKeyValueService;
+import pl.piotrsukiennik.tuner.KeyValueService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * Time: 17:51
  */
 @Service(value = "KeyValueLocalService")
-public class KeyValueLocalService implements IKeyValueService {
+public class KeyValueLocalService implements KeyValueService {
     private Cache<String, Object> cache = CacheBuilder.newBuilder().
      expireAfterAccess( 30, TimeUnit.DAYS ).
      maximumSize( 1000 ).

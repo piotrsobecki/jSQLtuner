@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class DataSource extends ValueEntity {
+public class DataSourceIdentity extends ValueEntity {
     private String identifier;
 
     private String clazz;
@@ -39,13 +39,13 @@ public class DataSource extends ValueEntity {
         if ( this == o ) {
             return true;
         }
-        if ( !( o instanceof DataSource ) ) {
+        if ( !( o instanceof DataSourceIdentity ) ) {
             return false;
         }
         if ( !super.equals( o ) ) {
             return false;
         }
-        DataSource that = (DataSource) o;
+        DataSourceIdentity that = (DataSourceIdentity) o;
         return !( clazz != null ? !clazz.equals( that.clazz ) : that.clazz != null ) && !( identifier != null ? !identifier.equals( that.identifier ) : that.identifier != null );
 
     }

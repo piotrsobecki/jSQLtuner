@@ -14,17 +14,18 @@ public class RowSet {
 
 
     public static CachedRowSet clone( java.sql.ResultSet rowSet ) throws SQLException {
-        CachedRowSet cachedRowSet = new FixedCachedRowSetImpl();
-        cachedRowSet.populate( rowSet );
-        rowSet.beforeFirst();
-        return cachedRowSet;
+        if ( rowSet instanceof CachedRowSet ) {
+            return RowSet.clone( (CachedRowSet) rowSet );
+        }
+        else {
+            return RowSet.cached( rowSet );
+        }
     }
 
     public static CachedRowSet clone( CachedRowSet rowSet ) {
         CachedRowSet cachedRowSet = null;
         try {
-            cachedRowSet = new FixedCachedRowSetImpl();
-            cachedRowSet.populate( rowSet );
+            cachedRowSet = cached( rowSet );
             rowSet.beforeFirst();
         }
         catch ( SQLException e ) {

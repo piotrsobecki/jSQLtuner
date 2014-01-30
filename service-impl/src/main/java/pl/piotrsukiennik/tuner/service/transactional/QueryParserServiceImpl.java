@@ -3,6 +3,8 @@ package pl.piotrsukiennik.tuner.service.transactional;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.statement.Statement;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.query.Query;
@@ -25,6 +27,8 @@ import java.io.StringReader;
 @Transactional(value = "jsqlTunerTransactionManager")
 class QueryParserServiceImpl implements QueryParserService {
 
+    private static final Log LOG = LogFactory.getLog( QueryParserService.class );
+
     @Resource
     private QueryElementParserService queryElementParserService;
 
@@ -46,8 +50,17 @@ class QueryParserServiceImpl implements QueryParserService {
                 Statement statement = pm.parse( new StringReader( query ) );
                 StatementParserVisitor statementParserVisitor = new StatementParserVisitor( queryElementParserService, queryContext, statement );
                 parsedQuery = statementParserVisitor.getQuery();
-                parsedQuery.setHash( queryHash );
-                DaoHolder.getQueryDao().submit( parsedQuery );
+                if ( parsedQuery != null ) {
+                    parsedQuery.setHash( queryHash );
+                    DaoHolder.getQueryDao().submit( parsedQuery );
+                }
+                else {
+                    if ( LOG.isErrorEnabled() ) {
+                        LOG.error( String.format( "Query \"%s\" is not supported by parser. ", query ) );
+                    }
+                    DaoHolder.getLogDao().logException( query, "Query parsing not supported!" );
+                    return null;
+                }
             }
             return parsedQuery;
         }

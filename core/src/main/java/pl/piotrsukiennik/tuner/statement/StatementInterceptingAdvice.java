@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.statement;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.IDecisionService;
+import pl.piotrsukiennik.tuner.QueryProxyService;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
 
 import javax.annotation.Resource;
@@ -19,7 +19,7 @@ public class StatementInterceptingAdvice implements InterceptingAdvice<PreparedS
 
     @Resource
     private
-    IDecisionService decisionService;
+    QueryProxyService decisionService;
 
 
     @Override
