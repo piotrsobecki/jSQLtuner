@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.statement.advisor;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
-import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
+import pl.piotrsukiennik.tuner.Sharder;
 import pl.piotrsukiennik.tuner.model.query.Query;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public abstract class QueryAdvisorBuilder<Q extends Query> {
 
     @Resource
-    protected DataSourcesManager manager;
+    protected Sharder sharder;
 
     private String expression;
 

@@ -33,11 +33,10 @@ public class QueryProxyServiceImpl implements QueryProxyService {
     @Resource
     private PreparedStatementProxyCreator preparedStatementProxyCreator;
 
-
     private Collection<QueryInitializationListener> listeners;
 
     @Inject
-    @Qualifier( "jsqltunerIgnoreSchema" )
+    @Qualifier("jsqltunerIgnoreSchema")
     private List<String> ignoreSchema;
 
     @Override
@@ -51,10 +50,8 @@ public class QueryProxyServiceImpl implements QueryProxyService {
     }
 
     public PreparedStatement proceed( PreparedStatement source, Query query ) {
-
         return preparedStatementProxyCreator.create( query, source );
     }
-
 
     public PreparedStatement proceed( PreparedStatement source, Connection connection, String queryString ) {
         String schema = Statements.getSchema( connection );

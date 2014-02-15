@@ -2,11 +2,13 @@
 
 package pl.piotrsukiennik.tuner.datasources.shard;
 
+import pl.piotrsukiennik.tuner.DataSourceMetaData;
 import pl.piotrsukiennik.tuner.KeyValueService;
 import pl.piotrsukiennik.tuner.datasources.AbstractDataSource;
 import pl.piotrsukiennik.tuner.datasources.IdentifierMetaData;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
 
@@ -18,8 +20,14 @@ import javax.sql.rowset.CachedRowSet;
 public class KeyValueDataSource extends AbstractDataSource {
     private KeyValueService keyValueService;
 
+
+    public static DataSourceIdentity getIdentity( String identifier ) {
+        DataSourceMetaData dataSourceMetaData = new IdentifierMetaData( identifier );
+        return new DataSourceIdentity( KeyValueDataSource.class, dataSourceMetaData.getIdentifier() );
+    }
+
     public KeyValueDataSource( KeyValueService keyValueService ) {
-        super( new IdentifierMetaData( keyValueService.getIdentifier() ) );
+        super( KeyValueDataSource.getIdentity( keyValueService.getIdentifier() ) );
         this.keyValueService = keyValueService;
     }
 

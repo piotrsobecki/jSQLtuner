@@ -4,7 +4,7 @@ import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
 
@@ -18,8 +18,6 @@ public interface DataSource {
     void setDataSourceIdentity( DataSourceIdentity ds );
 
     DataSourceIdentity getDataSourceIdentity();
-
-    DataSourceMetaData getMetaData();
 
     DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
 

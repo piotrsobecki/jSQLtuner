@@ -18,8 +18,8 @@ import java.util.List;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/jsqltuner-test-root-context.xml" })
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/jsqltuner-test-root-context.xml" } )
 public class HibernateEntitiesTest {
 
 
@@ -44,7 +44,7 @@ public class HibernateEntitiesTest {
 
 
     @Test
-    @Repeat(10)
+    @Repeat( 10 )
     public void testCacheClear() {
 
         List<TestEntity> testEntities = entityService.getTestEntities();
@@ -64,11 +64,14 @@ public class HibernateEntitiesTest {
 
     @Test
     public void testGetSingle() {
-        List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
-        Assert.assertEquals( 1, testEntities.size() );
-        Assert.assertNotNull( testEntities.get( 0 ) );
-        Assert.assertNotNull( testEntities.get( 0 ).getId() );
-        Assert.assertNotNull( testEntities.get( 0 ).getString() );
+        for ( int i = 0; i < 10; i++ ) {
+            List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
+            Assert.assertEquals( 1, testEntities.size() );
+            Assert.assertNotNull( testEntities.get( 0 ) );
+            Assert.assertNotNull( testEntities.get( 0 ).getId() );
+            Assert.assertNotNull( testEntities.get( 0 ).getString() );
+        }
+
     }
 
     @Test

@@ -18,4 +18,6 @@ public interface Sharder {
     void delete( Query query );
 
     DataRetrieval getData( ReadQuery query ) throws DataRetrievalException;
+
+    void setRootDataForQuery( ReadQuery query, DataSource dataSource );
 }

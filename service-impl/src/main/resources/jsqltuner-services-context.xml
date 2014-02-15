@@ -12,4 +12,13 @@
     <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager"/>
     <context:component-scan base-package="pl.piotrsukiennik.tuner.service"/>
 
+    <bean id="fitnessCalculator" class="pl.piotrsukiennik.tuner.service.ai.fitness.FitnessCalculatorExpression">
+        <constructor-arg value="1/sqrt(averageExecutionTime)"/>
+    </bean>
+
+    <bean class="pl.piotrsukiennik.tuner.service.ai.DataSourceSelectorImpl">
+        <property name="selectionHelperClass" value="pl.piotrsukiennik.ai.selectionhelper.RouletteWheelSelection"/>
+        <property name="fitnessCalculator" ref="fitnessCalculator"/>
+    </bean>
+
 </beans>

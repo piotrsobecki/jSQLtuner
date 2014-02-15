@@ -11,12 +11,15 @@ import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.CacheManagerService;
-import pl.piotrsukiennik.tuner.service.QueryDataSourceSelectorService;
+import pl.piotrsukiennik.tuner.service.LocalDataSourceService;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelector;
 import pl.piotrsukiennik.tuner.utils.RowSet;
 
 import javax.annotation.Resource;
 import javax.sql.rowset.CachedRowSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,28 +39,64 @@ public class SharderImpl implements Sharder {
     List<DataSharder> dataSharders;
 
     @Resource
-    private
-    QueryDataSourceSelectorService queryDataSourceSelectorService;
+    private LocalDataSourceService dataSourceMapper;
 
     @Resource
-    private
-    CacheManagerService cacheManagerService;
+    private CacheManagerService cacheManagerService;
+
+    @Resource
+    private DataSourceSelector dataSourceSelector;
 
 
     @Override
     public DataRetrieval getData( ReadQuery query ) throws DataRetrievalException {
-        DataSource dataSource = queryDataSourceSelectorService.selectDataSourceForQuery( query );
+        DataRetrieval dataRetrieval = null;
+        DataSource dataSource = null;
+        DataSourceIdentity dataSourceIdentity = dataSourceSelector.selectDataSourceForQuery( query );
+        if ( dataSourceIdentity != null ) {
+            dataSource = dataSourceMapper.getSingleLocal( query, dataSourceIdentity );
+        }
         if ( dataSource != null ) {
-            DataRetrieval dataRetrieval = dataSource.get( query );
-            dataRetrieval.setDataSourceIdentifier( dataSource.getMetaData().getIdentifier() );
-            if ( LOG.isInfoEnabled() ) {
-                LOG.info( String.format( "Retreived Data for (%s) using dataSource (%s)", query.getValue(), dataRetrieval.getDataSourceIdentifier() ) );
+            try {
+                dataRetrieval = dataSource.get( query );
+                dataRetrieval.setDataSourceIdentifier( dataSource.getDataSourceIdentity().getIdentifier() );
             }
-            return dataRetrieval;
+            catch ( DataRetrievalException dre ) {
+                if ( LOG.isWarnEnabled() ) {
+                    LOG.warn( "No data could be retreived using sharding manager.", dre );
+                }
+            }
         }
-        else {
-            throw new DataRetrievalException( "Could Not Find DataSourceIdentity for query" );
+        if ( dataRetrieval == null || dataRetrieval.getResultSet() == null ) {
+            dataSource = dataSourceMapper.getRootDataSource( query );
+            dataSourceIdentity = dataSource.getDataSourceIdentity();
+            dataRetrieval = getRootData( query, dataSource );
         }
+        if ( LOG.isInfoEnabled() ) {
+            LOG.info( String.format( "Retreived Data for (%s) using dataSource (%s)", query.getValue(), dataRetrieval.getDataSourceIdentifier() ) );
+        }
+        dataSourceSelector.submitDataRetrieval( dataSourceIdentity, query, dataRetrieval );
+        return dataRetrieval;
+    }
+
+    protected DataRetrieval getRootData( ReadQuery query, DataSource dataSource ) throws DataRetrievalException {
+        DataRetrieval dataRetrieval = dataSource.get( query );
+        dataRetrieval.setDataSourceIdentifier( dataSource.getDataSourceIdentity().getIdentifier() );
+        try {
+            CachedRowSet cachedRowSet = RowSet.cached( dataRetrieval.getResultSet() );
+            dataRetrieval.setResultSet( cachedRowSet );
+            query.setRows( cachedRowSet.size() );
+            put( query, cachedRowSet );
+        }
+        catch ( SQLException e ) {
+            throw new DataRetrievalException( "Data Sources Manager could cache ResultSet", e );
+        }
+        return dataRetrieval;
+    }
+
+    public DataRetrieval getRootData( ReadQuery query ) throws DataRetrievalException {
+        DataSource dataSource = dataSourceMapper.getRootDataSource( query );
+        return getRootData( query, dataSource );
     }
 
     @Override
@@ -65,7 +104,7 @@ public class SharderImpl implements Sharder {
         CachedRowSet clonedData = RowSet.clone( data );
         for ( DataSharder dataSharder : dataSharders ) {
             dataSharder.put( query, clonedData );
-            queryDataSourceSelectorService.submit( query, dataSharder );//TODO
+            dataSourceSelector.scheduleDataRetrieval( dataSharder.getDataSourceIdentity(), query );
         }
         if ( query instanceof SelectQuery ) {
             cacheManagerService.putCachedQuery( (SelectQuery) query );
@@ -85,7 +124,12 @@ public class SharderImpl implements Sharder {
                 dataSharder.delete( query );
             }
         }
-        queryDataSourceSelectorService.removeDataSourcesForQueries( queriesToInvalidate, dataSharders );
+        for ( SelectQuery selectQuery : queriesToInvalidate ) {
+            dataSourceSelector.removeDataSourcesForQuery( selectQuery );
+        }
     }
 
+    public void setRootDataForQuery( ReadQuery query, DataSource dataSource ) {
+        dataSourceMapper.setRootDataSource( query, dataSource );
+    }
 }

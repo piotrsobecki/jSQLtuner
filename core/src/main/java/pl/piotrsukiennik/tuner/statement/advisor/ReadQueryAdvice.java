@@ -1,8 +1,9 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.aopalliance.intercept.MethodInvocation;
-import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
+import pl.piotrsukiennik.tuner.Sharder;
 import pl.piotrsukiennik.tuner.datasources.StatementMethodInvocationDataSource;
+import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
@@ -19,19 +20,19 @@ import java.sql.Statement;
  */
 public class ReadQueryAdvice extends QueryAdvice<SelectQuery, ResultSet> {
 
-    private DataSourcesManager manager;
+    private Sharder shardingManager;
 
-
-    public ReadQueryAdvice( DataSourcesManager dataSourcesManager, SelectQuery query ) {
+    public ReadQueryAdvice( Sharder shardingManager, SelectQuery query ) {
         super( query );
-        this.manager = dataSourcesManager;
+        this.shardingManager = shardingManager;
     }
 
     @Override
     public ResultSet invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
         try {
-            manager.setDataForQuery( query, new StatementMethodInvocationDataSource( (Statement) methodInvocation.getThis(), methodInvocation, query ) );
-            return manager.getData( query );
+            shardingManager.setRootDataForQuery( query, new StatementMethodInvocationDataSource( (Statement) methodInvocation.getThis(), methodInvocation, query ) );
+            DataRetrieval dataRetrieval = shardingManager.getData( query );
+            return dataRetrieval.getResultSet();
         }
         catch ( SQLException | DataRetrievalException e ) {
             DaoHolder.getLogDao().logException( query.getValue(), e );
@@ -40,11 +41,4 @@ public class ReadQueryAdvice extends QueryAdvice<SelectQuery, ResultSet> {
     }
 
 
-    public DataSourcesManager getManager() {
-        return manager;
-    }
-
-    public void setManager( DataSourcesManager manager ) {
-        this.manager = manager;
-    }
 }

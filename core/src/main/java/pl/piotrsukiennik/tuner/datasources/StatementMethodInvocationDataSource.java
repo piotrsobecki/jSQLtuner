@@ -1,11 +1,14 @@
 package pl.piotrsukiennik.tuner.datasources;
 
 import org.aopalliance.intercept.MethodInvocation;
+import pl.piotrsukiennik.tuner.DataSourceMetaData;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,10 +25,15 @@ public class StatementMethodInvocationDataSource extends AbstractDataSource {
 
     private ReadQuery readQuery;
 
+    public static DataSourceIdentity getIdentity( Connection connection ) {
+        DataSourceMetaData dataSourceMetaData = new ConnectionDataSourceMetaData( connection );
+        return new DataSourceIdentity( StatementMethodInvocationDataSource.class, dataSourceMetaData.getIdentifier() );
+    }
+
     public StatementMethodInvocationDataSource( Statement statement,
                                                 MethodInvocation methodInvocation,
                                                 ReadQuery readQuery ) throws SQLException {
-        super( new ConnectionDataSourceMetaData( statement.getConnection() ) );
+        super( StatementMethodInvocationDataSource.getIdentity( statement.getConnection() ) );
         this.methodInvocation = methodInvocation;
         this.readQuery = readQuery;
     }

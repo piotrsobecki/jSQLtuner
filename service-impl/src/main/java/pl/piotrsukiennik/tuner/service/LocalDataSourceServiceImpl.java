@@ -5,7 +5,7 @@ import com.google.common.collect.Collections2;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -32,7 +32,7 @@ class LocalDataSourceServiceImpl implements LocalDataSourceService {
 
         @Override
         public boolean apply( DataSource dataSource ) {
-            return identifier.equalsIgnoreCase( dataSource.getMetaData().getIdentifier() );
+            return identifier.equalsIgnoreCase( dataSource.getDataSourceIdentity().getIdentifier() );
         }
     }
 
@@ -58,5 +58,17 @@ class LocalDataSourceServiceImpl implements LocalDataSourceService {
             out.add( rootDS );
         }
         return out;
+    }
+
+    @Override
+    public DataSource getSingleLocal( Query query, DataSourceIdentity dataSourceIdentity ) {
+        Collection<DataSource> local = getLocal( query, dataSourceIdentity );
+        Iterator<DataSource> iterator = local.iterator();
+        if ( iterator.hasNext() ) {
+            DataSource dataSourceLocal = iterator.next();
+            dataSourceLocal.setDataSourceIdentity( dataSourceIdentity );
+            return dataSourceLocal;
+        }
+        return null;
     }
 }

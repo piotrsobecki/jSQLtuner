@@ -2,12 +2,11 @@ package pl.piotrsukiennik.tuner.datasources;
 
 import pl.piotrsukiennik.tuner.DataSharder;
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.DataSourceMetaData;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.execution.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.utils.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
@@ -23,15 +22,14 @@ import java.util.Set;
  */
 public abstract class AbstractDataSource implements DataSource, DataSharder {
 
-    private DataSourceMetaData dataSourceMetaData;
-
     private DataSourceIdentity dataSourceIdentity;
 
     private Set<String> supportedQueries = new LinkedHashSet<String>();
 
 
-    protected AbstractDataSource( DataSourceMetaData dataSourceMetaData ) {
-        this.dataSourceMetaData = dataSourceMetaData;
+    protected AbstractDataSource( DataSourceIdentity dataSourceIdentity ) {
+        this.dataSourceIdentity = dataSourceIdentity;
+
     }
 
     public DataSourceIdentity getDataSourceIdentity() {
@@ -42,10 +40,6 @@ public abstract class AbstractDataSource implements DataSource, DataSharder {
         this.dataSourceIdentity = persistedDataSourceIdentity;
     }
 
-    @Override
-    public DataSourceMetaData getMetaData() {
-        return dataSourceMetaData;
-    }
 
     @Override
     public final DataRetrieval get( ReadQuery query ) throws DataRetrievalException {
@@ -101,17 +95,17 @@ public abstract class AbstractDataSource implements DataSource, DataSharder {
             return false;
         }
         AbstractDataSource that = (AbstractDataSource) o;
-        if ( dataSourceMetaData != null ) {
-            return dataSourceMetaData.getIdentifier().equals( that.getMetaData().getIdentifier() );
+        if ( dataSourceIdentity != null ) {
+            return dataSourceIdentity.equals( that.getDataSourceIdentity() );
         }
         else {
-            return that.dataSourceMetaData != null;
+            return that.dataSourceIdentity != null;
         }
     }
 
     @Override
     public int hashCode() {
-        int result = dataSourceMetaData != null ? dataSourceMetaData.hashCode() : 0;
+        int result = dataSourceIdentity != null ? dataSourceIdentity.hashCode() : 0;
         result = 31 * result + ( dataSourceIdentity != null ? dataSourceIdentity.hashCode() : 0 );
         return result;
     }

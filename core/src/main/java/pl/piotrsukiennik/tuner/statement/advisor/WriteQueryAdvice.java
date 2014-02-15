@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.statement.advisor;
 
 import org.aopalliance.intercept.MethodInvocation;
-import pl.piotrsukiennik.tuner.datasources.DataSourcesManager;
+import pl.piotrsukiennik.tuner.Sharder;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
 import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 import pl.piotrsukiennik.tuner.model.query.WriteQueryExecution;
@@ -15,11 +15,11 @@ import java.sql.Timestamp;
  * Time: 15:58
  */
 public class WriteQueryAdvice extends QueryAdvice<WriteQuery, Object> {
-    private DataSourcesManager manager;
+    private Sharder sharder;
 
-    public WriteQueryAdvice( DataSourcesManager dataSourcesManager, WriteQuery query ) {
+    public WriteQueryAdvice( Sharder sharder, WriteQuery query ) {
         super( query );
-        this.manager = dataSourcesManager;
+        this.sharder = sharder;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class WriteQueryAdvice extends QueryAdvice<WriteQuery, Object> {
             writeQueryExecution.setQuery( query );
             DaoHolder.getCommonDao().create( writeQueryExecution );
             if ( rowsAffected > 0 ) {
-                manager.invalidate( query );
+                sharder.delete( query );
             }
             return ret;
         }

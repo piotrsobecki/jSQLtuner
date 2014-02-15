@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.model.query.execution;
+package pl.piotrsukiennik.tuner.model.query.datasource;
 
 import pl.piotrsukiennik.tuner.model.ValueEntity;
 
@@ -17,6 +17,14 @@ public class DataSourceIdentity extends ValueEntity {
     private String identifier;
 
     private String clazz;
+
+    public DataSourceIdentity() {
+    }
+
+    public DataSourceIdentity( Class clazz, String identifier ) {
+        this.identifier = identifier;
+        this.clazz = clazz.getName();
+    }
 
     public String getIdentifier() {
         return identifier;

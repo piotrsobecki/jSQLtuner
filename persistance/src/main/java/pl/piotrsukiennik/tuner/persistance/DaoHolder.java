@@ -14,8 +14,6 @@ public abstract class DaoHolder {
 
     protected static SchemaDao schemaDao;
 
-    protected static QueryExecutionDao queryExecutionDao;
-
     public static LogDao getLogDao() {
         return logDao;
     }
@@ -30,10 +28,6 @@ public abstract class DaoHolder {
 
     public static SchemaDao getSchemaDao() {
         return schemaDao;
-    }
-
-    public static QueryExecutionDao getQueryExecutionDao() {
-        return queryExecutionDao;
     }
 
     protected static void setLogDao( LogDao logDao ) {
@@ -52,7 +46,4 @@ public abstract class DaoHolder {
         DaoHolder.commonDao = commonDao;
     }
 
-    protected static void setQueryExecutionDao( QueryExecutionDao queryExecutionDao ) {
-        DaoHolder.queryExecutionDao = queryExecutionDao;
-    }
 }

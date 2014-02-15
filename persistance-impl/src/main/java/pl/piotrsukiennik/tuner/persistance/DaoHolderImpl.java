@@ -20,7 +20,6 @@ class DaoHolderImpl extends DaoHolder implements ApplicationListener<ContextRefr
         setLogDao( applicationContext.getBean( LogDao.class ) );
         setQueryDao( applicationContext.getBean( QueryDao.class ) );
         setSchemaDao( applicationContext.getBean( SchemaDao.class ) );
-        setQueryExecutionDao( applicationContext.getBean( QueryExecutionDao.class ) );
         setCommonDao( applicationContext.getBean( CommonDao.class ) );
     }
 
