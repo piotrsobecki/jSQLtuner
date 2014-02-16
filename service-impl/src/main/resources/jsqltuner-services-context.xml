@@ -7,6 +7,8 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:property-placeholder location="jsqltuner-persistance.properties"/>
+
     <import resource="classpath*:jsqltuner-persistance-context.xml"/>
 
     <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager"/>
@@ -22,8 +24,8 @@
     </bean>
 
     <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceContextImpl">
-        <constructor-arg index="0" value="jdbc:h2:target/db/jsqltuner"/>
-        <constructor-arg index="1" value="jsqltuner"/>
+        <constructor-arg index="0" value="${jsqltuner.db.url}"/>
+        <constructor-arg index="1" value="${jsqltuner.db.schema}"/>
     </bean>
 
 </beans>

@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Hashtable;
 
 public class FixedCachedRowSetImpl extends CachedRowSetImpl {
 
@@ -23,11 +22,6 @@ public class FixedCachedRowSetImpl extends CachedRowSetImpl {
     public FixedCachedRowSetImpl() throws SQLException {
         super();
     }
-
-    public FixedCachedRowSetImpl( Hashtable env ) throws SQLException {
-        super( env );
-    }
-
 
     private int getColIdxByName( String name ) throws SQLException {
         RowSetMetaDataImpl rowSetMetaData = (RowSetMetaDataImpl) this.getMetaData();

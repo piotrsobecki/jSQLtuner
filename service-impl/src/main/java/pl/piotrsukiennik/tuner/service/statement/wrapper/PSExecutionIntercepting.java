@@ -28,10 +28,9 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     private static final Log LOG = LogFactory.getLog( PSExecutionIntercepting.class );
 
-    private String PARSER_ERROR_FORMAT = "Query \"%s\" is not supported by parser - returning default execution PreparedStatement.%s()";
+    private static final String PARSER_ERROR_FORMAT = "Query \"%s\" is not supported by parser - returning default execution PreparedStatement.%s()";
 
-    private String PARSER_WRITE_ERROR_FORMAT = "Query \"%s\" is not supported by parser - ignored.";
-
+    private static final String PARSER_WRITE_ERROR_FORMAT = "Query \"%s\" is not supported by parser - ignored.";
 
     protected Sharder sharder;
 
