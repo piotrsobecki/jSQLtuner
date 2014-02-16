@@ -21,4 +21,9 @@
         <property name="fitnessCalculator" ref="fitnessCalculator"/>
     </bean>
 
+    <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceContextImpl">
+        <constructor-arg index="0" value="jdbc:h2:target/db/jsqltuner"/>
+        <constructor-arg index="1" value="jsqltuner"/>
+    </bean>
+
 </beans>

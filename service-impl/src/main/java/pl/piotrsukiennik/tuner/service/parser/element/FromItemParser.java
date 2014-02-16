@@ -9,9 +9,9 @@ import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.query.source.SubJoinSource;
 import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 /**
  * Author: Piotr Sukiennik

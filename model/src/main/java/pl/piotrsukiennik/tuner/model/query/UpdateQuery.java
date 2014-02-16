@@ -21,7 +21,7 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery {
     private Condition whereCondition;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Condition getWhereCondition() {
         return whereCondition;
     }
@@ -30,7 +30,7 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery {
         this.whereCondition = whereCondition;
     }
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Set<ColumnValue> getColumnValues() {
         return columnValues;
     }

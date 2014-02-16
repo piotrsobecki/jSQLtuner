@@ -3,9 +3,9 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 import net.sf.jsqlparser.statement.delete.Delete;
 import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 /**
  * Author: Piotr Sukiennik

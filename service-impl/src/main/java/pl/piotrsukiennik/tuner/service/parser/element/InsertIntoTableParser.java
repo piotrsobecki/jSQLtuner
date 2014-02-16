@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.service.parser.element;
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
+import pl.piotrsukiennik.tuner.service.QueryContext;
 
 /**
  * Author: Piotr Sukiennik

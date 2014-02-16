@@ -93,17 +93,10 @@
         </dependency>
 
         <dependency>
-            <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>utils</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
         </dependency>
-
 
         <dependency>
             <groupId>mysql</groupId>

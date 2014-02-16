@@ -4,8 +4,8 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 
 /**
  * Author: Piotr Sukiennik

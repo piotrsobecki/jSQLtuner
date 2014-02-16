@@ -11,8 +11,8 @@ import pl.piotrsukiennik.tuner.model.ValueEntity;
 import pl.piotrsukiennik.tuner.model.schema.Database;
 import pl.piotrsukiennik.tuner.model.schema.Schema;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 
 /**
  * Author: Piotr Sukiennik

@@ -3,9 +3,9 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.SelectBodyParser;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 /**
  * Author: Piotr Sukiennik

@@ -18,7 +18,7 @@ public class InsertWithValuesQuery extends InsertQuery {
     private Set<Condition> columnValues;
 
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Set<Condition> getColumnValues() {
         return columnValues;
     }

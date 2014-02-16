@@ -4,9 +4,9 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.insert.Insert;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.InsertItemsListParser;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 import java.util.LinkedHashSet;
 import java.util.List;

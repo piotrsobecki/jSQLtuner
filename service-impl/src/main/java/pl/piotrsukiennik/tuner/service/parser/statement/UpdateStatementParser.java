@@ -6,10 +6,10 @@ import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.service.parser.element.ValueEntityExpresionParser;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -37,7 +37,6 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
             Expression expression = values.get( i );
             pl.piotrsukiennik.tuner.model.schema.Column column1
              = queryContext.getColumn( tableSource.getTable().getValue(), column.getColumnName() );
-
             ColumnValue columnValue = new ColumnValue();
             columnValue.setColumn( column1 );
             ValueEntityExpresionParser parser = new ValueEntityExpresionParser( queryElementParserService, queryContext, columnValue );

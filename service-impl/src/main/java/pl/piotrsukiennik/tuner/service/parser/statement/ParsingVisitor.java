@@ -1,8 +1,8 @@
 package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 
 
 /**

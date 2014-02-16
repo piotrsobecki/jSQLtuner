@@ -4,9 +4,9 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
-import pl.piotrsukiennik.tuner.service.util.QueryUtils;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.util.QueryConstructorUtils;
 
 /**
  * Author: Piotr Sukiennik
@@ -30,7 +30,7 @@ public class SelectIntoTableParser implements IntoTableVisitor {
     @Override
     public void visit( Table tableName ) {
         TableSource tableSource = queryElementParserService.getTableSource( queryContext, tableName );
-        QueryUtils.addSource( sourceQuery, tableSource );
+        QueryConstructorUtils.addSource( sourceQuery, tableSource );
     }
 
 }

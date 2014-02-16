@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.service;
 
+import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 
 /**
@@ -8,5 +9,5 @@ import pl.piotrsukiennik.tuner.model.query.Query;
  * Time: 17:44
  */
 public interface QueryParserService {
-    Query parse( String databaseStr, String schemaStr, String queryStr );
+    Query parse( String databaseStr, String schemaStr, String queryStr ) throws QueryParsingNotSupportedException;
 }

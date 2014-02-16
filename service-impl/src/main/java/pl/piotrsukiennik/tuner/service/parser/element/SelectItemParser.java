@@ -10,9 +10,9 @@ import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
 import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
-import pl.piotrsukiennik.tuner.service.util.QueryUtils;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.util.QueryConstructorUtils;
 
 import java.util.LinkedHashSet;
 
@@ -42,14 +42,14 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
     public void visit( AllColumns allColumns ) {
         for ( Source source : selectQuery.getSources() ) {
             StarProjection starProjection = queryElementParserService.getStarProjection( queryContext, allColumns, source );
-            QueryUtils.addProjection( selectQuery, starProjection );
+            QueryConstructorUtils.addProjection( selectQuery, starProjection );
         }
     }
 
     @Override
     public void visit( AllTableColumns allTableColumns ) {
         StarProjection starProjection = queryElementParserService.getStarProjection( queryContext, allTableColumns );
-        QueryUtils.addProjection( selectQuery, starProjection );
+        QueryConstructorUtils.addProjection( selectQuery, starProjection );
     }
 
     @Override
@@ -57,7 +57,7 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
         Expression expression = selectExpressionItem.getExpression();
         if ( expression instanceof Column ) {
             Column column = ( (Column) expression );
-            QueryUtils.addProjection( selectQuery, queryElementParserService.getColumnProjection( queryContext, column ) );
+            QueryConstructorUtils.addProjection( selectQuery, queryElementParserService.getColumnProjection( queryContext, column ) );
         }
     }
 }

@@ -17,6 +17,7 @@
         <property name="password" value=""/>
     </bean>
 
+
     <bean id="jsqlTunerSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
           autowire-candidate="false">
         <property name="dataSource" ref="jsqlTunerDataSource"/>

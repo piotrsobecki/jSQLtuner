@@ -11,9 +11,9 @@ import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.condition.*;
 import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.persistance.DaoHolder;
-import pl.piotrsukiennik.tuner.service.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.QueryContext;
+import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
-import pl.piotrsukiennik.tuner.service.query.QueryContext;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -135,7 +135,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     @Override
     public void visit( StringValue stringValue ) {
         condition = new Condition();
-        condition.setOperator( ConditionOperator.LONG_VALUE );
+        condition.setOperator( ConditionOperator.STRING_VALUE );
         condition.setValue( stringValue.getValue() );
 
     }

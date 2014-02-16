@@ -1,5 +1,7 @@
 package pl.piotrsukiennik.tuner.model.query;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import pl.piotrsukiennik.tuner.model.schema.Column;
 
 import javax.persistence.*;
@@ -15,7 +17,8 @@ import java.util.Set;
 public abstract class InsertQuery extends WriteQuery {
     private pl.piotrsukiennik.tuner.model.schema.Table table;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @LazyCollection(LazyCollectionOption.FALSE)
     public pl.piotrsukiennik.tuner.model.schema.Table getTable() {
         return table;
     }
@@ -24,10 +27,11 @@ public abstract class InsertQuery extends WriteQuery {
         this.table = table;
     }
 
+
     private Set<pl.piotrsukiennik.tuner.model.schema.Column> columns;
 
-
-    @OneToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @LazyCollection(LazyCollectionOption.FALSE)
     public Set<Column> getColumns() {
         return columns;
     }

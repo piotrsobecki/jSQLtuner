@@ -1,13 +1,13 @@
 package pl.piotrsukiennik.tuner.statement;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.QueryProxyService;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
+import pl.piotrsukiennik.tuner.service.PreparedStatementWrapperBuilder;
 
-import javax.annotation.Resource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
+
 
 /**
  * Author: Piotr Sukiennik
@@ -17,23 +17,20 @@ import java.sql.PreparedStatement;
 @Component
 public class StatementInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
 
-    @Resource
-    private
-    QueryProxyService decisionService;
-
+    @Autowired
+    private PreparedStatementWrapperBuilder preparedStatementWrapperBuilder;
 
     @Override
     public PreparedStatement invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
-        String queryString = (String) methodInvocation.getArguments()[0];
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = (PreparedStatement) methodInvocation.proceed();
+            PreparedStatement preparedStatement = (PreparedStatement) methodInvocation.proceed();
+            String queryString = (String) methodInvocation.getArguments()[0];
+            return preparedStatementWrapperBuilder.build( preparedStatement, queryString );
         }
         catch ( Throwable throwable ) {
             throw new PreparedStatementInterceptException( throwable );
         }
-        return decisionService.proceed( preparedStatement, (Connection) methodInvocation.getThis(), queryString );
-
     }
+
 
 }
