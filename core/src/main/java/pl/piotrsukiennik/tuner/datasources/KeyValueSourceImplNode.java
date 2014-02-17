@@ -1,13 +1,13 @@
 
 
-package pl.piotrsukiennik.tuner.datasources.shard;
+package pl.piotrsukiennik.tuner.datasources;
 
-import pl.piotrsukiennik.tuner.KeyValueDataSource;
 import pl.piotrsukiennik.tuner.KeyValueService;
+import pl.piotrsukiennik.tuner.KeyValueSharderNode;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
-import pl.piotrsukiennik.tuner.service.statement.AbstractDataSource;
+import pl.piotrsukiennik.tuner.service.statement.AbstractSourceNode;
 
 import javax.sql.rowset.CachedRowSet;
 
@@ -16,12 +16,12 @@ import javax.sql.rowset.CachedRowSet;
  * Date: 31.08.13
  * Time: 19:17
  */
-public class KeyValueDataSourceImpl extends AbstractDataSource implements KeyValueDataSource {
+public class KeyValueSourceImplNode extends AbstractSourceNode implements KeyValueSharderNode {
 
     private KeyValueService keyValueService;
 
-    public KeyValueDataSourceImpl( KeyValueService keyValueService ) {
-        super( new DataSourceIdentity( KeyValueDataSource.class, keyValueService.getIdentifier() ) );
+    public KeyValueSourceImplNode( KeyValueService keyValueService ) {
+        super( new DataSourceIdentity( KeyValueSharderNode.class, keyValueService.getIdentifier() ) );
         this.keyValueService = keyValueService;
     }
 

@@ -15,13 +15,13 @@ import java.sql.Statement;
  * Date: 26.08.13
  * Time: 23:01
  */
-public abstract class InterceptorDataSource extends AbstractDataSource {
+public abstract class InterceptorSourceNode extends AbstractSourceNode {
 
     private ReadQuery readQuery;
 
-    public InterceptorDataSource( Statement statement,
+    public InterceptorSourceNode( Statement statement,
                                   ReadQuery readQuery ) throws SQLException {
-        super( new DataSourceIdentity( InterceptorDataSource.class, statement.getConnection().getMetaData().getURL() ) );
+        super( new DataSourceIdentity( InterceptorSourceNode.class, statement.getConnection().getMetaData().getURL() ) );
         this.readQuery = readQuery;
     }
 
@@ -55,8 +55,8 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
     public boolean equals( Object o ) {
         if ( o == this )
             return true;
-        if ( o instanceof InterceptorDataSource ) {
-            ReadQuery oQ = ( (InterceptorDataSource) o ).getReadQuery();
+        if ( o instanceof InterceptorSourceNode ) {
+            ReadQuery oQ = ( (InterceptorSourceNode) o ).getReadQuery();
             return ( ( getReadQuery().getId() == oQ.getId() ) && oQ.getId() != 0 )
              || getReadQuery().getHash().equals( oQ.getHash() );
         }

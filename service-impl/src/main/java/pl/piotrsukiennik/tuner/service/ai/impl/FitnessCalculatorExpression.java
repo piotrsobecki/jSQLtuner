@@ -1,8 +1,9 @@
-package pl.piotrsukiennik.tuner.service.ai.fitness;
+package pl.piotrsukiennik.tuner.service.ai.impl;
 
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import pl.piotrsukiennik.tuner.service.ai.selection.DataSourceSelectable;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectable;
+import pl.piotrsukiennik.tuner.service.ai.FitnessCalculator;
 
 /**
  * @author Piotr Sukiennik

@@ -15,8 +15,6 @@ import javax.sql.rowset.CachedRowSet;
  */
 public interface DataSource {
 
-    void setDataSourceIdentity( DataSourceIdentity ds );
-
     DataSourceIdentity getDataSourceIdentity();
 
     DataRetrieval get( ReadQuery query ) throws DataRetrievalException;

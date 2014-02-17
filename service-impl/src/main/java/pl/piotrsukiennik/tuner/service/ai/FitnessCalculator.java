@@ -1,6 +1,4 @@
-package pl.piotrsukiennik.tuner.service.ai.fitness;
-
-import pl.piotrsukiennik.tuner.service.ai.selection.DataSourceSelectable;
+package pl.piotrsukiennik.tuner.service.ai;
 
 /**
  * @author Piotr Sukiennik

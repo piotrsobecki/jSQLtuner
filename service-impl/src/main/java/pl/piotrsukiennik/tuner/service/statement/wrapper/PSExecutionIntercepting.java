@@ -13,7 +13,7 @@ import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 import pl.piotrsukiennik.tuner.model.query.WriteQueryExecution;
 import pl.piotrsukiennik.tuner.persistance.DaoHolder;
 import pl.piotrsukiennik.tuner.service.QueryParserService;
-import pl.piotrsukiennik.tuner.service.statement.InterceptorDataSource;
+import pl.piotrsukiennik.tuner.service.statement.InterceptorSourceNode;
 import pl.piotrsukiennik.tuner.service.util.Statements;
 
 import java.sql.ResultSet;
@@ -198,7 +198,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
             sharder.setRootDataForQuery( readQuery, rootDataSource );
-            DataRetrieval dataRetrieval = sharder.getData( readQuery );
+            DataRetrieval dataRetrieval = sharder.get( readQuery );
             return dataRetrieval.getResultSet();
         }
         catch ( DataRetrievalException e ) {
@@ -211,7 +211,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
     public ResultSet executeQuery( final String sql ) throws SQLException {
         try {
             ReadQuery readQuery = getQuery( sql );
-            DataSource rootDs = new InterceptorDataSource( this, readQuery ) {
+            DataSource rootDs = new InterceptorSourceNode( this, readQuery ) {
                 @Override
                 protected ResultSet proceed() throws SQLException {
                     return PSExecutionIntercepting.super.executeQuery( sql );
@@ -229,7 +229,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
     public ResultSet executeQuery() throws SQLException {
         try {
             ReadQuery readQuery = getQuery( sql );
-            DataSource rootDs = new InterceptorDataSource( this, readQuery ) {
+            DataSource rootDs = new InterceptorSourceNode( this, readQuery ) {
                 @Override
                 protected ResultSet proceed() throws SQLException {
                     return PSExecutionIntercepting.super.executeQuery();
@@ -247,7 +247,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
     public ResultSet getResultSet() throws SQLException {
         try {
             ReadQuery readQuery = getQuery( sql );
-            DataSource rootDs = new InterceptorDataSource( this, readQuery ) {
+            DataSource rootDs = new InterceptorSourceNode( this, readQuery ) {
                 @Override
                 protected ResultSet proceed() throws SQLException {
                     return PSExecutionIntercepting.super.getResultSet();

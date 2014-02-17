@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service.statement;
 
-import pl.piotrsukiennik.tuner.DataSharder;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.SharderNode;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
@@ -20,14 +20,14 @@ import java.util.Set;
  * Date: 26.08.13
  * Time: 22:24
  */
-public abstract class AbstractDataSource implements DataSource, DataSharder {
+public abstract class AbstractSourceNode implements DataSource, SharderNode {
 
     private DataSourceIdentity dataSourceIdentity;
 
     private Set<String> supportedQueries = new LinkedHashSet<String>();
 
 
-    protected AbstractDataSource( DataSourceIdentity dataSourceIdentity ) {
+    protected AbstractSourceNode( DataSourceIdentity dataSourceIdentity ) {
         this.dataSourceIdentity = dataSourceIdentity;
 
     }
@@ -91,10 +91,10 @@ public abstract class AbstractDataSource implements DataSource, DataSharder {
         if ( this == o ) {
             return true;
         }
-        if ( !( o instanceof AbstractDataSource ) ) {
+        if ( !( o instanceof AbstractSourceNode ) ) {
             return false;
         }
-        AbstractDataSource that = (AbstractDataSource) o;
+        AbstractSourceNode that = (AbstractSourceNode) o;
         if ( dataSourceIdentity != null ) {
             return dataSourceIdentity.equals( that.getDataSourceIdentity() );
         }

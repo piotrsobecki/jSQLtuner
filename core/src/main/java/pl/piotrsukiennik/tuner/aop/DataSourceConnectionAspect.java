@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.statement;
+package pl.piotrsukiennik.tuner.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -21,7 +21,7 @@ class DataSourceConnectionAspect {
 
 
     @Inject
-    @Qualifier("connectionQualifier")
+    @Qualifier("interceptPreparedStatement")
     private List<Advisor> advisors;
 
     public DataSourceConnectionAspect() {

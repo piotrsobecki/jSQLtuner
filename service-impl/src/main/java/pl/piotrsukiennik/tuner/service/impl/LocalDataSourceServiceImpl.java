@@ -8,6 +8,7 @@ import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.LocalDataSourceService;
+import pl.piotrsukiennik.tuner.service.util.Collections3;
 
 import java.util.*;
 
@@ -20,7 +21,7 @@ import java.util.*;
 class LocalDataSourceServiceImpl implements LocalDataSourceService {
 
     @Autowired
-    private Set<DataSource> dataSourceList;
+    private Set<DataSource> dataSources;
 
     private Map<String, DataSource> rootDataSources = new LinkedHashMap<String, DataSource>();
 
@@ -47,29 +48,26 @@ class LocalDataSourceServiceImpl implements LocalDataSourceService {
         rootDataSources.put( query.getHash(), dataSource );
     }
 
+
+    public Collection<DataSource> getDataSources( Query selectQuery ) {
+        Set<DataSource> out = new LinkedHashSet<>( dataSources );
+        out.add( getRootDataSource( selectQuery ) );
+        return out;
+    }
+
+
     @Override
     public Collection<DataSource> getLocal( Query query, DataSourceIdentity dataSourceIdentity ) {
-        if ( dataSourceIdentity == null ) {
-            return Collections.EMPTY_LIST;
+        if ( dataSourceIdentity != null ) {
+            IdentifierPredicate identifierPredicate = new IdentifierPredicate( dataSourceIdentity.getIdentifier() );
+            Collection<DataSource> dataSources = getDataSources( query );
+            return new LinkedHashSet<DataSource>( Collections2.filter( dataSources, identifierPredicate ) );
         }
-        IdentifierPredicate identifierPredicate = new IdentifierPredicate( dataSourceIdentity.getIdentifier() );
-        Collection<DataSource> out = new LinkedHashSet<DataSource>( Collections2.filter( dataSourceList, identifierPredicate ) );
-        DataSource rootDS = getRootDataSource( query );
-        if ( identifierPredicate.apply( rootDS ) ) {
-            out.add( rootDS );
-        }
-        return out;
+        return Collections.EMPTY_LIST;
     }
 
     @Override
     public DataSource getSingleLocal( Query query, DataSourceIdentity dataSourceIdentity ) {
-        Collection<DataSource> local = getLocal( query, dataSourceIdentity );
-        Iterator<DataSource> iterator = local.iterator();
-        if ( iterator.hasNext() ) {
-            DataSource dataSourceLocal = iterator.next();
-            dataSourceLocal.setDataSourceIdentity( dataSourceIdentity );
-            return dataSourceLocal;
-        }
-        return null;
+        return Collections3.first( getLocal( query, dataSourceIdentity ) );
     }
 }

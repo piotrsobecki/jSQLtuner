@@ -9,7 +9,7 @@
 
     <!--  <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSourceImplImpl>
             <constructor-arg>
-               <bean class="pl.piotrsukiennik.tuner.datasources.keyvalue.KeyValueMemcachedService">
+               <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueServiceMemcachedImplImpl">
                    <constructor-arg>
                        <bean class="net.spy.memcached.spring.MemcachedClientFactoryBean" scope="singleton">
                            <property name="servers" value="localhost:11211"/>
@@ -19,9 +19,9 @@
                </bean>
             </constructor-arg>
         </bean>-->
-    <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSourceImpl">
+    <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueSourceImplNode">
         <constructor-arg>
-            <bean class="pl.piotrsukiennik.tuner.datasources.keyvalue.KeyValueLocalService"/>
+            <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueServiceLocalImpl"/>
         </constructor-arg>
     </bean>
 </beans>

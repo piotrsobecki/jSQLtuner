@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.statement;
+package pl.piotrsukiennik.tuner.aop;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
  * Time: 00:47
  */
 @Component
-public class StatementInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
+public class PSInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
 
     @Autowired
     private PreparedStatementWrapperBuilder preparedStatementWrapperBuilder;

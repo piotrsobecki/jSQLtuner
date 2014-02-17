@@ -6,6 +6,10 @@ package pl.piotrsukiennik.tuner.persistance;
  */
 public abstract class DaoHolder {
 
+    protected DaoHolder() {
+
+    }
+
     protected static CommonDao commonDao;
 
     protected static LogDao logDao;

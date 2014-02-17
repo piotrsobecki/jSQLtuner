@@ -5,6 +5,6 @@ package pl.piotrsukiennik.tuner;
  * Date: 26.08.13
  * Time: 20:53
  */
-public interface DataSourceMetaData {
+public interface Service {
     String getIdentifier();
 }

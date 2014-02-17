@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.datasources.keyvalue;
+package pl.piotrsukiennik.tuner.datasources;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -11,13 +11,13 @@ import java.util.concurrent.TimeUnit;
  * Date: 04.07.13
  * Time: 17:51
  */
-public class KeyValueLocalService implements KeyValueService {
+public class KeyValueServiceLocalImpl implements KeyValueService {
     private Cache<String, Object> cache = CacheBuilder.newBuilder().
      expireAfterAccess( 30, TimeUnit.DAYS ).
      maximumSize( 1000 ).
      build();
 
-    public KeyValueLocalService() {
+    public KeyValueServiceLocalImpl() {
     }
 
 
@@ -43,6 +43,6 @@ public class KeyValueLocalService implements KeyValueService {
 
     @Override
     public String getIdentifier() {
-        return "KeyValueLocalService";
+        return "KeyValueServiceLocalImpl";
     }
 }

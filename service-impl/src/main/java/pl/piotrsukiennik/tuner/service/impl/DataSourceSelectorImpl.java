@@ -1,13 +1,16 @@
-package pl.piotrsukiennik.tuner.service.ai;
+package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
-import pl.piotrsukiennik.tuner.service.ai.fitness.FitnessCalculator;
-import pl.piotrsukiennik.tuner.service.ai.selection.DataSourceIdentifier;
-import pl.piotrsukiennik.tuner.service.ai.selection.DataSourceSelectable;
-import pl.piotrsukiennik.tuner.service.ai.selection.DataSourceSelectionHelper;
+import pl.piotrsukiennik.tuner.service.DataSourceSelector;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectable;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectionHelper;
+import pl.piotrsukiennik.tuner.service.ai.FitnessCalculator;
+import pl.piotrsukiennik.tuner.service.ai.impl.DataSourceIdentifier;
+import pl.piotrsukiennik.tuner.service.ai.impl.DataSourceSelectableImpl;
+import pl.piotrsukiennik.tuner.service.ai.impl.DataSourceSelectionHelperImpl;
 import pl.piotrsukiennik.tuner.service.util.Objects2;
 
 import java.util.LinkedHashMap;
@@ -20,7 +23,6 @@ import java.util.Map;
 public class DataSourceSelectorImpl implements DataSourceSelector {
 
     private Map<String, DataSourceSelectionHelper<DataSourceSelectable>> selectionHelperForQuery = new LinkedHashMap<>();
-
 
     private Class<? extends UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperClass;
 
@@ -59,7 +61,7 @@ public class DataSourceSelectorImpl implements DataSourceSelector {
     public void submitDataRetrieval( DataSourceIdentity dataSource, ReadQuery readQuery, DataRetrieval dataRetrieval ) {
         DataSourceSelectionHelper<DataSourceSelectable> selectionHelper = selectionHelperForQuery.get( readQuery.getHash() );
         if ( selectionHelper == null ) {
-            selectionHelper = new DataSourceSelectionHelper<DataSourceSelectable>( Objects2.newInstance( selectionHelperClass ), fitnessCalculator );
+            selectionHelper = new DataSourceSelectionHelperImpl<DataSourceSelectable>( Objects2.newInstance( selectionHelperClass ), fitnessCalculator );
             selectionHelperForQuery.put( readQuery.getHash(), selectionHelper );
         }
         DataSourceSelectable sourceForQuery = selectionHelper.getSelection( new DataSourceIdentifier( dataSource ) );
@@ -67,7 +69,7 @@ public class DataSourceSelectorImpl implements DataSourceSelector {
             sourceForQuery.updateExecutionTime( dataRetrieval.getExecutionTimeNano() );
         }
         else {
-            sourceForQuery = new DataSourceSelectable( selectionHelper, dataSource, dataRetrieval.getExecutionTimeNano(), dataRetrieval.getRows() );
+            sourceForQuery = new DataSourceSelectableImpl( selectionHelper, dataSource, dataRetrieval.getExecutionTimeNano(), dataRetrieval.getRows() );
         }
     }
 
@@ -75,10 +77,10 @@ public class DataSourceSelectorImpl implements DataSourceSelector {
     public void scheduleDataRetrieval( DataSourceIdentity dataSource, ReadQuery readQuery ) {
         DataSourceSelectionHelper<DataSourceSelectable> selectionHelper = selectionHelperForQuery.get( readQuery.getHash() );
         if ( selectionHelper == null ) {
-            selectionHelper = new DataSourceSelectionHelper<DataSourceSelectable>( Objects2.newInstance( selectionHelperClass ), fitnessCalculator );
+            selectionHelper = new DataSourceSelectionHelperImpl<DataSourceSelectable>( Objects2.newInstance( selectionHelperClass ), fitnessCalculator );
             selectionHelperForQuery.put( readQuery.getHash(), selectionHelper );
         }
-        new DataSourceSelectable( selectionHelper, dataSource );
+        new DataSourceSelectableImpl( selectionHelper, dataSource );
     }
 
     @Override

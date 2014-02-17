@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.ai.selection;
+package pl.piotrsukiennik.tuner.service.ai.impl;
 
 import pl.piotrsukiennik.ai.id.GenericIdentifier;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;

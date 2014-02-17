@@ -12,7 +12,7 @@ import javax.sql.rowset.CachedRowSet;
  * Date: 31.08.13
  * Time: 18:57
  */
-public interface DataSharder extends DataSource {
+public interface Shard {
     DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
 
     boolean contains( ReadQuery query );

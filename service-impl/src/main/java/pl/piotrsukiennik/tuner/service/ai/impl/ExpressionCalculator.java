@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.ai.fitness;
+package pl.piotrsukiennik.tuner.service.ai.impl;
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;

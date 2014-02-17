@@ -6,6 +6,6 @@ package pl.piotrsukiennik.tuner;
  * Date: 04.07.13
  * Time: 17:49
  */
-public interface KeyValueDataSource extends DataSource {
+public interface KeyValueSharderNode extends SharderNode {
 
 }

@@ -8,15 +8,16 @@
     <aop:config/>
     <aop:aspectj-autoproxy/>
     <context:annotation-config/>
-    <context:component-scan base-package="pl.piotrsukiennik.tuner.statement"/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.aop"/>
 
     <import resource="classpath*:jsqltuner-services-context.xml"/>
     <import resource="jsqltuner-datasources-context.xml"/>
 
-    <bean id="statementsInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
-        <qualifier value="connectionQualifier"/>
+    <bean id="preparedStatementInterceptingAdvisor"
+          class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <qualifier value="interceptPreparedStatement"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
-        <property name="advice" ref="statementInterceptingAdvice"/>
+        <property name="advice" ref="PSInterceptingAdvice"/>
         <property name="order" value="1"/>
     </bean>
 

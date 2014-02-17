@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.ai;
+package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;

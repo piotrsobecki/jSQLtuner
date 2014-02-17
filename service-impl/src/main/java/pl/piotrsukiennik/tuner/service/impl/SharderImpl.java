@@ -4,10 +4,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSharder;
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.KeyValueDataSource;
+import pl.piotrsukiennik.tuner.KeyValueSharderNode;
 import pl.piotrsukiennik.tuner.Sharder;
+import pl.piotrsukiennik.tuner.SharderNode;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
@@ -15,8 +15,8 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.CacheManagerService;
+import pl.piotrsukiennik.tuner.service.DataSourceSelector;
 import pl.piotrsukiennik.tuner.service.LocalDataSourceService;
-import pl.piotrsukiennik.tuner.service.ai.DataSourceSelector;
 import pl.piotrsukiennik.tuner.service.util.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
@@ -37,7 +37,7 @@ public class SharderImpl implements Sharder {
 
     @Autowired
     private
-    List<DataSharder> dataSharders;
+    List<SharderNode> sharderNodes;
 
     @Autowired
     private LocalDataSourceService dataSourceMapper;
@@ -48,9 +48,18 @@ public class SharderImpl implements Sharder {
     @Autowired
     private DataSourceSelector dataSourceSelector;
 
+    @Override
+    public boolean contains( ReadQuery query ) {
+        for ( SharderNode sharderNode : sharderNodes ) {
+            if ( sharderNode.contains( query ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
-    public DataRetrieval getData( ReadQuery query ) throws DataRetrievalException {
+    public DataRetrieval get( ReadQuery query ) throws DataRetrievalException {
         DataRetrieval dataRetrieval = null;
         DataSource dataSource = null;
         DataSourceIdentity dataSourceIdentity = dataSourceSelector.selectDataSourceForQuery( query );
@@ -103,9 +112,9 @@ public class SharderImpl implements Sharder {
     @Override
     public void put( ReadQuery query, CachedRowSet data ) {
         CachedRowSet clonedData = RowSet.clone( data );
-        for ( DataSharder dataSharder : dataSharders ) {
-            dataSharder.put( query, clonedData );
-            dataSourceSelector.scheduleDataRetrieval( dataSharder.getDataSourceIdentity(), query );
+        for ( SharderNode sharderNode : sharderNodes ) {
+            sharderNode.put( query, clonedData );
+            dataSourceSelector.scheduleDataRetrieval( sharderNode.getDataSourceIdentity(), query );
         }
         if ( query instanceof SelectQuery ) {
             cacheManagerService.putCachedQuery( (SelectQuery) query );
@@ -115,14 +124,14 @@ public class SharderImpl implements Sharder {
     @Override
     public void delete( Query query ) {
         Collection<SelectQuery> queriesToInvalidate = cacheManagerService.getQueriesToInvalidate( query );
-        for ( DataSharder dataSharder : dataSharders ) {
-            if ( dataSharder instanceof KeyValueDataSource ) {
+        for ( SharderNode sharderNode : sharderNodes ) {
+            if ( sharderNode instanceof KeyValueSharderNode ) {
                 for ( SelectQuery selectQuery : queriesToInvalidate ) {
-                    dataSharder.delete( selectQuery );
+                    sharderNode.delete( selectQuery );
                 }
             }
             else {
-                dataSharder.delete( query );
+                sharderNode.delete( query );
             }
         }
         for ( SelectQuery selectQuery : queriesToInvalidate ) {

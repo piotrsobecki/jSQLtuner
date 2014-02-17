@@ -1,8 +1,10 @@
-package pl.piotrsukiennik.tuner.service.ai.selection;
+package pl.piotrsukiennik.tuner.service.ai.impl;
 
 import pl.piotrsukiennik.ai.id.Identifier;
 import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
-import pl.piotrsukiennik.tuner.service.ai.fitness.FitnessCalculator;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectable;
+import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectionHelper;
+import pl.piotrsukiennik.tuner.service.ai.FitnessCalculator;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,7 +13,7 @@ import java.util.Queue;
  * @author Piotr Sukiennik
  * @date 14.02.14
  */
-public class DataSourceSelectionHelper<T extends DataSourceSelectable> implements UpdateableSelectionHelper<T> {
+public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> implements UpdateableSelectionHelper<T>, DataSourceSelectionHelper<T> {
 
     private UpdateableSelectionHelper<T> updateableSelectionHelper;
 
@@ -19,23 +21,24 @@ public class DataSourceSelectionHelper<T extends DataSourceSelectable> implement
 
     private FitnessCalculator fitnessCalculator;
 
-    public DataSourceSelectionHelper( UpdateableSelectionHelper<T> updateableSelectionHelper, FitnessCalculator fitnessCalculator ) {
+    public DataSourceSelectionHelperImpl( UpdateableSelectionHelper<T> updateableSelectionHelper, FitnessCalculator fitnessCalculator ) {
         this.fitnessCalculator = fitnessCalculator;
         this.updateableSelectionHelper = updateableSelectionHelper;
     }
 
 
-    protected synchronized void updateFitness( T t ) {
+    public synchronized void updateFitness( T t ) {
         t.setFitness( fitnessCalculator.calc( t ) );
         fitnessChanged( t );
     }
 
 
+    @Override
     public boolean fitnessChanged( T value ) {
-
         return updateableSelectionHelper.fitnessChanged( value );
     }
 
+    @Override
     public boolean removeOption( T value ) {
         return updateableSelectionHelper.removeOption( value );
     }
@@ -57,10 +60,12 @@ public class DataSourceSelectionHelper<T extends DataSourceSelectable> implement
         }
     }
 
+    @Override
     public void submit( T selectable ) {
         updateableSelectionHelper.submit( selectable );
     }
 
+    @Override
     public void scheduleForSelection( T selectable ) {
         scheduled.add( selectable );
     }

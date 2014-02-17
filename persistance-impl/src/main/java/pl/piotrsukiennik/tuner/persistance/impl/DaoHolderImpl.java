@@ -14,6 +14,8 @@ import pl.piotrsukiennik.tuner.persistance.*;
 @Repository
 class DaoHolderImpl extends DaoHolder implements ApplicationListener<ContextRefreshedEvent> {
 
+    protected DaoHolderImpl() {
+    }
 
     @Override
     public void onApplicationEvent( ContextRefreshedEvent contextRefreshedEvent ) {
