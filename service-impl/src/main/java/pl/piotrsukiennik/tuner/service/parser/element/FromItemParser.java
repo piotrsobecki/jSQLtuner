@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.query.source.SubJoinSource;
 import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
 
 /**
@@ -23,14 +23,14 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
 
     private Source source;
 
-    public FromItemParser( QueryElementParserService queryElementParserService, QueryContext queryContext ) {
-        super( queryElementParserService, queryContext );
+    public FromItemParser( ElementParserService elementParserService, QueryContext queryContext ) {
+        super( elementParserService, queryContext );
     }
 
 
     @Override
     public void visit( Table tableName ) {
-        source = queryElementParserService.getTableSource( queryContext, tableName );
+        source = elementParserService.getTableSource( queryContext, tableName );
     }
 
     @Override
@@ -40,7 +40,7 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
         subQuerySource.setValue( subSelect.getSelectBody().toString() );
 
         SelectQuery selectQuery = new SelectQuery();
-        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( queryElementParserService, queryContext, selectQuery );
+        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( elementParserService, queryContext, selectQuery );
         subSelect.getSelectBody().accept( selectBodyParser );
         subQuerySource.setSelectQuery( selectQuery );
         source = subQuerySource;
@@ -50,8 +50,8 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
     public void visit( SubJoin subjoin ) {
         SubJoinSource subJoinSource = new SubJoinSource();
 
-        JoinFragment joinFragment = queryElementParserService.getJoin( queryContext, subjoin.getJoin() );
-        FromItemParser fromItemParser = new FromItemParser( queryElementParserService, queryContext );
+        JoinFragment joinFragment = elementParserService.getJoin( queryContext, subjoin.getJoin() );
+        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
         subjoin.getLeft().accept( fromItemParser );
 
         subJoinSource.setJoinFragment( joinFragment );

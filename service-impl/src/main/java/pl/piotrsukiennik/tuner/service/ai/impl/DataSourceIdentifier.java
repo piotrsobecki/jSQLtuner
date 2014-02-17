@@ -12,7 +12,4 @@ public class DataSourceIdentifier extends GenericIdentifier<String> {
         super( dataSource.getIdentifier() );
     }
 
-    DataSourceIdentifier( String identifier ) {
-        super( identifier );
-    }
 }

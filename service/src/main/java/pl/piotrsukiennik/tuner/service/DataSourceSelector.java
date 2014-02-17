@@ -9,11 +9,11 @@ import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
  * @date 13.02.14
  */
 public interface DataSourceSelector {
-    DataSourceIdentity selectDataSourceForQuery( ReadQuery readQuery );
+    DataSourceIdentity getDataSource( ReadQuery readQuery );
 
-    void submitDataRetrieval( DataSourceIdentity dataSource, ReadQuery readQuery, DataRetrieval dataRetrieval );
+    void submitDataRetrieval( DataRetrieval dataRetrieval );
 
-    public void scheduleDataRetrieval( DataSourceIdentity dataSource, ReadQuery readQuery );
+    public void scheduleDataRetrieval( ReadQuery readQuery, DataSourceIdentity dataSource );
 
-    void removeDataSourcesForQuery( ReadQuery query );
+    void removeDataSources( ReadQuery query );
 }

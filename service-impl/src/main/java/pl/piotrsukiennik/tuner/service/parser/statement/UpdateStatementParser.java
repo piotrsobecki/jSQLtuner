@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.service.parser.element.ValueEntityExpresionParser;
 
@@ -21,13 +21,13 @@ import java.util.Set;
  * Time: 23:07
  */
 public class UpdateStatementParser<U extends UpdateQuery> extends StatementParser<UpdateQuery> {
-    public UpdateStatementParser( QueryElementParserService queryElementParserService, QueryContext queryContext, Update update ) {
-        super( queryElementParserService, queryContext, update, new UpdateQuery() );
+    public UpdateStatementParser( ElementParserService elementParserService, QueryContext queryContext, Update update ) {
+        super( elementParserService, queryContext, update, new UpdateQuery() );
     }
 
     @Override
     public void visit( Update update ) {
-        TableSource tableSource = queryElementParserService.getTableSource( queryContext, update.getTable() );
+        TableSource tableSource = elementParserService.getTableSource( queryContext, update.getTable() );
         List<Column> columnList = update.getColumns();
         List<Expression> values = update.getExpressions();
         Set<ColumnValue> valueEntities = new LinkedHashSet<ColumnValue>();
@@ -39,12 +39,12 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
              = queryContext.getColumn( tableSource.getTable().getValue(), column.getColumnName() );
             ColumnValue columnValue = new ColumnValue();
             columnValue.setColumn( column1 );
-            ValueEntityExpresionParser parser = new ValueEntityExpresionParser( queryElementParserService, queryContext, columnValue );
+            ValueEntityExpresionParser parser = new ValueEntityExpresionParser( elementParserService, queryContext, columnValue );
             expression.accept( parser );
             valueEntities.add( columnValue );
         }
 
-        ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
         update.getWhere().accept( expresionParser );
         query.setWhereCondition( expresionParser.getCondition() );
         query.setColumnValues( valueEntities );

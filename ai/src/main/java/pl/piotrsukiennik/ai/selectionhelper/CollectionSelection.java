@@ -23,6 +23,10 @@ public abstract class CollectionSelection<T extends Selectable> implements Updat
         return null;
     }
 
+    public synchronized boolean update( T value ) {
+        return getCollection().remove( value ) && getCollection().add( value );
+    }
+
     @Override
     public boolean removeOption( T value ) {
         return getCollection().remove( value );

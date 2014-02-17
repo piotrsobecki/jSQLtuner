@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,20 +25,20 @@ public class ItemsListParser implements ItemsListVisitor {
 
     private QueryContext queryContext;
 
-    private QueryElementParserService queryElementParserService;
+    private ElementParserService elementParserService;
 
-    public ItemsListParser( QueryElementParserService queryElementParserService, QueryContext queryContext, Query sourceQuery ) {
+    public ItemsListParser( ElementParserService elementParserService, QueryContext queryContext, Query sourceQuery ) {
         this.sourceQuery = sourceQuery;
         this.queryContext = queryContext;
-        this.queryElementParserService = queryElementParserService;
+        this.elementParserService = elementParserService;
     }
 
     @Override
     public void visit( SubSelect subSelect ) {
         SelectQuery selectQuery = new SelectQuery();
         selectQuery.setParentQuery( sourceQuery );
-        FromItemParser fromItemParser = new FromItemParser( queryElementParserService, queryContext );
-        ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
         subSelect.accept( fromItemParser );
         subSelect.accept( expresionParser );
         //TODO
@@ -51,7 +51,7 @@ public class ItemsListParser implements ItemsListVisitor {
         Set<ColumnValue> columnValues = new LinkedHashSet<ColumnValue>();
         for ( Expression ex : expressions ) {
             ColumnValue columnValue = new ColumnValue();
-            ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+            ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
             ex.accept( expresionParser );
             columnValue.setCondition( expresionParser.getCondition() );
             columnValues.add( columnValue );

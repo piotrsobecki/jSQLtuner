@@ -18,8 +18,8 @@
         <constructor-arg value="1/sqrt(averageExecutionTime)"/>
     </bean>
 
-    <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceSelectorImpl">
-        <property name="selectionHelperClass" value="pl.piotrsukiennik.ai.selectionhelper.RouletteWheelSelection"/>
+    <bean class="pl.piotrsukiennik.tuner.service.ai.impl.DataSourceSelectorImpl">
+        <property name="selectionHelperClass" value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
         <property name="fitnessCalculator" ref="fitnessCalculator"/>
     </bean>
 

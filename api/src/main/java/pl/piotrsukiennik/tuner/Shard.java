@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
-import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
@@ -13,8 +11,6 @@ import javax.sql.rowset.CachedRowSet;
  * Time: 18:57
  */
 public interface Shard {
-    DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
-
     boolean contains( ReadQuery query );
 
     void put( ReadQuery query, CachedRowSet data );

@@ -19,7 +19,7 @@
                </bean>
             </constructor-arg>
         </bean>-->
-    <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueSourceImplNode">
+    <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueDataSourceImpl">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueServiceLocalImpl"/>
         </constructor-arg>

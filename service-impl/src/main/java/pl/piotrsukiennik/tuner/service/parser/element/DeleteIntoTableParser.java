@@ -5,7 +5,7 @@ import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
 /**
  * Author: Piotr Sukiennik
@@ -18,7 +18,7 @@ public class DeleteIntoTableParser implements IntoTableVisitor {
 
     private QueryContext queryContext;
 
-    public DeleteIntoTableParser( QueryElementParserService queryElementParserService, QueryContext queryContext, DeleteQuery sourceQuery ) {
+    public DeleteIntoTableParser( ElementParserService elementParserService, QueryContext queryContext, DeleteQuery sourceQuery ) {
         this.sourceQuery = sourceQuery;
         this.queryContext = queryContext;
     }

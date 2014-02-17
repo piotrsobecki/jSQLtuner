@@ -27,7 +27,7 @@ public class DataSourceContextImpl implements DataSourceContext {
 
 
     @Override
-    public boolean isPartOf( String database, String schema ) {
+    public boolean contains( String database, String schema ) {
         return this.database.equalsIgnoreCase( database ) && this.schema.equalsIgnoreCase( schema );
     }
 

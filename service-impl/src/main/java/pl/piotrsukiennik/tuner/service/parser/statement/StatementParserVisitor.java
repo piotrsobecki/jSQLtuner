@@ -10,7 +10,7 @@ import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.util.hash.HashGenerators;
 
 /**
@@ -21,8 +21,8 @@ import pl.piotrsukiennik.tuner.service.util.hash.HashGenerators;
 public class StatementParserVisitor<T extends Query> extends StatementParser implements StatementVisitor {
 
 
-    public StatementParserVisitor( QueryElementParserService queryElementParserService, QueryContext queryContext, Statement statement ) {
-        super( queryElementParserService, queryContext, statement, null );
+    public StatementParserVisitor( ElementParserService elementParserService, QueryContext queryContext, Statement statement ) {
+        super( elementParserService, queryContext, statement, null );
 
     }
 
@@ -33,35 +33,35 @@ public class StatementParserVisitor<T extends Query> extends StatementParser imp
     @Override
     public void visit( Drop drop ) {
         //TODO
-        //SelectStatementParser statementParser = new DropStatementParser( queryElementParserService, getQueryContext(), drop );
+        //SelectStatementParser statementParser = new DropStatementParser( elementParserService, getQueryContext(), drop );
         //setHash( statementParser.getQuery(), drop );
         //setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Select select ) {
-        SelectStatementParser statementParser = new SelectStatementParser( queryElementParserService, getQueryContext(), select );
+        SelectStatementParser statementParser = new SelectStatementParser( elementParserService, getQueryContext(), select );
         setHash( statementParser.getQuery(), select );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Delete delete ) {
-        DeleteStatementParser deleteStatementParser = new DeleteStatementParser( queryElementParserService, getQueryContext(), delete );
+        DeleteStatementParser deleteStatementParser = new DeleteStatementParser( elementParserService, getQueryContext(), delete );
         setHash( deleteStatementParser.getQuery(), delete );
         setQuery( deleteStatementParser.getQuery() );
     }
 
     @Override
     public void visit( Update update ) {
-        UpdateStatementParser<UpdateQuery> updateStatementParser = new UpdateStatementParser<UpdateQuery>( queryElementParserService, getQueryContext(), update );
+        UpdateStatementParser<UpdateQuery> updateStatementParser = new UpdateStatementParser<UpdateQuery>( elementParserService, getQueryContext(), update );
         setHash( updateStatementParser.getQuery(), update );
         setQuery( updateStatementParser.getQuery() );
     }
 
     @Override
     public void visit( Insert insert ) {
-        InsertStatementParser insertStatementParser = new InsertStatementParser( queryElementParserService, getQueryContext(), insert );
+        InsertStatementParser insertStatementParser = new InsertStatementParser( elementParserService, getQueryContext(), insert );
         setHash( insertStatementParser.getQuery(), insert );
         setQuery( insertStatementParser.getQuery() );
     }

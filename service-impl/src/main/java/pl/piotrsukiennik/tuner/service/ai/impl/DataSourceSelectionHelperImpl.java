@@ -26,16 +26,10 @@ public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> imple
         this.updateableSelectionHelper = updateableSelectionHelper;
     }
 
-
-    public synchronized void updateFitness( T t ) {
-        t.setFitness( fitnessCalculator.calc( t ) );
-        fitnessChanged( t );
-    }
-
-
     @Override
-    public boolean fitnessChanged( T value ) {
-        return updateableSelectionHelper.fitnessChanged( value );
+    public synchronized boolean update( T t ) {
+        t.setFitness( fitnessCalculator.calc( t ) );
+        return updateableSelectionHelper.update( t );
     }
 
     @Override
@@ -62,11 +56,13 @@ public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> imple
 
     @Override
     public void submit( T selectable ) {
+        selectable.setFitness( fitnessCalculator.calc( selectable ) );
         updateableSelectionHelper.submit( selectable );
+
     }
 
     @Override
-    public void scheduleForSelection( T selectable ) {
+    public void schedule( T selectable ) {
         scheduled.add( selectable );
     }
 

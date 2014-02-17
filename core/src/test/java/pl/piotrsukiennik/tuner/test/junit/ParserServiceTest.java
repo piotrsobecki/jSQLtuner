@@ -13,7 +13,7 @@ import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryParserService;
+import pl.piotrsukiennik.tuner.service.ParserService;
 
 import javax.annotation.Resource;
 
@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 public class ParserServiceTest {
 
     @Resource
-    private QueryParserService queryParserService;
+    private ParserService parserService;
 
     @Test
     @Repeat(2)
@@ -35,7 +35,7 @@ public class ParserServiceTest {
         String schema = "testschema";
         String query = "Select * from Test";
 
-        Query queryParsed = queryParserService.parse( database, schema, query );
+        Query queryParsed = parserService.parse( database, schema, query );
 
         Assert.assertNotNull( queryParsed );
         Assert.assertTrue( queryParsed instanceof SelectQuery );

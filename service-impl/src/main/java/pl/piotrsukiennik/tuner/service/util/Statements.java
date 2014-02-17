@@ -2,11 +2,12 @@ package pl.piotrsukiennik.tuner.service.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pl.piotrsukiennik.tuner.service.statement.wrapper.PSParameter;
+import pl.piotrsukiennik.tuner.service.wrapper.preparedstatement.PSParameter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -52,13 +53,25 @@ public class Statements {
         }
     }
 
+    public static String getDatabase( Statement statement ) {
+        try {
+            return getDatabase( statement.getConnection() );
+        }
+        catch ( SQLException e ) {
+            if ( LOG.isErrorEnabled() ) {
+                LOG.error( "Could not obtain database name from statement. ", e );
+            }
+            return DEFAULT_SCHEMA_NAME;
+        }
+    }
+
     public static String getDatabase( PreparedStatement preparedStatement ) {
         try {
             return getDatabase( preparedStatement.getConnection() );
         }
         catch ( SQLException e ) {
             if ( LOG.isErrorEnabled() ) {
-                LOG.error( "Could not obtain database name from preparedStatement. ", e );
+                LOG.error( "Could not obtain database name from statement. ", e );
             }
             return DEFAULT_SCHEMA_NAME;
         }
@@ -76,13 +89,25 @@ public class Statements {
         }
     }
 
+    public static String getSchema( Statement statement ) {
+        try {
+            return getSchema( statement.getConnection() );
+        }
+        catch ( SQLException e ) {
+            if ( LOG.isErrorEnabled() ) {
+                LOG.error( "Could not obtain schema name from statement. ", e );
+            }
+            return DEFAULT_SCHEMA_NAME;
+        }
+    }
+
     public static String getSchema( PreparedStatement preparedStatement ) {
         try {
             return getSchema( preparedStatement.getConnection() );
         }
         catch ( SQLException e ) {
             if ( LOG.isErrorEnabled() ) {
-                LOG.error( "Could not obtain schema name from preparedStatement. ", e );
+                LOG.error( "Could not obtain schema name from statement. ", e );
             }
             return DEFAULT_SCHEMA_NAME;
         }

@@ -15,6 +15,10 @@ public class Objects2 {
     private Objects2() {
     }
 
+    public static boolean eq( Object o1, Object o2 ) {
+        return ( o1 == null && o2 == null ) || ( o1 != null && o2 != null && o1.equals( o2 ) );
+    }
+
     public static <T> T newInstance( Class<T> clazz ) {
         try {
             return clazz.newInstance();
@@ -23,7 +27,7 @@ public class Objects2 {
             if ( LOG.isErrorEnabled() ) {
                 LOG.error( ie );
             }
-            throw new RuntimeException( ie );
+            throw new NewInstanceException( ie );
         }
     }
 }

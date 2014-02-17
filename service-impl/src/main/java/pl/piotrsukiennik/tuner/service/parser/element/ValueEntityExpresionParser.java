@@ -12,7 +12,7 @@ import pl.piotrsukiennik.tuner.model.schema.Database;
 import pl.piotrsukiennik.tuner.model.schema.Schema;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
 /**
  * Author: Piotr Sukiennik
@@ -25,12 +25,12 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
 
     private QueryContext queryContext;
 
-    private QueryElementParserService queryElementParserService;
+    private ElementParserService elementParserService;
 
-    public ValueEntityExpresionParser( QueryElementParserService queryElementParserService, QueryContext queryContext, ValueEntity valueEntity ) {
+    public ValueEntityExpresionParser( ElementParserService elementParserService, QueryContext queryContext, ValueEntity valueEntity ) {
         this.valueEntity = valueEntity;
         this.queryContext = queryContext;
-        this.queryElementParserService = queryElementParserService;
+        this.elementParserService = elementParserService;
     }
 
 
@@ -46,7 +46,7 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
 
     @Override
     public void visit( InverseExpression inverseExpression ) {
-        ValueEntityExpresionParser valueEntityExpresionParser = new ValueEntityExpresionParser( queryElementParserService, queryContext, valueEntity );
+        ValueEntityExpresionParser valueEntityExpresionParser = new ValueEntityExpresionParser( elementParserService, queryContext, valueEntity );
         inverseExpression.getExpression().accept( valueEntityExpresionParser );
         valueEntity.setValue( "Inverse " + valueEntity.getValue() );
     }

@@ -21,7 +21,7 @@ class DataSourceConnectionAspect {
 
 
     @Inject
-    @Qualifier("interceptPreparedStatement")
+    @Qualifier("connectionAdvisor")
     private List<Advisor> advisors;
 
     public DataSourceConnectionAspect() {

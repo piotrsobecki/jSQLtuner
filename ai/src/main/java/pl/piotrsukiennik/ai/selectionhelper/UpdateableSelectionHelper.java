@@ -8,7 +8,7 @@ import pl.piotrsukiennik.ai.selectable.Selectable;
  * @date 12.02.14
  */
 public interface UpdateableSelectionHelper<T extends Selectable> extends SelectionHelper<T> {
-    boolean fitnessChanged( T value );
+    boolean update( T t );
 
     boolean removeOption( T value );
 

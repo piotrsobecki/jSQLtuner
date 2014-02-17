@@ -2,6 +2,9 @@ package pl.piotrsukiennik.tuner.dto;
 
 //import pl.piotrsukiennik.tuner.IDataSource;
 
+import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
+
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
 
@@ -11,13 +14,33 @@ import java.sql.ResultSet;
  * Time: 13:29
  */
 public class DataRetrieval {
+
+    private DataSourceIdentity dataSourceIdentity;
+
     private ResultSet resultSet;
 
-    private String dataSourceIdentifier;
+    private ReadQuery readQuery;
 
     private long executionTimeNano;
 
     private long rows;
+
+    public DataRetrieval( ReadQuery readQuery,
+                          DataSourceIdentity dataSourceIdentity,
+                          ResultSet resultSet,
+                          long executionTimeNano,
+                          long rows ) {
+
+        this.readQuery = readQuery;
+        this.dataSourceIdentity = dataSourceIdentity;
+        this.resultSet = resultSet;
+        this.executionTimeNano = executionTimeNano;
+        this.rows = rows;
+    }
+
+    public ReadQuery getReadQuery() {
+        return readQuery;
+    }
 
     public ResultSet getResultSet() {
         return resultSet;
@@ -42,12 +65,12 @@ public class DataRetrieval {
         return rows;
     }
 
-    public String getDataSourceIdentifier() {
-        return dataSourceIdentifier;
+    public DataSourceIdentity getDataSourceIdentity() {
+        return dataSourceIdentity;
     }
 
-    public void setDataSourceIdentifier( String dataSourceIdentifier ) {
-        this.dataSourceIdentifier = dataSourceIdentifier;
+    public void setDataSourceIdentity( DataSourceIdentity dataSourceIdentity ) {
+        this.dataSourceIdentity = dataSourceIdentity;
     }
 
     public void setRows( long rows ) {

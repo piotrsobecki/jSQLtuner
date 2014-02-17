@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.model.query.InsertWithValuesQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.condition.Condition;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,11 +27,11 @@ public class InsertItemsListParser implements ItemsListVisitor {
 
     private QueryContext queryContext;
 
-    private QueryElementParserService queryElementParserService;
+    private ElementParserService elementParserService;
 
-    public InsertItemsListParser( QueryElementParserService queryElementParserService, QueryContext queryContext ) {
+    public InsertItemsListParser( ElementParserService elementParserService, QueryContext queryContext ) {
         this.queryContext = queryContext;
-        this.queryElementParserService = queryElementParserService;
+        this.elementParserService = elementParserService;
     }
 
     public InsertQuery getInsertQuery() {
@@ -43,8 +43,8 @@ public class InsertItemsListParser implements ItemsListVisitor {
         InsertAsSelectQuery insertAsSelectQuery = new InsertAsSelectQuery();
         SelectQuery selectQuery = new SelectQuery();
         selectQuery.setParentQuery( insertAsSelectQuery );
-        FromItemParser fromItemParser = new FromItemParser( queryElementParserService, queryContext );
-        ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
         subSelect.accept( fromItemParser );
         subSelect.accept( expresionParser );
         selectQuery.setWhereCondition( expresionParser.getCondition() );
@@ -58,7 +58,7 @@ public class InsertItemsListParser implements ItemsListVisitor {
         List<Expression> expressions = expressionList.getExpressions();
         Set<Condition> columnValues = new LinkedHashSet<Condition>();
         for ( Expression ex : expressions ) {
-            ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+            ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
             ex.accept( expresionParser );
             columnValues.add( expresionParser.getCondition() );
         }

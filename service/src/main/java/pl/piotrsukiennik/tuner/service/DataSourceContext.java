@@ -5,5 +5,5 @@ package pl.piotrsukiennik.tuner.service;
  * @date 16.02.14
  */
 public interface DataSourceContext {
-    boolean isPartOf( String database, String schema );
+    boolean contains( String database, String schema );
 }

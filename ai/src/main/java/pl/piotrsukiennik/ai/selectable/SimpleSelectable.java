@@ -6,9 +6,9 @@ import pl.piotrsukiennik.ai.id.Identifier;
  * @author Piotr Sukiennik
  * @date 12.02.14
  */
-public class SimpleSelectable extends AbstractSelectable implements Selectable {
+public class SimpleSelectable<I extends Identifier> extends AbstractSelectable<I> implements Selectable<I> {
 
-    public SimpleSelectable( Identifier identifier, double fitness ) {
+    public SimpleSelectable( I identifier, double fitness ) {
         super( identifier );
         this.fitness = fitness;
     }

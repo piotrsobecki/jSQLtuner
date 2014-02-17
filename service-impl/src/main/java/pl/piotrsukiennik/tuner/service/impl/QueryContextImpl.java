@@ -6,7 +6,7 @@ import pl.piotrsukiennik.tuner.model.schema.Column;
 import pl.piotrsukiennik.tuner.model.schema.Database;
 import pl.piotrsukiennik.tuner.model.schema.Schema;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.persistance.DaoHolder;
+import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class QueryContextImpl implements QueryContext {
             return queryContextDto.getDatabase();
         }
         else {
-            Database database = DaoHolder.getSchemaDao().getDatabase( nameCorrected );
+            Database database = Dao.getSchemaDao().getDatabase( nameCorrected );
             queryContextDto.setDatabase( database );
             return database;
         }
@@ -60,7 +60,7 @@ public class QueryContextImpl implements QueryContext {
             return queryContextDto.getSchema();
         }
         else {
-            Schema schema = DaoHolder.getSchemaDao().getSchema( queryContextDto.getDatabase(), schemaNameCorrected );
+            Schema schema = Dao.getSchemaDao().getSchema( queryContextDto.getDatabase(), schemaNameCorrected );
             queryContextDto.setSchema( schema );
             return schema;
         }
@@ -72,7 +72,7 @@ public class QueryContextImpl implements QueryContext {
         String key = table.getValue() + "." + columnName;
         Column column = queryContextDto.getColumns().get( key );
         if ( column == null ) {
-            column = DaoHolder.getSchemaDao().getColumn( table, columnNameCorrected );
+            column = Dao.getSchemaDao().getColumn( table, columnNameCorrected );
             queryContextDto.getColumns().put( key, column );
         }
         return column;
@@ -90,7 +90,7 @@ public class QueryContextImpl implements QueryContext {
         String key = tableName;
         Table table = queryContextDto.getTables().get( key );
         if ( table == null ) {
-            table = DaoHolder.getSchemaDao().getTable( queryContextDto.getSchema(), nameCorrected );
+            table = Dao.getSchemaDao().getTable( queryContextDto.getSchema(), nameCorrected );
             queryContextDto.getTables().put( key, table );
         }
         return table;

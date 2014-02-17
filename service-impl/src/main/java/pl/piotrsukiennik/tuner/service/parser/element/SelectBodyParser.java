@@ -7,9 +7,9 @@ import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
-import pl.piotrsukiennik.tuner.service.util.QueryConstructorUtils;
+import pl.piotrsukiennik.tuner.service.util.NewQueryUtils;
 
 import java.util.List;
 
@@ -19,26 +19,26 @@ import java.util.List;
  * Time: 22:54
  */
 public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> implements net.sf.jsqlparser.statement.select.SelectVisitor {
-    public SelectBodyParser( QueryElementParserService queryElementParserService, QueryContext queryContext, T query ) {
-        super( queryElementParserService, queryContext, query );
+    public SelectBodyParser( ElementParserService elementParserService, QueryContext queryContext, T query ) {
+        super( elementParserService, queryContext, query );
     }
 
     @Override
     public void visit( PlainSelect plainSelect ) {
-        FromItemParser fromItemParser = new FromItemParser( queryElementParserService, queryContext );
+        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
         plainSelect.getFromItem().accept( fromItemParser );
-        QueryConstructorUtils.addSource( query, fromItemParser.getSource() );
+        NewQueryUtils.addSource( query, fromItemParser.getSource() );
         if ( plainSelect.getFromItem() != null ) {
             plainSelect.getFromItem().accept( fromItemParser );
         }
 
         List<SelectItem> selectItems = plainSelect.getSelectItems();
-        SelectItemParser selectItemParser = new SelectItemParser( queryElementParserService, queryContext, query );
+        SelectItemParser selectItemParser = new SelectItemParser( elementParserService, queryContext, query );
         for ( SelectItem selectItem : selectItems ) {
             selectItem.accept( selectItemParser );
         }
 
-        ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
 
         if ( plainSelect.getHaving() != null ) {
             plainSelect.getHaving().accept( expresionParser );
@@ -53,8 +53,8 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         if ( plainSelect.getJoins() != null ) {
             List<Join> joins = plainSelect.getJoins();
             for ( Join join : joins ) {
-                JoinFragment joinFragment = queryElementParserService.getJoin( queryContext, join );
-                QueryConstructorUtils.addJoin( query, joinFragment );
+                JoinFragment joinFragment = elementParserService.getJoin( queryContext, join );
+                NewQueryUtils.addJoin( query, joinFragment );
             }
         }
 
@@ -62,8 +62,8 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
             List<OrderByElement> orderByElements = plainSelect.getOrderByElements();
             for ( int i = 0; i < orderByElements.size(); i++ ) {
                 OrderByElement orderByElement = orderByElements.get( i );
-                OrderByFragment orderByFragment = queryElementParserService.getOrderByFragment( queryContext, orderByElement );
-                QueryConstructorUtils.addOrderByFragment( query, orderByFragment );
+                OrderByFragment orderByFragment = elementParserService.getOrderByFragment( queryContext, orderByElement );
+                NewQueryUtils.addOrderByFragment( query, orderByFragment );
             }
 
         }
@@ -71,8 +71,8 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         if ( plainSelect.getGroupByColumnReferences() != null ) {
             List<Column> groupByColumns = plainSelect.getGroupByColumnReferences();
             for ( Column column : groupByColumns ) {
-                ColumnProjection columnProjection = queryElementParserService.getColumnProjection( queryContext, column );
-                QueryConstructorUtils.addGroupByFragment( query, columnProjection );
+                ColumnProjection columnProjection = elementParserService.getColumnProjection( queryContext, column );
+                NewQueryUtils.addGroupByFragment( query, columnProjection );
             }
 
         }

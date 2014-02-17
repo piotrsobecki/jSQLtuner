@@ -18,10 +18,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -49,21 +58,9 @@
         </dependency>
 
         <dependency>
-            <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>net.sf.jsqlparser</groupId>
             <artifactId>jsqlparser</artifactId>
             <version>0.8.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>service</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

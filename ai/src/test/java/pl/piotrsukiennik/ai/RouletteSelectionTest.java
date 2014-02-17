@@ -4,7 +4,7 @@ package pl.piotrsukiennik.ai;
 import junit.framework.TestCase;
 import pl.piotrsukiennik.ai.id.Identifiers;
 import pl.piotrsukiennik.ai.selectable.SimpleSelectable;
-import pl.piotrsukiennik.ai.selectionhelper.RouletteWheelSelection;
+import pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection;
 
 /**
  * Unit test for simple App.

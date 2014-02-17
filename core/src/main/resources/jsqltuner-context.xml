@@ -15,10 +15,16 @@
 
     <bean id="preparedStatementInterceptingAdvisor"
           class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
-        <qualifier value="interceptPreparedStatement"/>
+        <qualifier value="connectionAdvisor"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
         <property name="advice" ref="PSInterceptingAdvice"/>
-        <property name="order" value="1"/>
+    </bean>
+
+    <bean id="statementInterceptingAdvisor"
+          class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <qualifier value="connectionAdvisor"/>
+        <property name="expression" value="execution (java.sql.Statement java.sql.Connection.*(..))"/>
+        <property name="advice" ref="SInterceptingAdvice"/>
     </bean>
 
 </beans>

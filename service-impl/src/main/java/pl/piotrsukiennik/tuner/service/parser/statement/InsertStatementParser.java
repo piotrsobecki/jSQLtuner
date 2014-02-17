@@ -5,7 +5,7 @@ import net.sf.jsqlparser.statement.insert.Insert;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.InsertItemsListParser;
 
 import java.util.LinkedHashSet;
@@ -19,14 +19,14 @@ import java.util.Set;
  */
 public class InsertStatementParser extends StatementParser<InsertQuery> {
 
-    public InsertStatementParser( QueryElementParserService queryElementParserService, QueryContext queryContext, Insert insert ) {
-        super( queryElementParserService, queryContext, insert, null );
+    public InsertStatementParser( ElementParserService elementParserService, QueryContext queryContext, Insert insert ) {
+        super( elementParserService, queryContext, insert, null );
     }
 
     @Override
     public void visit( Insert insert ) {
         Table table = queryContext.getTable( insert.getTable().getWholeTableName() );
-        InsertItemsListParser insertItemsListParser = new InsertItemsListParser( queryElementParserService, queryContext );
+        InsertItemsListParser insertItemsListParser = new InsertItemsListParser( elementParserService, queryContext );
         insert.getItemsList().accept( insertItemsListParser );
         query = insertItemsListParser.getInsertQuery();
         init( insert );

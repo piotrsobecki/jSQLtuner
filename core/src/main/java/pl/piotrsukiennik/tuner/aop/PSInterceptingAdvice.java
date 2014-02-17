@@ -4,7 +4,7 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
-import pl.piotrsukiennik.tuner.service.PreparedStatementWrapperBuilder;
+import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
 
 import java.sql.PreparedStatement;
 
@@ -18,14 +18,14 @@ import java.sql.PreparedStatement;
 public class PSInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
 
     @Autowired
-    private PreparedStatementWrapperBuilder preparedStatementWrapperBuilder;
+    private PreparedStatementBuilder PreparedStatementBuilder;
 
     @Override
     public PreparedStatement invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
         try {
             PreparedStatement preparedStatement = (PreparedStatement) methodInvocation.proceed();
             String queryString = (String) methodInvocation.getArguments()[0];
-            return preparedStatementWrapperBuilder.build( preparedStatement, queryString );
+            return PreparedStatementBuilder.build( preparedStatement, queryString );
         }
         catch ( Throwable throwable ) {
             throw new PreparedStatementInterceptException( throwable );

@@ -43,6 +43,6 @@ public class KeyValueServiceLocalImpl implements KeyValueService {
 
     @Override
     public String getIdentifier() {
-        return "KeyValueServiceLocalImpl";
+        return "KeyValueServiceLocal";
     }
 }

@@ -4,7 +4,7 @@ import net.sf.jsqlparser.statement.delete.Delete;
 import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.QueryElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
 
 /**
@@ -13,16 +13,16 @@ import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
  * Time: 23:07
  */
 public class DeleteStatementParser extends StatementParser<DeleteQuery> {
-    public DeleteStatementParser( QueryElementParserService queryElementParserService, QueryContext queryContext, Delete delete ) {
-        super( queryElementParserService, queryContext, delete, new DeleteQuery() );
+    public DeleteStatementParser( ElementParserService elementParserService, QueryContext queryContext, Delete delete ) {
+        super( elementParserService, queryContext, delete, new DeleteQuery() );
     }
 
     @Override
     public void visit( Delete delete ) {
-        TableSource tableSource = queryElementParserService.getTableSource( queryContext, delete.getTable() );
+        TableSource tableSource = elementParserService.getTableSource( queryContext, delete.getTable() );
         query.setTableSource( tableSource );
         if ( delete.getWhere() != null ) {
-            ExpresionParser expresionParser = new ExpresionParser( queryElementParserService, queryContext );
+            ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
             delete.getWhere().accept( expresionParser );
             query.setWhereCondition( expresionParser.getCondition() );
         }

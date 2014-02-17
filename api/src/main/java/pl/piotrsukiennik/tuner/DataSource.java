@@ -1,12 +1,12 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.ResultSet;
 
 /**
  * Author: Piotr Sukiennik
@@ -17,7 +17,7 @@ public interface DataSource {
 
     DataSourceIdentity getDataSourceIdentity();
 
-    DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
+    ResultSet get( ReadQuery query ) throws DataRetrievalException;
 
     void put( ReadQuery query, CachedRowSet resultSet );
 

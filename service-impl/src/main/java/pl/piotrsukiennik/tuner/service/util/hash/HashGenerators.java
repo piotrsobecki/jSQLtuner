@@ -9,7 +9,7 @@ public class HashGenerators {
     private HashGenerators() {
     }
 
-    public static IHashGenerator MD5 = new IHashGenerator() {
+    public static HashGenerator MD5 = new HashGenerator() {
         @Override
         public synchronized String getHash( String value ) {
             return MD5Hash.toMd5( value );

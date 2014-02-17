@@ -1,9 +1,9 @@
 package pl.piotrsukiennik.tuner.service.ai.impl;
 
 import pl.piotrsukiennik.ai.selectable.AbstractSelectable;
+import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectable;
-import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectionHelper;
 
 /**
  * @author Piotr Sukiennik
@@ -11,7 +11,6 @@ import pl.piotrsukiennik.tuner.service.ai.DataSourceSelectionHelper;
  */
 public class DataSourceSelectableImpl extends AbstractSelectable<DataSourceIdentifier> implements DataSourceSelectable<DataSourceIdentifier> {
 
-    private DataSourceSelectionHelper selectionHelper;
 
     private DataSourceIdentity dataSource;
 
@@ -23,27 +22,22 @@ public class DataSourceSelectableImpl extends AbstractSelectable<DataSourceIdent
 
     private double fitness = 0;
 
-    public DataSourceSelectableImpl( DataSourceSelectionHelper selectionHelper, DataSourceIdentity dataSource ) {
+    DataSourceSelectableImpl( DataSourceIdentity dataSource ) {
         super( new DataSourceIdentifier( dataSource ) );
-        this.selectionHelper = selectionHelper;
         this.dataSource = dataSource;
-        this.selectionHelper.scheduleForSelection( this );
 
     }
 
-    public DataSourceSelectableImpl( DataSourceSelectionHelper selectionHelper, DataSourceIdentity dataSource, double executionTime, long rows ) {
-        super( new DataSourceIdentifier( dataSource ) );
-        this.selectionHelper = selectionHelper;
-        this.dataSource = dataSource;
-        this.rows = rows;
-        this.updateExecutionTime( executionTime );
-        this.selectionHelper.submit( this );
+    DataSourceSelectableImpl( DataRetrieval dataRetrieval ) {
+        super( new DataSourceIdentifier( dataRetrieval.getDataSourceIdentity() ) );
+        this.dataSource = dataRetrieval.getDataSourceIdentity();
+        this.rows = dataRetrieval.getRows();
+        this.updateExecutionTime( dataRetrieval.getExecutionTimeNano() );
     }
 
     @Override
     public void updateExecutionTime( double executionTime ) {
         this.averageExecutionTime = ( ( executions * averageExecutionTime ) + executionTime ) / ++executions;
-        this.selectionHelper.updateFitness( this );
     }
 
 
