@@ -18,7 +18,7 @@ import pl.piotrsukiennik.tuner.service.CacheService;
 import pl.piotrsukiennik.tuner.service.DataRetrievalService;
 import pl.piotrsukiennik.tuner.service.DataSourceSelector;
 import pl.piotrsukiennik.tuner.service.DataSourceService;
-import pl.piotrsukiennik.tuner.service.util.RowSet;
+import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;

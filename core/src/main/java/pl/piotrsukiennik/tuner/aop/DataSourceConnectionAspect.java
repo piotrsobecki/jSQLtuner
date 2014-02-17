@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.sql.Connection;
 import java.util.List;
 
 @Component
@@ -21,24 +20,22 @@ class DataSourceConnectionAspect {
 
 
     @Inject
-    @Qualifier("connectionAdvisor")
+    @Qualifier( "connectionAdvisor" )
     private List<Advisor> advisors;
 
     public DataSourceConnectionAspect() {
     }
 
-    @Around(value = "onGetConnectionPointcut()")
+    @Around( "onGetConnectionPointcut()" )
     public Object onNewConnection( final ProceedingJoinPoint pjp ) throws Throwable {
-        Connection retVal = (Connection) pjp.proceed( pjp.getArgs() );
-        ProxyFactory proxyFactory = new ProxyFactory( retVal );
+        ProxyFactory proxyFactory = new ProxyFactory( pjp.proceed( pjp.getArgs() ) );
         for ( Advisor adv : this.advisors ) {
             proxyFactory.addAdvisor( adv );
         }
-        retVal = (Connection) proxyFactory.getProxy();
-        return retVal;
+        return proxyFactory.getProxy();
     }
 
-    @Pointcut(ANY_DATA_SOURCE_EXECUTION)
+    @Pointcut( ANY_DATA_SOURCE_EXECUTION )
     protected void onGetConnectionPointcut() {
     }
 } 

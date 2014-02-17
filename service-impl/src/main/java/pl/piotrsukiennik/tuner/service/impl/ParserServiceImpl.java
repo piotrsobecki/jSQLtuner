@@ -14,7 +14,7 @@ import pl.piotrsukiennik.tuner.service.ParserService;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.StatementParserVisitor;
-import pl.piotrsukiennik.tuner.service.util.hash.HashGenerators;
+import pl.piotrsukiennik.tuner.util.hash.HashGenerators;
 
 import javax.annotation.Resource;
 import java.io.StringReader;

@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.DataSourceService;
-import pl.piotrsukiennik.tuner.service.util.Collections3;
+import pl.piotrsukiennik.tuner.util.Collections3;
 
 import java.util.*;
 

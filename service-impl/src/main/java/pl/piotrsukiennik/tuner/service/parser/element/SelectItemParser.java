@@ -12,7 +12,7 @@ import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.service.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 import java.util.LinkedHashSet;
 

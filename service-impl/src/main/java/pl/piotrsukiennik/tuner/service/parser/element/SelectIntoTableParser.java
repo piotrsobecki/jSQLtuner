@@ -6,7 +6,7 @@ import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.service.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
  * Author: Piotr Sukiennik

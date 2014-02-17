@@ -9,7 +9,7 @@ import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
-import pl.piotrsukiennik.tuner.service.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.service.cache.impl;
 import pl.piotrsukiennik.tuner.service.cache.Holder;
 import pl.piotrsukiennik.tuner.service.cache.HolderEnterable;
 import pl.piotrsukiennik.tuner.service.cache.HolderEnterableFactory;
-import pl.piotrsukiennik.tuner.service.util.Objects2;
+import pl.piotrsukiennik.tuner.util.Objects2;
 
 import java.util.Collection;
 

@@ -23,7 +23,7 @@ public class QueriesTest {
     @Resource
     private SQLQueryExecutionService queryExecutionService;
 
-    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id INT, key VARCHAR, value VARCHAR)";
+    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id INT,key VARCHAR,value VARCHAR)";
 
     private static String TEST_TABLE_DROP = "DROP TABLE TestTable";
 

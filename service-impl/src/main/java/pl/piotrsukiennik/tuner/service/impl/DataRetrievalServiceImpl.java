@@ -6,7 +6,7 @@ import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.DataRetrievalService;
-import pl.piotrsukiennik.tuner.service.util.RowSet;
+import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;

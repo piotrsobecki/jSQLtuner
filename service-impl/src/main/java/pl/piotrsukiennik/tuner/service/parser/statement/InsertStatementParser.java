@@ -7,6 +7,7 @@ import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.InsertItemsListParser;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class InsertStatementParser extends StatementParser<InsertQuery> {
 
     @Override
     public void visit( Insert insert ) {
-        Table table = queryContext.getTable( insert.getTable().getWholeTableName() );
+        Table table = NewQueryUtils.map( queryContext, insert.getTable() );
         InsertItemsListParser insertItemsListParser = new InsertItemsListParser( elementParserService, queryContext );
         insert.getItemsList().accept( insertItemsListParser );
         query = insertItemsListParser.getInsertQuery();

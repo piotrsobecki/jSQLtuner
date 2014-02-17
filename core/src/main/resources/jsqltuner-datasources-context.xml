@@ -5,11 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <context:component-scan base-package="pl.piotrsukiennik.tuner.datasources"/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.datasource"/>
 
-    <!--  <bean class="pl.piotrsukiennik.tuner.datasources.shard.KeyValueDataSourceImplImpl>
+    <!--  <bean class="pl.piotrsukiennik.tuner.datasourceshard.KeyValueDataSourceImplImpl>
             <constructor-arg>
-               <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueServiceMemcachedImplImpl">
+               <bean class="pl.piotrsukiennik.tuner.datasourceKeyValueServiceMemcachedImplImpl">
                    <constructor-arg>
                        <bean class="net.spy.memcached.spring.MemcachedClientFactoryBean" scope="singleton">
                            <property name="servers" value="localhost:11211"/>
@@ -19,9 +19,9 @@
                </bean>
             </constructor-arg>
         </bean>-->
-    <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueDataSourceImpl">
+    <bean class="pl.piotrsukiennik.tuner.datasource.KeyValueDataSourceImpl">
         <constructor-arg>
-            <bean class="pl.piotrsukiennik.tuner.datasources.KeyValueServiceLocalImpl"/>
+            <bean class="pl.piotrsukiennik.tuner.service.KeyValueServiceLocalImpl"/>
         </constructor-arg>
     </bean>
 </beans>

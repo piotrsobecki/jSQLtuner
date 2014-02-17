@@ -22,6 +22,10 @@ import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
  */
 public abstract class StatementParser<T extends Query> extends ParsingVisitor<T> implements StatementVisitor {
 
+    protected StatementParser( ElementParserService elementParserService, QueryContext queryContext, Statement statement ) {
+        super( elementParserService, queryContext );
+        statement.accept( this );
+    }
 
     protected StatementParser( ElementParserService elementParserService, QueryContext queryContext, Statement statement, T query ) {
         super( elementParserService, queryContext, query );

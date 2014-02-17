@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
-import pl.piotrsukiennik.tuner.service.util.Statements;
+import pl.piotrsukiennik.tuner.util.Statements;
 
 import java.sql.Connection;
 

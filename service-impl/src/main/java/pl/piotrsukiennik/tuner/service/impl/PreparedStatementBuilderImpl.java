@@ -3,13 +3,13 @@ package pl.piotrsukiennik.tuner.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.ShardService;
+import pl.piotrsukiennik.tuner.aop.wrapper.PSExecutionIntercepting;
+import pl.piotrsukiennik.tuner.aop.wrapper.PSParametersIntercepting;
+import pl.piotrsukiennik.tuner.aop.wrapper.SExecutionIntercepting;
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
 import pl.piotrsukiennik.tuner.service.ParserService;
 import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
-import pl.piotrsukiennik.tuner.service.util.Statements;
-import pl.piotrsukiennik.tuner.service.wrapper.preparedstatement.PSExecutionIntercepting;
-import pl.piotrsukiennik.tuner.service.wrapper.preparedstatement.PSParametersIntercepting;
-import pl.piotrsukiennik.tuner.service.wrapper.statement.SExecutionIntercepting;
+import pl.piotrsukiennik.tuner.util.Statements;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
