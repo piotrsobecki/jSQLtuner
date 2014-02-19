@@ -1,15 +1,19 @@
 package pl.piotrsukiennik.tuner.util;
 
+import net.sf.jsqlparser.expression.Alias;
 import pl.piotrsukiennik.tuner.model.query.JoinsAware;
 import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.SourcesAware;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.Projection;
+import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
+import pl.piotrsukiennik.tuner.model.schema.Index;
 import pl.piotrsukiennik.tuner.model.schema.Table;
+import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
 import java.util.LinkedHashSet;
@@ -26,14 +30,26 @@ public class NewQueryUtils {
 
     }
 
+    public static String getTableAlias( Alias alias ) {
+        return alias == null ? "" : alias.getName();
+    }
+
+    public static String getTableSourceValue( net.sf.jsqlparser.schema.Table table ) {
+        return table.getWholeTableName() + " " + getTableAlias( table.getAlias() );
+    }
+
+    public static Index map( QueryContext queryContext, Table table, net.sf.jsqlparser.statement.create.table.Index index ) {
+        return queryContext.getIndex( table, index.getName() );
+    }
+
     public static Table map( QueryContext queryContext, net.sf.jsqlparser.schema.Table table ) {
         return queryContext.getTable( table.getWholeTableName() );
     }
 
     public static void addProjection( ProjectionsAware query, Projection projection ) {
-        Set<Projection> projections = query.getProjections();
+        Set<pl.piotrsukiennik.tuner.model.query.expression.Expression> projections = query.getProjections();
         if ( projections == null ) {
-            projections = new LinkedHashSet<Projection>();
+            projections = new LinkedHashSet<pl.piotrsukiennik.tuner.model.query.expression.Expression>();
             query.setProjections( projections );
         }
         projection.setPosition( projections.size() );
@@ -71,13 +87,13 @@ public class NewQueryUtils {
         sources.add( orderByFragment );
     }
 
-    public static void addGroupByFragment( SelectQuery selectQuery, ColumnProjection groupByFragment ) {
-        Set<ColumnProjection> sources = selectQuery.getGroups();
+    public static void addGroupByFragment( SelectQuery selectQuery, Expression expression ) {
+        Set<GroupByFragment> sources = selectQuery.getGroups();
         if ( sources == null ) {
-            sources = new LinkedHashSet<ColumnProjection>();
+            sources = new LinkedHashSet<GroupByFragment>();
             selectQuery.setGroups( sources );
         }
-        groupByFragment.setPosition( sources.size() );
-        sources.add( groupByFragment );
+        int position = sources.size();
+        sources.add( Dao.getQueryDao().getGroupByFragment( expression, position ) );
     }
 }

@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,16 +14,15 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class InsertWithValuesQuery extends InsertQuery {
 
-
-    private Set<Condition> columnValues;
+    private Set<Expression> columnValues;
 
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    public Set<Condition> getColumnValues() {
+    public Set<Expression> getColumnValues() {
         return columnValues;
     }
 
-    public void setColumnValues( Set<Condition> columnValues ) {
+    public void setColumnValues( Set<Expression> columnValues ) {
         this.columnValues = columnValues;
     }
 

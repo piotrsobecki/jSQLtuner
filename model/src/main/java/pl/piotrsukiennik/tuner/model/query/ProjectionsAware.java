@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  * Time: 19:30
  */
 public interface ProjectionsAware extends SourcesAware {
-    Set<Projection> getProjections();
+    Set<Expression> getProjections();
 
-    void setProjections( Set<Projection> projections );
+    void setProjections( Set<Expression> projections );
 }

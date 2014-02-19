@@ -1,7 +1,8 @@
-package pl.piotrsukiennik.tuner.model.query;
+package pl.piotrsukiennik.tuner.model.query.write;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 
 import javax.persistence.*;
 
@@ -11,13 +12,13 @@ import javax.persistence.*;
  * Time: 20:55
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class CreateTableQuery extends WriteQuery {
+@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
+public class AlterTableQuery extends WriteQuery {
 
     private pl.piotrsukiennik.tuner.model.schema.Table table;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @LazyCollection( LazyCollectionOption.FALSE )
     public pl.piotrsukiennik.tuner.model.schema.Table getTable() {
         return table;
     }

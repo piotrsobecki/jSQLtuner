@@ -7,12 +7,12 @@ import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.OrderByElement;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
-import pl.piotrsukiennik.tuner.model.query.condition.PairCondition;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.query.expression.PairExpression;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.ColumnProjection;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.persistance.Dao;
@@ -20,6 +20,7 @@ import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.service.parser.element.FromItemParser;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
  * Author: Piotr Sukiennik
@@ -31,10 +32,10 @@ import pl.piotrsukiennik.tuner.service.parser.element.FromItemParser;
 public class ParserElementServiceImpl implements ElementParserService {
 
 
-    public PairCondition getCondition( QueryContext queryContext, Condition leftCondition, Condition rightCondition ) {
-        PairCondition pairCondition = new PairCondition();
-        pairCondition.setLeftCondition( leftCondition );
-        pairCondition.setRightCondition( rightCondition );
+    public PairExpression getCondition( QueryContext queryContext, OperatorExpression leftExpression, OperatorExpression rightExpression ) {
+        PairExpression pairCondition = new PairExpression();
+        pairCondition.setLeftExpression( leftExpression );
+        pairCondition.setRightExpression( rightExpression );
         Dao.getCommonDao().create( pairCondition );
         return pairCondition;
     }
@@ -43,12 +44,8 @@ public class ParserElementServiceImpl implements ElementParserService {
     @Override
     public TableSource getTableSource( QueryContext queryContext, Table tableName ) {
         TableSource tableSource = new TableSource();
-        String tableValue = tableName.getWholeTableName();
-        if ( tableName.getAlias() == null ) {
-            tableValue += " " + tableName.getAlias();
-        }
-        tableSource.setAlias( tableName.getAlias() );
-        tableSource.setValue( tableValue );
+        tableSource.setAlias( NewQueryUtils.getTableAlias( tableName.getAlias() ) );
+        tableSource.setValue( NewQueryUtils.getTableSourceValue( tableName ) );
         tableSource.setTable( queryContext.getTable( tableName.getWholeTableName() ) );
         tableSource = queryContext.mergeTableSource( tableSource );
         if ( tableSource.getId() == 0 ) {
@@ -68,7 +65,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         orderByFragment.setOrderDirection( orderByElement.isAsc() ? OrderByFragment.Order.ASC : OrderByFragment.Order.DESC );
         ExpresionParser orderByExpresionParser = new ExpresionParser( this, queryContext );
         orderByElement.getExpression().accept( orderByExpresionParser );
-        orderByFragment.setOrderByExpression( orderByExpresionParser.getCondition() );
+        orderByFragment.setOrderByExpression( orderByExpresionParser.getExpression() );
         Dao.getCommonDao().create( orderByFragment );
         return orderByFragment;
     }
@@ -103,7 +100,6 @@ public class ParserElementServiceImpl implements ElementParserService {
 
     @Override
     public StarProjection getStarProjection( QueryContext queryContext, AllTableColumns allColumns ) {
-
         TableSource tableSource = null;
         if ( allColumns.getTable().getName() == null ) {
             tableSource = queryContext.getLastAttachedTableSource();
@@ -132,7 +128,7 @@ public class ParserElementServiceImpl implements ElementParserService {
 
         ExpresionParser parser = new ExpresionParser( this, queryContext );
         join.getOnExpression().accept( parser );
-        joinFragment.setOn( parser.getCondition() );
+        joinFragment.setOn( parser.getExpression() );
         Dao.getCommonDao().create( joinFragment );
         return joinFragment;
     }

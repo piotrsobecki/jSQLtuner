@@ -2,7 +2,10 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.StatementVisitor;
+import net.sf.jsqlparser.statement.alter.Alter;
+import net.sf.jsqlparser.statement.create.index.CreateIndex;
 import net.sf.jsqlparser.statement.create.table.CreateTable;
+import net.sf.jsqlparser.statement.create.view.CreateView;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.drop.Drop;
 import net.sf.jsqlparser.statement.insert.Insert;
@@ -11,8 +14,11 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.model.query.write.AlterTableQuery;
+import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 
 /**
@@ -63,5 +69,23 @@ public abstract class StatementParser<T extends Query> extends ParsingVisitor<T>
 
     @Override
     public void visit( CreateTable createTable ) {
+    }
+
+    @Override
+    public void visit( CreateIndex createIndex ) {
+
+    }
+
+    @Override
+    public void visit( CreateView createView ) {
+
+    }
+
+
+    @Override
+    public void visit( Alter alter ) {
+        query = (T) new AlterTableQuery();
+        Table table = NewQueryUtils.map( queryContext, alter.getTable() );
+        ( (AlterTableQuery) query ).setTable( table );
     }
 }

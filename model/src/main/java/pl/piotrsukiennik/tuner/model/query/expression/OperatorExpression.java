@@ -1,6 +1,4 @@
-package pl.piotrsukiennik.tuner.model.query.condition;
-
-import pl.piotrsukiennik.tuner.model.ValueEntity;
+package pl.piotrsukiennik.tuner.model.query.expression;
 
 import javax.persistence.*;
 
@@ -12,15 +10,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ConditionEntity")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Condition extends ValueEntity {
-    private ConditionOperator operator;
+public class OperatorExpression extends Expression {
+    private ExpressionOperator operator;
 
     @Enumerated(EnumType.STRING)
-    public ConditionOperator getOperator() {
+    public ExpressionOperator getOperator() {
         return operator;
     }
 
-    public void setOperator( ConditionOperator operator ) {
+    public void setOperator( ExpressionOperator operator ) {
         this.operator = operator;
     }
 

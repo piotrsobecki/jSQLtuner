@@ -7,8 +7,7 @@ import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.SelectExpressionItem;
 import net.sf.jsqlparser.statement.select.SelectItemVisitor;
 import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
-import pl.piotrsukiennik.tuner.model.query.projection.StarProjection;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
@@ -34,7 +33,7 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
         this.queryContext = queryContext;
         this.elementParserService = elementParserService;
         if ( this.selectQuery.getProjections() == null ) {
-            this.selectQuery.setProjections( new LinkedHashSet<Projection>() );
+            this.selectQuery.setProjections( new LinkedHashSet<pl.piotrsukiennik.tuner.model.query.expression.Expression>() );
         }
     }
 

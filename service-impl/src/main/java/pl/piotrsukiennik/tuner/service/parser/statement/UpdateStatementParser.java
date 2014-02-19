@@ -4,6 +4,7 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.UpdateQuery;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
@@ -46,7 +47,7 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
 
         ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
         update.getWhere().accept( expresionParser );
-        query.setWhereCondition( expresionParser.getCondition() );
+        query.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
         query.setColumnValues( valueEntities );
         super.visit( update );
     }

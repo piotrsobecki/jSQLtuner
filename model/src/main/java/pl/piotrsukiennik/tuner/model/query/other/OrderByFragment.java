@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.model.query.other;
 
 import pl.piotrsukiennik.tuner.model.ValueEntity;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
 
 import javax.persistence.*;
 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class OrderByFragment extends ValueEntity implements SortableByPosition {
     public enum Order {ASC, DESC}
 
-    private Condition orderByExpression;
+    private Expression orderByExpression;
 
     private Order orderDirection;
 
@@ -32,11 +32,11 @@ public class OrderByFragment extends ValueEntity implements SortableByPosition {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    public Condition getOrderByExpression() {
+    public Expression getOrderByExpression() {
         return orderByExpression;
     }
 
-    public void setOrderByExpression( Condition orderByExpression ) {
+    public void setOrderByExpression( Expression orderByExpression ) {
         this.orderByExpression = orderByExpression;
     }
 

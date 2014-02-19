@@ -86,7 +86,7 @@ public class ShardServiceImpl implements ShardService {
             dataSourceIdentity = dataSource.getDataSourceIdentity();
         }
         if ( LOG.isInfoEnabled() ) {
-            LOG.info( String.format( "Retreived Data for (%s) using (%s:%s)", query.getValue(), dataSourceIdentity.getClazz(), dataSourceIdentity.getIdentifier() ) );
+            LOG.info( String.format( "Execute (%s) on (%s:%s)", query.getValue(), dataSourceIdentity.getClazz(), dataSourceIdentity.getIdentifier() ) );
         }
         dataSourceSelector.submitDataRetrieval( dataRetrieval );
         return dataRetrieval;

@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.model.query.projection;
+package pl.piotrsukiennik.tuner.model.query.expression.projection;
 
 import pl.piotrsukiennik.tuner.model.schema.Function;
 

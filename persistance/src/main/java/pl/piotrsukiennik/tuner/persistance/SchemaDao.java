@@ -29,6 +29,8 @@ public interface SchemaDao {
 
     Table getTable( Schema schema, String tableName );
 
+    public Index getIndex( Table table, String indexName );
+
     Column getColumn( String database, String schema, String tableName, String columnName );
 
     Column getColumn( Database database, String schema, String tableName, String columnName );

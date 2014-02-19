@@ -1,6 +1,6 @@
-package pl.piotrsukiennik.tuner.model.query.condition;
+package pl.piotrsukiennik.tuner.model.query.expression;
 
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.Projection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
  * Time: 21:11
  */
 @Entity
-public class ProjectionValueCondition extends Condition {
+public class ProjectionValueExpression extends OperatorExpression {
 
     private Projection projection;
 

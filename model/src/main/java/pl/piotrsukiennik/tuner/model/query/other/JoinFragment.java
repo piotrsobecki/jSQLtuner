@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.model.query.other;
 
 import pl.piotrsukiennik.tuner.model.ValueEntity;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 
 import javax.persistence.CascadeType;
@@ -18,7 +18,7 @@ public class JoinFragment extends ValueEntity {
 
     private Source source;
 
-    private Condition on;
+    private Expression on;
 
 
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
@@ -31,11 +31,11 @@ public class JoinFragment extends ValueEntity {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
-    public Condition getOn() {
+    public Expression getOn() {
         return on;
     }
 
-    public void setOn( Condition on ) {
+    public void setOn( Expression on ) {
         this.on = on;
     }
 }

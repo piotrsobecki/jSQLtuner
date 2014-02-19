@@ -1,9 +1,6 @@
 package pl.piotrsukiennik.tuner.dto;
 
-import pl.piotrsukiennik.tuner.model.schema.Column;
-import pl.piotrsukiennik.tuner.model.schema.Database;
-import pl.piotrsukiennik.tuner.model.schema.Schema;
-import pl.piotrsukiennik.tuner.model.schema.Table;
+import pl.piotrsukiennik.tuner.model.schema.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +18,13 @@ public class QueryContextDto {
 
     private Map<String, Table> tables = new HashMap<String, Table>();
 
+    private Map<String, Index> indexes = new HashMap<String, Index>();
+
     private Map<String, Column> columns = new HashMap<String, Column>();
+
+    public Map<String, Index> getIndexes() {
+        return indexes;
+    }
 
     public Database getDatabase() {
         return database;
@@ -43,15 +46,8 @@ public class QueryContextDto {
         return tables;
     }
 
-    public void setTables( Map<String, Table> tables ) {
-        this.tables = tables;
-    }
-
     public Map<String, Column> getColumns() {
         return columns;
     }
 
-    public void setColumns( Map<String, Column> columns ) {
-        this.columns = columns;
-    }
 }

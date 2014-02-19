@@ -1,14 +1,15 @@
 package pl.piotrsukiennik.tuner.service.parser.element;
 
-import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
+import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.InsertWithValuesQuery;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
@@ -38,6 +39,12 @@ public class InsertItemsListParser implements ItemsListVisitor {
         return insertQuery;
     }
 
+
+    @Override
+    public void visit( MultiExpressionList multiExprList ) {
+        //TODO
+    }
+
     @Override
     public void visit( SubSelect subSelect ) {
         InsertAsSelectQuery insertAsSelectQuery = new InsertAsSelectQuery();
@@ -47,7 +54,7 @@ public class InsertItemsListParser implements ItemsListVisitor {
         ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
         subSelect.accept( fromItemParser );
         subSelect.accept( expresionParser );
-        selectQuery.setWhereCondition( expresionParser.getCondition() );
+        selectQuery.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
 
         insertAsSelectQuery.setSelectQuery( selectQuery );
         insertQuery = insertAsSelectQuery;
@@ -55,12 +62,12 @@ public class InsertItemsListParser implements ItemsListVisitor {
 
     @Override
     public void visit( ExpressionList expressionList ) {
-        List<Expression> expressions = expressionList.getExpressions();
-        Set<Condition> columnValues = new LinkedHashSet<Condition>();
-        for ( Expression ex : expressions ) {
+        List<net.sf.jsqlparser.expression.Expression> expressions = expressionList.getExpressions();
+        Set<Expression> columnValues = new LinkedHashSet<Expression>();
+        for ( net.sf.jsqlparser.expression.Expression ex : expressions ) {
             ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
             ex.accept( expresionParser );
-            columnValues.add( expresionParser.getCondition() );
+            columnValues.add( expresionParser.getExpression() );
         }
 
         InsertWithValuesQuery insertWithValuesQuery = new InsertWithValuesQuery();

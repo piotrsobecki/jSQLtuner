@@ -1,11 +1,12 @@
 package pl.piotrsukiennik.tuner.service.parser.element;
 
+import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.*;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
@@ -42,12 +43,12 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
 
         if ( plainSelect.getHaving() != null ) {
             plainSelect.getHaving().accept( expresionParser );
-            query.setHavingCondition( expresionParser.getCondition() );
+            query.setHavingExpression( (OperatorExpression) expresionParser.getExpression() );
         }
 
         if ( plainSelect.getWhere() != null ) {
             plainSelect.getWhere().accept( expresionParser );
-            query.setWhereCondition( expresionParser.getCondition() );
+            query.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
         }
 
         if ( plainSelect.getJoins() != null ) {
@@ -69,12 +70,19 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         }
 
         if ( plainSelect.getGroupByColumnReferences() != null ) {
-            List<Column> groupByColumns = plainSelect.getGroupByColumnReferences();
-            for ( Column column : groupByColumns ) {
-                ColumnProjection columnProjection = elementParserService.getColumnProjection( queryContext, column );
-                NewQueryUtils.addGroupByFragment( query, columnProjection );
+            List<Expression> groupByColumns = plainSelect.getGroupByColumnReferences();
+            for ( Expression column : groupByColumns ) {
+                pl.piotrsukiennik.tuner.model.query.expression.Expression fragment = null;
+                if ( column instanceof Column ) {
+                    fragment = elementParserService.getColumnProjection( queryContext, (Column) column );
+                }
+                else {
+                    ExpresionParser groupByColumnExpresionParser = new ExpresionParser( elementParserService, queryContext );
+                    column.accept( expresionParser );
+                    fragment = groupByColumnExpresionParser.getExpression();
+                }
+                NewQueryUtils.addGroupByFragment( query, fragment );
             }
-
         }
 
         if ( plainSelect.getInto() != null ) {
@@ -92,7 +100,14 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
     }
 
     @Override
-    public void visit( Union union ) {
-        init( union );
+    public void visit( SetOperationList setOpList ) {
+        //TODO
     }
+
+    @Override
+    public void visit( WithItem withItem ) {
+        //TODO
+    }
+
+
 }

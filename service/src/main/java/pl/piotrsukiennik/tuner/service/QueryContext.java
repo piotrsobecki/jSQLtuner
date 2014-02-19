@@ -1,10 +1,9 @@
 package pl.piotrsukiennik.tuner.service;
 
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.model.schema.Column;
-import pl.piotrsukiennik.tuner.model.schema.Database;
-import pl.piotrsukiennik.tuner.model.schema.Schema;
-import pl.piotrsukiennik.tuner.model.schema.Table;
+import pl.piotrsukiennik.tuner.model.schema.*;
 
 /**
  * @author Piotr Sukiennik
@@ -15,9 +14,13 @@ public interface QueryContext {
 
     Schema getSchema( String schemaName );
 
+    GroupByFragment getGroupByFragment( Expression element, int position );
+
     Column getColumn( Table table, String columnName );
 
     Column getColumn( String tableName, String columnName );
+
+    Index getIndex( Table table, String indexName );
 
     Table getTable( String tableName );
 

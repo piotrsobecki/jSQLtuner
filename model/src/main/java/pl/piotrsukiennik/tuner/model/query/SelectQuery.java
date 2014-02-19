@@ -2,11 +2,11 @@ package pl.piotrsukiennik.tuner.model.query;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 
@@ -22,13 +22,13 @@ import java.util.Set;
 public class SelectQuery extends ReadQuery implements ConditionQuery, ProjectionsAware, JoinsAware {
 
 
-    private Set<Projection> projections;
+    private Set<Expression> projections;
 
     private Set<Source> sources;
 
     private Set<JoinFragment> joins;
 
-    private Set<ColumnProjection> groups;
+    private Set<GroupByFragment> groups;
 
     private Set<OrderByFragment> orders;
 
@@ -36,9 +36,9 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
 
     private boolean distinctFragment;
 
-    private Condition whereCondition;
+    private OperatorExpression whereExpression;
 
-    private Condition havingCondition;
+    private OperatorExpression havingExpression;
 
     private Table intoTable;
 
@@ -72,19 +72,19 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
     }
 
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @LazyCollection(LazyCollectionOption.FALSE)
-    public Set<Projection> getProjections() {
+    @OneToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @LazyCollection( LazyCollectionOption.FALSE )
+    public Set<Expression> getProjections() {
         return projections;
     }
 
-    public void setProjections( Set<Projection> projections ) {
+    public void setProjections( Set<Expression> projections ) {
         this.projections = projections;
     }
 
-    @JoinTable(name = "SelectQuery_Joins")
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable( name = "SelectQuery_Joins" )
+    @OneToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @LazyCollection( LazyCollectionOption.FALSE )
     public Set<Source> getSources() {
         return sources;
     }
@@ -93,9 +93,9 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
         this.sources = sources;
     }
 
-    @JoinTable(name = "SelectQuery_Sources")
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable( name = "SelectQuery_Sources" )
+    @OneToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @LazyCollection( LazyCollectionOption.FALSE )
     public Set<JoinFragment> getJoins() {
         return joins;
     }
@@ -104,20 +104,20 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
         this.joins = joins;
     }
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @OrderBy(value = "position ASC")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    public Set<ColumnProjection> getGroups() {
+    @OneToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @OrderBy( value = "position ASC" )
+    @LazyCollection( LazyCollectionOption.FALSE )
+    public Set<GroupByFragment> getGroups() {
         return groups;
     }
 
-    public void setGroups( Set<ColumnProjection> groups ) {
+    public void setGroups( Set<GroupByFragment> groups ) {
         this.groups = groups;
     }
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @OrderBy(value = "position ASC")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @OrderBy( value = "position ASC" )
+    @LazyCollection( LazyCollectionOption.FALSE )
     public Set<OrderByFragment> getOrders() {
         return orders;
     }
@@ -126,7 +126,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
         this.orders = orders;
     }
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, optional = true)
+    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE }, optional = true )
     public Query getParentQuery() {
         return parentQuery;
     }
@@ -136,7 +136,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
     }
 
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     public Table getIntoTable() {
         return intoTable;
     }
@@ -145,21 +145,21 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
         this.intoTable = intoTable;
     }
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    public Condition getWhereCondition() {
-        return whereCondition;
+    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    public OperatorExpression getWhereExpression() {
+        return whereExpression;
     }
 
-    public void setWhereCondition( Condition whereCondition ) {
-        this.whereCondition = whereCondition;
+    public void setWhereExpression( OperatorExpression whereExpression ) {
+        this.whereExpression = whereExpression;
     }
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    public Condition getHavingCondition() {
-        return havingCondition;
+    @ManyToOne( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    public OperatorExpression getHavingExpression() {
+        return havingExpression;
     }
 
-    public void setHavingCondition( Condition havingCondition ) {
-        this.havingCondition = havingCondition;
+    public void setHavingExpression( OperatorExpression havingExpression ) {
+        this.havingExpression = havingExpression;
     }
 }

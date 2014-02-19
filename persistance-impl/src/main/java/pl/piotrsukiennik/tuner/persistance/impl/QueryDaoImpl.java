@@ -4,12 +4,13 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.query.other.Values;
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.persistance.QueryDao;
 
@@ -19,7 +20,7 @@ import pl.piotrsukiennik.tuner.persistance.QueryDao;
  * Time: 15:31
  */
 @Repository
-@Transactional(value = "jsqlTunerTransactionManager")
+@Transactional( value = "jsqlTunerTransactionManager" )
 class QueryDaoImpl extends CrudDaoImpl implements QueryDao {
 
 
@@ -50,13 +51,27 @@ class QueryDaoImpl extends CrudDaoImpl implements QueryDao {
 
 
     @Override
-    public void submit( Condition condition ) {
-        create( condition );
+    public void submit( OperatorExpression expression ) {
+        create( expression );
     }
 
     @Override
     public void submit( ColumnValue columnValue ) {
         create( columnValue );
+    }
+
+    @Override
+    public GroupByFragment getGroupByFragment( Expression expression, int position ) {
+        GroupByFragment groupByFragment = (GroupByFragment) s().createCriteria( GroupByFragment.class )
+         .add( Restrictions.eq( "expression", expression ) )
+         .add( Restrictions.eq( "position", position ) ).setMaxResults( 1 ).uniqueResult();
+        if ( groupByFragment == null ) {
+            groupByFragment = new GroupByFragment();
+            groupByFragment.setExpression( expression );
+            groupByFragment.setPosition( position );
+            return create( groupByFragment );
+        }
+        return groupByFragment;
     }
 
     @Override

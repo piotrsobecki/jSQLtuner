@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 
 import javax.persistence.CascadeType;
@@ -25,15 +25,15 @@ public class DeleteQuery extends WriteQuery implements ConditionQuery {
         this.tableSource = tableSource;
     }
 
-    private Condition whereCondition;
+    private OperatorExpression whereExpression;
 
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    public Condition getWhereCondition() {
-        return whereCondition;
+    public OperatorExpression getWhereExpression() {
+        return whereExpression;
     }
 
-    public void setWhereCondition( Condition whereCondition ) {
-        this.whereCondition = whereCondition;
+    public void setWhereExpression( OperatorExpression whereExpression ) {
+        this.whereExpression = whereExpression;
     }
 }

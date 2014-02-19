@@ -1,9 +1,7 @@
 package pl.piotrsukiennik.tuner.service.parser.element;
 
 import net.sf.jsqlparser.schema.Table;
-import net.sf.jsqlparser.statement.select.FromItemVisitor;
-import net.sf.jsqlparser.statement.select.SubJoin;
-import net.sf.jsqlparser.statement.select.SubSelect;
+import net.sf.jsqlparser.statement.select.*;
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
@@ -12,6 +10,7 @@ import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
  * Author: Piotr Sukiennik
@@ -34,9 +33,19 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
     }
 
     @Override
+    public void visit( LateralSubSelect lateralSubSelect ) {
+        //TODO
+    }
+
+    @Override
+    public void visit( ValuesList valuesList ) {
+        //TODO
+    }
+
+    @Override
     public void visit( SubSelect subSelect ) {
         SubQuerySource subQuerySource = new SubQuerySource();
-        subQuerySource.setAlias( subSelect.getAlias() );
+        subQuerySource.setAlias( NewQueryUtils.getTableAlias( subSelect.getAlias() ) );
         subQuerySource.setValue( subSelect.getSelectBody().toString() );
 
         SelectQuery selectQuery = new SelectQuery();
@@ -55,7 +64,7 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
         subjoin.getLeft().accept( fromItemParser );
 
         subJoinSource.setJoinFragment( joinFragment );
-        subJoinSource.setAlias( subjoin.getAlias() );
+        subJoinSource.setAlias( NewQueryUtils.getTableAlias( subjoin.getAlias() ) );
         subJoinSource.setSource( fromItemParser.getSource() );
         subJoinSource.setValue( subjoin.toString() );
 

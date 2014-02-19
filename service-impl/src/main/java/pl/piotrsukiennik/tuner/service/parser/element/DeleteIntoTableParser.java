@@ -6,6 +6,7 @@ import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
  * Author: Piotr Sukiennik
@@ -26,8 +27,8 @@ public class DeleteIntoTableParser implements IntoTableVisitor {
     @Override
     public void visit( Table tableName ) {
         TableSource tableSource = new TableSource();
-        tableSource.setAlias( tableName.getAlias() );
-        tableSource.setValue( tableName.getWholeTableName() + tableName.getAlias() == null ? "" : ( " " + tableName.getAlias() ) );
+        tableSource.setAlias( NewQueryUtils.getTableAlias( tableName.getAlias() ) );
+        tableSource.setValue( NewQueryUtils.getTableSourceValue( tableName ) );
         tableSource.setTable( queryContext.getTable( tableName.getWholeTableName() ) );
         sourceQuery.setTableSource( tableSource );
     }

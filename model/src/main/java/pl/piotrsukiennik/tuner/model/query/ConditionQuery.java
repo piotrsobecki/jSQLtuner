@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 
 /**
  * Author: Piotr Sukiennik
@@ -9,7 +9,7 @@ import pl.piotrsukiennik.tuner.model.query.condition.Condition;
  */
 public interface ConditionQuery {
 
-    Condition getWhereCondition();
+    OperatorExpression getWhereExpression();
 
-    void setWhereCondition( Condition whereCondition );
+    void setWhereExpression( OperatorExpression whereExpression );
 }

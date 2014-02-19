@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.model.query.other;
 
 import pl.piotrsukiennik.tuner.model.ValueEntity;
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.schema.Column;
 
 import javax.persistence.*;
@@ -15,16 +15,16 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ColumnValue extends ValueEntity {
 
-    private Condition condition;
+    private OperatorExpression expression;
 
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    public Condition getCondition() {
-        return condition;
+    public OperatorExpression getExpression() {
+        return expression;
     }
 
-    public void setCondition( Condition condition ) {
-        this.condition = condition;
+    public void setExpression( OperatorExpression expression ) {
+        this.expression = expression;
     }
 
     private Column column;

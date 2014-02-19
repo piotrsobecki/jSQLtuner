@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.delete.Delete;
 import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
@@ -17,6 +18,7 @@ public class DeleteStatementParser extends StatementParser<DeleteQuery> {
         super( elementParserService, queryContext, delete, new DeleteQuery() );
     }
 
+
     @Override
     public void visit( Delete delete ) {
         TableSource tableSource = elementParserService.getTableSource( queryContext, delete.getTable() );
@@ -24,7 +26,7 @@ public class DeleteStatementParser extends StatementParser<DeleteQuery> {
         if ( delete.getWhere() != null ) {
             ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
             delete.getWhere().accept( expresionParser );
-            query.setWhereCondition( expresionParser.getCondition() );
+            query.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
         }
         super.visit( delete );
     }

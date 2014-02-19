@@ -1,11 +1,10 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.tuner.dto.QueryContextDto;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
-import pl.piotrsukiennik.tuner.model.schema.Column;
-import pl.piotrsukiennik.tuner.model.schema.Database;
-import pl.piotrsukiennik.tuner.model.schema.Schema;
-import pl.piotrsukiennik.tuner.model.schema.Table;
+import pl.piotrsukiennik.tuner.model.schema.*;
 import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
@@ -85,6 +84,12 @@ public class QueryContextImpl implements QueryContext {
     }
 
     @Override
+    public GroupByFragment getGroupByFragment( Expression element, int position ) {
+        return Dao.getQueryDao().getGroupByFragment( element, position );
+
+    }
+
+    @Override
     public Table getTable( String tableName ) {
         String nameCorrected = correctName( tableName );
         String key = tableName;
@@ -97,6 +102,18 @@ public class QueryContextImpl implements QueryContext {
 
     }
 
+    @Override
+    public Index getIndex( Table table, String indexName ) {
+        String nameCorrected = correctName( indexName );
+        String key = nameCorrected;
+        Index index = queryContextDto.getIndexes().get( key );
+        if ( index == null ) {
+            index = Dao.getSchemaDao().getIndex( table, nameCorrected );
+            queryContextDto.getIndexes().put( key, index );
+        }
+        return index;
+
+    }
 
     @Override
     public TableSource mergeTableSource( TableSource tableSource ) {

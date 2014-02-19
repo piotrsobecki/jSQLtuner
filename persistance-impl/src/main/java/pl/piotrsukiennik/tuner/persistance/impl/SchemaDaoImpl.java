@@ -179,6 +179,21 @@ class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
     }
 
     @Override
+    public Index getIndex( Table table, String indexName ) {
+        Index index = (Index) s().createCriteria( Index.class )
+         .add( Restrictions.eq( TABLE, table ) )
+         .add( Restrictions.eq( VALUE, indexName ) )
+         .setMaxResults( 1 ).uniqueResult();
+        if ( index == null ) {
+            index = new Index();
+            index.setTable( table );
+            index.setValue( indexName );
+            create( index );
+        }
+        return index;
+    }
+
+    @Override
     public Column getColumn( String database, String schema, String tableName, String columnName ) {
         Column column = (Column) s().createCriteria( Column.class )
          .add( Restrictions.eq( TABLE_SCHEMA_DATABASE_VALUE, database ) )

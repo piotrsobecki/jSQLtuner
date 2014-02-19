@@ -17,11 +17,11 @@ abstract class CrudDaoImpl extends AbstractDaoImpl implements CrudDao {
         Session session = s();
         try {
             session.save( t );
+            session.flush();
         }
         catch ( Exception e ) {
             e.printStackTrace();
         }
-        session.flush();
         return t;
     }
 

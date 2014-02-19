@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.model.query.condition;
+package pl.piotrsukiennik.tuner.model.query.expression;
 
 import pl.piotrsukiennik.tuner.model.query.SelectQuery;
 
@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class SubSelectCondition extends Condition {
+public class SubSelectExpression extends OperatorExpression {
     private SelectQuery subQuery;
 
     @ManyToOne(cascade = CascadeType.MERGE)

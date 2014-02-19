@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.test.junit;
 
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class QueriesTest {
     @Resource
     private SQLQueryExecutionService queryExecutionService;
 
+    //TODO - make valid to parse
     private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id INT,key VARCHAR,value VARCHAR)";
 
     private static String TEST_TABLE_DROP = "DROP TABLE TestTable";
@@ -51,21 +53,58 @@ public class QueriesTest {
 
 
     @Test
-    @Repeat(10)
-    public void runTestQueries() {
+    @Repeat( 3 )
+    public void runTestValidQueries() {
         Utils.processEachLine( getClass().getClassLoader(),
-         "jsqltuner-test-queries.sql", new Utils.StringProcessor() {
+         "sql/jsqltuner-test-valid-queries.sql", new Utils.StringProcessor() {
             @Override
             public void process( String line ) {
                 try {
                     queryExecutionService.execute( line );
                 }
                 catch ( Exception e ) {
-                    //   e.printStackTrace();
+                    e.printStackTrace();
+                    TestCase.fail();
                 }
             }
         } );
     }
 
+
+    @Test
+    @Repeat( 3 )
+    public void runTestInvocationInvalidQueries() {
+        Utils.processEachLine( getClass().getClassLoader(),
+         "sql/jsqltuner-test-invocation-invalid-queries.sql", new Utils.StringProcessor() {
+            @Override
+            public void process( String line ) {
+                try {
+                    queryExecutionService.execute( line );
+                    TestCase.fail();
+                }
+                catch ( Exception e ) {
+                    e.printStackTrace();
+                }
+            }
+        } );
+    }
+
+    @Test
+    @Repeat( 2 )
+    public void runTestParserInvalidQueries() {
+        Utils.processEachLine( getClass().getClassLoader(),
+         "sql/jsqltuner-test-parser-invalid-queries.sql", new Utils.StringProcessor() {
+            @Override
+            public void process( String line ) {
+                try {
+                    queryExecutionService.execute( line );
+                    TestCase.fail();
+                }
+                catch ( Exception e ) {
+                    e.printStackTrace();
+                }
+            }
+        } );
+    }
 
 }

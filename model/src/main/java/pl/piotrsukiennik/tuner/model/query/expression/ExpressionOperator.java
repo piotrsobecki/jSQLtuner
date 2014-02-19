@@ -1,11 +1,11 @@
-package pl.piotrsukiennik.tuner.model.query.condition;
+package pl.piotrsukiennik.tuner.model.query.expression;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 26.07.13
  * Time: 21:11
  */
-public enum ConditionOperator {
+public enum ExpressionOperator {
     BETWEEN,
     EQUALS_TO,
     EXISTS,
@@ -47,5 +47,13 @@ public enum ConditionOperator {
     STRING_VALUE,
     TIMESTAMP_VALUE,
     TIME_VALUE,
-    WHEN_CLAUSE
+    WHEN_CLAUSE,
+    REGEXP,
+    JDBC_NAMED_PARAMETER,
+    CAST_EXPRESSION,
+    MODULO,
+    ANALYTIC_EXPRESSION,
+    EXTRACT_EXPRESSION,
+    INTERVAL_EXPRESSION,
+    ORACLE_HIERARCHICAL_EXPRESSION
 }

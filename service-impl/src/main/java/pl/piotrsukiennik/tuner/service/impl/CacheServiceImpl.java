@@ -3,10 +3,10 @@ package pl.piotrsukiennik.tuner.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.model.query.*;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.ColumnProjection;
+import pl.piotrsukiennik.tuner.model.query.expression.projection.SourceProjection;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
-import pl.piotrsukiennik.tuner.model.query.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.projection.Projection;
-import pl.piotrsukiennik.tuner.model.query.projection.SourceProjection;
 import pl.piotrsukiennik.tuner.model.query.source.Source;
 import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.model.query.source.TableSource;
@@ -41,7 +41,7 @@ class CacheServiceImpl implements CacheService {
 
     protected void putCachedQuery( SelectQuery objectToParseForPath, SelectQuery objectToStore ) {
         if ( objectToParseForPath.getProjections() != null ) {
-            for ( Projection projection : objectToParseForPath.getProjections() ) {
+            for ( Expression projection : objectToParseForPath.getProjections() ) {
                 if ( projection instanceof ColumnProjection ) {
                     hashesHolder.put( getPath( ( (ColumnProjection) projection ).getColumn() ), objectToStore );
                 }

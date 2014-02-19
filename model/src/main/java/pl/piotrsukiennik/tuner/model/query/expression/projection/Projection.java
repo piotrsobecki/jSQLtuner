@@ -1,6 +1,6 @@
-package pl.piotrsukiennik.tuner.model.query.projection;
+package pl.piotrsukiennik.tuner.model.query.expression.projection;
 
-import pl.piotrsukiennik.tuner.model.ValueEntity;
+import pl.piotrsukiennik.tuner.model.query.expression.Expression;
 import pl.piotrsukiennik.tuner.model.query.other.SortableByPosition;
 
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Projection extends ValueEntity implements SortableByPosition {
+public abstract class Projection extends Expression implements SortableByPosition {
     private int position;
 
     @Override

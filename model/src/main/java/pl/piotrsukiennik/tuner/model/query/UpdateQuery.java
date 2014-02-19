@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.condition.Condition;
+import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
 
 import javax.persistence.CascadeType;
@@ -18,19 +18,19 @@ import java.util.Set;
 public class UpdateQuery extends WriteQuery implements ConditionQuery {
     private Set<ColumnValue> columnValues;
 
-    private Condition whereCondition;
+    private OperatorExpression whereExpression;
 
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    public Condition getWhereCondition() {
-        return whereCondition;
+    @ManyToOne(cascade = { CascadeType.ALL })
+    public OperatorExpression getWhereExpression() {
+        return whereExpression;
     }
 
-    public void setWhereCondition( Condition whereCondition ) {
-        this.whereCondition = whereCondition;
+    public void setWhereExpression( OperatorExpression whereExpression ) {
+        this.whereExpression = whereExpression;
     }
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @OneToMany( cascade = { CascadeType.ALL } )
     public Set<ColumnValue> getColumnValues() {
         return columnValues;
     }

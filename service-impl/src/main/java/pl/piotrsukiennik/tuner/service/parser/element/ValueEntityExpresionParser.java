@@ -230,13 +230,13 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
 
     @Override
     public void visit( AllComparisonExpression allComparisonExpression ) {
-        valueEntity.setValue( allComparisonExpression.GetSubSelect().toString() );
+        valueEntity.setValue( allComparisonExpression.getSubSelect().toString() );
 
     }
 
     @Override
     public void visit( AnyComparisonExpression anyComparisonExpression ) {
-        valueEntity.setValue( anyComparisonExpression.GetSubSelect().toString() );
+        valueEntity.setValue( anyComparisonExpression.getSubSelect().toString() );
 
     }
 
@@ -267,6 +267,53 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
     @Override
     public void visit( BitwiseXor bitwiseXor ) {
         valueEntity.setValue( bitwiseXor.getStringExpression() );
+
+    }
+
+    @Override
+    public void visit( JdbcNamedParameter jdbcNamedParameter ) {
+        valueEntity.setValue( jdbcNamedParameter.getName() );
+
+    }
+
+    @Override
+    public void visit( CastExpression cast ) {
+        valueEntity.setValue( cast.getType().toString() );
+
+    }
+
+    @Override
+    public void visit( Modulo modulo ) {
+        valueEntity.setValue( modulo.getStringExpression() );
+
+    }
+
+    @Override
+    public void visit( AnalyticExpression aexpr ) {
+        valueEntity.setValue( aexpr.getName() );
+
+    }
+
+    @Override
+    public void visit( ExtractExpression eexpr ) {
+        valueEntity.setValue( eexpr.getName() );
+
+    }
+
+    @Override
+    public void visit( IntervalExpression iexpr ) {
+        valueEntity.setValue( iexpr.getParameter() );
+
+    }
+
+    @Override
+    public void visit( OracleHierarchicalExpression oexpr ) {
+
+    }
+
+    @Override
+    public void visit( RegExpMatchOperator rexpr ) {
+        valueEntity.setValue( rexpr.getStringExpression() );
 
     }
 }
