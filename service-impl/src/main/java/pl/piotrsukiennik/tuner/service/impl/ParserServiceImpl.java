@@ -5,19 +5,23 @@ import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.statement.Statement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.piotrsukiennik.tuner.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.persistance.Dao;
+import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
 import pl.piotrsukiennik.tuner.service.ParserService;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.StatementParserVisitor;
-import pl.piotrsukiennik.tuner.util.hash.HashGenerators;
+import pl.piotrsukiennik.tuner.util.TimedCallable;
+import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
-import javax.annotation.Resource;
 import java.io.StringReader;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Author: Piotr Sukiennik
@@ -30,42 +34,59 @@ class ParserServiceImpl implements ParserService {
 
     private static final Log LOG = LogFactory.getLog( ParserService.class );
 
-    @Resource
+    @Autowired
     private ElementParserService elementParserService;
 
-
-    protected String getQueryHash( String databaseStr, String schemaStr, String query ) {
-        return HashGenerators.MD5.getHash( databaseStr + "." + schemaStr + "." + query );
-    }
+    @Autowired
+    private LoggableServiceHolder logService;
 
     @Override
-    public <T extends Query> T parse( String databaseStr, String schemaStr, String query ) throws QueryParsingNotSupportedException {
+    public <T extends Query> T parse( String database, String schema, String query ) throws QueryParsingNotSupportedException {
+        T parsedQuery;
+        QueryContext queryContext = new QueryContextImpl( database, schema );
+        TimedCallable<T> timedCallable = getQuery( queryContext, query );
         try {
-            CCJSqlParserManager pm = new CCJSqlParserManager();
-            QueryContext queryContext = new QueryContextImpl();
-            queryContext.getDatabase( databaseStr );
-            queryContext.getSchema( schemaStr );
-            String queryHash = getQueryHash( databaseStr, schemaStr, query );
-            T parsedQuery = Dao.getQueryDao().getQueryByHash( queryHash );
-            if ( parsedQuery == null ) {
-                Statement statement = pm.parse( new StringReader( query ) );
-                StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( elementParserService, queryContext, statement );
-                parsedQuery = (T) statementParserVisitor.getQuery();
-                if ( parsedQuery != null ) {
-                    parsedQuery.setHash( queryHash );
-                    Dao.getQueryDao().submit( parsedQuery );
-                }
-                else {
-                    Dao.getLogDao().logException( query, "Query parsing not supported!" );
-                    throw new QueryParsingNotSupportedException( query );
-                }
-            }
+            parsedQuery = timedCallable.call();
+            logService.log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getTime( TimeUnit.NANOSECONDS ) );
             return parsedQuery;
         }
-        catch ( JSQLParserException e ) {
-            Dao.getLogDao().logException( query, e );
-            throw new QueryParsingNotSupportedException( query, e );
+        catch ( Exception e ) {
+            throw new QueryParsingNotSupportedException( e, query );
         }
+    }
+
+
+    protected <T extends Query> TimedCallable<T> getQuery( final QueryContext queryContext, final String query ) throws QueryParsingNotSupportedException {
+        return new TimedCallableImpl<T>( new Callable<T>() {
+            @Override
+            public T call() throws Exception {
+                return parse( queryContext, query );
+            }
+        } );
+    }
+
+    protected <T extends Query> T parse( final QueryContext queryContext, String query ) throws QueryParsingNotSupportedException {
+        try {
+            Statement statement = parse( query );
+            return parse( queryContext, query, statement );
+        }
+        catch ( JSQLParserException e ) {
+            throw new QueryParsingNotSupportedException( e, query );
+        }
+    }
+
+    protected Statement parse( String query ) throws JSQLParserException {
+        CCJSqlParserManager pm = new CCJSqlParserManager();
+        return pm.parse( new StringReader( query ) );
+    }
+
+    protected <T extends Query> T parse( final QueryContext queryContext, String query, Statement statement ) throws QueryParsingNotSupportedException {
+        StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( elementParserService, queryContext, statement );
+        T mappedQuery = (T) statementParserVisitor.getQuery();
+        if ( mappedQuery == null ) {
+            throw new QueryParsingNotSupportedException( query );
+        }
+        return mappedQuery;
     }
 
 }

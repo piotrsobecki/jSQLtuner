@@ -1,19 +1,14 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.KeyValueShardNode;
-import pl.piotrsukiennik.tuner.ShardNode;
-import pl.piotrsukiennik.tuner.ShardService;
+import pl.piotrsukiennik.tuner.*;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.service.CacheService;
 import pl.piotrsukiennik.tuner.service.DataRetrievalService;
 import pl.piotrsukiennik.tuner.service.DataSourceSelector;
@@ -34,11 +29,8 @@ import java.util.List;
 public class ShardServiceImpl implements ShardService {
 
 
-    private static final Log LOG = LogFactory.getLog( ShardServiceImpl.class );
-
     @Autowired
-    private
-    List<ShardNode> nodes;
+    private List<ShardNode> nodes;
 
     @Autowired
     private DataSourceService dataSourceService;
@@ -52,6 +44,10 @@ public class ShardServiceImpl implements ShardService {
     @Autowired
     private DataSourceSelector dataSourceSelector;
 
+
+    @Autowired
+    private LoggableService loggableService;
+
     @Override
     public boolean contains( ReadQuery query ) {
         for ( ShardNode shardNode : nodes ) {
@@ -64,30 +60,25 @@ public class ShardServiceImpl implements ShardService {
 
     @Override
     public DataRetrieval get( ReadQuery query ) throws DataRetrievalException {
+        DataSource dataSource;
         DataRetrieval dataRetrieval = null;
-        DataSource dataSource = null;
         DataSourceIdentity dataSourceIdentity = dataSourceSelector.getDataSource( query );
         if ( dataSourceIdentity != null ) {
             dataSource = dataSourceService.getDataSourceByIdentity( query, dataSourceIdentity );
-        }
-        if ( dataSource != null ) {
-            try {
-                dataRetrieval = dataRetrievalService.get( dataSource, query );
-            }
-            catch ( DataRetrievalException dre ) {
-                if ( LOG.isWarnEnabled() ) {
-                    LOG.warn( "No data could be retreived using sharding manager.", dre );
+            if ( dataSource != null ) {
+                try {
+                    dataRetrieval = dataRetrievalService.get( dataSource, query );
+                }
+                catch ( DataRetrievalException dre ) {
+                    dre.accept( loggableService );
                 }
             }
         }
         if ( dataRetrieval == null || dataRetrieval.getResultSet() == null ) {
             dataSource = dataSourceService.getRootDataSource( query );
             dataRetrieval = getRootData( dataSource, query );
-            dataSourceIdentity = dataSource.getDataSourceIdentity();
         }
-        if ( LOG.isInfoEnabled() ) {
-            LOG.info( String.format( "Execute (%s) on (%s:%s)", query.getValue(), dataSourceIdentity.getClazz(), dataSourceIdentity.getIdentifier() ) );
-        }
+        loggableService.log( dataRetrieval );
         dataSourceSelector.submitDataRetrieval( dataRetrieval );
         return dataRetrieval;
     }
@@ -101,15 +92,11 @@ public class ShardServiceImpl implements ShardService {
             put( query, cachedRowSet );
         }
         catch ( SQLException e ) {
-            throw new DataRetrievalException( "Data Sources Manager could cache ResultSet", e );
+            throw new DataRetrievalException( "Data Sources Manager could cache ResultSet", e, query, dataSource.getDataSourceIdentity() );
         }
         return dataRetrieval;
     }
 
-    public DataRetrieval getRootData( ReadQuery query ) throws DataRetrievalException {
-        DataSource dataSource = dataSourceService.getRootDataSource( query );
-        return getRootData( dataSource, query );
-    }
 
     @Override
     public void put( ReadQuery query, CachedRowSet data ) {

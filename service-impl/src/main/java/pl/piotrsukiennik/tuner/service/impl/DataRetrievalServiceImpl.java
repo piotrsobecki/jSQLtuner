@@ -7,10 +7,14 @@ import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.DataRetrievalService;
 import pl.piotrsukiennik.tuner.util.RowSet;
+import pl.piotrsukiennik.tuner.util.TimedCallable;
+import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Piotr Sukiennik
@@ -21,24 +25,31 @@ public class DataRetrievalServiceImpl implements DataRetrievalService {
 
     @Override
     public final DataRetrieval get( DataSource dataSource, ReadQuery query ) throws DataRetrievalException {
-        long rows = 0;
-        long start = System.nanoTime();
-        ResultSet resultSet = dataSource.get( query );
-        if ( resultSet == null ) {
-            throw new DataRetrievalException( "No data found for query" );
-        }
+        TimedCallable<CachedRowSet> timedCallable = getTimedCallable( dataSource, query );
         try {
-            CachedRowSet cachedRowSet = RowSet.clone( resultSet );
-            rows = cachedRowSet.size();
-            resultSet = cachedRowSet;
+            CachedRowSet cachedRowSet = timedCallable.call();
+            return new DataRetrieval( query, dataSource.getDataSourceIdentity(), cachedRowSet, timedCallable.getTime( TimeUnit.NANOSECONDS ), cachedRowSet.size() );
         }
-        catch ( SQLException e ) {
-            throw new DataRetrievalException( e );
+        catch ( Exception e ) {
+            throw new DataRetrievalException( e, query, dataSource.getDataSourceIdentity() );
         }
-        long end = System.nanoTime();
-        long executionTimeNano = end - start;
-
-        return new DataRetrieval( query, dataSource.getDataSourceIdentity(), resultSet, executionTimeNano, rows );
     }
 
+    protected TimedCallable<CachedRowSet> getTimedCallable( final DataSource dataSource, final ReadQuery query ) {
+        return new TimedCallableImpl<>( new Callable<CachedRowSet>() {
+            @Override
+            public CachedRowSet call() throws Exception {
+                ResultSet resultSet = dataSource.get( query );
+                if ( resultSet != null ) {
+                    try {
+                        return RowSet.clone( resultSet );
+                    }
+                    catch ( SQLException e ) {
+                        throw new DataRetrievalException( e, query, dataSource.getDataSourceIdentity() );
+                    }
+                }
+                throw new DataRetrievalException( "No data found for query", query, dataSource.getDataSourceIdentity() );
+            }
+        } );
+    }
 }

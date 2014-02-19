@@ -7,14 +7,14 @@ import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.OrderByElement;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
-import pl.piotrsukiennik.tuner.model.query.expression.PairExpression;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
-import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.expression.PairExpression;
+import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
+import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
+import pl.piotrsukiennik.tuner.model.other.JoinFragment;
+import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.source.Source;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
@@ -28,7 +28,7 @@ import pl.piotrsukiennik.tuner.util.NewQueryUtils;
  * Time: 18:07
  */
 @Service
-@Transactional(value = "jsqlTunerTransactionManager")
+@Transactional( value = "jsqlTunerTransactionManager" )
 public class ParserElementServiceImpl implements ElementParserService {
 
 
@@ -36,7 +36,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         PairExpression pairCondition = new PairExpression();
         pairCondition.setLeftExpression( leftExpression );
         pairCondition.setRightExpression( rightExpression );
-        Dao.getCommonDao().create( pairCondition );
+        Dao.getCommon().create( pairCondition );
         return pairCondition;
     }
 
@@ -49,7 +49,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         tableSource.setTable( queryContext.getTable( tableName.getWholeTableName() ) );
         tableSource = queryContext.mergeTableSource( tableSource );
         if ( tableSource.getId() == 0 ) {
-            Dao.getCommonDao().create( tableSource );
+            Dao.getCommon().create( tableSource );
         }
         return tableSource;
     }
@@ -66,7 +66,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         ExpresionParser orderByExpresionParser = new ExpresionParser( this, queryContext );
         orderByElement.getExpression().accept( orderByExpresionParser );
         orderByFragment.setOrderByExpression( orderByExpresionParser.getExpression() );
-        Dao.getCommonDao().create( orderByFragment );
+        Dao.getCommon().create( orderByFragment );
         return orderByFragment;
     }
 
@@ -86,7 +86,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         ColumnProjection columnProjection = new ColumnProjection();
         columnProjection.setColumn( col );
         columnProjection.setSource( tableSource );
-        Dao.getCommonDao().create( columnProjection );
+        Dao.getCommon().create( columnProjection );
         return columnProjection;
     }
 
@@ -94,7 +94,7 @@ public class ParserElementServiceImpl implements ElementParserService {
     public StarProjection getStarProjection( QueryContext queryContext, AllColumns allColumns, Source source ) {
         StarProjection columnProjection = new StarProjection();
         columnProjection.setSource( source );
-        Dao.getCommonDao().create( columnProjection );
+        Dao.getCommon().create( columnProjection );
         return columnProjection;
     }
 
@@ -112,7 +112,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         }
         StarProjection columnProjection = new StarProjection();
         columnProjection.setSource( tableSource );
-        Dao.getCommonDao().create( columnProjection );
+        Dao.getCommon().create( columnProjection );
         return columnProjection;
     }
 
@@ -129,7 +129,7 @@ public class ParserElementServiceImpl implements ElementParserService {
         ExpresionParser parser = new ExpresionParser( this, queryContext );
         join.getOnExpression().accept( parser );
         joinFragment.setOn( parser.getExpression() );
-        Dao.getCommonDao().create( joinFragment );
+        Dao.getCommon().create( joinFragment );
         return joinFragment;
     }
 

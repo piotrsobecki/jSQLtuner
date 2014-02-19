@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.ai.impl;
 
 import pl.piotrsukiennik.ai.id.GenericIdentifier;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 
 /**
  * @author Piotr Sukiennik

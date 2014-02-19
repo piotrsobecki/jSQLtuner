@@ -1,8 +1,8 @@
 package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 /**
  * @author Piotr Sukiennik

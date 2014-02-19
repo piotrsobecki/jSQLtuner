@@ -2,8 +2,8 @@ package pl.piotrsukiennik.tuner.dto;
 
 //import pl.piotrsukiennik.tuner.IDataSource;
 
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
@@ -76,5 +76,6 @@ public class DataRetrieval {
     public void setRows( long rows ) {
         this.rows = rows;
     }
+
 
 }

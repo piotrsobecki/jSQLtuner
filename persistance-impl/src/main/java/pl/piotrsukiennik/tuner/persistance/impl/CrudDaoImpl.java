@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import pl.piotrsukiennik.tuner.model.ValueEntity;
 import pl.piotrsukiennik.tuner.persistance.CrudDao;
 
+import java.io.Serializable;
+
 
 /**
  * @author Piotr Sukiennik
@@ -16,7 +18,8 @@ abstract class CrudDaoImpl extends AbstractDaoImpl implements CrudDao {
     public <T extends ValueEntity> T create( T t ) {
         Session session = s();
         try {
-            session.save( t );
+            Serializable serializable = session.save( t );
+            t.setId( (Long) serializable );
             session.flush();
         }
         catch ( Exception e ) {

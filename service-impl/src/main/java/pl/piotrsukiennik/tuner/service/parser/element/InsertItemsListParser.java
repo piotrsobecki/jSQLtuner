@@ -4,12 +4,12 @@ import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
 import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
 import net.sf.jsqlparser.statement.select.SubSelect;
-import pl.piotrsukiennik.tuner.model.query.InsertAsSelectQuery;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
-import pl.piotrsukiennik.tuner.model.query.InsertWithValuesQuery;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.query.impl.InsertAsSelectQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.InsertWithValuesQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 

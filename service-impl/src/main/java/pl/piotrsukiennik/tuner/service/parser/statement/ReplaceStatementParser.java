@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.replace.Replace;
-import pl.piotrsukiennik.tuner.model.query.ReplaceQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.ReplaceQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;

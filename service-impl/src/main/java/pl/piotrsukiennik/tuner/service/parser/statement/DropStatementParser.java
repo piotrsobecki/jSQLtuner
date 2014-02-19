@@ -2,8 +2,8 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.drop.Drop;
 import pl.piotrsukiennik.tuner.model.query.DropQuery;
-import pl.piotrsukiennik.tuner.model.query.DropTableQuery;
-import pl.piotrsukiennik.tuner.model.query.GenericDropQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.DropTableQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.GenericDropQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 

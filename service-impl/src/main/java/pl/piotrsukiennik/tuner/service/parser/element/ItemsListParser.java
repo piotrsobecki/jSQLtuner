@@ -6,7 +6,7 @@ import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
 import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 
@@ -52,7 +52,7 @@ public class ItemsListParser implements ItemsListVisitor {
 
     @Override
     public void visit( ExpressionList expressionList ) {
-        Set<pl.piotrsukiennik.tuner.model.query.expression.Expression> expressionsOut = new LinkedHashSet<>();
+        Set<pl.piotrsukiennik.tuner.model.expression.Expression> expressionsOut = new LinkedHashSet<>();
         List<Expression> expressions = expressionList.getExpressions();
         for ( Expression ex : expressions ) {
             ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );

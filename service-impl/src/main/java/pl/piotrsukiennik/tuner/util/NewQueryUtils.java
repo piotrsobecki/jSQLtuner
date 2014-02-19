@@ -1,18 +1,18 @@
 package pl.piotrsukiennik.tuner.util;
 
 import net.sf.jsqlparser.expression.Alias;
-import pl.piotrsukiennik.tuner.model.query.JoinsAware;
-import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.SourcesAware;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.Projection;
-import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
-import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
-import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.expression.projection.Projection;
+import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
+import pl.piotrsukiennik.tuner.model.other.JoinFragment;
+import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.query.JoinsAwareQuery;
+import pl.piotrsukiennik.tuner.model.query.ProjectionsAwareQuery;
+import pl.piotrsukiennik.tuner.model.query.SourcesAwareQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.schema.Index;
 import pl.piotrsukiennik.tuner.model.schema.Table;
+import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
@@ -46,10 +46,10 @@ public class NewQueryUtils {
         return queryContext.getTable( table.getWholeTableName() );
     }
 
-    public static void addProjection( ProjectionsAware query, Projection projection ) {
-        Set<pl.piotrsukiennik.tuner.model.query.expression.Expression> projections = query.getProjections();
+    public static void addProjection( ProjectionsAwareQuery query, Projection projection ) {
+        Set<pl.piotrsukiennik.tuner.model.expression.Expression> projections = query.getProjections();
         if ( projections == null ) {
-            projections = new LinkedHashSet<pl.piotrsukiennik.tuner.model.query.expression.Expression>();
+            projections = new LinkedHashSet<pl.piotrsukiennik.tuner.model.expression.Expression>();
             query.setProjections( projections );
         }
         projection.setPosition( projections.size() );
@@ -57,7 +57,7 @@ public class NewQueryUtils {
     }
 
 
-    public static void addSource( SourcesAware query, Source source ) {
+    public static void addSource( SourcesAwareQuery query, Source source ) {
         Set<Source> sources = query.getSources();
         if ( sources == null ) {
             sources = new LinkedHashSet<Source>();
@@ -67,7 +67,7 @@ public class NewQueryUtils {
     }
 
 
-    public static void addJoin( JoinsAware query, JoinFragment source ) {
+    public static void addJoin( JoinsAwareQuery query, JoinFragment source ) {
         Set<JoinFragment> sources = query.getJoins();
         if ( sources == null ) {
             sources = new LinkedHashSet<JoinFragment>();
@@ -94,6 +94,6 @@ public class NewQueryUtils {
             selectQuery.setGroups( sources );
         }
         int position = sources.size();
-        sources.add( Dao.getQueryDao().getGroupByFragment( expression, position ) );
+        sources.add( Dao.getQuery().getGroupByFragment( expression, position ) );
     }
 }

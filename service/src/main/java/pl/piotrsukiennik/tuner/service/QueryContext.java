@@ -1,9 +1,9 @@
 package pl.piotrsukiennik.tuner.service;
 
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 
 /**
  * @author Piotr Sukiennik

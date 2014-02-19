@@ -3,15 +3,15 @@ package pl.piotrsukiennik.tuner.persistance.impl;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.expression.projection.Projection;
+import pl.piotrsukiennik.tuner.model.other.ColumnValue;
+import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
+import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.other.Values;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.Projection;
-import pl.piotrsukiennik.tuner.model.query.other.ColumnValue;
-import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
-import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.other.Values;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
+import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.persistance.QueryDao;
 
 /**
@@ -20,22 +20,22 @@ import pl.piotrsukiennik.tuner.persistance.QueryDao;
  * Time: 15:31
  */
 @Repository
-@Transactional( value = "jsqlTunerTransactionManager" )
+@Transactional(value = "jsqlTunerTransactionManager")
 class QueryDaoImpl extends CrudDaoImpl implements QueryDao {
 
 
-    public <T extends Query> T getQueryByHash( String hash ) {
+    public <T extends Query> T get( String hash ) {
         return (T) s().createCriteria( Query.class ).add( Restrictions.eq( "hash", hash ) ).setMaxResults( 1 ).uniqueResult();
     }
 
-    public <T extends Query> T getQueryByHash( Class<? extends Query> clazz, String hash ) {
+    public <T extends Query> T get( Class<? extends Query> clazz, String hash ) {
         return (T) s().createCriteria( clazz ).add( Restrictions.eq( "hash", hash ) ).setMaxResults( 1 ).uniqueResult();
     }
 
     @Override
     public <T extends Query> T submit( T query ) {
         if ( query.getId() == 0 ) {
-            T queryPersisted = getQueryByHash( query.getClass(), query.getHash() );
+            T queryPersisted = get( query.getClass(), query.getHash() );
             if ( queryPersisted == null ) {
                 return create( query );
             }

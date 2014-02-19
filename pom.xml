@@ -79,6 +79,7 @@
         <module>service-impl</module>
         <module>persistance</module>
         <module>persistance-impl</module>
+        <module>util</module>
     </modules>
 
     <build>

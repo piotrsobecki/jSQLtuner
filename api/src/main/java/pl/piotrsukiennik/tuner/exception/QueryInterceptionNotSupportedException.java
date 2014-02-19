@@ -1,23 +1,31 @@
 package pl.piotrsukiennik.tuner.exception;
 
+import pl.piotrsukiennik.tuner.Loggable;
+import pl.piotrsukiennik.tuner.LoggableService;
+
 /**
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public class QueryInterceptionNotSupportedException extends RuntimeException {
+public class QueryInterceptionNotSupportedException extends RuntimeException implements Loggable {
 
-    private static String MESSAGE_FORMAT = "Query interception not supported - (%s).";
+    private String query;
+
+    public QueryInterceptionNotSupportedException( String query ) {
+        super();
+        this.query = query;
+    }
 
     public QueryInterceptionNotSupportedException() {
-        super();
+        this( "Query not intercepted" );
     }
 
-    public QueryInterceptionNotSupportedException( String sql ) {
-        super( String.format( MESSAGE_FORMAT, sql ) );
+    public String getQuery() {
+        return query;
     }
 
-    public QueryInterceptionNotSupportedException( String sql, Throwable cause ) {
-        super( String.format( MESSAGE_FORMAT, sql ), cause );
+    @Override
+    public void accept( LoggableService log ) {
+        log.log( this );
     }
-
 }

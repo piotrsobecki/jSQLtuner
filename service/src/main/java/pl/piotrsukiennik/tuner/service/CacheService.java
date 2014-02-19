@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 
 import java.util.Collection;
 

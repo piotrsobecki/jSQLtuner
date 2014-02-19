@@ -4,9 +4,9 @@ package pl.piotrsukiennik.tuner.datasource;
 
 import pl.piotrsukiennik.tuner.KeyValueService;
 import pl.piotrsukiennik.tuner.KeyValueShardNode;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 
 import javax.sql.rowset.CachedRowSet;
 

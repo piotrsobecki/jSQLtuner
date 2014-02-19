@@ -7,12 +7,12 @@ import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
+import pl.piotrsukiennik.tuner.model.source.Source;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.service.ParserService;
 
 import javax.annotation.Resource;

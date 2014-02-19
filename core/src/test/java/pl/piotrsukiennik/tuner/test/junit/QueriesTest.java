@@ -25,7 +25,7 @@ public class QueriesTest {
     private SQLQueryExecutionService queryExecutionService;
 
     //TODO - make valid to parse
-    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id INT,key VARCHAR,value VARCHAR)";
+    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id int,key varchar(255),value varchar(255))";
 
     private static String TEST_TABLE_DROP = "DROP TABLE TestTable";
 
@@ -53,7 +53,7 @@ public class QueriesTest {
 
 
     @Test
-    @Repeat( 3 )
+    @Repeat(3)
     public void runTestValidQueries() {
         Utils.processEachLine( getClass().getClassLoader(),
          "sql/jsqltuner-test-valid-queries.sql", new Utils.StringProcessor() {
@@ -72,7 +72,7 @@ public class QueriesTest {
 
 
     @Test
-    @Repeat( 3 )
+    @Repeat(3)
     public void runTestInvocationInvalidQueries() {
         Utils.processEachLine( getClass().getClassLoader(),
          "sql/jsqltuner-test-invocation-invalid-queries.sql", new Utils.StringProcessor() {
@@ -90,7 +90,7 @@ public class QueriesTest {
     }
 
     @Test
-    @Repeat( 2 )
+    @Repeat(2)
     public void runTestParserInvalidQueries() {
         Utils.processEachLine( getClass().getClassLoader(),
          "sql/jsqltuner-test-parser-invalid-queries.sql", new Utils.StringProcessor() {

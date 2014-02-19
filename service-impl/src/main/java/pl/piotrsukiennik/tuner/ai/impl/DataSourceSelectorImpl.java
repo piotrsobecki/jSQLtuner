@@ -5,8 +5,8 @@ import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.DataSourceSelector;
 import pl.piotrsukiennik.tuner.util.Objects2;
 

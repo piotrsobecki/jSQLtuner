@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @Transactional(value = "jsqlTunerTransactionManager")
 class LogDaoImpl extends CrudDaoImpl implements LogDao {
     @Override
-    public void logException( String query, Throwable exception ) {
+    public void log( String query, Throwable exception ) {
         String exceptionMessage = null;
         if ( exception.getCause() == null ) {
             exceptionMessage = exception.getMessage();
@@ -24,11 +24,11 @@ class LogDaoImpl extends CrudDaoImpl implements LogDao {
         else {
             exceptionMessage = exception.getCause().getMessage();
         }
-        logException( query, exceptionMessage );
+        log( query, exceptionMessage );
     }
 
     @Override
-    public void logException( String query, String exception ) {
+    public void log( String query, String exception ) {
         QueryException queryException = new QueryException();
         queryException.setValue( query );
         queryException.setTimestamp( new Timestamp( System.currentTimeMillis() ) );

@@ -2,8 +2,8 @@ package pl.piotrsukiennik.tuner.service.parser.element;
 
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
-import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;

@@ -7,8 +7,8 @@ import pl.piotrsukiennik.tuner.aop.wrapper.PSExecutionIntercepting;
 import pl.piotrsukiennik.tuner.aop.wrapper.PSParametersIntercepting;
 import pl.piotrsukiennik.tuner.aop.wrapper.SExecutionIntercepting;
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
-import pl.piotrsukiennik.tuner.service.ParserService;
 import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
+import pl.piotrsukiennik.tuner.service.QueryService;
 import pl.piotrsukiennik.tuner.util.Statements;
 
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ import java.sql.Statement;
 public class PreparedStatementBuilderImpl implements PreparedStatementBuilder {
 
     @Autowired
-    private ParserService parserService;
+    private QueryService queryService;
 
     @Autowired
     private ShardService shardService;
@@ -35,7 +35,7 @@ public class PreparedStatementBuilderImpl implements PreparedStatementBuilder {
         String database = Statements.getDatabase( statement );
         String schema = Statements.getSchema( statement );
         if ( !dataSourceContext.contains( database, schema ) ) {
-            return new SExecutionIntercepting<>( statement, shardService, parserService, database, schema );
+            return new SExecutionIntercepting<>( statement, shardService, queryService, database, schema );
         }
         return statement;
     }
@@ -46,7 +46,7 @@ public class PreparedStatementBuilderImpl implements PreparedStatementBuilder {
         String schema = Statements.getSchema( preparedStatement );
         if ( !dataSourceContext.contains( database, schema ) ) {
             PSParametersIntercepting<PreparedStatement> parametersIntercepting = new PSParametersIntercepting<>( preparedStatement );
-            return new PSExecutionIntercepting<>( parametersIntercepting, shardService, parserService, database, schema, sql );
+            return new PSExecutionIntercepting<>( parametersIntercepting, shardService, queryService, database, schema, sql );
         }
         return preparedStatement;
     }

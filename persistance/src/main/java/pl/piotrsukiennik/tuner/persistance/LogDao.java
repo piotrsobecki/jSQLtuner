@@ -6,7 +6,7 @@ package pl.piotrsukiennik.tuner.persistance;
  * Time: 14:30
  */
 public interface LogDao {
-    void logException( String query, String exception );
+    void log( String query, String exception );
 
-    void logException( String query, Throwable exception );
+    void log( String query, Throwable exception );
 }

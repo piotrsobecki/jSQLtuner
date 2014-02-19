@@ -47,6 +47,12 @@
         </dependency>
 
         <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.jsqlparser</groupId>
             <artifactId>jsqlparser</artifactId>
             <version>${jsqlparser.version}</version>

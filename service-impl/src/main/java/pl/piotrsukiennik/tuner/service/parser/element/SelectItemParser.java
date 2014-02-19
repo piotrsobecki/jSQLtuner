@@ -6,9 +6,9 @@ import net.sf.jsqlparser.statement.select.AllColumns;
 import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.SelectExpressionItem;
 import net.sf.jsqlparser.statement.select.SelectItemVisitor;
-import pl.piotrsukiennik.tuner.model.query.ProjectionsAware;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
+import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
+import pl.piotrsukiennik.tuner.model.query.ProjectionsAwareQuery;
+import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;
@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
  * Date: 14.09.13
  * Time: 02:23
  */
-public class SelectItemParser<T extends ProjectionsAware> implements SelectItemVisitor {
+public class SelectItemParser<T extends ProjectionsAwareQuery> implements SelectItemVisitor {
 
     private T selectQuery;
 
@@ -33,7 +33,7 @@ public class SelectItemParser<T extends ProjectionsAware> implements SelectItemV
         this.queryContext = queryContext;
         this.elementParserService = elementParserService;
         if ( this.selectQuery.getProjections() == null ) {
-            this.selectQuery.setProjections( new LinkedHashSet<pl.piotrsukiennik.tuner.model.query.expression.Expression>() );
+            this.selectQuery.setProjections( new LinkedHashSet<pl.piotrsukiennik.tuner.model.expression.Expression>() );
         }
     }
 

@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 
 /**
  * Author: Piotr Sukiennik

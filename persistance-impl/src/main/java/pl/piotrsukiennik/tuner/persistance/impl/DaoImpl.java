@@ -20,10 +20,10 @@ class DaoImpl extends Dao implements ApplicationListener<ContextRefreshedEvent> 
     @Override
     public void onApplicationEvent( ContextRefreshedEvent contextRefreshedEvent ) {
         ApplicationContext applicationContext = contextRefreshedEvent.getApplicationContext();
-        setLogDao( applicationContext.getBean( LogDao.class ) );
-        setQueryDao( applicationContext.getBean( QueryDao.class ) );
-        setSchemaDao( applicationContext.getBean( SchemaDao.class ) );
-        setCommonDao( applicationContext.getBean( CommonDao.class ) );
+        setLog( applicationContext.getBean( LogDao.class ) );
+        setQuery( applicationContext.getBean( QueryDao.class ) );
+        setSchema( applicationContext.getBean( SchemaDao.class ) );
+        setCommon( applicationContext.getBean( CommonDao.class ) );
     }
 
 

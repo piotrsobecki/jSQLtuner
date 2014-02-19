@@ -3,10 +3,10 @@ package pl.piotrsukiennik.tuner.service.parser.element;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.*;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
-import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
-import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.other.JoinFragment;
+import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
@@ -72,7 +72,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         if ( plainSelect.getGroupByColumnReferences() != null ) {
             List<Expression> groupByColumns = plainSelect.getGroupByColumnReferences();
             for ( Expression column : groupByColumns ) {
-                pl.piotrsukiennik.tuner.model.query.expression.Expression fragment = null;
+                pl.piotrsukiennik.tuner.model.expression.Expression fragment = null;
                 if ( column instanceof Column ) {
                     fragment = elementParserService.getColumnProjection( queryContext, (Column) column );
                 }

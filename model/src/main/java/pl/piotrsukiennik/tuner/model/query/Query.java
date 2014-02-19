@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Query extends ValueEntity implements IQuery {
+public abstract class Query extends ValueEntity implements ValueQuery {
     private String hash;
 
 

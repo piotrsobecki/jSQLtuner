@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.SelectBodyParser;

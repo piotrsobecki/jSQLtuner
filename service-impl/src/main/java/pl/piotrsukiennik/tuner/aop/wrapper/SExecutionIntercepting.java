@@ -8,7 +8,8 @@ import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.WriteQuery;
-import pl.piotrsukiennik.tuner.service.ParserService;
+import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
+import pl.piotrsukiennik.tuner.service.QueryService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,17 +25,17 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
     protected ShardService shardService;
 
-    protected ParserService parserService;
+    protected QueryService queryService;
 
     protected String database;
 
     protected String schema;
 
 
-    public SExecutionIntercepting( T statement, ShardService shardService, ParserService parserService, String database, String schema ) {
+    public SExecutionIntercepting( T statement, ShardService shardService, QueryService queryService, String database, String schema ) {
         super( statement );
         this.shardService = shardService;
-        this.parserService = parserService;
+        this.queryService = queryService;
         this.database = database;
         this.schema = schema;
     }
@@ -44,7 +45,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     @Override
     public ResultSet getResultSet() throws SQLException {
         try {
-            ReadQuery readQuery =  parserService.parse(database, schema, sql );
+            ReadQuery readQuery =  queryService.parse(database, schema, sql );
             DataSource rootDs = new InterceptorDataSource( this, readQuery ) {
                 @Override
                 protected ResultSet proceed() throws SQLException {
@@ -54,7 +55,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             return WrapperUtil.getResultSet( shardService, readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            LoggableServiceHolder.get().logParsingException( sql,e );
             return super.getResultSet();
         }
     }*/
@@ -63,7 +64,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     @Override
     public ResultSet executeQuery( final String sql ) throws SQLException {
         try {
-            ReadQuery readQuery = parserService.parse( database, schema, sql );
+            ReadQuery readQuery = queryService.get( database, schema, sql );
             DataSource rootDs = new InterceptorDataSource( this, readQuery ) {
                 @Override
                 protected ResultSet proceed() throws SQLException {
@@ -73,7 +74,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             return WrapperUtil.getResultSet( shardService, readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
             return super.getResultSet();
         }
     }
@@ -89,11 +90,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public int executeUpdate( String sql ) throws SQLException {
         int rowsAffected = super.executeUpdate( sql );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -102,11 +103,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public boolean execute( String sql ) throws SQLException {
         boolean rowsAffected = super.execute( sql );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -115,11 +116,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public int executeUpdate( String sql, int[] columnIndexes ) throws SQLException {
         int rowsAffected = super.executeUpdate( sql, columnIndexes );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -128,11 +129,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public int executeUpdate( String sql, int autoGeneratedKeys ) throws SQLException {
         int rowsAffected = super.executeUpdate( sql, autoGeneratedKeys );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -141,11 +142,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public int executeUpdate( String sql, String[] columnNames ) throws SQLException {
         int rowsAffected = super.executeUpdate( sql, columnNames );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -154,11 +155,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public boolean execute( String sql, int autoGeneratedKeys ) throws SQLException {
         boolean rowsAffected = super.execute( sql, autoGeneratedKeys );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -167,11 +168,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public boolean execute( String sql, int[] columnIndexes ) throws SQLException {
         boolean rowsAffected = super.execute( sql, columnIndexes );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }
@@ -180,11 +181,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     public boolean execute( String sql, String[] columnNames ) throws SQLException {
         boolean rowsAffected = super.execute( sql, columnNames );
         try {
-            WriteQuery query = parserService.parse( database, schema, sql );
+            WriteQuery query = queryService.get( database, schema, sql );
             WrapperUtil.proceed( shardService, query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            WrapperUtil.log( LOG, e, sql );
+            e.accept( LoggableServiceHolder.get() );
         }
         return rowsAffected;
     }

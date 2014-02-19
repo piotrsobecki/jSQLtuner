@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.ai;
 
 import pl.piotrsukiennik.ai.id.Identifier;
 import pl.piotrsukiennik.ai.selectable.Selectable;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 
 /**
  * @author Piotr Sukiennik

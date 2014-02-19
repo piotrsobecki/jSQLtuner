@@ -1,10 +1,10 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.tuner.dto.QueryContextDto;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.other.GroupByFragment;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
@@ -29,6 +29,12 @@ public class QueryContextImpl implements QueryContext {
         this( new QueryContextDto() );
     }
 
+    public QueryContextImpl( String database, String schema ) {
+        this( new QueryContextDto() );
+        this.getDatabase( database );
+        this.getSchema( schema );
+    }
+
     public QueryContextImpl( QueryContextDto queryContextDto ) {
         this.queryContextDto = queryContextDto;
     }
@@ -40,12 +46,11 @@ public class QueryContextImpl implements QueryContext {
     @Override
     public Database getDatabase( String databaseName ) {
         String nameCorrected = correctName( databaseName );
-
         if ( queryContextDto.getDatabase() != null ) {
             return queryContextDto.getDatabase();
         }
         else {
-            Database database = Dao.getSchemaDao().getDatabase( nameCorrected );
+            Database database = Dao.getSchema().getDatabase( nameCorrected );
             queryContextDto.setDatabase( database );
             return database;
         }
@@ -59,7 +64,7 @@ public class QueryContextImpl implements QueryContext {
             return queryContextDto.getSchema();
         }
         else {
-            Schema schema = Dao.getSchemaDao().getSchema( queryContextDto.getDatabase(), schemaNameCorrected );
+            Schema schema = Dao.getSchema().getSchema( queryContextDto.getDatabase(), schemaNameCorrected );
             queryContextDto.setSchema( schema );
             return schema;
         }
@@ -71,7 +76,7 @@ public class QueryContextImpl implements QueryContext {
         String key = table.getValue() + "." + columnName;
         Column column = queryContextDto.getColumns().get( key );
         if ( column == null ) {
-            column = Dao.getSchemaDao().getColumn( table, columnNameCorrected );
+            column = Dao.getSchema().getColumn( table, columnNameCorrected );
             queryContextDto.getColumns().put( key, column );
         }
         return column;
@@ -85,7 +90,7 @@ public class QueryContextImpl implements QueryContext {
 
     @Override
     public GroupByFragment getGroupByFragment( Expression element, int position ) {
-        return Dao.getQueryDao().getGroupByFragment( element, position );
+        return Dao.getQuery().getGroupByFragment( element, position );
 
     }
 
@@ -95,7 +100,7 @@ public class QueryContextImpl implements QueryContext {
         String key = tableName;
         Table table = queryContextDto.getTables().get( key );
         if ( table == null ) {
-            table = Dao.getSchemaDao().getTable( queryContextDto.getSchema(), nameCorrected );
+            table = Dao.getSchema().getTable( queryContextDto.getSchema(), nameCorrected );
             queryContextDto.getTables().put( key, table );
         }
         return table;
@@ -108,7 +113,7 @@ public class QueryContextImpl implements QueryContext {
         String key = nameCorrected;
         Index index = queryContextDto.getIndexes().get( key );
         if ( index == null ) {
-            index = Dao.getSchemaDao().getIndex( table, nameCorrected );
+            index = Dao.getSchema().getIndex( table, nameCorrected );
             queryContextDto.getIndexes().put( key, index );
         }
         return index;

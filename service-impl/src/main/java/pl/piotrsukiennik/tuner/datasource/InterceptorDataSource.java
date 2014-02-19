@@ -3,9 +3,9 @@ package pl.piotrsukiennik.tuner.datasource;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.WriteToStatementException;
 import pl.piotrsukiennik.tuner.exception.WrongStatementException;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.util.Objects2;
 
 import javax.sql.rowset.CachedRowSet;
@@ -36,10 +36,10 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
             if ( Objects2.eq( this.query, query ) ) {
                 return proceed();
             }
-            throw new WrongStatementException( String.format( GET_DATA_EXCEPTION_FORMAT, query.getValue() ) );
+            throw new WrongStatementException( query, getDataSourceIdentity() );
         }
         catch ( SQLException e ) {
-            throw new DataRetrievalException( e );
+            throw new DataRetrievalException( e, query, getDataSourceIdentity() );
         }
     }
 

@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.ai.impl;
 import pl.piotrsukiennik.ai.selectable.AbstractSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 
 /**
  * @author Piotr Sukiennik

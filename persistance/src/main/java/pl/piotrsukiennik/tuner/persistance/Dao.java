@@ -18,35 +18,35 @@ public abstract class Dao {
 
     protected static SchemaDao schemaDao;
 
-    public static LogDao getLogDao() {
+    public static LogDao getLog() {
         return logDao;
     }
 
-    public static CommonDao getCommonDao() {
+    public static CommonDao getCommon() {
         return commonDao;
     }
 
-    public static QueryDao getQueryDao() {
+    public static QueryDao getQuery() {
         return queryDao;
     }
 
-    public static SchemaDao getSchemaDao() {
+    public static SchemaDao getSchema() {
         return schemaDao;
     }
 
-    protected static void setLogDao( LogDao logDao ) {
+    protected static void setLog( LogDao logDao ) {
         Dao.logDao = logDao;
     }
 
-    protected static void setQueryDao( QueryDao queryDao ) {
+    protected static void setQuery( QueryDao queryDao ) {
         Dao.queryDao = queryDao;
     }
 
-    protected static void setSchemaDao( SchemaDao schemaDao ) {
+    protected static void setSchema( SchemaDao schemaDao ) {
         Dao.schemaDao = schemaDao;
     }
 
-    protected static void setCommonDao( CommonDao commonDao ) {
+    protected static void setCommon( CommonDao commonDao ) {
         Dao.commonDao = commonDao;
     }
 

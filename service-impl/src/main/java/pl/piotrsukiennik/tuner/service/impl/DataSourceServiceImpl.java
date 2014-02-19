@@ -5,8 +5,8 @@ import com.google.common.collect.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.model.query.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.service.DataSourceService;
 import pl.piotrsukiennik.tuner.util.Collections3;
 

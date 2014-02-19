@@ -7,10 +7,10 @@ import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
 import net.sf.jsqlparser.expression.operators.relational.*;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.expression.*;
-import pl.piotrsukiennik.tuner.model.query.expression.Expression;
-import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
+import pl.piotrsukiennik.tuner.model.expression.*;
+import pl.piotrsukiennik.tuner.model.expression.Expression;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
+import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.persistance.Dao;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
@@ -35,7 +35,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     public Expression getExpression() {
         if ( expression.getId() == 0 ) {
-            Dao.getCommonDao().create( expression );
+            Dao.getCommon().create( expression );
         }
         return expression;
     }

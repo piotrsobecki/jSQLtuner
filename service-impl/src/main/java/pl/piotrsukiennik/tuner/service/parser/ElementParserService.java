@@ -5,12 +5,12 @@ import net.sf.jsqlparser.statement.select.AllColumns;
 import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.OrderByElement;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.ColumnProjection;
-import pl.piotrsukiennik.tuner.model.query.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
-import pl.piotrsukiennik.tuner.model.query.other.OrderByFragment;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
+import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
+import pl.piotrsukiennik.tuner.model.other.JoinFragment;
+import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
+import pl.piotrsukiennik.tuner.model.source.Source;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 
 /**

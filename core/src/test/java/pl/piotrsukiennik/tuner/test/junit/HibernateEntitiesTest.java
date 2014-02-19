@@ -5,14 +5,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.piotrsukiennik.tuner.test.model.TestEntity;
 import pl.piotrsukiennik.tuner.test.service.EntityService;
 
-import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Piotr Sukiennik
@@ -22,11 +23,10 @@ import java.util.List;
 @ContextConfiguration(locations = { "/jsqltuner-test-root-context.xml" })
 public class HibernateEntitiesTest {
 
+    @Autowired
+    private EntityService entityService;
 
-    private
-    @Resource
-    EntityService entityService;
-
+    public static final int SINGLE_GET_RUNS = 100;
 
     @Before
     public void setupBefore() {
@@ -64,15 +64,21 @@ public class HibernateEntitiesTest {
 
     @Test
     public void testGetSingle() {
-        for ( int i = 0; i < 10; i++ ) {
+        TimeUnit out = TimeUnit.MILLISECONDS;
+        long start = System.currentTimeMillis();
+        for ( int i = 0; i < SINGLE_GET_RUNS; i++ ) {
             List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
             Assert.assertEquals( 1, testEntities.size() );
             Assert.assertNotNull( testEntities.get( 0 ) );
             Assert.assertNotNull( testEntities.get( 0 ).getId() );
             Assert.assertNotNull( testEntities.get( 0 ).getString() );
         }
-
+        long end = System.currentTimeMillis();
+        long diff = end - start;
+        long sec = out.convert( diff, TimeUnit.MILLISECONDS );
+        System.out.println( "Execution took " + sec + " " + out.name() );
     }
+
 
     @Test
     public void testGetNull() {

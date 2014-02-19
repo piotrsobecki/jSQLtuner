@@ -2,11 +2,11 @@ package pl.piotrsukiennik.tuner.service.parser.element;
 
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.*;
-import pl.piotrsukiennik.tuner.model.query.SelectQuery;
-import pl.piotrsukiennik.tuner.model.query.other.JoinFragment;
-import pl.piotrsukiennik.tuner.model.query.source.Source;
-import pl.piotrsukiennik.tuner.model.query.source.SubJoinSource;
-import pl.piotrsukiennik.tuner.model.query.source.SubQuerySource;
+import pl.piotrsukiennik.tuner.model.other.JoinFragment;
+import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
+import pl.piotrsukiennik.tuner.model.source.Source;
+import pl.piotrsukiennik.tuner.model.source.SubJoinSource;
+import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;

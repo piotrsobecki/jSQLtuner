@@ -1,9 +1,9 @@
 package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.delete.Delete;
-import pl.piotrsukiennik.tuner.model.query.DeleteQuery;
-import pl.piotrsukiennik.tuner.model.query.expression.OperatorExpression;
-import pl.piotrsukiennik.tuner.model.query.source.TableSource;
+import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
+import pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery;
+import pl.piotrsukiennik.tuner.model.source.TableSource;
 import pl.piotrsukiennik.tuner.service.QueryContext;
 import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
