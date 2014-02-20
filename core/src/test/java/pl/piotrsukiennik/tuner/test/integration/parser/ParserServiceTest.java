@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.test.junit;
+package pl.piotrsukiennik.tuner.test.integration.parser;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,15 +21,15 @@ import javax.annotation.Resource;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/jsqltuner-context.xml" })
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/jsqltuner-context.xml" } )
 public class ParserServiceTest {
 
     @Resource
     private ParserService parserService;
 
     @Test
-    @Repeat(2)
+    @Repeat( 2 )
     public void testParseSelectQuery() throws QueryParsingNotSupportedException {
         String database = "testdb";
         String schema = "testschema";
