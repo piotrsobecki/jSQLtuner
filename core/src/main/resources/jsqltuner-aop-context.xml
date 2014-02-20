@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <import resource="jsqltuner-datasources-context.xml"/>
+    <import resource="classpath*:jsqltuner-services-context.xml"/>
+
+    <aop:config/>
+    <aop:aspectj-autoproxy/>
+    <context:annotation-config/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.aop"/>
+
+    <bean id="preparedStatementInterceptingAdvisor"
+          class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <qualifier value="connectionAdvisor"/>
+        <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
+        <property name="advice" ref="PSInterceptingAdvice"/>
+    </bean>
+
+    <bean id="statementInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <qualifier value="connectionAdvisor"/>
+        <property name="expression" value="execution (java.sql.Statement java.sql.Connection.*(..))"/>
+        <property name="advice" ref="SInterceptingAdvice"/>
+    </bean>
+
+
+</beans>

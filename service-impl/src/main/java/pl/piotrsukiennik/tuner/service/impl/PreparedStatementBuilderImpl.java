@@ -3,12 +3,12 @@ package pl.piotrsukiennik.tuner.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.ShardService;
-import pl.piotrsukiennik.tuner.aop.wrapper.PSExecutionIntercepting;
-import pl.piotrsukiennik.tuner.aop.wrapper.PSParametersIntercepting;
-import pl.piotrsukiennik.tuner.aop.wrapper.SExecutionIntercepting;
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
 import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
 import pl.piotrsukiennik.tuner.service.QueryService;
+import pl.piotrsukiennik.tuner.statement.PSExecutionIntercepting;
+import pl.piotrsukiennik.tuner.statement.PSParametersIntercepting;
+import pl.piotrsukiennik.tuner.statement.SExecutionIntercepting;
 import pl.piotrsukiennik.tuner.util.Statements;
 
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import java.sql.Statement;
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-@Service
+@Service("pl.piotrsukiennik.tuner.service.PreparedStatementBuilder.impl")
 public class PreparedStatementBuilderImpl implements PreparedStatementBuilder {
 
     @Autowired

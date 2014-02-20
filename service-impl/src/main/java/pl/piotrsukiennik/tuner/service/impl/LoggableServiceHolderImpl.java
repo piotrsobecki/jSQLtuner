@@ -21,15 +21,13 @@ import java.util.concurrent.TimeUnit;
  * @author Piotr Sukiennik
  * @date 19.02.14
  */
-@Service
-@Transactional( "jsqlTunerTransactionManager" )
+@Service("pl.piotrsukiennik.tuner.LoggableService.impl")
+@Transactional("jsqlTunerTransactionManager")
 public class LoggableServiceHolderImpl extends LoggableServiceHolder implements LoggableService {
 
     private static final Log LOG = LogFactory.getLog( LoggableServiceHolder.class );
 
     private static final String EXCEPTION_MESSAGE_FORMAT = "Query (%s) caused exception.";
-
-    private static final String EXCEPTION_MESSAGE_MSG_FORMAT = "Query (%s) caused exception. Message %s";
 
 
     public LoggableServiceHolderImpl() {

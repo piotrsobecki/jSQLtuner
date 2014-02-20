@@ -37,9 +37,6 @@ class ParserServiceImpl implements ParserService {
     @Autowired
     private ElementParserService elementParserService;
 
-    @Autowired
-    private LoggableServiceHolder logService;
-
     @Override
     public <T extends Query> T parse( String database, String schema, String query ) throws QueryParsingNotSupportedException {
         T parsedQuery;
@@ -47,7 +44,7 @@ class ParserServiceImpl implements ParserService {
         TimedCallable<T> timedCallable = getQuery( queryContext, query );
         try {
             parsedQuery = timedCallable.call();
-            logService.log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getTime( TimeUnit.NANOSECONDS ) );
+            LoggableServiceHolder.get().log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getTime( TimeUnit.NANOSECONDS ) );
             return parsedQuery;
         }
         catch ( Exception e ) {

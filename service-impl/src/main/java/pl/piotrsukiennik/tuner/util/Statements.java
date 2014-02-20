@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pl.piotrsukiennik.tuner.aop.wrapper.PSParameter;
+import pl.piotrsukiennik.tuner.statement.PSParameter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
