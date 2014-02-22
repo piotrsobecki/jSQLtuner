@@ -10,7 +10,7 @@ import java.util.Map;
  * Date: 28.07.13
  * Time: 19:24
  */
-public class QueryContextDto {
+public class QueryElementsCache {
 
     private Database database;
 

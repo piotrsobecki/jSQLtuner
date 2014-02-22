@@ -15,7 +15,7 @@ import java.util.List;
  * Time: 12:58
  */
 @Service
-@Transactional
+@Transactional("transactionManager")
 public class EntityService extends AbstractService {
 
 

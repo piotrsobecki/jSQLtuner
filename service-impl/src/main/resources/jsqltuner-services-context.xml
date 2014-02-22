@@ -7,9 +7,10 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager"/>
-    <context:component-scan base-package="pl.piotrsukiennik.tuner.service,pl.piotrsukiennik.tuner.service.impl"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.service"/>
     <context:property-placeholder location="jsqltuner-persistance.properties"/>
+    <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager" proxy-target-class="false"/>
 
     <import resource="classpath*:jsqltuner-persistance-context.xml"/>
 

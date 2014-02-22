@@ -8,29 +8,22 @@ import net.sf.jsqlparser.expression.operators.relational.*;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.model.ValueEntity;
-import pl.piotrsukiennik.tuner.model.schema.Database;
-import pl.piotrsukiennik.tuner.model.schema.Schema;
-import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 27.07.13
  * Time: 13:25
  */
-public class ValueEntityExpresionParser implements ExpressionVisitor {
+public class ValueEntityExpresionParser extends Visitor implements ExpressionVisitor {
 
     private ValueEntity valueEntity;
 
-    private QueryContext queryContext;
 
-    private ElementParserService elementParserService;
-
-    public ValueEntityExpresionParser( ElementParserService elementParserService, QueryContext queryContext, ValueEntity valueEntity ) {
+    public ValueEntityExpresionParser( QueryParsingContext parsingContext, ValueEntity valueEntity ) {
+        super( parsingContext );
         this.valueEntity = valueEntity;
-        this.queryContext = queryContext;
-        this.elementParserService = elementParserService;
     }
 
 
@@ -46,7 +39,7 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
 
     @Override
     public void visit( InverseExpression inverseExpression ) {
-        ValueEntityExpresionParser valueEntityExpresionParser = new ValueEntityExpresionParser( elementParserService, queryContext, valueEntity );
+        ValueEntityExpresionParser valueEntityExpresionParser = new ValueEntityExpresionParser( parsingContext, valueEntity );
         inverseExpression.getExpression().accept( valueEntityExpresionParser );
         valueEntity.setValue( "Inverse " + valueEntity.getValue() );
     }
@@ -197,11 +190,7 @@ public class ValueEntityExpresionParser implements ExpressionVisitor {
 
     @Override
     public void visit( Column tableColumn ) {
-        pl.piotrsukiennik.tuner.model.schema.Column col = queryContext.getColumn( tableColumn.getTable().getWholeTableName(), tableColumn.getColumnName() );
-        Table table = col.getTable();
-        Schema schema = table.getSchema();
-        Database database = schema.getDatabase();
-        valueEntity.setValue( database.getValue() + "." + schema.getValue() + "." + table.getValue() + "." + col.getValue() );
+        valueEntity = parsingContext.getColumn( tableColumn );
     }
 
     @Override

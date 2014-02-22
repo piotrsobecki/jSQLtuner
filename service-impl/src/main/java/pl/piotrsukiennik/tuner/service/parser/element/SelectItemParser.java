@@ -9,8 +9,8 @@ import net.sf.jsqlparser.statement.select.SelectItemVisitor;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.ProjectionsAwareQuery;
 import pl.piotrsukiennik.tuner.model.source.Source;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 import java.util.LinkedHashSet;
@@ -20,18 +20,14 @@ import java.util.LinkedHashSet;
  * Date: 14.09.13
  * Time: 02:23
  */
-public class SelectItemParser<T extends ProjectionsAwareQuery> implements SelectItemVisitor {
+public class SelectItemParser<T extends ProjectionsAwareQuery> extends Visitor implements SelectItemVisitor {
 
     private T selectQuery;
 
-    private QueryContext queryContext;
 
-    private ElementParserService elementParserService;
-
-    public SelectItemParser( ElementParserService elementParserService, QueryContext queryContext, T selectQuery ) {
+    public SelectItemParser( QueryParsingContext parsingContext, T selectQuery ) {
+        super( parsingContext );
         this.selectQuery = selectQuery;
-        this.queryContext = queryContext;
-        this.elementParserService = elementParserService;
         if ( this.selectQuery.getProjections() == null ) {
             this.selectQuery.setProjections( new LinkedHashSet<pl.piotrsukiennik.tuner.model.expression.Expression>() );
         }
@@ -40,14 +36,14 @@ public class SelectItemParser<T extends ProjectionsAwareQuery> implements Select
     @Override
     public void visit( AllColumns allColumns ) {
         for ( Source source : selectQuery.getSources() ) {
-            StarProjection starProjection = elementParserService.getStarProjection( queryContext, allColumns, source );
+            StarProjection starProjection = parsingContext.getStarProjection( source );
             NewQueryUtils.addProjection( selectQuery, starProjection );
         }
     }
 
     @Override
     public void visit( AllTableColumns allTableColumns ) {
-        StarProjection starProjection = elementParserService.getStarProjection( queryContext, allTableColumns );
+        StarProjection starProjection = parsingContext.getStarProjection( allTableColumns );
         NewQueryUtils.addProjection( selectQuery, starProjection );
     }
 
@@ -56,7 +52,7 @@ public class SelectItemParser<T extends ProjectionsAwareQuery> implements Select
         Expression expression = selectExpressionItem.getExpression();
         if ( expression instanceof Column ) {
             Column column = ( (Column) expression );
-            NewQueryUtils.addProjection( selectQuery, elementParserService.getColumnProjection( queryContext, column ) );
+            NewQueryUtils.addProjection( selectQuery, parsingContext.getColumnProjection( column ) );
         }
     }
 }

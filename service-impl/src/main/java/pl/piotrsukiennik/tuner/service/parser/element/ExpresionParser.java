@@ -12,8 +12,7 @@ import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.persistance.Dao;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
 
 import java.util.LinkedHashSet;
@@ -29,8 +28,8 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     private Expression expression;
 
 
-    public ExpresionParser( ElementParserService elementParserService, QueryContext queryContext ) {
-        super( elementParserService, queryContext );
+    public ExpresionParser( QueryParsingContext parsingContext ) {
+        super( parsingContext );
     }
 
     public Expression getExpression() {
@@ -43,8 +42,8 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     protected void process( ExpressionOperator operator, BinaryExpression binaryExpression ) {
         PairExpression pairCondition = new PairExpression();
         pairCondition.setOperator( operator );
-        ExpresionParser leftExpresionParser = new ExpresionParser( elementParserService, queryContext );
-        ExpresionParser rightExpresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser leftExpresionParser = new ExpresionParser( parsingContext );
+        ExpresionParser rightExpresionParser = new ExpresionParser( parsingContext );
         binaryExpression.getLeftExpression().accept( leftExpresionParser );
         binaryExpression.getRightExpression().accept( rightExpresionParser );
         pairCondition.setLeftExpression( leftExpresionParser.getExpression() );
@@ -181,7 +180,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         SubExpression subCondition = new SubExpression();
         subCondition.setOperator( ExpressionOperator.PARENTHESIS );
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         parenthesis.getExpression().accept( expresionParser );
         subCondition.setSubExpression( (OperatorExpression) expresionParser.getExpression() );
         expression = subCondition;
@@ -229,9 +228,9 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     public void visit( Between between ) {
 
         BetweenExpression betweenCondition = new BetweenExpression();
-        ExpresionParser leftExpresionParser = new ExpresionParser( elementParserService, queryContext );
-        ExpresionParser startExpresionParser = new ExpresionParser( elementParserService, queryContext );
-        ExpresionParser endExpresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser leftExpresionParser = new ExpresionParser( parsingContext );
+        ExpresionParser startExpresionParser = new ExpresionParser( parsingContext );
+        ExpresionParser endExpresionParser = new ExpresionParser( parsingContext );
         between.getLeftExpression().accept( leftExpresionParser );
         between.getBetweenExpressionStart().accept( startExpresionParser );
         between.getBetweenExpressionEnd().accept( endExpresionParser );
@@ -259,7 +258,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     @Override
     public void visit( InExpression inExpression ) {
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         inExpression.getLeftExpression().accept( expresionParser );
 
         SubExpression subCondition = new SubExpression();
@@ -271,7 +270,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     @Override
     public void visit( IsNullExpression isNullExpression ) {
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         isNullExpression.getLeftExpression().accept( expresionParser );
         SubExpression subCondition = new SubExpression();
         subCondition.setSubExpression( expresionParser.getExpression() );
@@ -301,7 +300,8 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
 
     @Override
     public void visit( Column tableColumn ) {
-        expression = elementParserService.getColumnProjection( queryContext, tableColumn );
+
+        expression = parsingContext.getColumnProjection( tableColumn );
     }
 
     @Override
@@ -313,7 +313,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         subQuerySource.setValue( subSelect.getSelectBody().toString() );
 
         SelectQuery selectQuery = new SelectQuery();
-        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( elementParserService, queryContext, selectQuery );
+        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( parsingContext, selectQuery );
         subSelect.getSelectBody().accept( selectBodyParser );
         subQuerySource.setSelectQuery( selectQuery );
 
@@ -330,7 +330,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         listCondition.setOperator( ExpressionOperator.CASE );
         listCondition.setSubExpressions( new LinkedHashSet<Expression>() );
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
 
         caseExpression.getSwitchExpression().accept( expresionParser );
 
@@ -352,7 +352,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     public void visit( WhenClause whenClause ) {
         PairExpression pairCondition = new PairExpression();
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
 
         whenClause.getWhenExpression().accept( expresionParser );
 
@@ -371,7 +371,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
         SubExpression subCondition = new SubExpression();
         subCondition.setOperator( ExpressionOperator.EXISTS );
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         existsExpression.getRightExpression().accept( expresionParser );
 
         subCondition.setSubExpression( expresionParser.getExpression() );

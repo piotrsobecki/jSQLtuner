@@ -16,9 +16,7 @@ import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.AlterTableQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 
 /**
@@ -28,15 +26,22 @@ import pl.piotrsukiennik.tuner.util.NewQueryUtils;
  */
 public abstract class StatementParser<T extends Query> extends ParsingVisitor<T> implements StatementVisitor {
 
-    protected StatementParser( ElementParserService elementParserService, QueryContext queryContext, Statement statement ) {
-        super( elementParserService, queryContext );
+    protected StatementParser( QueryParsingContext parsingContext, Statement statement ) {
+        super( parsingContext );
         statement.accept( this );
     }
 
-    protected StatementParser( ElementParserService elementParserService, QueryContext queryContext, Statement statement, T query ) {
-        super( elementParserService, queryContext, query );
+    protected StatementParser( QueryParsingContext parsingContext, Statement statement, T query ) {
+        super( parsingContext, query );
         init( statement );
         statement.accept( this );
+    }
+
+    @Override
+    public void visit( Alter alter ) {
+        query = (T) new AlterTableQuery();
+        Table table = parsingContext.getTable( alter.getTable() );
+        ( (AlterTableQuery) query ).setTable( table );
     }
 
     @Override
@@ -82,10 +87,4 @@ public abstract class StatementParser<T extends Query> extends ParsingVisitor<T>
     }
 
 
-    @Override
-    public void visit( Alter alter ) {
-        query = (T) new AlterTableQuery();
-        Table table = NewQueryUtils.map( queryContext, alter.getTable() );
-        ( (AlterTableQuery) query ).setTable( table );
-    }
 }

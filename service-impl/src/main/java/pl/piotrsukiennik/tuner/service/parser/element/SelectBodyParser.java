@@ -7,8 +7,7 @@ import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
@@ -20,13 +19,14 @@ import java.util.List;
  * Time: 22:54
  */
 public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> implements net.sf.jsqlparser.statement.select.SelectVisitor {
-    public SelectBodyParser( ElementParserService elementParserService, QueryContext queryContext, T query ) {
-        super( elementParserService, queryContext, query );
+
+    public SelectBodyParser( QueryParsingContext parsingContext, T query ) {
+        super( parsingContext, query );
     }
 
     @Override
     public void visit( PlainSelect plainSelect ) {
-        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
+        FromItemParser fromItemParser = new FromItemParser( parsingContext );
         plainSelect.getFromItem().accept( fromItemParser );
         NewQueryUtils.addSource( query, fromItemParser.getSource() );
         if ( plainSelect.getFromItem() != null ) {
@@ -34,12 +34,12 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         }
 
         List<SelectItem> selectItems = plainSelect.getSelectItems();
-        SelectItemParser selectItemParser = new SelectItemParser( elementParserService, queryContext, query );
+        SelectItemParser selectItemParser = new SelectItemParser( parsingContext, query );
         for ( SelectItem selectItem : selectItems ) {
             selectItem.accept( selectItemParser );
         }
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
 
         if ( plainSelect.getHaving() != null ) {
             plainSelect.getHaving().accept( expresionParser );
@@ -54,7 +54,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         if ( plainSelect.getJoins() != null ) {
             List<Join> joins = plainSelect.getJoins();
             for ( Join join : joins ) {
-                JoinFragment joinFragment = elementParserService.getJoin( queryContext, join );
+                JoinFragment joinFragment = parsingContext.getJoin( join );
                 NewQueryUtils.addJoin( query, joinFragment );
             }
         }
@@ -63,7 +63,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
             List<OrderByElement> orderByElements = plainSelect.getOrderByElements();
             for ( int i = 0; i < orderByElements.size(); i++ ) {
                 OrderByElement orderByElement = orderByElements.get( i );
-                OrderByFragment orderByFragment = elementParserService.getOrderByFragment( queryContext, orderByElement );
+                OrderByFragment orderByFragment = parsingContext.getOrderByFragment( orderByElement );
                 NewQueryUtils.addOrderByFragment( query, orderByFragment );
             }
 
@@ -74,10 +74,10 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
             for ( Expression column : groupByColumns ) {
                 pl.piotrsukiennik.tuner.model.expression.Expression fragment = null;
                 if ( column instanceof Column ) {
-                    fragment = elementParserService.getColumnProjection( queryContext, (Column) column );
+                    fragment = parsingContext.getColumnProjection( (Column) column );
                 }
                 else {
-                    ExpresionParser groupByColumnExpresionParser = new ExpresionParser( elementParserService, queryContext );
+                    ExpresionParser groupByColumnExpresionParser = new ExpresionParser( parsingContext );
                     column.accept( expresionParser );
                     fragment = groupByColumnExpresionParser.getExpression();
                 }
@@ -86,7 +86,7 @@ public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> i
         }
 
         if ( plainSelect.getInto() != null ) {
-            query.setIntoTable( queryContext.getTable( plainSelect.getInto().getWholeTableName() ) );
+            query.setIntoTable( parsingContext.getTable( plainSelect.getInto() ) );
         }
 
         if ( plainSelect.getLimit() != null ) {

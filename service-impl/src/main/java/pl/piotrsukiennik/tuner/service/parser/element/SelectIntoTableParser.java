@@ -4,8 +4,8 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
 import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
@@ -13,23 +13,19 @@ import pl.piotrsukiennik.tuner.util.NewQueryUtils;
  * Date: 27.07.13
  * Time: 13:29
  */
-public class SelectIntoTableParser implements IntoTableVisitor {
+public class SelectIntoTableParser extends Visitor implements IntoTableVisitor {
 
     private SelectQuery sourceQuery;
 
-    private QueryContext queryContext;
 
-    private ElementParserService elementParserService;
-
-    public SelectIntoTableParser( ElementParserService elementParserService, QueryContext queryContext, SelectQuery sourceQuery ) {
+    public SelectIntoTableParser( QueryParsingContext parsingContext, SelectQuery sourceQuery ) {
+        super( parsingContext );
         this.sourceQuery = sourceQuery;
-        this.queryContext = queryContext;
-        this.elementParserService = elementParserService;
     }
 
     @Override
     public void visit( Table tableName ) {
-        TableSource tableSource = elementParserService.getTableSource( queryContext, tableName );
+        TableSource tableSource = parsingContext.getTableSource( tableName );
         NewQueryUtils.addSource( sourceQuery, tableSource );
     }
 

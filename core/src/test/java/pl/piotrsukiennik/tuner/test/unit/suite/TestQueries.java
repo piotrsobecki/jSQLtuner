@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Repeat;
 import pl.piotrsukiennik.tuner.test.unit.AbstractSQLFramework;
 import pl.piotrsukiennik.tuner.test.unit.query.SqlTest;
 import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerAop;
+import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerWrapper;
 //import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerWrapper;
 
 /**
@@ -19,12 +20,12 @@ import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerAop;
 @Suite.SuiteClasses({
  SqlTest.class,
  SqlTestJsqlTunerAop.class,
- // SqlTestJsqlTunerWrapper.class
-
+ SqlTestJsqlTunerWrapper.class
 })
 public abstract class TestQueries extends AbstractSQLFramework {
 
-    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable(id int,key varchar(255),value varchar(255))";
+
+    private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable (id int,key varchar (255),value varchar (255))";
 
     private static String TEST_TABLE_DROP = "DROP TABLE TestTable";
 
@@ -50,20 +51,20 @@ public abstract class TestQueries extends AbstractSQLFramework {
 
 
     @Test
-    @Repeat( 3 )
+    @Repeat(3)
     public void runTestValidQueries() {
         testEachValidStatement( "runTestValidQueries()", "sql/jsqltuner-test-valid-queries.sql" );
     }
 
 
     @Test
-    @Repeat( 3 )
+    @Repeat(3)
     public void runTestInvocationInvalidQueries() {
         testEachInvalidStatement( "runTestInvocationInvalidQueries()", "sql/jsqltuner-test-invocation-invalid-queries.sql" );
     }
 
     @Test
-    @Repeat( 2 )
+    @Repeat(2)
     public void runTestParserInvalidQueries() {
         testEachInvalidStatement( "runTestParserInvalidQueries()", "sql/jsqltuner-test-parser-invalid-queries.sql" );
     }

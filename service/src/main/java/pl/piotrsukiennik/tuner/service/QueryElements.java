@@ -3,13 +3,12 @@ package pl.piotrsukiennik.tuner.service;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
-import pl.piotrsukiennik.tuner.model.source.TableSource;
 
 /**
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public interface QueryContext {
+public interface QueryElements {
     Database getDatabase( String databaseName );
 
     Schema getSchema( String schemaName );
@@ -24,9 +23,4 @@ public interface QueryContext {
 
     Table getTable( String tableName );
 
-    TableSource mergeTableSource( TableSource tableSource );
-
-    TableSource getTableSource( String table );
-
-    TableSource getLastAttachedTableSource();
 }

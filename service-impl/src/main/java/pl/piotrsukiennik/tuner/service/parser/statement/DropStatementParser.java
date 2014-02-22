@@ -4,8 +4,7 @@ import net.sf.jsqlparser.statement.drop.Drop;
 import pl.piotrsukiennik.tuner.model.query.DropQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.DropTableQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.GenericDropQuery;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -13,8 +12,8 @@ import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
  * Time: 23:07
  */
 public class DropStatementParser extends StatementParser<DropQuery> {
-    public DropStatementParser( ElementParserService elementParserService, QueryContext queryContext, Drop drop ) {
-        super( elementParserService, queryContext, drop );
+    public DropStatementParser( QueryParsingContext parsingContext, Drop drop ) {
+        super( parsingContext, drop );
     }
 
     @Override
@@ -23,7 +22,7 @@ public class DropStatementParser extends StatementParser<DropQuery> {
             case "TABLE": {
                 DropTableQuery dropTableQuery = new DropTableQuery();
                 dropTableQuery.setType( drop.getType() );
-                dropTableQuery.setTable( queryContext.getTable( drop.getName() ) );
+                dropTableQuery.setTable( parsingContext.getTable( drop.getName() ) );
                 this.query = dropTableQuery;
             }
             default: {

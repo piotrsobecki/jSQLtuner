@@ -3,10 +3,7 @@ package pl.piotrsukiennik.tuner.service.parser.element;
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery;
-import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -17,20 +14,15 @@ public class DeleteIntoTableParser implements IntoTableVisitor {
 
     private DeleteQuery sourceQuery;
 
-    private QueryContext queryContext;
+    private QueryParsingContext parsingContext;
 
-    public DeleteIntoTableParser( ElementParserService elementParserService, QueryContext queryContext, DeleteQuery sourceQuery ) {
+    public DeleteIntoTableParser( QueryParsingContext parsingContext, DeleteQuery sourceQuery ) {
         this.sourceQuery = sourceQuery;
-        this.queryContext = queryContext;
+        this.parsingContext = parsingContext;
     }
 
     @Override
     public void visit( Table tableName ) {
-        TableSource tableSource = new TableSource();
-        tableSource.setAlias( NewQueryUtils.getTableAlias( tableName.getAlias() ) );
-        tableSource.setValue( NewQueryUtils.getTableSourceValue( tableName ) );
-        tableSource.setTable( queryContext.getTable( tableName.getWholeTableName() ) );
-        sourceQuery.setTableSource( tableSource );
+        sourceQuery.setTableSource( parsingContext.getTableSource( tableName ) );
     }
-
 }

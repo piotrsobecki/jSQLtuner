@@ -7,8 +7,7 @@ import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.service.parser.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.service.parser.element.ValueEntityExpresionParser;
 
@@ -22,13 +21,13 @@ import java.util.Set;
  * Time: 23:07
  */
 public class UpdateStatementParser<U extends UpdateQuery> extends StatementParser<UpdateQuery> {
-    public UpdateStatementParser( ElementParserService elementParserService, QueryContext queryContext, Update update ) {
-        super( elementParserService, queryContext, update, new UpdateQuery() );
+    public UpdateStatementParser( QueryParsingContext parsingContext, Update update ) {
+        super( parsingContext, update, new UpdateQuery() );
     }
 
     @Override
     public void visit( Update update ) {
-        TableSource tableSource = elementParserService.getTableSource( queryContext, update.getTable() );
+        TableSource tableSource = parsingContext.getTableSource( update.getTable() );
         List<Column> columnList = update.getColumns();
         List<Expression> values = update.getExpressions();
         Set<ColumnValue> valueEntities = new LinkedHashSet<ColumnValue>();
@@ -36,16 +35,15 @@ public class UpdateStatementParser<U extends UpdateQuery> extends StatementParse
         for ( int i = 0; i < columnList.size(); i++ ) {
             Column column = columnList.get( i );
             Expression expression = values.get( i );
-            pl.piotrsukiennik.tuner.model.schema.Column column1
-             = queryContext.getColumn( tableSource.getTable().getValue(), column.getColumnName() );
+            pl.piotrsukiennik.tuner.model.schema.Column column1 = parsingContext.getColumn( tableSource.getTable(), column );
             ColumnValue columnValue = new ColumnValue();
             columnValue.setColumn( column1 );
-            ValueEntityExpresionParser parser = new ValueEntityExpresionParser( elementParserService, queryContext, columnValue );
+            ValueEntityExpresionParser parser = new ValueEntityExpresionParser( parsingContext, columnValue );
             expression.accept( parser );
             valueEntities.add( columnValue );
         }
 
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         update.getWhere().accept( expresionParser );
         query.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
         query.setColumnValues( valueEntities );

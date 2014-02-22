@@ -2,9 +2,7 @@ package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import net.sf.jsqlparser.statement.truncate.Truncate;
 import pl.piotrsukiennik.tuner.model.query.impl.TruncateQuery;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -12,13 +10,13 @@ import pl.piotrsukiennik.tuner.util.NewQueryUtils;
  * Time: 23:07
  */
 public class TruncateTableStatementParser extends StatementParser<TruncateQuery> {
-    public TruncateTableStatementParser( ElementParserService elementParserService, QueryContext queryContext, Truncate truncate ) {
-        super( elementParserService, queryContext, truncate, new TruncateQuery() );
+    public TruncateTableStatementParser( QueryParsingContext parsingContext, Truncate truncate ) {
+        super( parsingContext, truncate, new TruncateQuery() );
     }
 
     @Override
     public void visit( Truncate truncate ) {
-        query.setTable( NewQueryUtils.map( queryContext, truncate.getTable() ) );
+        query.setTable( parsingContext.getTable( truncate.getTable() ) );
     }
 
 

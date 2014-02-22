@@ -12,8 +12,7 @@ import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -23,55 +22,55 @@ import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 public class StatementParserVisitor<T extends Query> extends StatementParser implements StatementVisitor {
 
 
-    public StatementParserVisitor( ElementParserService elementParserService, QueryContext queryContext, Statement statement ) {
-        super( elementParserService, queryContext, statement );
+    public StatementParserVisitor( QueryParsingContext parsingContext, Statement statement ) {
+        super( parsingContext, statement );
     }
 
     @Override
     public void visit( Replace replace ) {
-        ReplaceStatementParser statementParser = new ReplaceStatementParser( elementParserService, getQueryContext(), replace );
+        ReplaceStatementParser statementParser = new ReplaceStatementParser( parsingContext, replace );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Truncate truncate ) {
-        TruncateTableStatementParser statementParser = new TruncateTableStatementParser( elementParserService, getQueryContext(), truncate );
+        TruncateTableStatementParser statementParser = new TruncateTableStatementParser( parsingContext, truncate );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( CreateTable createTable ) {
-        CreateTableStatementParser statementParser = new CreateTableStatementParser( elementParserService, getQueryContext(), createTable );
+        CreateTableStatementParser statementParser = new CreateTableStatementParser( parsingContext, createTable );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Drop drop ) {
-        DropStatementParser statementParser = new DropStatementParser( elementParserService, getQueryContext(), drop );
+        DropStatementParser statementParser = new DropStatementParser( parsingContext, drop );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Select select ) {
-        SelectStatementParser statementParser = new SelectStatementParser( elementParserService, getQueryContext(), select );
+        SelectStatementParser statementParser = new SelectStatementParser( parsingContext, select );
         setQuery( statementParser.getQuery() );
     }
 
     @Override
     public void visit( Delete delete ) {
-        DeleteStatementParser deleteStatementParser = new DeleteStatementParser( elementParserService, getQueryContext(), delete );
+        DeleteStatementParser deleteStatementParser = new DeleteStatementParser( parsingContext, delete );
         setQuery( deleteStatementParser.getQuery() );
     }
 
     @Override
     public void visit( Update update ) {
-        UpdateStatementParser<UpdateQuery> updateStatementParser = new UpdateStatementParser<UpdateQuery>( elementParserService, getQueryContext(), update );
+        UpdateStatementParser<UpdateQuery> updateStatementParser = new UpdateStatementParser<UpdateQuery>( parsingContext, update );
         setQuery( updateStatementParser.getQuery() );
     }
 
     @Override
     public void visit( Insert insert ) {
-        InsertStatementParser insertStatementParser = new InsertStatementParser( elementParserService, getQueryContext(), insert );
+        InsertStatementParser insertStatementParser = new InsertStatementParser( parsingContext, insert );
         setQuery( insertStatementParser.getQuery() );
     }
 

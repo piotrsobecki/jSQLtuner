@@ -18,13 +18,14 @@ import java.util.Map;
  * @date 19.02.14
  */
 @Service
-@Transactional( "jsqlTunerTransactionManager" )
+@Transactional("jsqlTunerTransactionManager")
 public class QueryServiceImpl implements QueryService {
 
     private Map<String, Query> cachedQueries = new LinkedHashMap<>();
 
     @Autowired
     private ParserService parserService;
+
 
     @Override
     public <T extends Query> T get( String hash ) {

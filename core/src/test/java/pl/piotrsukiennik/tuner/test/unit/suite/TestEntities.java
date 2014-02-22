@@ -13,6 +13,7 @@ import pl.piotrsukiennik.tuner.test.service.EntityService;
 import pl.piotrsukiennik.tuner.test.unit.AbstractFrameworkCommon;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTest;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerAop;
+import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerWrapper;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -27,7 +28,7 @@ import java.util.concurrent.Callable;
 @Suite.SuiteClasses({
  EntitiesTest.class,
  EntitiesTestJsqlTunerAop.class,
- //EntitiesTestJsqlTunerWrapper.class
+ EntitiesTestJsqlTunerWrapper.class
 })
 public abstract class TestEntities extends AbstractFrameworkCommon {
 

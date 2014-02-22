@@ -9,9 +9,7 @@ import pl.piotrsukiennik.tuner.model.query.impl.CreateTableQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.CreateViewQuery;
 import pl.piotrsukiennik.tuner.model.schema.Index;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
-import pl.piotrsukiennik.tuner.util.NewQueryUtils;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -19,22 +17,22 @@ import pl.piotrsukiennik.tuner.util.NewQueryUtils;
  * Time: 23:07
  */
 public class CreateTableStatementParser extends StatementParser<CreateQuery> {
-    public CreateTableStatementParser( ElementParserService elementParserService, QueryContext queryContext, CreateTable createTable ) {
-        super( elementParserService, queryContext, createTable );
+    public CreateTableStatementParser( QueryParsingContext parsingContext, CreateTable createTable ) {
+        super( parsingContext, createTable );
     }
 
     @Override
     public void visit( CreateTable createTable ) {
         query = new CreateTableQuery();
-        Table table = NewQueryUtils.map( queryContext, createTable.getTable() );
+        Table table = parsingContext.getTable( createTable.getTable() );
         ( (CreateTableQuery) query ).setTable( table );
     }
 
     @Override
     public void visit( CreateIndex createIndex ) {
         query = new CreateIndexQuery();
-        Table table = NewQueryUtils.map( queryContext, createIndex.getTable() );
-        Index index = NewQueryUtils.map( queryContext, table, createIndex.getIndex() );
+        Table table = parsingContext.getTable( createIndex.getTable() );
+        Index index = parsingContext.getIndex( table, createIndex.getIndex() );
         ( (CreateIndexQuery) query ).setTable( table );
         ( (CreateIndexQuery) query ).setIndex( index );
     }
@@ -42,7 +40,7 @@ public class CreateTableStatementParser extends StatementParser<CreateQuery> {
     @Override
     public void visit( CreateView createView ) {
         query = new CreateViewQuery();
-        Table table = NewQueryUtils.map( queryContext, createView.getView() );
+        Table table = parsingContext.getTable( createView.getView() );
         ( (CreateViewQuery) query ).setView( table );
     }
 

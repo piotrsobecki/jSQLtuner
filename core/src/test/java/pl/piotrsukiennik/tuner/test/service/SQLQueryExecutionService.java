@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 17:49
  */
 @Service
-@Transactional
+@Transactional("transactionManager")
 public class SQLQueryExecutionService extends AbstractService {
     public List execute( String query ) {
         if ( query.toLowerCase().startsWith( "select" ) ) {

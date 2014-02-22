@@ -1,8 +1,7 @@
 package pl.piotrsukiennik.tuner.service.parser.statement;
 
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 
 /**
@@ -13,19 +12,15 @@ import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
 public abstract class ParsingVisitor<T extends Query> extends Visitor {
     protected T query;
 
-    protected ParsingVisitor( ElementParserService elementParserService, QueryContext queryContext ) {
-        super( elementParserService, queryContext );
+    protected ParsingVisitor( QueryParsingContext parsingContext ) {
+        super( parsingContext );
     }
 
-    public ParsingVisitor( ElementParserService elementParserService, QueryContext queryContext, T query ) {
-        super( elementParserService, queryContext );
+    public ParsingVisitor( QueryParsingContext parsingContext, T query ) {
+        super( parsingContext );
         this.query = query;
     }
 
-
-    public QueryContext getQueryContext() {
-        return queryContext;
-    }
 
     public T getQuery() {
         return query;

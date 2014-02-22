@@ -7,18 +7,20 @@
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.datasource"/>
 
-    <!--  <bean class="pl.piotrsukiennik.tuner.datasourceshard.KeyValueDataSourceImplImpl>
-            <constructor-arg>
-               <bean class="pl.piotrsukiennik.tuner.datasourceKeyValueServiceMemcachedImplImpl">
-                   <constructor-arg>
-                       <bean class="net.spy.memcached.spring.MemcachedClientFactoryBean" scope="singleton">
-                           <property name="servers" value="localhost:11211"/>
-                           <property name="protocol" value="TEXT"/>
-                       </bean>
-                   </constructor-arg>
-               </bean>
-            </constructor-arg>
-        </bean>-->
+    <!--
+    <bean class="pl.piotrsukiennik.tuner.datasource.KeyValueDataSourceImpl">
+        <constructor-arg>
+           <bean class="pl.piotrsukiennik.tuner.datasource.KeyValueServiceMemcachedImpl">
+               <constructor-arg>
+                   <bean class="net.spy.memcached.spring.MemcachedClientFactoryBean" scope="singleton">
+                       <property name="servers" value="localhost:11211"/>
+                       <property name="protocol" value="TEXT"/>
+                   </bean>
+               </constructor-arg>
+           </bean>
+        </constructor-arg>
+    </bean>
+        -->
     <bean class="pl.piotrsukiennik.tuner.datasource.KeyValueDataSourceImpl">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.service.KeyValueServiceLocalImpl"/>

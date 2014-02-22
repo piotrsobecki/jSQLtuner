@@ -1,7 +1,6 @@
 package pl.piotrsukiennik.tuner.service.parser.statement;
 
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 
 
 /**
@@ -10,18 +9,12 @@ import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
  * Time: 22:53
  */
 public abstract class Visitor {
-    protected QueryContext queryContext;
+    protected QueryParsingContext parsingContext;
 
-    protected ElementParserService elementParserService;
 
-    protected Visitor( ElementParserService elementParserService, QueryContext queryContext ) {
-        this.queryContext = queryContext;
-        this.elementParserService = elementParserService;
+    protected Visitor( QueryParsingContext parsingContext ) {
+        this.parsingContext = parsingContext;
     }
 
-
-    public QueryContext getQueryContext() {
-        return queryContext;
-    }
 
 }

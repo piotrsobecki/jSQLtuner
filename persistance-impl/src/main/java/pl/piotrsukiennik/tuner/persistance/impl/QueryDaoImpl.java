@@ -23,7 +23,6 @@ import pl.piotrsukiennik.tuner.persistance.QueryDao;
 @Transactional(value = "jsqlTunerTransactionManager")
 class QueryDaoImpl extends CrudDaoImpl implements QueryDao {
 
-
     public <T extends Query> T get( String hash ) {
         return (T) s().createCriteria( Query.class ).add( Restrictions.eq( "hash", hash ) ).setMaxResults( 1 ).uniqueResult();
     }

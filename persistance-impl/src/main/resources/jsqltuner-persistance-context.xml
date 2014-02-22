@@ -7,9 +7,10 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
+    <context:annotation-config/>
     <context:property-placeholder location="jsqltuner-persistance.properties"/>
     <context:component-scan base-package="pl.piotrsukiennik.tuner.persistance"/>
+    <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager" proxy-target-class="false"/>
 
     <bean id="jsqlTunerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           autowire-candidate="false">
@@ -39,7 +40,6 @@
         </property>
     </bean>
 
-    <tx:annotation-driven transaction-manager="jsqlTunerTransactionManager"/>
 
     <bean id="jsqlTunerTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           autowire-candidate="false">

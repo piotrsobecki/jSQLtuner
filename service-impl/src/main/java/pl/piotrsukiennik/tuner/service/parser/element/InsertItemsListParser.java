@@ -10,8 +10,8 @@ import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.InsertAsSelectQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.InsertWithValuesQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.service.parser.statement.Visitor;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,17 +22,13 @@ import java.util.Set;
  * Date: 27.07.13
  * Time: 13:30
  */
-public class InsertItemsListParser implements ItemsListVisitor {
+public class InsertItemsListParser extends Visitor implements ItemsListVisitor {
 
     private InsertQuery insertQuery;
 
-    private QueryContext queryContext;
 
-    private ElementParserService elementParserService;
-
-    public InsertItemsListParser( ElementParserService elementParserService, QueryContext queryContext ) {
-        this.queryContext = queryContext;
-        this.elementParserService = elementParserService;
+    public InsertItemsListParser( QueryParsingContext parsingContext ) {
+        super( parsingContext );
     }
 
     public InsertQuery getInsertQuery() {
@@ -50,8 +46,8 @@ public class InsertItemsListParser implements ItemsListVisitor {
         InsertAsSelectQuery insertAsSelectQuery = new InsertAsSelectQuery();
         SelectQuery selectQuery = new SelectQuery();
         selectQuery.setParentQuery( insertAsSelectQuery );
-        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
-        ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+        FromItemParser fromItemParser = new FromItemParser( parsingContext );
+        ExpresionParser expresionParser = new ExpresionParser( parsingContext );
         subSelect.accept( fromItemParser );
         subSelect.accept( expresionParser );
         selectQuery.setWhereExpression( (OperatorExpression) expresionParser.getExpression() );
@@ -65,7 +61,7 @@ public class InsertItemsListParser implements ItemsListVisitor {
         List<net.sf.jsqlparser.expression.Expression> expressions = expressionList.getExpressions();
         Set<Expression> columnValues = new LinkedHashSet<Expression>();
         for ( net.sf.jsqlparser.expression.Expression ex : expressions ) {
-            ExpresionParser expresionParser = new ExpresionParser( elementParserService, queryContext );
+            ExpresionParser expresionParser = new ExpresionParser( parsingContext );
             ex.accept( expresionParser );
             columnValues.add( expresionParser.getExpression() );
         }

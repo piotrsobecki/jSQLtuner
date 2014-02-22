@@ -13,8 +13,7 @@ import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
 import pl.piotrsukiennik.tuner.service.ParserService;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.service.parser.statement.StatementParserVisitor;
 import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
@@ -29,19 +28,19 @@ import java.util.concurrent.TimeUnit;
  * Time: 19:05
  */
 @Service
-@Transactional(value = "jsqlTunerTransactionManager")
+@Transactional( value = "jsqlTunerTransactionManager" )
 class ParserServiceImpl implements ParserService {
 
     private static final Log LOG = LogFactory.getLog( ParserService.class );
 
+
     @Autowired
-    private ElementParserService elementParserService;
+    private QueryContextBuilder queryContextBuilder;
 
     @Override
     public <T extends Query> T parse( String database, String schema, String query ) throws QueryParsingNotSupportedException {
         T parsedQuery;
-        QueryContext queryContext = new QueryContextImpl( database, schema );
-        TimedCallable<T> timedCallable = getQuery( queryContext, query );
+        TimedCallable<T> timedCallable = getCallable( database, schema, query );
         try {
             parsedQuery = timedCallable.call();
             LoggableServiceHolder.get().log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getTime( TimeUnit.NANOSECONDS ) );
@@ -53,23 +52,14 @@ class ParserServiceImpl implements ParserService {
     }
 
 
-    protected <T extends Query> TimedCallable<T> getQuery( final QueryContext queryContext, final String query ) throws QueryParsingNotSupportedException {
+    protected <T extends Query> TimedCallable<T> getCallable( final String database, final String schema, final String query ) throws QueryParsingNotSupportedException {
         return new TimedCallableImpl<T>( new Callable<T>() {
             @Override
             public T call() throws Exception {
-                return parse( queryContext, query );
+                Statement statement = parse( query );
+                return parse( database, schema, query, statement );
             }
         } );
-    }
-
-    protected <T extends Query> T parse( final QueryContext queryContext, String query ) throws QueryParsingNotSupportedException {
-        try {
-            Statement statement = parse( query );
-            return parse( queryContext, query, statement );
-        }
-        catch ( JSQLParserException e ) {
-            throw new QueryParsingNotSupportedException( e, query );
-        }
     }
 
     protected Statement parse( String query ) throws JSQLParserException {
@@ -77,8 +67,9 @@ class ParserServiceImpl implements ParserService {
         return pm.parse( new StringReader( query ) );
     }
 
-    protected <T extends Query> T parse( final QueryContext queryContext, String query, Statement statement ) throws QueryParsingNotSupportedException {
-        StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( elementParserService, queryContext, statement );
+    protected <T extends Query> T parse( String database, String schema, String query, Statement statement ) throws QueryParsingNotSupportedException {
+        QueryParsingContext parsingContext = queryContextBuilder.getQueryContext( database, schema );
+        StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( parsingContext, statement );
         T mappedQuery = (T) statementParserVisitor.getQuery();
         if ( mappedQuery == null ) {
             throw new QueryParsingNotSupportedException( query );

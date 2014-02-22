@@ -2,19 +2,17 @@ package pl.piotrsukiennik.tuner.test.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 28.07.13
  * Time: 12:58
  */
-@Transactional
+
 public abstract class AbstractService {
     private
-    @Resource
+    @Autowired
     SessionFactory sessionFactory;
 
     public Session s() {

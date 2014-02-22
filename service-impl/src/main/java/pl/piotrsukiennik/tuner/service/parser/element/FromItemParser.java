@@ -7,10 +7,8 @@ import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.SubJoinSource;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
-import pl.piotrsukiennik.tuner.service.QueryContext;
-import pl.piotrsukiennik.tuner.service.parser.ElementParserService;
+import pl.piotrsukiennik.tuner.service.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.service.parser.statement.ParsingVisitor;
-import pl.piotrsukiennik.tuner.util.NewQueryUtils;
 
 /**
  * Author: Piotr Sukiennik
@@ -22,14 +20,14 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
 
     private Source source;
 
-    public FromItemParser( ElementParserService elementParserService, QueryContext queryContext ) {
-        super( elementParserService, queryContext );
+    public FromItemParser( QueryParsingContext parsingContext ) {
+        super( parsingContext );
     }
 
 
     @Override
     public void visit( Table tableName ) {
-        source = elementParserService.getTableSource( queryContext, tableName );
+        source = parsingContext.getTableSource( tableName );
     }
 
     @Override
@@ -45,11 +43,11 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
     @Override
     public void visit( SubSelect subSelect ) {
         SubQuerySource subQuerySource = new SubQuerySource();
-        subQuerySource.setAlias( NewQueryUtils.getTableAlias( subSelect.getAlias() ) );
+        subQuerySource.setAlias( parsingContext.getTableAlias( subSelect.getAlias() ) );
         subQuerySource.setValue( subSelect.getSelectBody().toString() );
 
         SelectQuery selectQuery = new SelectQuery();
-        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( elementParserService, queryContext, selectQuery );
+        SelectBodyParser<SelectQuery> selectBodyParser = new SelectBodyParser<SelectQuery>( parsingContext, selectQuery );
         subSelect.getSelectBody().accept( selectBodyParser );
         subQuerySource.setSelectQuery( selectQuery );
         source = subQuerySource;
@@ -59,12 +57,12 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
     public void visit( SubJoin subjoin ) {
         SubJoinSource subJoinSource = new SubJoinSource();
 
-        JoinFragment joinFragment = elementParserService.getJoin( queryContext, subjoin.getJoin() );
-        FromItemParser fromItemParser = new FromItemParser( elementParserService, queryContext );
+        JoinFragment joinFragment = parsingContext.getJoin( subjoin.getJoin() );
+        FromItemParser fromItemParser = new FromItemParser( parsingContext );
         subjoin.getLeft().accept( fromItemParser );
 
         subJoinSource.setJoinFragment( joinFragment );
-        subJoinSource.setAlias( NewQueryUtils.getTableAlias( subjoin.getAlias() ) );
+        subJoinSource.setAlias( parsingContext.getTableAlias( subjoin.getAlias() ) );
         subJoinSource.setSource( fromItemParser.getSource() );
         subJoinSource.setValue( subjoin.toString() );
 
