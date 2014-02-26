@@ -6,7 +6,6 @@
        xmlns:jsqltuner="http://piotrsukiennik.pl/schema/jsqltuner"
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
 
-    <jsqltuner:wrapper-context id="wrapperContext"/>
 
     <jsqltuner:datasource id="dataSource" wrappedContextRef="wrapperContext" ref="dataSourceOrig"/>
 
@@ -30,8 +29,12 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <prop key="hibernate.hbm2ddl.import_files">import_data.sql</prop>
+                <prop key="hibernate.hbm2ddl.import_files_sql_extractor">
+                    org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+                </prop>
             </props>
         </property>
     </bean>

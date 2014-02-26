@@ -6,7 +6,7 @@
 
     <!--    <jsqltuner:aop-context id="aopContext"/>-->
     <import resource="classpath*:jsqltuner-aop-context.xml"/>
-    <import resource="jsqltuner-test-hibernate-context.xml"/>
+    <import resource="../jsqltuner-test-hibernate-context.xml"/>
     <context:annotation-config/>
 
 </beans>

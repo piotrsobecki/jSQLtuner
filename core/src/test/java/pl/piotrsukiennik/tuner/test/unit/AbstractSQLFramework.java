@@ -3,8 +3,9 @@ package pl.piotrsukiennik.tuner.test.unit;
 import junit.framework.TestCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.piotrsukiennik.tuner.test.service.SQLQueryExecutionService;
-import pl.piotrsukiennik.tuner.test.util.Utils;
+import pl.piotrsukiennik.tuner.test.util.Statements;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -22,11 +23,12 @@ public abstract class AbstractSQLFramework extends AbstractFrameworkCommon {
         test( method, new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                Utils.processEachLine( getClass().getClassLoader(), sqlFile, new Utils.StringProcessor() {
+                Statements.forEachValid( getClass().getClassLoader(), sqlFile, new Statements.StringProcessor() {
                     @Override
-                    public void process( String line ) {
+                    public void call( String line ) {
                         try {
-                            queryExecutionService.execute( line );
+                            List l = queryExecutionService.execute( line );
+                            System.out.println( l );
                         }
                         catch ( Exception e ) {
                             e.printStackTrace();
@@ -43,9 +45,9 @@ public abstract class AbstractSQLFramework extends AbstractFrameworkCommon {
         test( method, new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                Utils.processEachLine( getClass().getClassLoader(), sqlFile, new Utils.StringProcessor() {
+                Statements.forEachInValid( getClass().getClassLoader(), sqlFile, new Statements.StringProcessor() {
                     @Override
-                    public void process( String line ) {
+                    public void call( String line ) {
                         try {
                             queryExecutionService.execute( line );
                             TestCase.fail();
