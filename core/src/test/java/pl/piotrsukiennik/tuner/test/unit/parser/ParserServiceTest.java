@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @date 22.01.14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/jsqltuner-context.xml" })
+@ContextConfiguration(locations = { "classpath*:jsqltuner-aop-context.xml" })
 public class ParserServiceTest {
 
     @Resource

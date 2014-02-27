@@ -5,7 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.piotrsukiennik.tuner.test.model.TestEntity;
+import pl.piotrsukiennik.tuner.test.model.MockData;
+import pl.piotrsukiennik.tuner.test.model.MockDataModel;
 
 import java.util.List;
 
@@ -19,15 +20,24 @@ import java.util.List;
 public class EntityService extends AbstractService {
 
 
-    public void deleteTestEntry( TestEntity testEntity ) {
+    public void deleteTestEntry( MockDataModel mockData ) {
         Session session = s();
-        session.delete( testEntity );
+        session.delete( mockData );
         session.flush();
     }
 
-    public TestEntity saveTestEntry( String value ) {
-        TestEntity test = new TestEntity();
-        test.setString( value );
+    public MockDataModel save( MockData mockData ) {
+        MockDataModel mockDataModel = new MockDataModel( mockData );
+        Session session = s();
+        Integer id = (Integer) session.save( mockDataModel );
+        mockDataModel.setId( id );
+        session.flush();
+        return mockDataModel;
+    }
+
+    public MockDataModel save( String email ) {
+        MockDataModel test = new MockDataModel();
+        test.setEmail( email );
         Session session = s();
         Integer id = (Integer) session.save( test );
         session.flush();
@@ -35,21 +45,21 @@ public class EntityService extends AbstractService {
         return test;
     }
 
-    public List<TestEntity> getTestEntries( String value ) {
-        TestEntity test = new TestEntity();
-        test.setString( value );
+    public List<MockDataModel> getEntriesByEmail( String email ) {
+        MockDataModel test = new MockDataModel();
+        test.setEmail( email );
         Session session = s();
-        return session.createCriteria( TestEntity.class ).add( Restrictions.eq( "string", value ) ).list();
+        return session.createCriteria( MockDataModel.class ).add( Restrictions.eq( "email", email ) ).list();
     }
 
-    public TestEntity getTestEntry( Integer id ) {
+    public MockDataModel getTestEntry( Integer id ) {
         Session session = s();
-        return (TestEntity) session.get( TestEntity.class, id );
+        return (MockDataModel) session.get( MockDataModel.class, id );
     }
 
-    public List<TestEntity> getTestEntities() {
+    public List<MockDataModel> getTestEntities() {
         Session session = s();
-        Criteria criteria = session.createCriteria( TestEntity.class );
+        Criteria criteria = session.createCriteria( MockDataModel.class );
         return criteria.list();
     }
 }

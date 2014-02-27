@@ -7,14 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Repeat;
-import pl.piotrsukiennik.tuner.test.model.TestEntity;
+import pl.piotrsukiennik.tuner.test.model.MockData;
+import pl.piotrsukiennik.tuner.test.model.MockDataModel;
 import pl.piotrsukiennik.tuner.test.service.EntityService;
 import pl.piotrsukiennik.tuner.test.unit.AbstractFrameworkCommon;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTest;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerAop;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -39,37 +40,41 @@ public abstract class TestEntities extends AbstractFrameworkCommon {
 
     @Before
     public void setupBefore() {
-        TestEntity t1 = entityService.saveTestEntry( "test1" );
-        TestEntity t2 = entityService.saveTestEntry( "test2" );
+        MockData t1 = entityService.save( "test1" );
+        MockData t2 = entityService.save( "test2" );
     }
 
     @After
     public void setupAfter() {
-        List<TestEntity> t1 = entityService.getTestEntities();
-        for ( TestEntity t : t1 ) {
+        List<MockDataModel> mockDataList = new ArrayList<>();
+        List<MockDataModel> t1 = entityService.getEntriesByEmail( "test1" );
+        List<MockDataModel> t2 = entityService.getEntriesByEmail( "test2" );
+        mockDataList.addAll( t1 );
+        mockDataList.addAll( t2 );
+        for ( MockDataModel t : mockDataList ) {
             entityService.deleteTestEntry( t );
         }
     }
 
 
     @Test
-    @Repeat(10)
     public void testCacheClear() {
         test( "testCacheClear()", new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                List<TestEntity> testEntities = entityService.getTestEntities();
-                Assert.assertEquals( 2, testEntities.size() );
 
-                TestEntity t3 = entityService.saveTestEntry( "test3" );
+                List<MockDataModel> testEntities = entityService.getTestEntities();
+                int size = testEntities.size();
 
-                List<TestEntity> testEntities2 = entityService.getTestEntities();
-                Assert.assertEquals( 3, testEntities2.size() );
+                MockDataModel t3 = entityService.save( "test3" );
+
+                List<MockDataModel> testEntities2 = entityService.getTestEntities();
+                Assert.assertEquals( ( size + 1 ), testEntities2.size() );
 
                 entityService.deleteTestEntry( t3 );
 
-                List<TestEntity> testEntities3 = entityService.getTestEntities();
-                Assert.assertEquals( 2, testEntities3.size() );
+                List<MockDataModel> testEntities3 = entityService.getTestEntities();
+                Assert.assertEquals( size, testEntities3.size() );
                 return null;
             }
         } );
@@ -82,11 +87,11 @@ public abstract class TestEntities extends AbstractFrameworkCommon {
             @Override
             public Object call() throws Exception {
                 for ( int i = 0; i < SINGLE_GET_RUNS; i++ ) {
-                    List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
+                    List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
                     Assert.assertEquals( 1, testEntities.size() );
                     Assert.assertNotNull( testEntities.get( 0 ) );
                     Assert.assertNotNull( testEntities.get( 0 ).getId() );
-                    Assert.assertNotNull( testEntities.get( 0 ).getString() );
+                    Assert.assertNotNull( testEntities.get( 0 ).getEmail() );
                 }
                 return null;
             }
@@ -99,8 +104,8 @@ public abstract class TestEntities extends AbstractFrameworkCommon {
         test( "testGetNull()", new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                TestEntity testEntity2 = entityService.getTestEntry( 9999 );
-                Assert.assertNull( testEntity2 );
+                MockData mockData2 = entityService.getTestEntry( -1 );
+                Assert.assertNull( mockData2 );
                 return null;
             }
         } );
@@ -111,12 +116,12 @@ public abstract class TestEntities extends AbstractFrameworkCommon {
         test( "testGetDifferentValues()", new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                List<TestEntity> testEntities = entityService.getTestEntries( "test1" );
-                TestEntity testEntity = testEntities.get( 0 );
-                Assert.assertNotNull( testEntity );
-                Assert.assertEquals( "test1", testEntity.getString() );
+                List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
+                MockData mockData = testEntities.get( 0 );
+                Assert.assertNotNull( mockData );
+                Assert.assertEquals( "test1", mockData.getEmail() );
 
-                List<TestEntity> testEntitiesEmpty = entityService.getTestEntries( "test999" );
+                List<MockDataModel> testEntitiesEmpty = entityService.getEntriesByEmail( "test999" );
                 Assert.assertEquals( 0, testEntitiesEmpty.size() );
                 return null;
             }
