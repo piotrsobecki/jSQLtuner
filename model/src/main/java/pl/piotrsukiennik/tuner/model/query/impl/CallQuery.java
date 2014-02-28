@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.schema.Procedure;
 
@@ -23,5 +24,11 @@ public class CallQuery extends Query {
 
     public void setProcedure( Procedure procedure ) {
         this.procedure = procedure;
+    }
+
+
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
     }
 }

@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 
@@ -27,5 +28,9 @@ public class InsertWithValuesQuery extends InsertQuery {
         this.columnValues = columnValues;
     }
 
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
+    }
 
 }

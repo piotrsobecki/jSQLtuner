@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.model.query.impl;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.query.WriteQuery;
 
 import javax.persistence.*;
@@ -27,4 +28,8 @@ public class TruncateQuery extends WriteQuery {
         this.table = table;
     }
 
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
+    }
 }

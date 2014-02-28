@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.ConditionQuery;
@@ -22,7 +23,6 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery {
 
     private OperatorExpression whereExpression;
 
-
     @ManyToOne(cascade = { CascadeType.ALL })
     public OperatorExpression getWhereExpression() {
         return whereExpression;
@@ -41,4 +41,8 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery {
         this.columnValues = columnValues;
     }
 
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
+    }
 }

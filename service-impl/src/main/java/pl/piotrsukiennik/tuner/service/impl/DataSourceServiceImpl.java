@@ -39,23 +39,23 @@ class DataSourceServiceImpl implements DataSourceService {
     }
 
     @Override
-    public DataSource getRootDataSource( Query selectQuery ) {
-        return rootDataSources.get( selectQuery.getHash() );
+    public DataSource getDefault( Query query ) {
+        return rootDataSources.get( query.getHash() );
     }
 
     @Override
-    public void setRootDataSource( Query query, DataSource dataSource ) {
+    public void setDefault( Query query, DataSource dataSource ) {
         rootDataSources.put( query.getHash(), dataSource );
     }
 
     @Override
-    public DataSource getDataSourceByIdentity( Query query, DataSourceIdentity dataSourceIdentity ) {
+    public DataSource getDataSource( Query query, DataSourceIdentity dataSourceIdentity ) {
         return Collections3.first( getDataSourcesByIdentity( query, dataSourceIdentity ) );
     }
 
     public Collection<DataSource> getDataSources( Query selectQuery ) {
         Set<DataSource> out = new LinkedHashSet<>( dataSources );
-        out.add( getRootDataSource( selectQuery ) );
+        out.add( getDefault( selectQuery ) );
         return out;
     }
 

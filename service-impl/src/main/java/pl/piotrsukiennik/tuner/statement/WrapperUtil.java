@@ -41,7 +41,7 @@ public class WrapperUtil {
 
     static ResultSet getResultSet( ShardService shardService, ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            shardService.setRootDataForQuery( readQuery, rootDataSource );
+            shardService.setDefaultDataSource( readQuery, rootDataSource );
             DataRetrieval dataRetrieval = shardService.get( readQuery );
             return dataRetrieval.getResultSet();
         }

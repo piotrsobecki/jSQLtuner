@@ -12,6 +12,7 @@ import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
@@ -56,6 +57,11 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
 
     @Override
     public void delete( Query query ) {
+        throw new WriteToStatementException();
+    }
+
+    @Override
+    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
         throw new WriteToStatementException();
     }
 

@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.ConditionQuery;
 import pl.piotrsukiennik.tuner.model.query.WriteQuery;
@@ -37,5 +38,10 @@ public class DeleteQuery extends WriteQuery implements ConditionQuery {
 
     public void setWhereExpression( OperatorExpression whereExpression ) {
         this.whereExpression = whereExpression;
+    }
+
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
     }
 }

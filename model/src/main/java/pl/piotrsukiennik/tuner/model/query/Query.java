@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidating;
 import pl.piotrsukiennik.tuner.model.ValueEntity;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Query extends ValueEntity implements ValueQuery {
+public abstract class Query extends ValueEntity implements ValueQuery, QueryInvalidating {
     private String hash;
 
 

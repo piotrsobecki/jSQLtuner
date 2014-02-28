@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 
 import javax.persistence.CascadeType;
@@ -22,5 +23,10 @@ public class InsertAsSelectQuery extends InsertQuery {
 
     public void setSelectQuery( SelectQuery selectQuery ) {
         this.selectQuery = selectQuery;
+    }
+
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
     }
 }

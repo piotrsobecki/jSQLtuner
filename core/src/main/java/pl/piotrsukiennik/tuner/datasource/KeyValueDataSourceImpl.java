@@ -9,6 +9,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 import javax.sql.rowset.CachedRowSet;
+import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
@@ -40,6 +41,13 @@ public class KeyValueDataSourceImpl extends AbstractDataSource implements KeyVal
     public void delete( Query query ) {
         String key = getKey( query.getHash() );
         keyValueService.delete( key );
+    }
+
+    @Override
+    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
+        for ( ReadQuery readQuery : queriesToInvalidate ) {
+            delete( readQuery );
+        }
     }
 
 

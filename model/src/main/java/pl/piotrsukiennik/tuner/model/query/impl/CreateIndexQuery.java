@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.model.query.impl;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.query.CreateQuery;
 import pl.piotrsukiennik.tuner.model.schema.Index;
 
@@ -40,4 +41,8 @@ public class CreateIndexQuery extends CreateQuery {
         this.index = index;
     }
 
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
+    }
 }

@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.model.query.impl;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
 import pl.piotrsukiennik.tuner.model.query.CreateQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 
@@ -26,5 +27,10 @@ public class CreateViewQuery extends CreateQuery {
 
     public void setView( Table view ) {
         this.view = view;
+    }
+
+    @Override
+    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+        return invalidator.invalidates( this );
     }
 }

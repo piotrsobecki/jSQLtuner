@@ -10,7 +10,9 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
  * Time: 18:57
  */
 public interface ShardService extends Shard {
+
     DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
 
-    void setRootDataForQuery( ReadQuery query, DataSource dataSource );
+    void setDefaultDataSource( ReadQuery query, DataSource dataSource );
+
 }

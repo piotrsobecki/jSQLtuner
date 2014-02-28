@@ -9,9 +9,9 @@ import pl.piotrsukiennik.tuner.model.query.Query;
  * @date 13.01.14
  */
 public interface DataSourceService {
-    DataSource getRootDataSource( Query selectQuery );
+    DataSource getDataSource( Query query, DataSourceIdentity dataSourceIdentity );
 
-    void setRootDataSource( Query query, DataSource dataSource );
+    DataSource getDefault( Query query );
 
-    DataSource getDataSourceByIdentity( Query query, DataSourceIdentity dataSourceIdentity );
+    void setDefault( Query query, DataSource dataSource );
 }
