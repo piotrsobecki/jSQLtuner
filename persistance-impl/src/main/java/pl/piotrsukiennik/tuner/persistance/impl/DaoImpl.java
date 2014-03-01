@@ -18,11 +18,10 @@ class DaoImpl extends Dao implements ApplicationContextAware {
     }
 
 
-    @Override
     public void setApplicationContext( ApplicationContext applicationContext ) throws BeansException {
         setLog( applicationContext.getBean( LogDao.class ) );
         setQuery( applicationContext.getBean( QueryDao.class ) );
         setSchema( applicationContext.getBean( SchemaDao.class ) );
-        setCommon( applicationContext.getBean( CommonDao.class ) );
+        setQueryElement( applicationContext.getBean( QueryElementDao.class ) );
     }
 }

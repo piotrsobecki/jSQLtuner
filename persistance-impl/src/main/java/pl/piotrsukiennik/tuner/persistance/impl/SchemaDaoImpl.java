@@ -2,7 +2,6 @@ package pl.piotrsukiennik.tuner.persistance.impl;
 
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.schema.*;
 import pl.piotrsukiennik.tuner.persistance.SchemaDao;
 
@@ -12,7 +11,6 @@ import pl.piotrsukiennik.tuner.persistance.SchemaDao;
  * Time: 20:03
  */
 @Repository
-@Transactional(value = "jsqlTunerTransactionManager")
 class SchemaDaoImpl extends CrudDaoImpl implements SchemaDao {
 
     private static final String DATABASE = "database";

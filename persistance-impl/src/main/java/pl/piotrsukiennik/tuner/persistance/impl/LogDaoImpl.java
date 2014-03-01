@@ -1,7 +1,6 @@
 package pl.piotrsukiennik.tuner.persistance.impl;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.log.QueryException;
 import pl.piotrsukiennik.tuner.persistance.LogDao;
 
@@ -13,7 +12,6 @@ import java.sql.Timestamp;
  * Time: 15:01
  */
 @Repository
-@Transactional(value = "jsqlTunerTransactionManager")
 class LogDaoImpl extends CrudDaoImpl implements LogDao {
     @Override
     public void log( String query, Throwable exception ) {

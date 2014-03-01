@@ -80,6 +80,7 @@
         <module>persistance</module>
         <module>persistance-impl</module>
         <module>util</module>
+        <module>parser</module>
     </modules>
 
     <build>

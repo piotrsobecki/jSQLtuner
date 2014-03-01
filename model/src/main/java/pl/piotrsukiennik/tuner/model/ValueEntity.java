@@ -29,14 +29,21 @@ public abstract class ValueEntity {
     }
 
     public void setValue( String value ) {
-        this.value = value;
+        if ( value != null ) {
+            if ( value.length() >= 255 ) {
+                this.value = value.substring( 0, 255 );
+            }
+            else {
+                this.value = value;
+            }
+        }
     }
 
     @PrePersist
     @PreUpdate
     protected final void initValue() {
         if ( value == null ) {
-            value = this.toString();
+            setValue( this.toString() );
         }
     }
 

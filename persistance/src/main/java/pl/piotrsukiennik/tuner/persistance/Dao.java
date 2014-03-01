@@ -7,47 +7,45 @@ package pl.piotrsukiennik.tuner.persistance;
 public abstract class Dao {
 
     protected Dao() {
-
     }
 
-    protected static CommonDao commonDao;
+    protected static LogDao log;
 
-    protected static LogDao logDao;
+    protected static QueryDao query;
 
-    protected static QueryDao queryDao;
+    protected static SchemaDao schema;
 
-    protected static SchemaDao schemaDao;
+    protected static QueryElementDao queryElement;
 
     public static LogDao getLog() {
-        return logDao;
-    }
-
-    public static CommonDao getCommon() {
-        return commonDao;
+        return log;
     }
 
     public static QueryDao getQuery() {
-        return queryDao;
+        return query;
     }
 
     public static SchemaDao getSchema() {
-        return schemaDao;
+        return schema;
     }
 
     protected static void setLog( LogDao logDao ) {
-        Dao.logDao = logDao;
+        Dao.log = logDao;
     }
 
     protected static void setQuery( QueryDao queryDao ) {
-        Dao.queryDao = queryDao;
+        Dao.query = queryDao;
     }
 
     protected static void setSchema( SchemaDao schemaDao ) {
-        Dao.schemaDao = schemaDao;
+        Dao.schema = schemaDao;
     }
 
-    protected static void setCommon( CommonDao commonDao ) {
-        Dao.commonDao = commonDao;
+    public static QueryElementDao getQueryElement() {
+        return queryElement;
     }
 
+    protected static void setQueryElement( QueryElementDao queryElementDao ) {
+        Dao.queryElement = queryElementDao;
+    }
 }

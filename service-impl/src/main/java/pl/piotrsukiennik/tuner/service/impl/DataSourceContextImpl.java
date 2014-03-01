@@ -1,9 +1,8 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
-import pl.piotrsukiennik.tuner.util.Statements;
 
-import java.sql.Connection;
+//import pl.piotrsukiennik.tuner.util.Statements;
 
 /**
  * @author Piotr Sukiennik
@@ -19,12 +18,14 @@ public class DataSourceContextImpl implements DataSourceContext {
         this.database = database;
         this.schema = schema;
     }
+/*
 
     public DataSourceContextImpl( Connection connection ) {
         this.database = Statements.getDatabase( connection );
         this.schema = Statements.getSchema( connection );
     }
 
+*/
 
     @Override
     public boolean contains( String database, String schema ) {

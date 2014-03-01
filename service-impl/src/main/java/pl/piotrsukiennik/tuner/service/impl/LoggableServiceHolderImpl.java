@@ -13,6 +13,7 @@ import pl.piotrsukiennik.tuner.exception.QueryInterceptionNotSupportedException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.persistance.Dao;
+import pl.piotrsukiennik.tuner.persistance.LogDao;
 import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
 
 import java.util.concurrent.TimeUnit;
@@ -22,13 +23,15 @@ import java.util.concurrent.TimeUnit;
  * @date 19.02.14
  */
 @Service("pl.piotrsukiennik.tuner.LoggableService.impl")
-@Transactional("jsqlTunerTransactionManager")
 public class LoggableServiceHolderImpl extends LoggableServiceHolder implements LoggableService {
 
     private static final Log LOG = LogFactory.getLog( LoggableServiceHolder.class );
 
     private static final String EXCEPTION_MESSAGE_FORMAT = "Query (%s) caused exception.";
 
+    public LogDao getLogDao() {
+        return Dao.getLog();
+    }
 
     public LoggableServiceHolderImpl() {
         LoggableServiceHolder.setLogService( this );
@@ -57,10 +60,10 @@ public class LoggableServiceHolderImpl extends LoggableServiceHolder implements 
 
 
     @Override
+    @Transactional("jsqlTunerTransactionManager")
     public void log( DataRetrievalException exception ) {
         log( exception.getQuery(), exception );
-        Dao.getLog().log( exception.getQuery(), exception );
-
+        getLogDao().log( exception.getQuery(), exception );
     }
 
     @Override

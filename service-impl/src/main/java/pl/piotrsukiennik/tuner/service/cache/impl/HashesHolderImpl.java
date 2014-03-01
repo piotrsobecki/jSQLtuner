@@ -54,6 +54,9 @@ public class HashesHolderImpl<P, K> implements HashesHolder<P, K> {
                 holder = ( (HolderEnterable<P, K>) holder ).enter( str );
             }
         }
+        if ( holder == null ) {
+            return Collections.EMPTY_LIST;
+        }
         return holder.get();
     }
 

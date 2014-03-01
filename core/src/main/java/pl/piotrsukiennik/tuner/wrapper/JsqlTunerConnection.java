@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.wrapper;
 
-import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
+import pl.piotrsukiennik.tuner.PreparedStatementBuilder;
 
 import java.sql.*;
 

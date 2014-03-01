@@ -3,8 +3,8 @@ package pl.piotrsukiennik.tuner.aop;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.piotrsukiennik.tuner.PreparedStatementBuilder;
 import pl.piotrsukiennik.tuner.exception.PreparedStatementInterceptException;
-import pl.piotrsukiennik.tuner.service.PreparedStatementBuilder;
 
 import java.sql.PreparedStatement;
 

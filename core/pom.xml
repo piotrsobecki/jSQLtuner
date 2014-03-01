@@ -32,7 +32,16 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner.parser</groupId>
+            <artifactId>parser-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner.parser</groupId>
+            <artifactId>parser-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>api</artifactId>

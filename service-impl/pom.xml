@@ -15,7 +15,6 @@
     <name>jSQLtuner :: service implementation</name>
     <url>http://maven.apache.org</url>
     <properties>
-        <jsqlparser.version>0.8.8</jsqlparser.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -29,6 +28,7 @@
             <artifactId>api</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>ai</artifactId>
@@ -58,23 +58,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>${jsqlparser.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>de.congrace</groupId>
             <artifactId>exp4j</artifactId>
             <version>0.3.11</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${google.guava.version}</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.springframework</groupId>

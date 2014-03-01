@@ -59,22 +59,33 @@ class QueryInvalidatorServiceImpl implements QueryInvalidatorService {
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( SelectQuery selectQuery ) {
-        return Collections.EMPTY_LIST;
-    }
-
-    @Override
     public Collection<ReadQuery> invalidates( AlterTableQuery alterTableQuery ) {
-        return Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public Collection<ReadQuery> invalidates( CreateViewQuery createViewQuery ) {
-        return Collections.EMPTY_LIST;
+        return supportingHashesHolder.getQueriesInvalidatedBy( alterTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( CreateTableQuery createTableQuery ) {
+        return supportingHashesHolder.getQueriesInvalidatedBy( createTableQuery.getTable() );
+    }
+
+    @Override
+    public Collection<ReadQuery> invalidates( TruncateQuery truncateQuery ) {
+        return supportingHashesHolder.getQueriesInvalidatedBy( truncateQuery.getTable() );
+    }
+
+    @Override
+    public Collection<ReadQuery> invalidates( DropTableQuery dropTableQuery ) {
+        return supportingHashesHolder.getQueriesInvalidatedBy( dropTableQuery.getTable() );
+    }
+
+    @Override
+    public Collection<ReadQuery> invalidates( SelectQuery selectQuery ) {
+        return Collections.EMPTY_LIST;
+    }
+
+
+    @Override
+    public Collection<ReadQuery> invalidates( CreateViewQuery createViewQuery ) {
         return Collections.EMPTY_LIST;
     }
 
@@ -85,16 +96,6 @@ class QueryInvalidatorServiceImpl implements QueryInvalidatorService {
 
     @Override
     public Collection<ReadQuery> invalidates( CallQuery callQuery ) {
-        return Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public Collection<ReadQuery> invalidates( TruncateQuery truncateQuery ) {
-        return Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public Collection<ReadQuery> invalidates( DropTableQuery dropTableQuery ) {
         return Collections.EMPTY_LIST;
     }
 

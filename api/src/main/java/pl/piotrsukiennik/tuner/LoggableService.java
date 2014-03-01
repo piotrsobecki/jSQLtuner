@@ -22,5 +22,4 @@ public interface LoggableService {
     void log( DataRetrieval dataRetrieval );
 
     void log( Query query, LoggableMessage loggableMessage, TimeUnit timeUnit, long duration );
-
 }
