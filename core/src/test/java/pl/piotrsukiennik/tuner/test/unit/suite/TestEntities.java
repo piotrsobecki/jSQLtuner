@@ -1,25 +1,23 @@
 package pl.piotrsukiennik.tuner.test.unit.suite;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import com.carrotsearch.junitbenchmarks.BenchmarkOptions;
+import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
+import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.piotrsukiennik.tuner.test.model.MockData;
 import pl.piotrsukiennik.tuner.test.model.MockDataModel;
 import pl.piotrsukiennik.tuner.test.service.EntityService;
-import pl.piotrsukiennik.tuner.test.unit.AbstractFrameworkCommon;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTest;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerAop;
 import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
-//import pl.piotrsukiennik.tuner.test.unit.entities.EntitiesTestJsqlTunerWrapper;
 
 /**
  * @author Piotr Sukiennik
@@ -31,12 +29,14 @@ import java.util.concurrent.Callable;
  EntitiesTestJsqlTunerAop.class,
  EntitiesTestJsqlTunerWrapper.class
 })
-public abstract class TestEntities extends AbstractFrameworkCommon {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@AxisRange(min = 0, max = 1)
+@BenchmarkMethodChart
+public abstract class TestEntities {
 
     @Autowired
     private EntityService entityService;
 
-    public static final int SINGLE_GET_RUNS = 1000;
 
     @Before
     public void setupBefore() {
@@ -59,73 +59,57 @@ public abstract class TestEntities extends AbstractFrameworkCommon {
 
     @Test
     public void testCacheClear() {
-        test( "testCacheClear()", new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
+        List<MockDataModel> testEntities = entityService.getTestEntities();
+        int size = testEntities.size();
 
-                List<MockDataModel> testEntities = entityService.getTestEntities();
-                int size = testEntities.size();
+        MockDataModel t3 = entityService.save( "test3" );
 
-                MockDataModel t3 = entityService.save( "test3" );
+        List<MockDataModel> testEntities2 = entityService.getTestEntities();
+        Assert.assertEquals( ( size + 1 ), testEntities2.size() );
 
-                List<MockDataModel> testEntities2 = entityService.getTestEntities();
-                Assert.assertEquals( ( size + 1 ), testEntities2.size() );
+        entityService.deleteTestEntry( t3 );
 
-                entityService.deleteTestEntry( t3 );
-
-                List<MockDataModel> testEntities3 = entityService.getTestEntities();
-                Assert.assertEquals( size, testEntities3.size() );
-                return null;
-            }
-        } );
+        List<MockDataModel> testEntities3 = entityService.getTestEntities();
+        Assert.assertEquals( size, testEntities3.size() );
     }
 
 
     @Test
-    public void getSingle() {
-        test( "getSingle()", new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
-                for ( int i = 0; i < SINGLE_GET_RUNS; i++ ) {
-                    List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
-                    Assert.assertEquals( 1, testEntities.size() );
-                    Assert.assertNotNull( testEntities.get( 0 ) );
-                    Assert.assertNotNull( testEntities.get( 0 ).getId() );
-                    Assert.assertNotNull( testEntities.get( 0 ).getEmail() );
-                }
-                return null;
-            }
-        } );
-    }
-
-
-    @Test
+    @BenchmarkOptions(benchmarkRounds = 3, warmupRounds = 0)
     public void testGetNull() {
-        test( "testGetNull()", new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
-                MockData mockData2 = entityService.getTestEntry( -1 );
-                Assert.assertNull( mockData2 );
-                return null;
-            }
-        } );
+        MockData mockData2 = entityService.getTestEntry( -1 );
+        Assert.assertNull( mockData2 );
     }
 
     @Test
     public void testGetDifferentValues() {
-        test( "testGetDifferentValues()", new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
-                List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
-                MockData mockData = testEntities.get( 0 );
-                Assert.assertNotNull( mockData );
-                Assert.assertEquals( "test1", mockData.getEmail() );
+        List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
+        MockData mockData = testEntities.get( 0 );
+        Assert.assertNotNull( mockData );
+        Assert.assertEquals( "test1", mockData.getEmail() );
 
-                List<MockDataModel> testEntitiesEmpty = entityService.getEntriesByEmail( "test999" );
-                Assert.assertEquals( 0, testEntitiesEmpty.size() );
-                return null;
-            }
-        } );
+        List<MockDataModel> testEntitiesEmpty = entityService.getEntriesByEmail( "test999" );
+        Assert.assertEquals( 0, testEntitiesEmpty.size() );
+    }
+
+    public void testSingleSelect( final int runs ) {
+        for ( int i = 0; i < runs; i++ ) {
+            List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
+            Assert.assertEquals( 1, testEntities.size() );
+            Assert.assertNotNull( testEntities.get( 0 ) );
+            Assert.assertNotNull( testEntities.get( 0 ).getId() );
+            Assert.assertNotNull( testEntities.get( 0 ).getEmail() );
+        }
+    }
+
+    @Test
+    public void testSingleSelect1() {
+        testSingleSelect( 1 );
+    }
+
+    @Test
+    public void testSingleSelect10() {
+        testSingleSelect( 10 );
     }
 
 }

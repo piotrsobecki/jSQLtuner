@@ -1,11 +1,14 @@
 package pl.piotrsukiennik.tuner.test.unit.suite;
 
+import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
+import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
-import org.springframework.test.annotation.Repeat;
 import pl.piotrsukiennik.tuner.test.unit.AbstractSQLFramework;
 import pl.piotrsukiennik.tuner.test.unit.query.SqlTest;
 import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerAop;
@@ -22,8 +25,10 @@ import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerWrapper;
  SqlTestJsqlTunerAop.class,
  SqlTestJsqlTunerWrapper.class
 })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@AxisRange( min = 0, max = 1 )
+@BenchmarkMethodChart
 public abstract class TestQueries extends AbstractSQLFramework {
-
 
     private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable (id int,key varchar (255),value varchar (255))";
 
@@ -51,22 +56,19 @@ public abstract class TestQueries extends AbstractSQLFramework {
 
 
     @Test
-    @Repeat(3)
     public void runTestValidQueries() {
-        testEachValidStatement( "runTestValidQueries()", "sql/jsqltuner-test-valid-queries.sql" );
+        testEachValidStatement( "sql/jsqltuner-test-valid-queries.sql" );
     }
 
 
     @Test
-    @Repeat(3)
     public void runTestInvocationInvalidQueries() {
-        testEachInvalidStatement( "runTestInvocationInvalidQueries()", "sql/jsqltuner-test-invocation-invalid-queries.sql" );
+        testEachInvalidStatement( "sql/jsqltuner-test-invocation-invalid-queries.sql" );
     }
 
     @Test
-    @Repeat(2)
     public void runTestParserInvalidQueries() {
-        testEachInvalidStatement( "runTestParserInvalidQueries()", "sql/jsqltuner-test-parser-invalid-queries.sql" );
+        testEachInvalidStatement( "sql/jsqltuner-test-parser-invalid-queries.sql" );
     }
 
 }

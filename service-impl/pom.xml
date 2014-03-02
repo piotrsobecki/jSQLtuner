@@ -15,6 +15,7 @@
     <name>jSQLtuner :: service implementation</name>
     <url>http://maven.apache.org</url>
     <properties>
+        <jsqltuner.build.directory>../</jsqltuner.build.directory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>

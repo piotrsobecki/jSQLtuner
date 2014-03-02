@@ -1,10 +1,15 @@
 package pl.piotrsukiennik.tuner.test.unit.query;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import com.carrotsearch.junitbenchmarks.BenchmarkRule;
+import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
+import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
+import com.carrotsearch.junitbenchmarks.h2.H2Consumer;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pl.piotrsukiennik.tuner.test.unit.H2ConsumerFactory;
 import pl.piotrsukiennik.tuner.test.unit.suite.TestQueries;
 
 /**
@@ -13,16 +18,11 @@ import pl.piotrsukiennik.tuner.test.unit.suite.TestQueries;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/jsqltuner-test-root-plain-context.xml" })
+@AxisRange(min = 0, max = 1)
+@BenchmarkMethodChart
 public class SqlTest extends TestQueries {
+    protected static final H2Consumer H2_CONSUMER = H2ConsumerFactory.getH2Consumer( SqlTest.class );
 
-    @BeforeClass
-    public static void beforeClass() {
-        beforeClassMethod();
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        afterClassMethod();
-    }
-
+    @Rule
+    public TestRule benchmarkRun = new BenchmarkRule( H2_CONSUMER );
 }

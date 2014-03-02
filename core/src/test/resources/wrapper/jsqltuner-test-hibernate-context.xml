@@ -9,7 +9,7 @@
 
     <jsqltuner:datasource id="dataSource" wrappedContextRef="wrapperContext" ref="dataSourceOrig"/>
 
-    <import resource="classpath*:jsqltuner-wrapper-context.xml"/>
+    <import resource="classpath*:jsqltuner-context.xml"/>
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.test.service"/>
 
