@@ -11,7 +11,7 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import pl.piotrsukiennik.parser.Parser;
+import pl.piotrsukiennik.tuner.Parser;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
@@ -29,7 +29,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:jsqltuner-aop-context.xml" })
-@AxisRange( min = 0, max = 1 )
+@AxisRange(min = 0, max = 1)
 @BenchmarkMethodChart
 public class ParserTest {
 

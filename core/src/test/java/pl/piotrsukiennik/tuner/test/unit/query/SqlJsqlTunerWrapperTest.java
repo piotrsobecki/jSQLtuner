@@ -19,12 +19,12 @@ import pl.piotrsukiennik.tuner.test.unit.TestQueries;
  * @date 20.02.14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/jsqltuner-test-root-plain-context.xml" })
+@ContextConfiguration(locations = { "/wrapper/jsqltuner-test-context.xml" })
 @AxisRange(min = 0, max = 1)
 @BenchmarkMethodChart
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class SqlTest extends TestQueries {
-    protected static final H2Consumer H2_CONSUMER = H2ConsumerFactory.getH2Consumer( SqlTest.class );
+public class SqlJsqlTunerWrapperTest extends TestQueries {
+    protected static final H2Consumer H2_CONSUMER = H2ConsumerFactory.getH2Consumer( SqlJsqlTunerWrapperTest.class );
 
     @Rule
     public TestRule benchmarkRun = new BenchmarkRule( H2_CONSUMER );

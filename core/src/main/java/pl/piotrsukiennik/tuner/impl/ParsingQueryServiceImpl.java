@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.parser.Parser;
+import pl.piotrsukiennik.tuner.Parser;
 import pl.piotrsukiennik.tuner.ParsingQueryService;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;

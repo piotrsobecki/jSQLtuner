@@ -6,5 +6,5 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="pl.piotrsukiennik.parser,pl.piotrsukiennik.parser.impl"/>
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.parser,pl.piotrsukiennik.tuner.parser.impl"/>
 </beans>
