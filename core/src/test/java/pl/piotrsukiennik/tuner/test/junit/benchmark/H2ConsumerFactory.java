@@ -1,7 +1,6 @@
-package pl.piotrsukiennik.tuner.test.unit;
+package pl.piotrsukiennik.tuner.test.junit.benchmark;
 
 import com.carrotsearch.junitbenchmarks.h2.H2Consumer;
-import org.springframework.util.FileSystemUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +37,8 @@ public class H2ConsumerFactory {
             DB_FILE_FOLDER = new File( val + DB_FILE_FOLDER_STR );
             CHARTS_FOLDER = new File( val + CHARTS_FOLDER_STR );
 
-            FileSystemUtils.deleteRecursively( DB_FILE_FOLDER );
-            FileSystemUtils.deleteRecursively( CHARTS_FOLDER );
+            /*FileSystemUtils.deleteRecursively( DB_FILE_FOLDER );
+            FileSystemUtils.deleteRecursively( CHARTS_FOLDER );*/
 
         }
         catch ( IOException e ) {
@@ -65,8 +64,8 @@ public class H2ConsumerFactory {
     public static H2Consumer getH2Consumer( Class clazz ) {
         File dbFile = getDbFile( clazz );
         File chartsDir = getChartsDir( clazz );
-        FileSystemUtils.deleteRecursively( dbFile );
-        FileSystemUtils.deleteRecursively( chartsDir );
+        /*FileSystemUtils.deleteRecursively( dbFile );
+        FileSystemUtils.deleteRecursively( chartsDir );*/
         dbFile.getParentFile().mkdirs();
         chartsDir.getParentFile().mkdirs();
         return new H2Consumer( dbFile, chartsDir, clazz.getSimpleName() );

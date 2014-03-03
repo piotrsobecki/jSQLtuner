@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.test.unit;
+package pl.piotrsukiennik.tuner.test.junit;
 
 import junit.framework.TestCase;
 import org.springframework.beans.factory.annotation.Autowired;

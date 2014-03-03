@@ -9,6 +9,7 @@
     <name>jSQLtuner</name>
     <description>SQL tuner for improving Java applications ORM performance using NoSQL technologies</description>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
         <jsqltuner.version>1.8-SNAPSHOT</jsqltuner.version>
         <google.guava.version>14.0.1</google.guava.version>
@@ -85,6 +86,24 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <serviceName>travis-ci</serviceName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <format>xml</format>
+                    <maxmem>256m</maxmem>
+                    <aggregate>true</aggregate>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>

@@ -16,6 +16,28 @@
     <properties>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
     </properties>
+    <profiles>
+        <profile>
+            <id>Benchmarks</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <includes>
+                                <include>**/*Benchmark.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*Test.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <build>
         <resources>
             <resource>
@@ -44,7 +66,7 @@
             </snapshots>
         </repository>
         <repository>
-        <id>spy</id>
+            <id>spy</id>
             <name>Spy Repository</name>
             <layout>default</layout>
             <url>http://files.couchbase.com/maven2/</url>

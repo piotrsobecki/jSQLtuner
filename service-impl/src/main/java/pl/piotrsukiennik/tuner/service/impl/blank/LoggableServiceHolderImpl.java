@@ -1,9 +1,8 @@
-package pl.piotrsukiennik.tuner.service.impl;
+package pl.piotrsukiennik.tuner.service.impl.blank;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.LoggableMessage;
 import pl.piotrsukiennik.tuner.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.LoggableService;
@@ -12,8 +11,6 @@ import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryInterceptionNotSupportedException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.persistance.Dao;
-import pl.piotrsukiennik.tuner.persistance.LogDao;
 import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
 
 import java.util.concurrent.TimeUnit;
@@ -28,10 +25,6 @@ public class LoggableServiceHolderImpl extends LoggableServiceHolder implements 
     private static final Log LOG = LogFactory.getLog( LoggableServiceHolder.class );
 
     private static final String EXCEPTION_MESSAGE_FORMAT = "Query (%s) caused exception.";
-
-    public LogDao getLogDao() {
-        return Dao.getLog();
-    }
 
     public LoggableServiceHolderImpl() {
         LoggableServiceHolder.setLogService( this );
@@ -51,19 +44,14 @@ public class LoggableServiceHolderImpl extends LoggableServiceHolder implements 
         }
     }
 
-
     private void log( String query, Throwable exception ) {
         if ( LOG.isWarnEnabled() ) {
             LOG.warn( String.format( EXCEPTION_MESSAGE_FORMAT, query ), exception );
         }
     }
 
-
-    @Override
-    @Transactional("jsqlTunerTransactionManager")
     public void log( DataRetrievalException exception ) {
         log( exception.getQuery(), exception );
-        getLogDao().log( exception.getQuery(), exception );
     }
 
     @Override

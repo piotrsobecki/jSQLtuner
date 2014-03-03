@@ -3,7 +3,6 @@ package pl.piotrsukiennik.tuner.parser;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
@@ -22,8 +21,6 @@ public interface QueryElements {
 
     OrderByFragment getOrderByFragment( OrderByFragment orderByFragment );
 
-    GroupByFragment getGroupByFragment( Expression element, int position );
-
     ColumnProjection getColumnProjection( ColumnProjection projection );
 
     JoinFragment getJoinFragment( JoinFragment joinFragment );
@@ -37,7 +34,6 @@ public interface QueryElements {
     Table getTable( String tableName );
 
     TableSource getTableSource( TableSource tableSource );
-
 
     <E extends Expression> E getExpression( E expression );
 }

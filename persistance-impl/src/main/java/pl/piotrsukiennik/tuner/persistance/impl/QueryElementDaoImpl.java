@@ -19,17 +19,14 @@ class QueryElementDaoImpl extends CrudDaoImpl implements QueryElementDao {
 
 
     @Override
-    public GroupByFragment getOrCreateGroupBy( Expression expression, int position ) {
-        GroupByFragment groupByFragment = (GroupByFragment) s().createCriteria( GroupByFragment.class )
-         .add( Restrictions.eq( "expression", expression ) )
-         .add( Restrictions.eq( "position", position ) ).setMaxResults( 1 ).uniqueResult();
-        if ( groupByFragment == null ) {
-            groupByFragment = new GroupByFragment();
-            groupByFragment.setExpression( expression );
-            groupByFragment.setPosition( position );
+    public GroupByFragment getOrCreateGroupBy( GroupByFragment groupByFragment ) {
+        GroupByFragment groupByFragmentPer = (GroupByFragment) s().createCriteria( GroupByFragment.class )
+         .add( Restrictions.eq( "expression", groupByFragment.getExpression() ) )
+         .add( Restrictions.eq( "position", groupByFragment.getPosition() ) ).setMaxResults( 1 ).uniqueResult();
+        if ( groupByFragmentPer == null ) {
             return create( groupByFragment );
         }
-        return groupByFragment;
+        return groupByFragmentPer;
     }
 
     @Override
@@ -40,11 +37,6 @@ class QueryElementDaoImpl extends CrudDaoImpl implements QueryElementDao {
     @Override
     public ColumnValue getOrCreate( ColumnValue columnValue ) {
         return create( columnValue );
-    }
-
-    @Override
-    public GroupByFragment getOrCreateGroupBy( GroupByFragment groupByFragment ) {
-        return create( groupByFragment );
     }
 
     @Override

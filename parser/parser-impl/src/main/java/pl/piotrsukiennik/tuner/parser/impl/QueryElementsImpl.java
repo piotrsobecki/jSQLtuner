@@ -4,7 +4,6 @@ import pl.piotrsukiennik.tuner.dto.QueryElementsCache;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
-import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
 import pl.piotrsukiennik.tuner.model.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
@@ -89,11 +88,6 @@ public class QueryElementsImpl implements QueryElements {
     public Column getColumn( String tableName, String columnName ) {
         String tableNameCorrected = correctName( tableName );
         return getColumn( getTable( tableNameCorrected ), columnName );
-    }
-
-    @Override
-    public GroupByFragment getGroupByFragment( Expression element, int position ) {
-        return elementService.getOrCreate( element, position );
     }
 
     @Override

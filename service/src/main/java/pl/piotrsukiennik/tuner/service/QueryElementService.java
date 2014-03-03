@@ -12,8 +12,6 @@ import pl.piotrsukiennik.tuner.model.source.Source;
  */
 public interface QueryElementService {
 
-    GroupByFragment getOrCreate( Expression element, int position );
-
     OperatorExpression getOrCreate( OperatorExpression expression );
 
     ColumnValue getOrCreate( ColumnValue columnValue );

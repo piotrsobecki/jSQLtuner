@@ -1,6 +1,5 @@
-package pl.piotrsukiennik.tuner.service.impl;
+package pl.piotrsukiennik.tuner.service.impl.transactional;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;
@@ -17,7 +16,7 @@ import java.util.Map;
  * @author Piotr Sukiennik
  * @date 19.02.14
  */
-@Service
+//@Service
 @Transactional("jsqlTunerTransactionManager")
 public class QueryServiceImpl implements QueryService {
 

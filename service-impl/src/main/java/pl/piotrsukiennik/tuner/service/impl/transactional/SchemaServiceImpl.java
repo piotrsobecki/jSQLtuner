@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl;
+package pl.piotrsukiennik.tuner.service.impl.transactional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

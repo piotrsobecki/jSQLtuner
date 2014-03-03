@@ -12,8 +12,6 @@ import pl.piotrsukiennik.tuner.model.source.Source;
  */
 public interface QueryElementDao {
 
-    GroupByFragment getOrCreateGroupBy( Expression element, int position );
-
     GroupByFragment getOrCreateGroupBy( GroupByFragment groupByFragment );
 
     OrderByFragment getOrCreate( OrderByFragment orderByFragment );

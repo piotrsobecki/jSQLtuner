@@ -1,10 +1,7 @@
-package pl.piotrsukiennik.tuner.test.unit;
+package pl.piotrsukiennik.tuner.test.junit;
 
-import com.carrotsearch.junitbenchmarks.BenchmarkOptions;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.piotrsukiennik.tuner.test.model.MockData;
 import pl.piotrsukiennik.tuner.test.model.MockDataModel;
@@ -18,6 +15,7 @@ import java.util.List;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public abstract class TestEntities {
 
     @Autowired
@@ -61,7 +59,6 @@ public abstract class TestEntities {
 
 
     @Test
-    @BenchmarkOptions(benchmarkRounds = 3, warmupRounds = 0)
     public void testGetNull() {
         MockData mockData2 = entityService.getTestEntry( -1 );
         Assert.assertNull( mockData2 );
@@ -97,5 +94,11 @@ public abstract class TestEntities {
     public void testSingleSelect10() {
         testSingleSelect( 10 );
     }
+
+    @Test
+    public void testSingleSelect100() {
+        testSingleSelect( 100 );
+    }
+
 
 }

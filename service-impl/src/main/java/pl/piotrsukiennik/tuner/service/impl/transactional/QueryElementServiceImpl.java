@@ -1,6 +1,5 @@
-package pl.piotrsukiennik.tuner.service.impl;
+package pl.piotrsukiennik.tuner.service.impl.transactional;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
@@ -15,7 +14,7 @@ import pl.piotrsukiennik.tuner.service.QueryElementService;
  * @author Piotr Sukiennik
  * @date 28.02.14
  */
-@Service
+//@Service
 @Transactional("jsqlTunerTransactionManager")
 public class QueryElementServiceImpl implements QueryElementService {
 
@@ -24,7 +23,10 @@ public class QueryElementServiceImpl implements QueryElementService {
     }
 
     public GroupByFragment getOrCreate( Expression element, int position ) {
-        return getQueryElementDao().getOrCreateGroupBy( element, position );
+        GroupByFragment groupByFragment = new GroupByFragment();
+        groupByFragment.setExpression( element );
+        groupByFragment.setPosition( position );
+        return getQueryElementDao().getOrCreateGroupBy( groupByFragment );
     }
 
     public OperatorExpression getOrCreate( OperatorExpression expression ) {

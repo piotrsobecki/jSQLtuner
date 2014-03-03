@@ -1,14 +1,17 @@
-package pl.piotrsukiennik.tuner.test.unit;
+package pl.piotrsukiennik.tuner.test.junit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-//import pl.piotrsukiennik.tuner.test.unit.query.SqlTestJsqlTunerWrapper;
+import org.junit.runners.MethodSorters;
+//import pl.piotrsukiennik.tuner.test.benchmark.query.SqlTestJsqlTunerWrapper;
 
 /**
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class TestQueries extends AbstractSQLFramework {
 
     private static String TEST_TABLE_CREATE = "CREATE TABLE TestTable (id int,key varchar (255),value varchar (255))";
