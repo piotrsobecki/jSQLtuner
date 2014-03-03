@@ -41,18 +41,18 @@ public abstract class TestQueries extends AbstractSQLFramework {
 
     @Test
     public void runTestValidQueries() {
-        testEachValidStatement( "sql/jsqltuner-test-valid-queries.sql" );
+        testEachValidStatement( "test-sql/jsqltuner-test-valid-queries.sql" );
     }
 
 
     @Test
     public void runTestInvocationInvalidQueries() {
-        testEachInvalidStatement( "sql/jsqltuner-test-invocation-invalid-queries.sql" );
+        testEachInvalidStatement( "test-sql/jsqltuner-test-invocation-invalid-queries.sql" );
     }
 
     @Test
     public void runTestParserInvalidQueries() {
-        testEachInvalidStatement( "sql/jsqltuner-test-parser-invalid-queries.sql" );
+        testEachInvalidStatement( "test-sql/jsqltuner-test-parser-invalid-queries.sql" );
     }
 
 }
