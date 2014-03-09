@@ -39,6 +39,9 @@
         </profile>
         <profile>
             <id>h2-db</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <jsqltuner.jdbc.schema>jsqltuner</jsqltuner.jdbc.schema>
                 <jsqltuner.jdbc.url>jdbc:h2:target/db/${jsqltuner.jdbc.schema}</jsqltuner.jdbc.url>
