@@ -1,11 +1,11 @@
 target
-*.iml
+.iml
 .idea
 site/**
 **/site/**
 target/**
 **/target/**
-**/*.iml
+**/.iml
 **/.idea
 
 #################
