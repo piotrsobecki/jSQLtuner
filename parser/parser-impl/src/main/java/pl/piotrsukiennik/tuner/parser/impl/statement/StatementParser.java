@@ -16,7 +16,7 @@ import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.AlterTableQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 
 /**
@@ -26,12 +26,12 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  */
 public abstract class StatementParser<T extends Query> extends ParsingVisitor<T> implements StatementVisitor {
 
-    protected StatementParser( QueryParsingContext parsingContext, Statement statement ) {
+    protected StatementParser( JsqlParserQueryParsingContext parsingContext, Statement statement ) {
         super( parsingContext );
         statement.accept( this );
     }
 
-    protected StatementParser( QueryParsingContext parsingContext, Statement statement, T query ) {
+    protected StatementParser( JsqlParserQueryParsingContext parsingContext, Statement statement, T query ) {
         super( parsingContext, query );
         init( statement );
         statement.accept( this );

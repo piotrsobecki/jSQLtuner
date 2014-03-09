@@ -12,7 +12,7 @@ import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -22,7 +22,7 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
 public class StatementParserVisitor<T extends Query> extends StatementParser implements StatementVisitor {
 
 
-    public StatementParserVisitor( QueryParsingContext parsingContext, Statement statement ) {
+    public StatementParserVisitor( JsqlParserQueryParsingContext parsingContext, Statement statement ) {
         super( parsingContext, statement );
     }
 

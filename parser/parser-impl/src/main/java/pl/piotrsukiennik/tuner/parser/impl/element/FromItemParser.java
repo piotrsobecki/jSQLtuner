@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.SubJoinSource;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.ParsingVisitor;
 
 /**
@@ -20,7 +20,7 @@ public class FromItemParser extends ParsingVisitor implements FromItemVisitor {
 
     private Source source;
 
-    public FromItemParser( QueryParsingContext parsingContext ) {
+    public FromItemParser( JsqlParserQueryParsingContext parsingContext ) {
         super( parsingContext );
     }
 

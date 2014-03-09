@@ -1,65 +1,24 @@
 package pl.piotrsukiennik.tuner.test.service;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.piotrsukiennik.tuner.test.model.MockData;
 import pl.piotrsukiennik.tuner.test.model.MockDataModel;
 
 import java.util.List;
 
 /**
- * Author: Piotr Sukiennik
- * Date: 28.07.13
- * Time: 12:58
+ * @author Piotr Sukiennik
+ * @date 09.03.14
  */
-@Service
-@Transactional("transactionManager")
-public class EntityService extends AbstractService {
+public interface EntityService {
+    void deleteTestEntry( MockDataModel mockData );
 
+    MockDataModel save( MockData mockData );
 
-    public void deleteTestEntry( MockDataModel mockData ) {
-        Session session = s();
-        session.delete( mockData );
-        session.flush();
-    }
+    MockDataModel save( String email );
 
-    public MockDataModel save( MockData mockData ) {
-        MockDataModel mockDataModel = new MockDataModel( mockData );
-        Session session = s();
-        Integer id = (Integer) session.save( mockDataModel );
-        mockDataModel.setId( id );
-        session.flush();
-        return mockDataModel;
-    }
+    List<MockDataModel> getEntriesByEmail( String email );
 
-    public MockDataModel save( String email ) {
-        MockDataModel test = new MockDataModel();
-        test.setEmail( email );
-        Session session = s();
-        Integer id = (Integer) session.save( test );
-        session.flush();
-        test.setId( id );
-        return test;
-    }
+    MockDataModel getTestEntry( Integer id );
 
-    public List<MockDataModel> getEntriesByEmail( String email ) {
-        MockDataModel test = new MockDataModel();
-        test.setEmail( email );
-        Session session = s();
-        return session.createCriteria( MockDataModel.class ).add( Restrictions.eq( "email", email ) ).list();
-    }
-
-    public MockDataModel getTestEntry( Integer id ) {
-        Session session = s();
-        return (MockDataModel) session.get( MockDataModel.class, id );
-    }
-
-    public List<MockDataModel> getTestEntities() {
-        Session session = s();
-        Criteria criteria = session.createCriteria( MockDataModel.class );
-        return criteria.list();
-    }
+    List<MockDataModel> getTestEntities();
 }

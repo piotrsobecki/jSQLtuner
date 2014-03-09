@@ -15,8 +15,8 @@ import pl.piotrsukiennik.tuner.test.junit.unit.parser.ParserTest;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@AxisRange(min = 0, max = 1)
+@RunWith( SpringJUnit4ClassRunner.class )
+@AxisRange( min = 0, max = 1 )
 @BenchmarkMethodChart
 public class ParserBenchmark extends ParserTest {
 

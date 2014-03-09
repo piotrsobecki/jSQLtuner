@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
  * Date: 09.07.13
  * Time: 00:47
  */
-@Component
+@Component("preparedStatementInterceptingAdvice")
 public class PSInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
 
     @Autowired

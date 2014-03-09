@@ -8,7 +8,7 @@ import net.sf.jsqlparser.expression.operators.relational.*;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.model.ValueEntity;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 /**
@@ -21,7 +21,7 @@ public class ValueEntityExpresionParser extends Visitor implements ExpressionVis
     private ValueEntity valueEntity;
 
 
-    public ValueEntityExpresionParser( QueryParsingContext parsingContext, ValueEntity valueEntity ) {
+    public ValueEntityExpresionParser( JsqlParserQueryParsingContext parsingContext, ValueEntity valueEntity ) {
         super( parsingContext );
         this.valueEntity = valueEntity;
     }

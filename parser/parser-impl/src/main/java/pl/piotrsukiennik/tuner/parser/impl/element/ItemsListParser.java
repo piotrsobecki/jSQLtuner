@@ -7,7 +7,7 @@ import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 import java.util.LinkedHashSet;
@@ -24,7 +24,7 @@ public class ItemsListParser extends Visitor implements ItemsListVisitor {
     private Query sourceQuery;
 
 
-    public ItemsListParser( QueryParsingContext parsingContext, Query sourceQuery ) {
+    public ItemsListParser( JsqlParserQueryParsingContext parsingContext, Query sourceQuery ) {
         super( parsingContext );
         this.sourceQuery = sourceQuery;
 

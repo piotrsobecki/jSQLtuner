@@ -9,8 +9,8 @@ import net.sf.jsqlparser.statement.select.SelectItemVisitor;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
 import pl.piotrsukiennik.tuner.model.query.ProjectionsAwareQuery;
 import pl.piotrsukiennik.tuner.model.source.Source;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.NewQueryUtils;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 import java.util.LinkedHashSet;
@@ -25,7 +25,7 @@ public class SelectItemParser<T extends ProjectionsAwareQuery> extends Visitor i
     private T selectQuery;
 
 
-    public SelectItemParser( QueryParsingContext parsingContext, T selectQuery ) {
+    public SelectItemParser( JsqlParserQueryParsingContext parsingContext, T selectQuery ) {
         super( parsingContext );
         this.selectQuery = selectQuery;
         if ( this.selectQuery.getProjections() == null ) {

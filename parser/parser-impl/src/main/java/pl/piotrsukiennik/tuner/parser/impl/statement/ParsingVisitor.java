@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.parser.impl.statement;
 
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 
 /**
@@ -12,11 +12,11 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
 public abstract class ParsingVisitor<T extends Query> extends Visitor {
     protected T query;
 
-    protected ParsingVisitor( QueryParsingContext parsingContext ) {
+    protected ParsingVisitor( JsqlParserQueryParsingContext parsingContext ) {
         super( parsingContext );
     }
 
-    public ParsingVisitor( QueryParsingContext parsingContext, T query ) {
+    public ParsingVisitor( JsqlParserQueryParsingContext parsingContext, T query ) {
         super( parsingContext );
         this.query = query;
     }

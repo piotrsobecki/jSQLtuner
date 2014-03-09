@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.InsertAsSelectQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.InsertWithValuesQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 import java.util.LinkedHashSet;
@@ -27,7 +27,7 @@ public class InsertItemsListParser extends Visitor implements ItemsListVisitor {
     private InsertQuery insertQuery;
 
 
-    public InsertItemsListParser( QueryParsingContext parsingContext ) {
+    public InsertItemsListParser( JsqlParserQueryParsingContext parsingContext ) {
         super( parsingContext );
     }
 

@@ -24,10 +24,10 @@ public class ParsingQueryServiceImpl implements ParsingQueryService {
 
     @Override
     public <T extends Query> T get( String database, String schema, String query ) throws QueryParsingNotSupportedException {
-        T queryParsed = queryService.get( database, schema, query );
+        T queryParsed = queryService.getQuery( database, schema, query );
         if ( queryParsed == null ) {
             queryParsed = parser.parse( database, schema, query );
-            queryService.save( queryParsed, database, schema, query );
+            queryService.createQuery( queryParsed, database, schema, query );
         }
         return queryParsed;
     }

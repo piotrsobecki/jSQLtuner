@@ -4,7 +4,7 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.insert.Insert;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.element.InsertItemsListParser;
 
 import java.util.LinkedHashSet;
@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class InsertStatementParser extends StatementParser<InsertQuery> {
 
-    public InsertStatementParser( QueryParsingContext parsingContext, Insert insert ) {
+    public InsertStatementParser( JsqlParserQueryParsingContext parsingContext, Insert insert ) {
         super( parsingContext, insert );
     }
 

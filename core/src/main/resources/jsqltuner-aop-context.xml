@@ -6,7 +6,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="pl.piotrsukiennik.tuner.aop"/>
+
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.aop">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
 
     <import resource="jsqltuner-context.xml"/>
 
@@ -17,13 +20,13 @@
           class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
         <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
-        <property name="advice" ref="PSInterceptingAdvice"/>
+        <property name="advice" ref="preparedStatementInterceptingAdvice"/>
     </bean>
 
     <bean id="statementInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
         <property name="expression" value="execution (java.sql.Statement java.sql.Connection.*(..))"/>
-        <property name="advice" ref="SInterceptingAdvice"/>
+        <property name="advice" ref="statementInterceptingAdvice"/>
     </bean>
 
 

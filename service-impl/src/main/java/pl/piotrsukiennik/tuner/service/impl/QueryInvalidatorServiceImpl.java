@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.QueryInvalidatorService;
-import pl.piotrsukiennik.tuner.service.cache.SupportingHashesHolder;
+import pl.piotrsukiennik.tuner.service.impl.cache.SupportingHashesHolder;
 
 import java.util.Collection;
 import java.util.Collections;

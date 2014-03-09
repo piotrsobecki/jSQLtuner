@@ -23,7 +23,7 @@ public class QueryProviderImpl implements QueryProvider {
 
     @Override
     public <T extends Query> T getQuery( String database, String schema, String query ) throws QueryParsingNotSupportedException {
-        T query1 = queryService.get( database, schema, query );
+        T query1 = queryService.getQuery( database, schema, query );
         if ( query1 == null ) {
             query1 = parser.parse( database, schema, query );
         }

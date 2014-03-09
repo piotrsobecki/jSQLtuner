@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:annotation-config/>
+
+    <context:property-placeholder location="jsqltuner-persistence.properties"/>
+
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.persistence,pl.piotrsukiennik.tuner.persistence.impl">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <bean id="jsqlTunerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          autowire-candidate="false">
+        <property name="driverClassName" value="${jsqltuner.db.driver}"/>
+        <property name="url" value="${jsqltuner.db.url}"/>
+        <property name="username" value="${jsqltuner.db.username}"/>
+        <property name="password" value="${jsqltuner.db.password}"/>
+    </bean>
+
+
+    <bean id="jsqlTunerSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          autowire-candidate="false">
+        <property name="dataSource" ref="jsqlTunerDataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>pl.piotrsukiennik.tuner.model</value>
+                <value>pl.piotrsukiennik.tuner.model.*</value>
+                <value>pl.piotrsukiennik.tuner.model.*.*</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${jsqltuner.hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!--
+        <bean  id="jsqlTunerTransactionManager"
+               class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+               autowire-candidate="false">
+            <qualifier value="jsqlTunerTransactionManager"/>
+            <property name="dataSource" ref="jsqlTunerDataSource"/>
+        </bean>
+    -->
+
+
+    <bean id="jsqlTunerTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          autowire-candidate="false">
+        <qualifier value="jsqlTunerTransactionManager"/>
+        <property name="sessionFactory" ref="jsqlTunerSessionFactory"/>
+    </bean>
+
+
+</beans>

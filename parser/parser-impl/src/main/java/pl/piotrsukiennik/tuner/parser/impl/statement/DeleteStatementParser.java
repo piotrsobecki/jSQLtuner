@@ -4,7 +4,7 @@ import net.sf.jsqlparser.statement.delete.Delete;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.element.ExpresionParser;
 
 /**
@@ -13,7 +13,7 @@ import pl.piotrsukiennik.tuner.parser.impl.element.ExpresionParser;
  * Time: 23:07
  */
 public class DeleteStatementParser extends StatementParser<DeleteQuery> {
-    public DeleteStatementParser( QueryParsingContext parsingContext, Delete delete ) {
+    public DeleteStatementParser( JsqlParserQueryParsingContext parsingContext, Delete delete ) {
         super( parsingContext, delete, new DeleteQuery() );
     }
 

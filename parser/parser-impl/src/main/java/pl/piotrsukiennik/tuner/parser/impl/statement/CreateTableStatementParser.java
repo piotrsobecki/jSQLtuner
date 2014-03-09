@@ -9,7 +9,7 @@ import pl.piotrsukiennik.tuner.model.query.impl.CreateTableQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.CreateViewQuery;
 import pl.piotrsukiennik.tuner.model.schema.Index;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -17,7 +17,7 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  * Time: 23:07
  */
 public class CreateTableStatementParser extends StatementParser<CreateQuery> {
-    public CreateTableStatementParser( QueryParsingContext parsingContext, CreateTable createTable ) {
+    public CreateTableStatementParser( JsqlParserQueryParsingContext parsingContext, CreateTable createTable ) {
         super( parsingContext, createTable );
     }
 

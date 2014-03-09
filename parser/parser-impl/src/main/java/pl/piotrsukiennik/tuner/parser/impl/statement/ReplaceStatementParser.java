@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.parser.impl.statement;
 
 import net.sf.jsqlparser.statement.replace.Replace;
 import pl.piotrsukiennik.tuner.model.query.impl.ReplaceQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  * Time: 23:07
  */
 public class ReplaceStatementParser extends StatementParser<ReplaceQuery> {
-    public ReplaceStatementParser( QueryParsingContext parsingContext, Replace replace ) {
+    public ReplaceStatementParser( JsqlParserQueryParsingContext parsingContext, Replace replace ) {
         super( parsingContext, replace, new ReplaceQuery() );
     }
 

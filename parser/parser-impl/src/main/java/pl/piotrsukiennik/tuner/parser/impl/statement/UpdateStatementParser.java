@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.parser.impl.element.ValueEntityExpresionParser;
 
@@ -21,7 +21,7 @@ import java.util.Set;
  * Time: 23:07
  */
 public class UpdateStatementParser<U extends UpdateQuery> extends StatementParser<UpdateQuery> {
-    public UpdateStatementParser( QueryParsingContext parsingContext, Update update ) {
+    public UpdateStatementParser( JsqlParserQueryParsingContext parsingContext, Update update ) {
         super( parsingContext, update, new UpdateQuery() );
     }
 

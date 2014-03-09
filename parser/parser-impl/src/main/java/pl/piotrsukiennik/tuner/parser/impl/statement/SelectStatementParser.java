@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.parser.impl.statement;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.element.SelectBodyParser;
 
 /**
@@ -12,7 +12,7 @@ import pl.piotrsukiennik.tuner.parser.impl.element.SelectBodyParser;
  * Time: 23:15
  */
 public class SelectStatementParser extends StatementParser<SelectQuery> {
-    public SelectStatementParser( QueryParsingContext parsingContext, Select select ) {
+    public SelectStatementParser( JsqlParserQueryParsingContext parsingContext, Select select ) {
         super( parsingContext, select, new SelectQuery() );
 
     }

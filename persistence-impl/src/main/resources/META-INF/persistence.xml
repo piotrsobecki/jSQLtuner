@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="jsqltunerPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.AlterTableQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.BetweenExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.CallQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Column</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection</class>
+        <class>pl.piotrsukiennik.tuner.model.other.ColumnValue</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.CreateIndexQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.CreateQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.CreateTableQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.CreateViewQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Database</class>
+        <class>pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.DropQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.DropTableQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.Expression</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Function</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.FunctionProjection</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.GenericDropQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.other.GroupByFragment</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Index</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.InsertAsSelectQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.InsertQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.InsertWithValuesQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.other.JoinFragment</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.ListExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.OperatorExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.other.OrderByFragment</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.PairExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Procedure</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.Projection</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.ProjectionValueExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.query.Query</class>
+        <class>pl.piotrsukiennik.tuner.model.log.QueryException</class>
+        <class>pl.piotrsukiennik.tuner.model.log.QueryExecution</class>
+        <class>pl.piotrsukiennik.tuner.model.query.ReadQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.log.ReadQueryExecution</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.ReplaceQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Schema</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.SelectQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.source.Source</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.SourceProjection</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.StarProjection</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.projection.StaticProjection</class>
+        <class>pl.piotrsukiennik.tuner.model.source.StaticSource</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.SubExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.source.SubJoinSource</class>
+        <class>pl.piotrsukiennik.tuner.model.source.SubQuerySource</class>
+        <class>pl.piotrsukiennik.tuner.model.expression.SubSelectExpression</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Table</class>
+        <class>pl.piotrsukiennik.tuner.model.source.TableSource</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.TruncateQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.schema.Type</class>
+        <class>pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.ValueEntity</class>
+        <class>pl.piotrsukiennik.tuner.model.other.Values</class>
+        <class>pl.piotrsukiennik.tuner.model.query.WriteQuery</class>
+        <class>pl.piotrsukiennik.tuner.model.log.WriteQueryExecution</class>
+    </persistence-unit>
+</persistence>

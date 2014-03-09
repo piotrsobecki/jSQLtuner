@@ -14,7 +14,7 @@ import java.sql.Statement;
  * Date: 09.07.13
  * Time: 00:47
  */
-@Component
+@Component("statementInterceptingAdvice")
 public class SInterceptingAdvice implements InterceptingAdvice<Statement> {
 
     @Autowired

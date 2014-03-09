@@ -10,9 +10,9 @@ import pl.piotrsukiennik.tuner.model.query.Query;
  */
 public interface QueryService {
 
-    <T extends Query> T get( String database, String schema, String query ) throws QueryParsingNotSupportedException;
+    <T extends Query> T getQuery( String database, String schema, String query ) throws QueryParsingNotSupportedException;
 
-    <T extends Query> void save( T query, String database, String schema, String queryStr );
+    <T extends Query> void createQuery( T query, String database, String schema, String queryStr );
 
-    void save( WriteQueryExecution writeQueryExecution );
+    void createExecution( WriteQueryExecution writeQueryExecution );
 }

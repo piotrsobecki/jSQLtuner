@@ -11,7 +11,7 @@ import pl.piotrsukiennik.tuner.model.expression.*;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 import java.util.LinkedHashSet;
@@ -27,7 +27,7 @@ public class ExpresionParser extends Visitor implements ExpressionVisitor {
     private Expression expression;
 
 
-    public ExpresionParser( QueryParsingContext parsingContext ) {
+    public ExpresionParser( JsqlParserQueryParsingContext parsingContext ) {
         super( parsingContext );
     }
 

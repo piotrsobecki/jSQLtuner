@@ -10,9 +10,9 @@ import pl.piotrsukiennik.tuner.LoggableService;
 import pl.piotrsukiennik.tuner.Parser;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.parser.QueryContextBuilder;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.StatementParserVisitor;
+import pl.piotrsukiennik.tuner.service.QueryParsingContextBuilder;
 import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
@@ -31,7 +31,7 @@ class ParserImpl implements Parser {
     //private static final Log LOG = LogFactory.getLog( Parser.class );
 
     @Autowired
-    private QueryContextBuilder queryContextBuilder;
+    private QueryParsingContextBuilder<JsqlParserQueryParsingContext> queryParsingContextBuilder;
 
     @Autowired
     private LoggableService logger;
@@ -68,7 +68,7 @@ class ParserImpl implements Parser {
     }
 
     protected <T extends Query> T parse( String database, String schema, String query, Statement statement ) throws QueryParsingNotSupportedException {
-        QueryParsingContext parsingContext = queryContextBuilder.getQueryContext( database, schema );
+        JsqlParserQueryParsingContext parsingContext = queryParsingContextBuilder.getQueryContext( database, schema );
         StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( parsingContext, statement );
         T mappedQuery = (T) statementParserVisitor.getQuery();
         if ( mappedQuery == null ) {

@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.parser.impl.statement;
 
 import net.sf.jsqlparser.statement.truncate.Truncate;
 import pl.piotrsukiennik.tuner.model.query.impl.TruncateQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  * Time: 23:07
  */
 public class TruncateTableStatementParser extends StatementParser<TruncateQuery> {
-    public TruncateTableStatementParser( QueryParsingContext parsingContext, Truncate truncate ) {
+    public TruncateTableStatementParser( JsqlParserQueryParsingContext parsingContext, Truncate truncate ) {
         super( parsingContext, truncate, new TruncateQuery() );
     }
 

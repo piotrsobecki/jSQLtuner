@@ -7,8 +7,8 @@ import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.NewQueryUtils;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.ParsingVisitor;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class SelectBodyParser<T extends SelectQuery> extends ParsingVisitor<T> implements net.sf.jsqlparser.statement.select.SelectVisitor {
 
-    public SelectBodyParser( QueryParsingContext parsingContext, T query ) {
+    public SelectBodyParser( JsqlParserQueryParsingContext parsingContext, T query ) {
         super( parsingContext, query );
     }
 

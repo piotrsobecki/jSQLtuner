@@ -34,6 +34,7 @@
 
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <qualifier value="transactionManager"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>

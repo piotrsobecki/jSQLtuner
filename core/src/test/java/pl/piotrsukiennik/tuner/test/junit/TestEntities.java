@@ -16,7 +16,7 @@ import java.util.List;
  * @date 22.01.14
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public abstract class TestEntities {
+public abstract class TestEntities extends TestQueries {
 
     @Autowired
     private EntityService entityService;
@@ -94,11 +94,13 @@ public abstract class TestEntities {
     public void testSingleSelect10() {
         testSingleSelect( 10 );
     }
+/*
 
     @Test
     public void testSingleSelect100() {
         testSingleSelect( 100 );
     }
+*/
 
 
 }

@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.parser.impl.element;
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 /**
@@ -15,7 +15,7 @@ public class InsertIntoTableParser extends Visitor implements IntoTableVisitor {
 
     private InsertQuery sourceQuery;
 
-    public InsertIntoTableParser( QueryParsingContext parsingContext, InsertQuery sourceQuery ) {
+    public InsertIntoTableParser( JsqlParserQueryParsingContext parsingContext, InsertQuery sourceQuery ) {
         super( parsingContext );
         this.sourceQuery = sourceQuery;
     }

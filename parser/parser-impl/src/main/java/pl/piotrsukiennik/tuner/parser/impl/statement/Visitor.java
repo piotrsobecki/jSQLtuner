@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.parser.impl.statement;
 
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 
 /**
@@ -9,10 +9,10 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  * Time: 22:53
  */
 public abstract class Visitor {
-    protected QueryParsingContext parsingContext;
+    protected JsqlParserQueryParsingContext parsingContext;
 
 
-    protected Visitor( QueryParsingContext parsingContext ) {
+    protected Visitor( JsqlParserQueryParsingContext parsingContext ) {
         this.parsingContext = parsingContext;
     }
 

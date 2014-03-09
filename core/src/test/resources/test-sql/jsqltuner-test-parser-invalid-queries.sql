@@ -1,1 +1,1 @@
-SELECT * * FROM TestTable;
+SELECT * * FROM MOCK_DATA;

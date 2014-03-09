@@ -4,7 +4,7 @@ import net.sf.jsqlparser.statement.drop.Drop;
 import pl.piotrsukiennik.tuner.model.query.DropQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.DropTableQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.GenericDropQuery;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 
 /**
  * Author: Piotr Sukiennik
@@ -12,7 +12,7 @@ import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
  * Time: 23:07
  */
 public class DropStatementParser extends StatementParser<DropQuery> {
-    public DropStatementParser( QueryParsingContext parsingContext, Drop drop ) {
+    public DropStatementParser( JsqlParserQueryParsingContext parsingContext, Drop drop ) {
         super( parsingContext, drop );
     }
 

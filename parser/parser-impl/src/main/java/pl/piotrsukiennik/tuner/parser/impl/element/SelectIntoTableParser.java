@@ -4,8 +4,8 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.IntoTableVisitor;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
+import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.NewQueryUtils;
-import pl.piotrsukiennik.tuner.parser.QueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.Visitor;
 
 /**
@@ -18,7 +18,7 @@ public class SelectIntoTableParser extends Visitor implements IntoTableVisitor {
     private SelectQuery sourceQuery;
 
 
-    public SelectIntoTableParser( QueryParsingContext parsingContext, SelectQuery sourceQuery ) {
+    public SelectIntoTableParser( JsqlParserQueryParsingContext parsingContext, SelectQuery sourceQuery ) {
         super( parsingContext );
         this.sourceQuery = sourceQuery;
     }
