@@ -16,6 +16,8 @@ public interface EntityService {
 
     MockDataModel save( String email );
 
+    List<MockDataModel> getEntriesWithNameAndEmailBegginingWithA();
+
     List<MockDataModel> getEntriesByEmail( String email );
 
     MockDataModel getTestEntry( Integer id );

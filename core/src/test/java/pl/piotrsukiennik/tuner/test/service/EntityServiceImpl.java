@@ -56,6 +56,12 @@ public class EntityServiceImpl extends AbstractService implements EntityService 
         return session.createCriteria( MockDataModel.class ).add( Restrictions.eq( "email", email ) ).list();
     }
 
+
+    public List<MockDataModel> getEntriesWithNameAndEmailBegginingWithA() {
+        Session session = s();
+        return session.getNamedQuery( MockDataModel.HQL_JOIN_SUBSELECT_LIKE_A_QUERY ).list();
+    }
+
     @Override
     public MockDataModel getTestEntry( Integer id ) {
         Session session = s();

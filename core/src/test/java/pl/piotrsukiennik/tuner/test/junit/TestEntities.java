@@ -77,11 +77,8 @@ public abstract class TestEntities extends TestQueries {
 
     public void testSingleSelect( final int runs ) {
         for ( int i = 0; i < runs; i++ ) {
-            List<MockDataModel> testEntities = entityService.getEntriesByEmail( "test1" );
-            Assert.assertEquals( 1, testEntities.size() );
-            Assert.assertNotNull( testEntities.get( 0 ) );
-            Assert.assertNotNull( testEntities.get( 0 ).getId() );
-            Assert.assertNotNull( testEntities.get( 0 ).getEmail() );
+            List<MockDataModel> testEntities = entityService.getEntriesWithNameAndEmailBegginingWithA();
+            Assert.assertEquals( 19, testEntities.size() );
         }
     }
 

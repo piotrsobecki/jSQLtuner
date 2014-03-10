@@ -27,7 +27,7 @@
     </build>
     <profiles>
         <profile>
-            <id>h2-db</id>
+            <id>jSQLtuner : DB : h2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -40,7 +40,7 @@
                 <jsqltuner.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.hibernate.dialect>
                 <jsqltuner.dep.jdbc.groupId>com.h2database</jsqltuner.dep.jdbc.groupId>
                 <jsqltuner.dep.jdbc.artifactId>h2</jsqltuner.dep.jdbc.artifactId>
-                <jsqltuner.dep.jdbc.version>1.3.174</jsqltuner.dep.jdbc.version>
+                <jsqltuner.dep.jdbc.version>${h2.version}</jsqltuner.dep.jdbc.version>
             </properties>
         </profile>
     </profiles>
@@ -92,32 +92,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring AOP + AspectJ -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -125,25 +99,10 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-        <!--
-
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-entitymanager</artifactId>
-                    <version>${hibernate.version}</version>
-                </dependency>
-        -->
 
     </dependencies>
 </project>

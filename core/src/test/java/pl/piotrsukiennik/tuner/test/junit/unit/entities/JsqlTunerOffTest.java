@@ -10,6 +10,6 @@ import pl.piotrsukiennik.tuner.test.junit.TestEntities;
  * @date 19.02.14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/aop/jsqltuner-test-context.xml" })
-public class JsqlTunerAopTest extends TestEntities {
+@ContextConfiguration(locations = { "/jsqltuner-test-root-plain-context.xml" })
+public class JsqlTunerOffTest extends TestEntities {
 }

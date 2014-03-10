@@ -15,12 +15,44 @@
     <packaging>jar</packaging>
     <name>jSQLtuner :: core</name>
     <properties>
+        <jsqltuner.method>aop</jsqltuner.method>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
     </properties>
     <profiles>
-
         <profile>
-            <id>Benchmarks</id>
+            <id>jSQLtuner : method : aop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jsqltuner.method>aop</jsqltuner.method>
+            </properties>
+        </profile>
+        <profile>
+            <id>jSQLtuner : method : wrapper</id>
+            <properties>
+                <jsqltuner.method>wrapper</jsqltuner.method>
+            </properties>
+        </profile>
+        <profile>
+            <id>jSQLtuner : test : db : h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
+                <jsqltuner.test.jdbc.url>jdbc:h2:target/db/${jsqltuner.test.jdbc.schema}</jsqltuner.test.jdbc.url>
+                <jsqltuner.test.jdbc.driver>org.h2.Driver</jsqltuner.test.jdbc.driver>
+                <jsqltuner.test.jdbc.username>sa</jsqltuner.test.jdbc.username>
+                <jsqltuner.test.jdbc.password/>
+                <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.test.hibernate.dialect>
+                <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
+                <jsqltuner.test.dep.jdbc.artifactId>h2</jsqltuner.test.dep.jdbc.artifactId>
+                <jsqltuner.test.dep.jdbc.version>${h2.version}</jsqltuner.test.dep.jdbc.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>jSQLtuner : test : benchmarks</id>
             <build>
                 <plugins>
                     <plugin>
@@ -39,9 +71,9 @@
                 </plugins>
             </build>
         </profile>
-
         <profile>
-            <id>services-persistence</id>
+            <!-- Services saving query model and executions -->
+            <id>jSQLtuner : services : persistent</id>
             <dependencies>
                 <dependency>
                     <groupId>pl.piotrsukiennik.tuner</groupId>
@@ -50,9 +82,9 @@
                 </dependency>
             </dependencies>
         </profile>
-
         <profile>
-            <id>services-blank</id>
+            <!-- Services not saving query model and executions - no db used-->
+            <id>jSQLtuner : services : blank</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -64,7 +96,6 @@
                 </dependency>
             </dependencies>
         </profile>
-
     </profiles>
     <build>
         <resources>
@@ -104,12 +135,6 @@
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>pl.piotrsukiennik.tuner.parser</groupId>
@@ -157,12 +182,6 @@
             <version>1.9.13</version>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
-        </dependency>
-
         <!--Memcached-->
         <dependency>
             <groupId>spy</groupId>
@@ -175,6 +194,7 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -185,6 +205,33 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google.guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>junit-benchmarks</artifactId>
+            <version>0.7.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -209,29 +256,22 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.9</version>
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <groupId>${jsqltuner.test.dep.jdbc.groupId}</groupId>
+            <artifactId>${jsqltuner.test.dep.jdbc.artifactId}</artifactId>
+            <version>${jsqltuner.test.dep.jdbc.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.carrotsearch</groupId>
-            <artifactId>junit-benchmarks</artifactId>
-            <version>0.7.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${google.guava.version}</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 
