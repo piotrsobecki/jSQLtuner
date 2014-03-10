@@ -8,3 +8,7 @@ jSQLtuner - ORM Performance And NoSQL
 
 PJIIT Master's thesis. SQL tuner for  improving Java applications ORM performance using NoSQL technologies.
 - Using NoSQL key-value database (memcached) to intelligently affect ORM performance.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/piotrsukiennik/jsqltuner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
