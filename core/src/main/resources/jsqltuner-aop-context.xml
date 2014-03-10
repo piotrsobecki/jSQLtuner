@@ -19,13 +19,14 @@
     <bean id="preparedStatementInterceptingAdvisor"
           class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
-        <property name="expression" value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
+        <property name="expression"
+                  value="execution (java.import-sql.PreparedStatement java.import-sql.Connection.*(..))"/>
         <property name="advice" ref="preparedStatementInterceptingAdvice"/>
     </bean>
 
     <bean id="statementInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
-        <property name="expression" value="execution (java.sql.Statement java.sql.Connection.*(..))"/>
+        <property name="expression" value="execution (java.import-sql.Statemenimport-sqlava.sql.Connection.*(..))"/>
         <property name="advice" ref="statementInterceptingAdvice"/>
     </bean>
 

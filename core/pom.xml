@@ -24,7 +24,7 @@
 
 
         <!--jSQLtuner : test : db : h2-->
-        <jsqltuner.test.jdbc.import>sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
+        <jsqltuner.test.jdbc.import>import-sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
         <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
         <jsqltuner.test.jdbc.url>jdbc:h2:target/db/${jsqltuner.test.jdbc.schema}</jsqltuner.test.jdbc.url>
         <jsqltuner.test.jdbc.driver>org.h2.Driver</jsqltuner.test.jdbc.driver>
@@ -52,7 +52,7 @@
         <profile>
             <id>test-db-mysql</id>
             <properties>
-                <jsqltuner.test.jdbc.import>sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
+                <jsqltuner.test.jdbc.import>import-sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
                 <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
                 <jsqltuner.test.jdbc.url>jdbc:mysql://localhost:3306/${jsqltuner.test.jdbc.schema}
                 </jsqltuner.test.jdbc.url>
