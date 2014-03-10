@@ -5,7 +5,6 @@ jSQLtuner - ORM Performance And NoSQL
 [![Coverage Status](https://coveralls.io/repos/piotrsukiennik/jSQLtuner/badge.png?branch=master)](https://coveralls.io/r/piotrsukiennik/jSQLtuner?branch=master)
 [![Stories in Ready](https://badge.waffle.io/piotrsukiennik/jsqltuner.png?label=ready&title=Ready)](https://waffle.io/piotrsukiennik/jsqltuner)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/piotrsukiennik/jsqltuner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-=========
 
 
 PJIIT Master's thesis. SQL tuner for  improving Java applications ORM performance using NoSQL technologies.
