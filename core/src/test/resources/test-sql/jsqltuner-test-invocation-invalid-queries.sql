@@ -1,1 +1,0 @@
-SELECT * FROM MOCK_DATA tt JOIN MOCK_DATA tt2 ON tt.id = tt2.id GROUP BY tt.id ORDER BY tt.id ASC;
