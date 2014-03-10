@@ -7,8 +7,7 @@
 
 
     <context:annotation-config/>
-
-    <context:property-placeholder location="jsqltuner-persistence.properties"/>
+    <context:property-placeholder location="classpath*:jsqltuner-persistence.properties"/>
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.persistence,pl.piotrsukiennik.tuner.persistence.impl">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>

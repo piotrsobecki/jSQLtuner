@@ -25,6 +25,25 @@
             </resource>
         </resources>
     </build>
+    <profiles>
+        <profile>
+            <id>h2-db</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jsqltuner.jdbc.schema>jsqltuner</jsqltuner.jdbc.schema>
+                <jsqltuner.jdbc.url>jdbc:h2:target/db/${jsqltuner.jdbc.schema}</jsqltuner.jdbc.url>
+                <jsqltuner.jdbc.driver>org.h2.Driver</jsqltuner.jdbc.driver>
+                <jsqltuner.jdbc.username>sa</jsqltuner.jdbc.username>
+                <jsqltuner.jdbc.password/>
+                <jsqltuner.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.hibernate.dialect>
+                <jsqltuner.dep.jdbc.groupId>com.h2database</jsqltuner.dep.jdbc.groupId>
+                <jsqltuner.dep.jdbc.artifactId>h2</jsqltuner.dep.jdbc.artifactId>
+                <jsqltuner.dep.jdbc.version>1.3.174</jsqltuner.dep.jdbc.version>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>${jsqltuner.dep.jdbc.groupId}</groupId>

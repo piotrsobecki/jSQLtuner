@@ -18,6 +18,7 @@
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
     </properties>
     <profiles>
+
         <profile>
             <id>Benchmarks</id>
             <build>
@@ -38,6 +39,32 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>services-persistence</id>
+            <dependencies>
+                <dependency>
+                    <groupId>pl.piotrsukiennik.tuner</groupId>
+                    <artifactId>service-db-impl</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>services-blank</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>pl.piotrsukiennik.tuner</groupId>
+                    <artifactId>service-blank-impl</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
     </profiles>
     <build>
         <resources>
@@ -109,12 +136,6 @@
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
 

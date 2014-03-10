@@ -12,7 +12,6 @@
 
     <import resource="classpath*:jsqltuner-datasources-context.xml"/>
     <import resource="classpath*:jsqltuner-services-context.xml"/>
-    <import resource="classpath*:jsqltuner-persistence-context.xml"/>
     <import resource="classpath*:jsqltuner-parser-context.xml"/>
 
 

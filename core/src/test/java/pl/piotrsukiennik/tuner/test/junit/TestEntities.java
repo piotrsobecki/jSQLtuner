@@ -15,7 +15,7 @@ import java.util.List;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class TestEntities extends TestQueries {
 
     @Autowired
@@ -94,13 +94,12 @@ public abstract class TestEntities extends TestQueries {
     public void testSingleSelect10() {
         testSingleSelect( 10 );
     }
-/*
+
 
     @Test
     public void testSingleSelect100() {
         testSingleSelect( 100 );
     }
-*/
 
 
 }

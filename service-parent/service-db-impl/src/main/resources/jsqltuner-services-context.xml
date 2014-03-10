@@ -8,8 +8,8 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
     <import resource="classpath*:jsqltuner-persistence-context.xml"/>
+    <context:property-placeholder location="classpath*:jsqltuner-persistence.properties"/>
 
     <aop:config proxy-target-class="true">
         <aop:pointcut id="allServices" expression="execution(* pl.piotrsukiennik.tuner.service.*.*(..))"/>
@@ -24,7 +24,6 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath*:jsqltuner-persistence.properties"/>
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.service">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -37,11 +36,6 @@
     <bean class="pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectorImpl">
         <property name="selectionHelperClass" value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
         <property name="fitnessCalculator" ref="fitnessCalculator"/>
-    </bean>
-
-    <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceContextImpl">
-        <constructor-arg index="0" value="${jsqltuner.db.url}"/>
-        <constructor-arg index="1" value="${jsqltuner.db.schema}"/>
     </bean>
 
 </beans>
