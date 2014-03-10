@@ -17,48 +17,61 @@
     <properties>
         <jsqltuner.method>aop</jsqltuner.method>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
+
+
+        <!--jSQLtuner : service : blank -->
+        <jsqltuner.service.impl.artifactId>service-blank-impl</jsqltuner.service.impl.artifactId>
+
+
+        <!--jSQLtuner : test : db : h2-->
+        <jsqltuner.test.jdbc.import>sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
+        <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
+        <jsqltuner.test.jdbc.url>jdbc:h2:target/db/${jsqltuner.test.jdbc.schema}</jsqltuner.test.jdbc.url>
+        <jsqltuner.test.jdbc.driver>org.h2.Driver</jsqltuner.test.jdbc.driver>
+        <jsqltuner.test.jdbc.username>sa</jsqltuner.test.jdbc.username>
+        <jsqltuner.test.jdbc.password/>
+        <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.test.hibernate.dialect>
+        <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
+        <jsqltuner.test.dep.jdbc.artifactId>h2</jsqltuner.test.dep.jdbc.artifactId>
+        <jsqltuner.test.dep.jdbc.version>${h2.version}</jsqltuner.test.dep.jdbc.version>
     </properties>
     <profiles>
         <profile>
-            <id>jSQLtuner : method : aop</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <!-- Services saving query model and executions -->
+            <id>services-persistent</id>
             <properties>
-                <jsqltuner.method>aop</jsqltuner.method>
+                <jsqltuner.service.impl.artifactId>service-db-impl</jsqltuner.service.impl.artifactId>
             </properties>
         </profile>
         <profile>
-            <id>jSQLtuner : method : wrapper</id>
+            <id>datasource-wrapper</id>
             <properties>
                 <jsqltuner.method>wrapper</jsqltuner.method>
             </properties>
         </profile>
         <profile>
-            <id>jSQLtuner : test : db : h2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>test-db-mysql</id>
             <properties>
+                <jsqltuner.test.jdbc.import>sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
                 <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
-                <jsqltuner.test.jdbc.url>jdbc:h2:target/db/${jsqltuner.test.jdbc.schema}</jsqltuner.test.jdbc.url>
-                <jsqltuner.test.jdbc.driver>org.h2.Driver</jsqltuner.test.jdbc.driver>
-                <jsqltuner.test.jdbc.username>sa</jsqltuner.test.jdbc.username>
-                <jsqltuner.test.jdbc.password/>
-                <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.test.hibernate.dialect>
-                <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
-                <jsqltuner.test.dep.jdbc.artifactId>h2</jsqltuner.test.dep.jdbc.artifactId>
-                <jsqltuner.test.dep.jdbc.version>${h2.version}</jsqltuner.test.dep.jdbc.version>
+                <jsqltuner.test.jdbc.url>jdbc:mysql://localhost:3306/${jsqltuner.test.jdbc.schema}
+                </jsqltuner.test.jdbc.url>
+                <jsqltuner.test.jdbc.driver>com.mysql.jdbc.Driver</jsqltuner.test.jdbc.driver>
+                <jsqltuner.test.jdbc.username>jsqltunertest</jsqltuner.test.jdbc.username>
+                <jsqltuner.test.jdbc.password>jsqltunertest</jsqltuner.test.jdbc.password>
+                <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</jsqltuner.test.hibernate.dialect>
+                <jsqltuner.test.dep.jdbc.groupId>mysql</jsqltuner.test.dep.jdbc.groupId>
+                <jsqltuner.test.dep.jdbc.artifactId>mysql-connector-java</jsqltuner.test.dep.jdbc.artifactId>
+                <jsqltuner.test.dep.jdbc.version>5.1.9</jsqltuner.test.dep.jdbc.version>
             </properties>
         </profile>
         <profile>
-            <id>jSQLtuner : test : benchmarks</id>
+            <id>test-benchmarks</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.9</version>
                         <configuration>
                             <includes>
                                 <include>**/*Benchmark.java</include>
@@ -70,31 +83,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-            <!-- Services saving query model and executions -->
-            <id>jSQLtuner : services : persistent</id>
-            <dependencies>
-                <dependency>
-                    <groupId>pl.piotrsukiennik.tuner</groupId>
-                    <artifactId>service-db-impl</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <!-- Services not saving query model and executions - no db used-->
-            <id>jSQLtuner : services : blank</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>pl.piotrsukiennik.tuner</groupId>
-                    <artifactId>service-blank-impl</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
     <build>
@@ -135,9 +123,18 @@
         </repository>
     </repositories>
     <dependencies>
-
         <dependency>
-            <groupId>pl.piotrsukiennik.tuner.parser</groupId>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>${jsqltuner.service.impl.artifactId}</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+        <groupId>pl.piotrsukiennik.tuner.parser</groupId>
             <artifactId>parser-api</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -159,9 +156,10 @@
         </dependency>
 
         <dependency>
-            <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>service</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>junit-benchmarks</artifactId>
+            <version>0.7.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -227,12 +225,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.carrotsearch</groupId>
-            <artifactId>junit-benchmarks</artifactId>
-            <version>0.7.2</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -254,14 +246,12 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.9</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>${jsqltuner.test.dep.jdbc.groupId}</groupId>
             <artifactId>${jsqltuner.test.dep.jdbc.artifactId}</artifactId>

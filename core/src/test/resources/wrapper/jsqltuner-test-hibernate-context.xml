@@ -11,15 +11,17 @@
 
     <import resource="classpath*:jsqltuner-context.xml"/>
 
+    <context:property-placeholder location="classpath*:jsqltuner-test.properties"/>
+
     <context:component-scan base-package="pl.piotrsukiennik.tuner.test.service"/>
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
 
     <bean id="dataSourceOrig" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:target/db/testdb"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
+        <property name="driverClassName" value="${jsql.test.db.driver}"/>
+        <property name="url" value="${jsql.test.db.url}"/>
+        <property name="username" value="${jsql.test.db.username}"/>
+        <property name="password" value="${jsql.test.db.password}"/>
     </bean>
 
 
@@ -28,10 +30,10 @@
         <property name="packagesToScan" value="pl.piotrsukiennik.tuner.test.model"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.dialect">${jsql.test.hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
-                <prop key="hibernate.hbm2ddl.import_files">import_data.sql</prop>
+                <prop key="hibernate.hbm2ddl.import_files">${jsql.test.db.import}</prop>
                 <prop key="hibernate.hbm2ddl.import_files_sql_extractor">
                     org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
                 </prop>

@@ -5,7 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="jsqltuner-test.properties"/>
+    <context:property-placeholder location="classpath*:jsqltuner-test.properties"/>
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.test.service"/>
 
@@ -25,7 +25,7 @@
                 <prop key="hibernate.dialect">${jsql.test.hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
-                <prop key="hibernate.hbm2ddl.import_files">import_data.sql</prop>
+                <prop key="hibernate.hbm2ddl.import_files">${jsql.test.db.import}</prop>
                 <prop key="hibernate.hbm2ddl.import_files_sql_extractor">
                     org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
                 </prop>
