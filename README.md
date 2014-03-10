@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/piotrsukiennik/jsqltuner.png?label=ready&title=Ready)](https://waffle.io/piotrsukiennik/jsqltuner)
 jSQLtuner - ORM Performance And NoSQL
 =========
 [![wercker status](https://app.wercker.com/status/a5b872897a79198434e079c4824dd06c/s/ "wercker status")](https://app.wercker.com/project/bykey/a5b872897a79198434e079c4824dd06c)
