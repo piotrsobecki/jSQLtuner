@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>jSQLtuner :: ai - Dependency Information</title>
+    <title>jSQLtuner - Dependency Information</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                jSQLtuner :: ai
+                jSQLtuner
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2014-03-11</span>
                   &nbsp;| <span id="projectVersion">Version: 2.1-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="${project.url}" title="jSQLtuner :: ai">jSQLtuner :: ai</a>
+            <div class="xright">                    <a href="${project.url}" title="jSQLtuner">jSQLtuner</a>
               
                     
       </div>
@@ -42,61 +42,73 @@
       <div id="navcolumn">
              
                     
-                                <h5>Parent Project</h5>
+                                          <h5>Modules</h5>
                   <ul>
                   <li class="none">
-                          <a href="../index.html" title="jSQLtuner">jSQLtuner</a>
+                          <a href="ai/index.html" title="jSQLtuner :: ai">jSQLtuner :: ai</a>
+            </li>
+                  <li class="none">
+                          <a href="api/index.html" title="jSQLtuner :: api">jSQLtuner :: api</a>
+            </li>
+                  <li class="none">
+                          <a href="core/index.html" title="jSQLtuner :: core">jSQLtuner :: core</a>
+            </li>
+                  <li class="none">
+                          <a href="model/index.html" title="jSQLtuner :: model">jSQLtuner :: model</a>
+            </li>
+                  <li class="none">
+                          <a href="service-parent/index.html" title="jSQLtuner :: service parent">jSQLtuner :: service parent</a>
+            </li>
+                  <li class="none">
+                          <a href="persistence/index.html" title="jSQLtuner :: persistence">jSQLtuner :: persistence</a>
+            </li>
+                  <li class="none">
+                          <a href="persistence-impl/index.html" title="jSQLtuner :: persistence implementation">jSQLtuner :: persistence implementation</a>
+            </li>
+                  <li class="none">
+                          <a href="util/index.html" title="jSQLtuner :: util">jSQLtuner :: util</a>
+            </li>
+                  <li class="none">
+                          <a href="parser/index.html" title="jSQLtuner :: parser">jSQLtuner :: parser</a>
             </li>
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
-                                                                                                                                                                                                                                                                                                                        <li class="expanded">
+                                                                                                                                                                                                                              <li class="expanded">
                           <a href="project-info.html" title="Project Information">Project Information</a>
                     <ul>
                       <li class="none">
-                          <a href="index.html" title="About">About</a>
-            </li>
-                      <li class="none">
-                          <a href="plugin-management.html" title="Plugin Management">Plugin Management</a>
-            </li>
-                      <li class="none">
-                          <a href="distribution-management.html" title="Distribution Management">Distribution Management</a>
+                          <a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
             </li>
                       <li class="none">
             <strong>Dependency Information</strong>
           </li>
                       <li class="none">
-                          <a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
+                          <a href="distribution-management.html" title="Distribution Management">Distribution Management</a>
             </li>
                       <li class="none">
-                          <a href="source-repository.html" title="Source Repository">Source Repository</a>
-            </li>
-                      <li class="none">
-                          <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
+                          <a href="index.html" title="About">About</a>
             </li>
                       <li class="none">
                           <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
             </li>
                       <li class="none">
-                          <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
-            </li>
-                      <li class="none">
-                          <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-            </li>
-                      <li class="none">
                           <a href="license.html" title="Project License">Project License</a>
             </li>
                       <li class="none">
-                          <a href="team-list.html" title="Project Team">Project Team</a>
+                          <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
+            </li>
+                      <li class="none">
+                          <a href="source-repository.html" title="Source Repository">Source Repository</a>
             </li>
                       <li class="none">
                           <a href="project-summary.html" title="Project Summary">Project Summary</a>
             </li>
-                      <li class="none">
-                          <a href="dependencies.html" title="Dependencies">Dependencies</a>
-            </li>
               </ul>
         </li>
+                                                                                                                          <li class="collapsed">
+                          <a href="project-reports.html" title="Project Reports">Project Reports</a>
+                  </li>
           </ul>
                              <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
         <img class="poweredBy" alt="Built by Maven" src="./images/logos/maven-feather.png" />
@@ -113,38 +125,39 @@
 <h3>Apache Maven<a name="Apache_Maven"></a></h3><a name="Apache_Maven"></a>
 <div class="source">
 <pre>&lt;dependency&gt;
-  &lt;groupId&gt;pl.piotrsukiennik.tuner&lt;/groupId&gt;
-  &lt;artifactId&gt;ai&lt;/artifactId&gt;
+  &lt;groupId&gt;pl.piotrsukiennik&lt;/groupId&gt;
+  &lt;artifactId&gt;tuner&lt;/artifactId&gt;
   &lt;version&gt;2.1-SNAPSHOT&lt;/version&gt;
+  &lt;type&gt;pom&lt;/type&gt;
 &lt;/dependency&gt;</pre></div></div>
 <div class="section">
 <h3>Apache Buildr<a name="Apache_Buildr"></a></h3><a name="Apache_Buildr"></a>
 <div class="source">
-<pre>'pl.piotrsukiennik.tuner:ai:jar:2.1-SNAPSHOT'</pre></div></div>
+<pre>'pl.piotrsukiennik:tuner:pom:2.1-SNAPSHOT'</pre></div></div>
 <div class="section">
 <h3>Apache Ant<a name="Apache_Ant"></a></h3><a name="Apache_Ant"></a>
 <div class="source">
-<pre>&lt;dependency org=&quot;pl.piotrsukiennik.tuner&quot; name=&quot;ai&quot; rev=&quot;2.1-SNAPSHOT&quot;&gt;
-  &lt;artifact name=&quot;ai&quot; type=&quot;jar&quot; /&gt;
+<pre>&lt;dependency org=&quot;pl.piotrsukiennik&quot; name=&quot;tuner&quot; rev=&quot;2.1-SNAPSHOT&quot;&gt;
+  &lt;artifact name=&quot;tuner&quot; type=&quot;pom&quot; /&gt;
 &lt;/dependency&gt;</pre></div></div>
 <div class="section">
 <h3>Groovy Grape<a name="Groovy_Grape"></a></h3><a name="Groovy_Grape"></a>
 <div class="source">
 <pre>@Grapes(
-@Grab(group='pl.piotrsukiennik.tuner', module='ai', version='2.1-SNAPSHOT')
+@Grab(group='pl.piotrsukiennik', module='tuner', version='2.1-SNAPSHOT')
 )</pre></div></div>
 <div class="section">
 <h3>Grails<a name="Grails"></a></h3><a name="Grails"></a>
 <div class="source">
-<pre>compile 'pl.piotrsukiennik.tuner:ai:2.1-SNAPSHOT'</pre></div></div>
+<pre>compile 'pl.piotrsukiennik:tuner:2.1-SNAPSHOT'</pre></div></div>
 <div class="section">
 <h3>Leiningen<a name="Leiningen"></a></h3><a name="Leiningen"></a>
 <div class="source">
-<pre>[pl.piotrsukiennik.tuner/ai &quot;2.1-SNAPSHOT&quot;]</pre></div></div>
+<pre>[pl.piotrsukiennik/tuner &quot;2.1-SNAPSHOT&quot;]</pre></div></div>
 <div class="section">
 <h3>SBT<a name="SBT"></a></h3><a name="SBT"></a>
 <div class="source">
-<pre>libraryDependencies += &quot;pl.piotrsukiennik.tuner&quot; %% &quot;ai&quot; % &quot;2.1-SNAPSHOT&quot;</pre></div></div></div>
+<pre>libraryDependencies += &quot;pl.piotrsukiennik&quot; %% &quot;tuner&quot; % &quot;2.1-SNAPSHOT&quot;</pre></div></div></div>
       </div>
     </div>
     <div class="clear">
