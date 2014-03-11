@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>jSQLtuner :: api - Project Dependencies</title>
+    <title>jSQLtuner :: persistence - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                jSQLtuner :: api
+                jSQLtuner :: persistence
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2014-03-11</span>
                   &nbsp;| <span id="projectVersion">Version: 2.1-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="jSQLtuner :: api">jSQLtuner :: api</a>
+            <div class="xright">                    <a href="./" title="jSQLtuner :: persistence">jSQLtuner :: persistence</a>
               
                     
       </div>
@@ -125,7 +125,23 @@
 <td><a class="externalLink" href="http://maven.apache.org">model</a></td>
 <td>2.1-SNAPSHOT</td>
 <td>jar</td>
-<td>-</td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
+<td>-</td></tr></table></div><a name="Project_Dependencies_provided"></a>
+<div class="section">
+<h3>provided<a name="provided"></a></h3>
+<p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GroupId</th>
+<th>ArtifactId</th>
+<th>Version</th>
+<th>Type</th>
+<th>License</th></tr>
+<tr class="b">
+<td>org.eclipse.persistence</td>
+<td><a class="externalLink" href="http://www.eclipse.org/eclipselink">javax.persistence</a></td>
+<td>2.0.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
 <div class="section">
 <h2>Project Transitive Dependencies<a name="Project_Transitive_Dependencies"></a></h2>
 <p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a>
@@ -227,10 +243,10 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>pl.piotrsukiennik.tuner:api:jar:2.1-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>pl.piotrsukiennik.tuner:persistence:jar:2.1-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>jSQLtuner :: api</th></tr>
+<th>jSQLtuner :: persistence</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>SQL tuner for improving Java applications ORM performance using NoSQL technologies</p>
@@ -357,13 +373,23 @@
 <td>
 <p><b>Description: </b>Parent POM for JBoss projects. Provides default project build configuration.</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.jboss.org/jandex">http://www.jboss.org/jandex</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">AL 2.0</a></p></td></tr></table></div></li></ul></li></ul></li></ul></li></ul></div></div><a name="Licenses"></a>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">AL 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
+<li>org.eclipse.persistence:javax.persistence:jar:2.0.0 (provided) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Javax Persistence API 2.0</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>EclipseLink subversion revision 5939</p>
+<p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/eclipselink">http://www.eclipse.org/eclipselink</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></p></td></tr></table></div></li></ul></li></ul></div></div><a name="Licenses"></a>
 <div class="section">
 <h2>Licenses<a name="Licenses"></a></h2>
 <p><b>Apache License, version 2.0: </b>JBoss Logging 3</p>
 <p><b>Public Domain: </b>JBoss Logging I18n Annotations</p>
-<p><b>Unknown: </b>dom4j, jSQLtuner :: api, jSQLtuner :: model</p>
+<p><b>Unknown: </b>dom4j, jSQLtuner :: model, jSQLtuner :: persistence</p>
 <p><b>Common Development and Distribution License: </b>Java Transaction API</p>
+<p><b>Eclipse Public License - v 1.0: </b>Javax Persistence API 2.0</p>
 <p><b>LGPL 2.1: </b>Javassist</p>
 <p><b>GNU General Public License, Version 2 with the Classpath Exception: </b>Java Transaction API</p>
 <p><b>MPL 1.1: </b>Javassist</p>
@@ -402,6 +428,14 @@
 <td>1.3</td>
 <td>debug</td></tr>
 <tr class="b">
+<td>javax.persistence-2.0.0.jar</td>
+<td>131.53 kB</td>
+<td>199</td>
+<td>179</td>
+<td>5</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
 <td>hibernate-core-4.3.4.Final.jar</td>
 <td>4.98 MB</td>
 <td>3,674</td>
@@ -409,7 +443,7 @@
 <td>199</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>hibernate-commons-annotations-4.0.4.Final.jar</td>
 <td>73.55 kB</td>
 <td>79</td>
@@ -417,7 +451,7 @@
 <td>7</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>hibernate-jpa-2.1-api-1.0.0.Final.jar</td>
 <td>110.71 kB</td>
 <td>207</td>
@@ -425,7 +459,7 @@
 <td>4</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>javassist-3.18.1-GA.jar</td>
 <td>697.46 kB</td>
 <td>414</td>
@@ -433,7 +467,7 @@
 <td>17</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>jandex-1.1.0.Final.jar</td>
 <td>74.76 kB</td>
 <td>55</td>
@@ -441,7 +475,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>jboss-logging-3.1.3.GA.jar</td>
 <td>55.84 kB</td>
 <td>57</td>
@@ -449,7 +483,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>jboss-logging-annotations-1.2.0.Beta1.jar</td>
 <td>11.29 kB</td>
 <td>28</td>
@@ -457,7 +491,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>jboss-transaction-api_1.2_spec-1.0.0.Final.jar</td>
 <td>27.07 kB</td>
 <td>35</td>
@@ -465,7 +499,7 @@
 <td>2</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>model-2.1-SNAPSHOT.jar</td>
 <td>55.00 kB</td>
 <td>92</td>
@@ -473,7 +507,7 @@
 <td>12</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>xml-apis-1.0.b2.jar</td>
 <td>106.76 kB</td>
 <td>217</td>
@@ -481,7 +515,7 @@
 <td>17</td>
 <td>1.2</td>
 <td>release</td></tr>
-<tr class="b">
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -489,22 +523,30 @@
 <th>Packages</th>
 <th>JDK Rev</th>
 <th>Debug</th></tr>
-<tr class="a">
-<td>12</td>
-<td>6.89 MB</td>
-<td>5,305</td>
-<td>4,879</td>
-<td>287</td>
-<td>1.6</td>
-<td>11</td></tr>
 <tr class="b">
+<td>13</td>
+<td>7.02 MB</td>
+<td>5,504</td>
+<td>5,058</td>
+<td>292</td>
+<td>1.6</td>
+<td>12</td></tr>
+<tr class="a">
 <td>compile: 12</td>
 <td>compile: 6.89 MB</td>
 <td>compile: 5,305</td>
 <td>compile: 4,879</td>
 <td>compile: 287</td>
 <td>-</td>
-<td>compile: 11</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
+<td>compile: 11</td></tr>
+<tr class="b">
+<td>provided: 1</td>
+<td>provided: 131.53 kB</td>
+<td>provided: 199</td>
+<td>provided: 179</td>
+<td>provided: 5</td>
+<td>-</td>
+<td>provided: 1</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
 <div class="section">
 <h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2>
 <table border="0" class="bodyTable">
@@ -538,53 +580,57 @@
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
+<td>org.eclipse.persistence:javax.persistence:jar:2.0.0</td>
+<td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/eclipse/persistence/javax.persistence/2.0.0/javax.persistence-2.0.0.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/eclipse/persistence/javax.persistence/2.0.0/javax.persistence-2.0.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
 <td>org.hibernate:hibernate-core:jar:4.3.4.Final</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/hibernate/hibernate-core/4.3.4.Final/hibernate-core-4.3.4.Final.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/4.3.4.Final/hibernate-core-4.3.4.Final.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.hibernate.common:hibernate-commons-annotations:jar:4.0.4.Final</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.hibernate.javax.persistence:hibernate-jpa-2.1-api:jar:1.0.0.Final</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.javassist:javassist:jar:3.18.1-GA</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.jboss:jandex:jar:1.1.0.Final</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.jboss.logging:jboss-logging:jar:3.1.3.GA</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.jboss.logging:jboss-logging-annotations:jar:1.2.0.Beta1</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:jar:1.0.0.Final</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>pl.piotrsukiennik.tuner:model:jar:2.1-SNAPSHOT</td>
 <td>-</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>xml-apis:xml-apis:jar:1.0.b2</td>
 <td><a class="externalLink" href="http://nexus.piotrsukiennik.pl/content/groups/public//xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"><img alt="Found at http://nexus.piotrsukiennik.pl/content/groups/public/" src="images/icon_success_sml.gif" /></a></td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <th>Total</th>
 <th>maven-piotrsukiennik</th>
 <th>central</th></tr>
-<tr class="a">
-<td>12 (compile: 12)</td>
-<td>11</td>
-<td>11</td></tr></table></div>
+<tr class="b">
+<td>13 (compile: 12, provided: 1)</td>
+<td>12</td>
+<td>12</td></tr></table></div>
       </div>
     </div>
     <div class="clear">
