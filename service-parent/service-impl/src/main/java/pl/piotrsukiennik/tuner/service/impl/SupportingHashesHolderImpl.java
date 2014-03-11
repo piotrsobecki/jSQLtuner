@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.common;
+package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

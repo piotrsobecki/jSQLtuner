@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.common;
+package pl.piotrsukiennik.tuner.service.impl;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.common;
+package pl.piotrsukiennik.tuner.service.impl;
 
 import pl.piotrsukiennik.tuner.dto.QueryElementsCache;
 import pl.piotrsukiennik.tuner.model.expression.Expression;

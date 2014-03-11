@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.common;
+package pl.piotrsukiennik.tuner.service.impl;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
