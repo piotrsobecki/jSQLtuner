@@ -15,14 +15,13 @@
     <packaging>jar</packaging>
     <name>jSQLtuner :: core</name>
     <properties>
-        <jsqltuner.method>aop</jsqltuner.method>
+        <jsqltuner.test.method>aop</jsqltuner.test.method>
+        <jsqltuner.test.logger.level>ERROR</jsqltuner.test.logger.level>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
-
-
+        <jsqltuner.datasources.memcached.servers/>
+        <jsqltuner.datasources.memcached.protocol/>
         <!--jSQLtuner : service : blank -->
         <jsqltuner.service.impl.artifactId>service-blank-impl</jsqltuner.service.impl.artifactId>
-
-
         <!--jSQLtuner : test : db : h2-->
         <jsqltuner.test.jdbc.import>import-sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
         <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
@@ -37,6 +36,30 @@
     </properties>
     <profiles>
         <profile>
+            <id>test-logger-info</id>
+            <properties>
+                <jsqltuner.test.logger.level>INFO</jsqltuner.test.logger.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>test-datasources-memcached</id>
+            <properties>
+                <jsqltuner.datasources.memcached.servers>localhost:11211</jsqltuner.datasources.memcached.servers>
+                <jsqltuner.datasources.memcached.protocol>BINARY</jsqltuner.datasources.memcached.protocol>
+            </properties>
+            <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources/</directory>
+                        <filtering>true</filtering>
+                        <includes>
+                            <include>jsqltuner-test-datasources-memcached*</include>
+                        </includes>
+                    </testResource>
+                </testResources>
+            </build>
+        </profile>
+        <profile>
             <!-- Services saving query model and executions -->
             <id>services-persistent</id>
             <properties>
@@ -44,9 +67,9 @@
             </properties>
         </profile>
         <profile>
-            <id>datasource-wrapper</id>
+            <id>test-jsqltuner-method-datasource-wrapper</id>
             <properties>
-                <jsqltuner.method>wrapper</jsqltuner.method>
+                <jsqltuner.test.method>wrapper</jsqltuner.test.method>
             </properties>
         </profile>
         <profile>
@@ -96,6 +119,9 @@
             <testResource>
                 <directory>src/test/resources/</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>jsqltuner-test-datasources-memcached*</exclude>
+                </excludes>
             </testResource>
         </testResources>
     </build>

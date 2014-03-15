@@ -11,7 +11,7 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
     </context:component-scan>
 
-    <import resource="jsqltuner-context.xml"/>
+    <import resource="classpath*:pl/piotrsukiennik/tuner/spring/context/jsqltuner-context.xml"/>
 
     <aop:config/>
     <aop:aspectj-autoproxy/>

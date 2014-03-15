@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.xml;
+package pl.piotrsukiennik.tuner.spring.xml;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

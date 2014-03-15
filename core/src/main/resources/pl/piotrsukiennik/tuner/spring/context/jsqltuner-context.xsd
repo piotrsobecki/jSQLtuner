@@ -35,6 +35,54 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
+
+
+
+    <xsd:element name="keyValueDataSource">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[ A ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType" >
+                    <xsd:attribute name="keyValueService-ref" type="xsd:string" use="required">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[Ref to datasource to be wrapped]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="keyValueMemcachedService">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[ A ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="memcachedClient-ref" type="xsd:string" use="required">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[Ref to datasource to be wrapped]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="keyValueLocalService">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[ A ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="aop-context">
         <xsd:annotation>
             <xsd:documentation><![CDATA[Activates AOP jsqltuner context.]]></xsd:documentation>

@@ -1,8 +1,6 @@
-package pl.piotrsukiennik.tuner.xml;
+package pl.piotrsukiennik.tuner.spring.xml;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-import pl.piotrsukiennik.tuner.xml.context.AopContextBeanDefinitionParser;
-import pl.piotrsukiennik.tuner.xml.context.WrapperContextBeanDefinitionParser;
 
 /**
  * @author Piotr Sukiennik
@@ -14,5 +12,10 @@ public class JsqlTunerNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser( "wrapper-context", new WrapperContextBeanDefinitionParser() );
         registerBeanDefinitionParser( "aop-context", new AopContextBeanDefinitionParser() );
         registerBeanDefinitionParser( "datasource", new DataSourceBeanDefinitionParser() );
+        registerBeanDefinitionParser( "keyValueDataSource", new KeyValueDataSourceBeanDefinitionParser() );
+        registerBeanDefinitionParser( "keyValueMemcachedService", new KeyValueMemcachedServiceBeanDefinitionParser() );
+        registerBeanDefinitionParser( "keyValueLocalService", new KeyValueLocalServiceBeanDefinitionParser() );
+
+
     }
 }

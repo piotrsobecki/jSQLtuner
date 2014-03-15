@@ -9,7 +9,7 @@
 
     <jsqltuner:datasource id="dataSource" wrappedContextRef="wrapperContext" ref="dataSourceOrig"/>
 
-    <import resource="classpath*:jsqltuner-context.xml"/>
+    <jsqltuner:wrapper-context id="jsqltunerContext"/>
 
     <context:property-placeholder location="classpath*:jsqltuner-test.properties"/>
 

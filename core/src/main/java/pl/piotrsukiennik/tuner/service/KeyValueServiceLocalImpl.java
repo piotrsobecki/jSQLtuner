@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KeyValueServiceLocalImpl implements KeyValueService {
     private Cache<String, Object> cache = CacheBuilder.newBuilder().
-     expireAfterAccess( 30, TimeUnit.DAYS ).
+     expireAfterAccess( 5, TimeUnit.MINUTES ).
      maximumSize( 1000 ).
      build();
 

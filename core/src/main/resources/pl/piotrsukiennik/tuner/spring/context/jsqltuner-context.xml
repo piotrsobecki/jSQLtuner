@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jsqltuner="http://piotrsukiennik.pl/schema/jsqltuner"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
+
+    <context:annotation-config/>
+
+<!--
+    <context:property-placeholder
+            ignore-resource-not-found="true" ignore-unresolvable="true"
+            location="classpath:/jsqltuner.properties,classpath:jsqltuner-ext.properties" />
+-->
+
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.impl">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+    <import resource="classpath*:pl/piotrsukiennik/tuner/spring/context/jsqltuner-*-context.xml"/>
+
+
+    <jsqltuner:keyValueDataSource id="localKeyValueDataSource" keyValueService-ref="keyValueLocalService"/>
+    <jsqltuner:keyValueLocalService id="keyValueLocalService"/>
+
+</beans>

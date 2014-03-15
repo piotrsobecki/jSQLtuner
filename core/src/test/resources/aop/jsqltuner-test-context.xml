@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jsqltuner="http://piotrsukiennik.pl/schema/jsqltuner"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
 
-    <import resource="classpath*:jsqltuner-aop-context.xml"/>
+      <jsqltuner:aop-context id="jsqltunerContext"/>
+
+
     <import resource="../jsqltuner-test-hibernate-context.xml"/>
 
 </beans>

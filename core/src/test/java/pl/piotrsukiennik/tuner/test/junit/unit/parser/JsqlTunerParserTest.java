@@ -13,6 +13,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.impl.SelectQuery;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
+import pl.piotrsukiennik.tuner.spring.JsqlTunerAopConfiguration;
 
 import javax.annotation.Resource;
 
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
  * @date 22.01.14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:jsqltuner-aop-context.xml" })
+@ContextConfiguration( locations = { "classpath*:jsqltuner-test-context.xml" } )
 public class JsqlTunerParserTest {
 
     @Resource

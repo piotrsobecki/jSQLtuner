@@ -14,19 +14,7 @@
     <version>2.1-SNAPSHOT</version>
     <name>jSQLtuner :: persistence implementation</name>
     <url>http://maven.apache.org</url>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--jSQLtuner : DB : h2-->
-        <jsqltuner.jdbc.schema>jsqltuner</jsqltuner.jdbc.schema>
-        <jsqltuner.jdbc.url>jdbc:h2:target/db/${jsqltuner.jdbc.schema}</jsqltuner.jdbc.url>
-        <jsqltuner.jdbc.driver>org.h2.Driver</jsqltuner.jdbc.driver>
-        <jsqltuner.jdbc.username>sa</jsqltuner.jdbc.username>
-        <jsqltuner.jdbc.password/>
-        <jsqltuner.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.hibernate.dialect>
-        <jsqltuner.dep.jdbc.groupId>com.h2database</jsqltuner.dep.jdbc.groupId>
-        <jsqltuner.dep.jdbc.artifactId>h2</jsqltuner.dep.jdbc.artifactId>
-        <jsqltuner.dep.jdbc.version>${h2.version}</jsqltuner.dep.jdbc.version>
-    </properties>
+
     <build>
         <resources>
             <resource>
