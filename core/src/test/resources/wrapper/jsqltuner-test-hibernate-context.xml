@@ -7,9 +7,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
 
 
-    <jsqltuner:datasource id="dataSource" wrappedContextRef="wrapperContext" ref="dataSourceOrig"/>
+    <jsqltuner:dataSourceWrapper id="dataSource" dataSource-ref="originalDataSource"/>
 
-    <jsqltuner:wrapper-context id="jsqltunerContext"/>
+    <bean id="originalDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jsql.test.db.driver}"/>
+        <property name="url" value="${jsql.test.db.url}"/>
+        <property name="username" value="${jsql.test.db.username}"/>
+        <property name="password" value="${jsql.test.db.password}"/>
+    </bean>
+
+
 
     <context:property-placeholder location="classpath*:jsqltuner-test.properties"/>
 
@@ -17,12 +24,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
 
-    <bean id="dataSourceOrig" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jsql.test.db.driver}"/>
-        <property name="url" value="${jsql.test.db.url}"/>
-        <property name="username" value="${jsql.test.db.username}"/>
-        <property name="password" value="${jsql.test.db.password}"/>
-    </bean>
+
 
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

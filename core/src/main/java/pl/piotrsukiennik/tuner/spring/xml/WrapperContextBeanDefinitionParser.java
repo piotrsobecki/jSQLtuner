@@ -14,4 +14,14 @@ public class WrapperContextBeanDefinitionParser extends AbstractSingleBeanDefini
     protected Class<?> getBeanClass( Element element ) {
         return JsqlTunerWrapperConfiguration.class;
     }
+
+    @Override
+    protected boolean shouldGenerateId() {
+        return true;
+    }
+
+    @Override
+    protected boolean shouldGenerateIdAsFallback() {
+        return true;
+    }
 }

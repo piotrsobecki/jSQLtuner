@@ -14,4 +14,14 @@ public class AopContextBeanDefinitionParser extends AbstractSingleBeanDefinition
     protected Class<?> getBeanClass( Element element ) {
         return JsqlTunerAopConfiguration.class;
     }
+
+    @Override
+    protected boolean shouldGenerateId() {
+        return true;
+    }
+
+    @Override
+    protected boolean shouldGenerateIdAsFallback() {
+        return true;
+    }
 }

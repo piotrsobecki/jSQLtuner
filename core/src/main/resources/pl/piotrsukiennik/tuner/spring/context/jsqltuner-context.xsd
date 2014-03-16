@@ -9,26 +9,23 @@
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"/>
 
+
+
     <xsd:annotation>
         <xsd:documentation>
             <![CDATA[Defines the configuration elements for the Spring Framework's AOP support.]]></xsd:documentation>
     </xsd:annotation>
 
-    <xsd:element name="datasource">
+    <xsd:element name="dataSourceWrapper">
         <xsd:annotation>
             <xsd:documentation><![CDATA[ A ]]></xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="ref" type="xsd:string" use="required">
+                <xsd:attribute name="dataSource-ref" type="xsd:string" use="required">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[Ref to datasource to be wrapped]]></xsd:documentation>
-                        </xsd:annotation>
-                    </xsd:attribute>
-                    <xsd:attribute name="wrappedContextRef" type="xsd:string" use="required">
-                        <xsd:annotation>
-                            <xsd:documentation><![CDATA[Ref to Wrapped Context ]]></xsd:documentation>
                         </xsd:annotation>
                     </xsd:attribute>
                 </xsd:extension>
@@ -87,20 +84,10 @@
         <xsd:annotation>
             <xsd:documentation><![CDATA[Activates AOP jsqltuner context.]]></xsd:documentation>
         </xsd:annotation>
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType"/>
-            </xsd:complexContent>
-        </xsd:complexType>
     </xsd:element>
     <xsd:element name="wrapper-context">
         <xsd:annotation>
             <xsd:documentation><![CDATA[Activates wrapper jsqltuner context.]]></xsd:documentation>
         </xsd:annotation>
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType"/>
-            </xsd:complexContent>
-        </xsd:complexType>
     </xsd:element>
 </xsd:schema>

@@ -11,7 +11,7 @@ public class JsqlTunerNamespaceHandler extends NamespaceHandlerSupport {
     public void init() {
         registerBeanDefinitionParser( "wrapper-context", new WrapperContextBeanDefinitionParser() );
         registerBeanDefinitionParser( "aop-context", new AopContextBeanDefinitionParser() );
-        registerBeanDefinitionParser( "datasource", new DataSourceBeanDefinitionParser() );
+        registerBeanDefinitionParser( "dataSourceWrapper", new DataSourceBeanDefinitionParser() );
         registerBeanDefinitionParser( "keyValueDataSource", new KeyValueDataSourceBeanDefinitionParser() );
         registerBeanDefinitionParser( "keyValueMemcachedService", new KeyValueMemcachedServiceBeanDefinitionParser() );
         registerBeanDefinitionParser( "keyValueLocalService", new KeyValueLocalServiceBeanDefinitionParser() );

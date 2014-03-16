@@ -22,7 +22,7 @@ public class DataSourceBeanDefinitionParser extends AbstractSingleBeanDefinition
 
     @Override
     protected void doParse( Element element, ParserContext parserContext, BeanDefinitionBuilder bean ) {
-        String ref = element.getAttribute( "ref" );
+        String ref = element.getAttribute( "dataSource-ref" );
         if ( StringUtils.hasText( ref ) ) {
             bean.addDependsOn( ref );
             bean.addPropertyReference( "dataSource", ref );
