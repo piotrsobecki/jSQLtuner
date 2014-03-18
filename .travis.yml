@@ -13,7 +13,12 @@ addons:
       description: "SQL tuner for improving Java applications ORM performance using NoSQL technologies"
     notification_email: piotrsukiennik@gmail.com
     build_command_prepend:
-    build_command:  mvn clean install
+      - wget http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+      - tar xvf apache-maven-3.1.1-bin.tar.gz > /dev/null
+      - export MVN_HOME=`pwd`/apache-maven-3.1.1
+      - export PATH=${MVN_HOME}/bin/:${PATH}
+      - mvn --version
+    build_command: mvn clean install
     branch_pattern: coverity_scan
 
 before_install:
@@ -24,7 +29,8 @@ before_install:
   - export PATH=${MVN_HOME}/bin/:${PATH}
   - mvn --version
 
-script: mvn clean install
+script: 
+  - mvn clean install
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:cobertura
