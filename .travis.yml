@@ -5,7 +5,17 @@ env:
    # The next declration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
    - secure: "Vk/lw1ZjRldLRdjsLN5k0FEdSfq/tKuAfqP4szLlue8nuZoO1FURybAhilnupWMiiSZUgVkqCAAzlp024kIipPSHKYuD9B/vTnI9915UdUqZWBOJzYCBSyf8P4WRyYdiP/IoSPohf+JFxYbjmBT0Hd1IfZD9JMW/bIff+0mSTA8="
-  matrix:
+
+addons:
+  coverity_scan:
+    project:
+      name: "piotrsukiennik/jSQLtuner"
+      description: "SQL tuner for improving Java applications ORM performance using NoSQL technologies"
+    notification_email: piotrsukiennik@gmail.com
+    build_command_prepend:
+    build_command:  mvn clean install
+    branch_pattern: coverity_scan
+
 before_install:
   # Maven 3.1.1
   - wget http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
@@ -19,12 +29,3 @@ script: mvn clean install
 after_success:
   - mvn clean cobertura:cobertura coveralls:cobertura
 
-addons:
-  coverity_scan:
-    project:
-      name: "piotrsukiennik/jSQLtuner"
-      description: "SQL tuner for improving Java applications ORM performance using NoSQL technologies"
-    notification_email: piotrsukiennik@gmail.com
-    build_command_prepend:
-    build_command:  mvn clean install
-    branch_pattern: coverity_scan
