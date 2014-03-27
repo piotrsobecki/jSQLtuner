@@ -1,5 +1,7 @@
-![jSQLtuner](https://raw.githubusercontent.com/piotrsukiennik/jSQLtuner/master/resources/jsqltuner.png)
-=========
+<p align="center">
+  <img src="https://github.com/piotrsukiennik/jSQLtuner/master/resources/jsqltuner.png?raw=true" alt="jSQLtuner"/>
+</p>
+
 ORM Performance And NoSQL
 =========
 
