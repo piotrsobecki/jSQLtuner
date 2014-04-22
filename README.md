@@ -17,6 +17,14 @@ Status
 [![Stories in Ready](https://badge.waffle.io/piotrsukiennik/jsqltuner.png?label=ready&title=Ready)](https://waffle.io/piotrsukiennik/jsqltuner)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/piotrsukiennik/jsqltuner/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+Documentation
+=========
+In current state, the project description and documenation is in form of master thesis.
+Master thesis contents include description, design overview, implementation details and performance tests. Thesis also includes information about direction to be taken with project development. 
+
+[PJIIT Master Thesis - jSQLtuner](https://docs.google.com/uc?authuser=0&id=0B0r1nmh9HUrWczk5SWpHYXh4LTA&export=download)
+
+
 License
 =========
 
