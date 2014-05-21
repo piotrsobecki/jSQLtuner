@@ -17,6 +17,13 @@ public class Collections3 {
     private Collections3() {
     }
 
+    public static <T> Collection<T> merge(Collection<T> targetCollection,Collection<T>... collections){
+        for (Collection collection: collections){
+            targetCollection.addAll( collection );
+        }
+        return targetCollection;
+    }
+
     public static <T> T first( Collection<T> collection ) {
         if ( collection != null && !collection.isEmpty() ) {
             return collection.iterator().next();

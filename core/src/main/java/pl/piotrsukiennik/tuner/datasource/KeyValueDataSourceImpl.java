@@ -32,24 +32,18 @@ public class KeyValueDataSourceImpl extends AbstractDataSource implements KeyVal
     }
 
     @Override
-    public void putData( ReadQuery query, CachedRowSet data ) {
+    public void put( ReadQuery query, CachedRowSet data ) {
         String key = getKey( query.getHash() );
         keyValueService.put( key, data );
     }
 
-    @Override
+ /*   @Override
     public void delete( Query query ) {
         String key = getKey( query.getHash() );
         keyValueService.delete( key );
     }
 
-    @Override
-    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
-        for ( ReadQuery readQuery : queriesToInvalidate ) {
-            delete( readQuery );
-        }
-    }
-
+*/
 
     protected String getKey( String suffix ) {
         return suffix;

@@ -2,25 +2,20 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.LoggableService;
 import pl.piotrsukiennik.tuner.ShardNode;
-import pl.piotrsukiennik.tuner.ShardService;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.service.DataRetrievalService;
 import pl.piotrsukiennik.tuner.service.DataSourceSelector;
-import pl.piotrsukiennik.tuner.service.DataSourceService;
-import pl.piotrsukiennik.tuner.service.QueryInvalidatorService;
+import pl.piotrsukiennik.tuner.service.QueryInvalidatonService;
 import pl.piotrsukiennik.tuner.util.RowSet;
 
 import javax.sql.rowset.CachedRowSet;
-import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Author: Piotr Sukiennik
@@ -28,19 +23,10 @@ import java.util.List;
  * Time: 18:58
  */
 @Service
-public class ShardServiceImpl implements ShardService {
+public class ShardServiceImpl extends AbstractShardServiceImpl {
 
     @Autowired
-    private List<ShardNode> nodes;
-
-    @Autowired
-    private DataSourceService dataSourceService;
-
-    @Autowired
-    private DataRetrievalService dataRetrievalService;
-
-    @Autowired
-    private QueryInvalidatorService invalidatorService;
+    private QueryInvalidatonService invalidatorService;
 
     @Autowired
     private DataSourceSelector dataSourceSelector;
@@ -50,76 +36,76 @@ public class ShardServiceImpl implements ShardService {
 
     @Override
     public boolean contains( ReadQuery query ) {
-        for ( ShardNode shardNode : nodes ) {
-            if ( shardNode.contains( query ) ) {
-                return true;
-            }
-        }
-        return false;
+        return !dataSourceSelector.supporting( query ).isEmpty();
     }
 
     @Override
     public DataRetrieval get( ReadQuery query ) throws DataRetrievalException {
-        DataSource dataSource;
         DataRetrieval dataRetrieval = null;
-        DataSourceIdentity dataSourceIdentity = dataSourceSelector.getDataSource( query );
+        DataSourceIdentity dataSourceIdentity = dataSourceSelector.select( query );
         if ( dataSourceIdentity != null ) {
-            dataSource = dataSourceService.getDataSource( query, dataSourceIdentity );
-            if ( dataSource != null ) {
-                try {
-                    dataRetrieval = dataRetrievalService.get( dataSource, query );
-                }
-                catch ( DataRetrievalException dre ) {
-                    dre.accept( loggableService );
-                }
+            try {
+                //Get using selected data source identity by the selector
+                dataRetrieval = getUsingDataSource( dataSourceIdentity,query );
+            }
+            catch ( DataRetrievalException dre ) {
+                dre.accept( loggableService );
             }
         }
+        //No data retreived
         if ( dataRetrieval == null || dataRetrieval.getResultSet() == null ) {
-            dataSource = dataSourceService.getDefault( query );
-            dataRetrieval = getRootData( dataSource, query );
+            //Retreive using root database
+            dataRetrieval = getUsingDefault( query );
+            //Propagate data
+            put( query, dataRetrieval );
         }
+        //Log retrieval
         loggableService.log( dataRetrieval );
-        dataSourceSelector.submitDataRetrieval( dataRetrieval );
-        return dataRetrieval;
-    }
-
-    protected DataRetrieval getRootData( DataSource dataSource, ReadQuery query ) throws DataRetrievalException {
-        DataRetrieval dataRetrieval = dataRetrievalService.get( dataSource, query );
-        try {
-            CachedRowSet cachedRowSet = RowSet.cached( dataRetrieval.getResultSet() );
-            dataRetrieval.setResultSet( cachedRowSet );
-            query.setRows( cachedRowSet.size() );
-            put( query, cachedRowSet );
-        }
-        catch ( SQLException e ) {
-            throw new DataRetrievalException( "Data Sources Manager could cache ResultSet", e, query, dataSource.getDataSourceIdentity() );
-        }
+        //Feedback retrieval to data source selector for learning
+        dataSourceSelector.submit( dataRetrieval );
         return dataRetrieval;
     }
 
 
     @Override
-    public void put( ReadQuery query, CachedRowSet data ) {
-        CachedRowSet clonedData = RowSet.clone( data );
-        for ( ShardNode node : nodes ) {
+    public void put( ReadQuery query, DataRetrieval data ) {
+        //Clone data for nodes
+        CachedRowSet clonedData = RowSet.clone( data.getResultSet() );
+        //Get possible nodes for sharding
+        Collection<ShardNode> selectedNodes = dataSourceSelector.possible(
+             nodes,
+             query,
+             data
+        );
+        for ( ShardNode node : selectedNodes ) {
+            //Distribute data for each node
             node.put( query, clonedData );
-            dataSourceSelector.scheduleDataRetrieval( query, node.getDataSourceIdentity() );
+            //Schedule the selection using the node
+            dataSourceSelector.schedule( query, node );
         }
+        //Inform invalidator service about new supported query
         invalidatorService.putCachedQuery( query );
     }
 
     @Override
     public void delete( Query query ) {
+        //Get read queries that this query invalidates
         Collection<ReadQuery> queriesToInvalidate = query.invalidates( invalidatorService );
-        for ( ShardNode node : nodes ) {
-            node.delete( query, queriesToInvalidate );
-        }
+        //Remove option of selection
         for ( ReadQuery selectQuery : queriesToInvalidate ) {
-            dataSourceSelector.removeDataSources( selectQuery );
+            dataSourceSelector.removeOptions( selectQuery );
+        }
+        for (ReadQuery readQuery: queriesToInvalidate){
+            //Get nodes on which this query is distributed
+            Collection<DataSourceIdentity> selectedNodes = dataSourceSelector.supporting( readQuery );
+            for (DataSourceIdentity dataSourceIdentity: selectedNodes){
+                //DInvalidate queries for each node
+                ShardNode shardNode = getShardNode( dataSourceIdentity );
+                if (shardNode!=null){
+                    shardNode.delete( query,queriesToInvalidate );
+                }
+            }
         }
     }
 
-    public void setDefaultDataSource( ReadQuery query, DataSource dataSource ) {
-        dataSourceService.setDefault( query, dataSource );
-    }
 }

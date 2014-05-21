@@ -13,16 +13,16 @@ import java.util.LinkedHashSet;
  * Time: 21:39
  */
 @Service
-public class HashesHolderImpl<P, K> implements HashesHolder<P, K> {
+public class QueryHolderImpl<P, K> implements QueryHolder<P, K> {
     private HolderEnterableFactory holderEnterableFactory;
 
     private HolderEnterable<P, K> rootHolder;
 
-    public HashesHolderImpl() {
+    public QueryHolderImpl() {
         this( new HolderEnterableFactoryImpl( LinkedHashSet.class ) );
     }
 
-    public HashesHolderImpl( HolderEnterableFactory holderEnterableFactory ) {
+    public QueryHolderImpl( HolderEnterableFactory holderEnterableFactory ) {
         this.rootHolder = holderEnterableFactory.buildEnterable();
         this.holderEnterableFactory = holderEnterableFactory;
     }

@@ -2,10 +2,13 @@ package pl.piotrsukiennik.tuner.datasource;
 
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ShardNode;
+import pl.piotrsukiennik.tuner.dto.DataRetrieval;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
+import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 import javax.sql.rowset.CachedRowSet;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -31,10 +34,12 @@ public abstract class AbstractDataSource implements DataSource, ShardNode {
 
 
     @Override
-    public void put( ReadQuery query, CachedRowSet data ) {
-        putData( query, data );
+    public void put( ReadQuery query, DataRetrieval data ) {
+        put( query, data.getResultSet() );
         supportedQueries.add( query.getHash() );
     }
+    @Override
+    public abstract void put( ReadQuery query, CachedRowSet data );
 
 
     @Override
@@ -42,7 +47,17 @@ public abstract class AbstractDataSource implements DataSource, ShardNode {
         return supportedQueries.contains( query.getHash() );
     }
 
-    protected abstract void putData( ReadQuery query, CachedRowSet data );
+    @Override
+    public void delete( Query query ) {
+        supportedQueries.remove( query.getHash() );
+    }
+    @Override
+    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
+        for ( ReadQuery readQuery : queriesToInvalidate ) {
+            delete( readQuery );
+        }
+    }
+
 
     @Override
     public boolean equals( Object o ) {

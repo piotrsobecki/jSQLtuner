@@ -17,7 +17,7 @@ public class H2ConsumerFactory {
 
     private static File DB_FILE_FOLDER;
 
-    private static final String DB_FILE_FOLDER_STR = "target/db/test/";
+    private static final String DB_FILE_FOLDER_STR = "target/db/benchmark/";
 
     private static final String CHARTS_FOLDER_STR = "resources/charts/";
 

@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner.dto;
 
-//import pl.piotrsukiennik.tuner.IDataSource;
-
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
@@ -15,9 +13,9 @@ import java.sql.ResultSet;
  */
 public class DataRetrieval {
 
-    private DataSourceIdentity dataSourceIdentity;
+    private DataSourceIdentity dataSource;
 
-    private ResultSet resultSet;
+    private CachedRowSet resultSet;
 
     private ReadQuery readQuery;
 
@@ -25,32 +23,38 @@ public class DataRetrieval {
 
     private long rows;
 
+    private long resultSetSize;
+
     public DataRetrieval( ReadQuery readQuery,
-                          DataSourceIdentity dataSourceIdentity,
-                          ResultSet resultSet,
+                          DataSourceIdentity dataSource,
+                          CachedRowSet resultSet,
                           long executionTimeNano,
-                          long rows ) {
+                          long rows,
+                          long resultSetSize) {
 
         this.readQuery = readQuery;
-        this.dataSourceIdentity = dataSourceIdentity;
+        this.dataSource = dataSource;
         this.resultSet = resultSet;
         this.executionTimeNano = executionTimeNano;
         this.rows = rows;
+        this.resultSetSize=resultSetSize;
     }
 
     public ReadQuery getReadQuery() {
         return readQuery;
     }
 
-    public ResultSet getResultSet() {
+    public CachedRowSet getResultSet() {
         return resultSet;
     }
 
-    public void setResultSet( ResultSet resultSet ) {
-        if ( resultSet instanceof CachedRowSet ) {
-            setRows( ( (CachedRowSet) resultSet ).size() );
-        }
+    public void setResultSet( CachedRowSet resultSet ) {
+        setRows( ( resultSet ).size() );
         this.resultSet = resultSet;
+    }
+
+    public long getResultSetSize() {
+        return resultSetSize;
     }
 
     public long getExecutionTimeNano() {
@@ -65,12 +69,16 @@ public class DataRetrieval {
         return rows;
     }
 
-    public DataSourceIdentity getDataSourceIdentity() {
-        return dataSourceIdentity;
+    public DataSourceIdentity getDataSource() {
+        return dataSource;
     }
 
-    public void setDataSourceIdentity( DataSourceIdentity dataSourceIdentity ) {
-        this.dataSourceIdentity = dataSourceIdentity;
+    public void setDataSource( DataSourceIdentity dataSource ) {
+        this.dataSource = dataSource;
+    }
+
+    public void setReadQuery( ReadQuery readQuery ) {
+        this.readQuery = readQuery;
     }
 
     public void setRows( long rows ) {

@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.impl.*;
  * @author Piotr Sukiennik
  * @date 28.02.14
  */
-public interface QueryInvalidator<R> {
+public interface QueryInvalidaton<R> {
 
     R invalidates( AlterTableQuery alterTableQuery );
 

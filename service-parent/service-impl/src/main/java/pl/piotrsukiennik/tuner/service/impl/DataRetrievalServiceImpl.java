@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.dto.DataRetrieval;
@@ -11,6 +12,7 @@ import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
 import javax.sql.rowset.CachedRowSet;
+import java.lang.instrument.Instrumentation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
@@ -23,12 +25,21 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DataRetrievalServiceImpl implements DataRetrievalService {
 
+
     @Override
     public final DataRetrieval get( DataSource dataSource, ReadQuery query ) throws DataRetrievalException {
         TimedCallable<CachedRowSet> timedCallable = getTimedCallable( dataSource, query );
         try {
             CachedRowSet cachedRowSet = timedCallable.call();
-            return new DataRetrieval( query, dataSource.getDataSourceIdentity(), cachedRowSet, timedCallable.getTime( TimeUnit.NANOSECONDS ), cachedRowSet.size() );
+            long size =cachedRowSet.size();
+            return new DataRetrieval(
+                 query,
+                 dataSource.getDataSourceIdentity(),
+                 cachedRowSet,
+                 timedCallable.getTime( TimeUnit.NANOSECONDS ),
+                 size,
+                 size
+            );
         }
         catch ( Exception e ) {
             throw new DataRetrievalException( e, query, dataSource.getDataSourceIdentity() );

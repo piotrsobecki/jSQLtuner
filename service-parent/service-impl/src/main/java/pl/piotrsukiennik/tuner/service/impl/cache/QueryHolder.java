@@ -6,7 +6,7 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public interface HashesHolder<P, K> {
+public interface QueryHolder<P, K> {
     void put( P[] path, K hash );
 
     Collection<K> get( P[] path );

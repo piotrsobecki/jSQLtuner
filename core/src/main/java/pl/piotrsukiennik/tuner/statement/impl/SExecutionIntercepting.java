@@ -36,7 +36,11 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     protected String schema;
 
 
-    public SExecutionIntercepting( T statement, ShardService shardService, ParsingQueryService queryService, String database, String schema ) {
+    public SExecutionIntercepting( T statement,
+                                   ShardService shardService,
+                                   ParsingQueryService queryService,
+                                   String database,
+                                   String schema ) {
         super( statement );
         this.shardService = shardService;
         this.queryService = queryService;

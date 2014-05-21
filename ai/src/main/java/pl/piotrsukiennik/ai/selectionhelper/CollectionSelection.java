@@ -4,6 +4,8 @@ import pl.piotrsukiennik.ai.id.Identifier;
 import pl.piotrsukiennik.ai.selectable.Selectable;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
 
 /**
  * @author Piotr Sukiennik
@@ -13,10 +15,11 @@ public abstract class CollectionSelection<T extends Selectable> implements Updat
 
     protected abstract Collection<T> getCollection();
 
+
     @Override
     public T getSelection( Identifier identifier ) {
         for ( T sel : getCollection() ) {
-            if ( identifier.equals( sel.getIdentifier() ) ) {
+            if ( Objects.equals(identifier,sel.getIdentifier()) ) {
                 return sel;
             }
         }
@@ -36,7 +39,7 @@ public abstract class CollectionSelection<T extends Selectable> implements Updat
     public boolean removeOption( Identifier optionIdentifier ) {
         T toRemove = null;
         for ( T t : getCollection() ) {
-            if ( t.getIdentifier().equals( optionIdentifier ) ) {
+            if ( Objects.equals(optionIdentifier,t.getIdentifier()) ) {
                 toRemove = t;
                 break;
             }
@@ -44,5 +47,8 @@ public abstract class CollectionSelection<T extends Selectable> implements Updat
         return removeOption( toRemove );
     }
 
-
+    @Override
+    public Collection<T> getOptions() {
+        return Collections.unmodifiableCollection(getCollection());
+    }
 }

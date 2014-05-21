@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public interface SupportingHashesHolder<K> {
+public interface SupportingQueryHolder<K> {
 
     Collection<K> getQueriesInvalidatedBy( Table table );
 

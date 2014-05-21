@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
-import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidaton;
 import pl.piotrsukiennik.tuner.model.query.DropQuery;
 
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class GenericDropQuery extends DropQuery {
 
 
     @Override
-    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+    public <R> R invalidates( QueryInvalidaton<R> invalidator ) {
         return invalidator.invalidates( this );
     }
 }

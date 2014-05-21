@@ -39,7 +39,7 @@ class DataSourceServiceImpl implements DataSourceService {
     }
 
     @Override
-    public DataSource getDefault( Query query ) {
+    public DataSource getDataSourceDefault( Query query ) {
         return rootDataSources.get( query.getHash() );
     }
 
@@ -55,10 +55,18 @@ class DataSourceServiceImpl implements DataSourceService {
 
     public Collection<DataSource> getDataSources( Query selectQuery ) {
         Set<DataSource> out = new LinkedHashSet<>( dataSources );
-        out.add( getDefault( selectQuery ) );
+        out.add( getDataSourceDefault( selectQuery ) );
         return out;
     }
 
+    @Override
+    public DataSource getDataSource( DataSourceIdentity dataSourceIdentity ) {
+        if ( dataSourceIdentity != null ) {
+            IdentifierPredicate identifierPredicate = new IdentifierPredicate( dataSourceIdentity.getIdentifier() );
+            return Collections3.first( Collections2.filter( dataSources, identifierPredicate ) );
+        }
+        return null;
+    }
 
     protected Collection<DataSource> getDataSourcesByIdentity( Query query, DataSourceIdentity dataSourceIdentity ) {
         if ( dataSourceIdentity != null ) {
@@ -68,6 +76,7 @@ class DataSourceServiceImpl implements DataSourceService {
         }
         return Collections.EMPTY_LIST;
     }
+
 
 
 }

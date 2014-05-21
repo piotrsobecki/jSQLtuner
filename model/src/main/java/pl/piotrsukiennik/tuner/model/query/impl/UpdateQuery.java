@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.model.query.impl;
 
-import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidaton;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.ConditionQuery;
@@ -42,7 +42,7 @@ public class UpdateQuery extends WriteQuery implements ConditionQuery {
     }
 
     @Override
-    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+    public <R> R invalidates( QueryInvalidaton<R> invalidator ) {
         return invalidator.invalidates( this );
     }
 }

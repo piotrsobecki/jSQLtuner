@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.model.query.impl;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import pl.piotrsukiennik.tuner.cache.QueryInvalidator;
+import pl.piotrsukiennik.tuner.cache.QueryInvalidaton;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.other.GroupByFragment;
@@ -169,7 +169,7 @@ public class SelectQuery extends ReadQuery implements ConditionQuery, Projection
     }
 
     @Override
-    public <R> R invalidates( QueryInvalidator<R> invalidator ) {
+    public <R> R invalidates( QueryInvalidaton<R> invalidator ) {
         return invalidator.invalidates( this );
     }
 

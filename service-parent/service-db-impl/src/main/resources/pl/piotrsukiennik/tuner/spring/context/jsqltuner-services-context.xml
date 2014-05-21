@@ -26,13 +26,18 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
-    <bean id="fitnessCalculator" class="pl.piotrsukiennik.tuner.ai.impl.FitnessCalculatorExpression">
-        <constructor-arg value="1/sqrt(averageExecutionTime)"/>
-    </bean>
 
     <bean class="pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectorImpl">
-        <property name="selectionHelperClass" value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
-        <property name="fitnessCalculator" ref="fitnessCalculator"/>
+        <constructor-arg>
+            <bean class="pl.piotrsukiennik.tuner.util.GenericBuilderImpl">
+                <constructor-arg value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="pl.piotrsukiennik.tuner.ai.impl.FitnessCalculatorExpression">
+                <constructor-arg value="1/sqrt(averageExecutionTime)"/>
+            </bean>
+        </constructor-arg>
     </bean>
 
 </beans>

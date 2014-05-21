@@ -51,7 +51,7 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
     }
 
     @Override
-    public void putData( ReadQuery query, CachedRowSet resultSet ) {
+    public void put( ReadQuery query, CachedRowSet resultSet ) {
         throw new WriteToStatementException();
     }
 

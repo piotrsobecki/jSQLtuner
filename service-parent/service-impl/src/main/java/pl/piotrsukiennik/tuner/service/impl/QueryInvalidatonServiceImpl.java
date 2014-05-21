@@ -7,8 +7,8 @@ import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryInvalidatorService;
-import pl.piotrsukiennik.tuner.service.impl.cache.SupportingHashesHolder;
+import pl.piotrsukiennik.tuner.service.QueryInvalidatonService;
+import pl.piotrsukiennik.tuner.service.impl.cache.SupportingQueryHolder;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,24 +21,24 @@ import java.util.Set;
  * Time: 21:04
  */
 @Service
-class QueryInvalidatorServiceImpl implements QueryInvalidatorService {
+class QueryInvalidatonServiceImpl implements QueryInvalidatonService {
 
     @Autowired
-    private SupportingHashesHolder<ReadQuery> supportingHashesHolder;
+    private SupportingQueryHolder<ReadQuery> supportingQueryHolder;
 
     @Override
     public void putCachedQuery( ReadQuery query ) {
-        supportingHashesHolder.putQuery( query );
+        supportingQueryHolder.putQuery( query );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( InsertQuery insertQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( insertQuery.getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( insertQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( DeleteQuery deleteQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
     }
 
     @Override
@@ -48,10 +48,10 @@ class QueryInvalidatorServiceImpl implements QueryInvalidatorService {
             Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
             for ( ColumnValue columnValue : updateQuery.getColumnValues() ) {
                 tablesToStarInvalidate.add( columnValue.getColumn().getTable() );
-                queriesToInvalidate.addAll( supportingHashesHolder.getQueriesInvalidatedBy( columnValue.getColumn() ) );
+                queriesToInvalidate.addAll( supportingQueryHolder.getQueriesInvalidatedBy( columnValue.getColumn() ) );
             }
             for ( Table table : tablesToStarInvalidate ) {
-                queriesToInvalidate.addAll( supportingHashesHolder.getQueriesInvalidatedByStar( table ) );
+                queriesToInvalidate.addAll( supportingQueryHolder.getQueriesInvalidatedByStar( table ) );
             }
             return queriesToInvalidate;
         }
@@ -60,22 +60,22 @@ class QueryInvalidatorServiceImpl implements QueryInvalidatorService {
 
     @Override
     public Collection<ReadQuery> invalidates( AlterTableQuery alterTableQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( alterTableQuery.getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( alterTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( CreateTableQuery createTableQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( createTableQuery.getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( createTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( TruncateQuery truncateQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( truncateQuery.getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( truncateQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( DropTableQuery dropTableQuery ) {
-        return supportingHashesHolder.getQueriesInvalidatedBy( dropTableQuery.getTable() );
+        return supportingQueryHolder.getQueriesInvalidatedBy( dropTableQuery.getTable() );
     }
 
     @Override

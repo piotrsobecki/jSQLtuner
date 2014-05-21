@@ -5,7 +5,10 @@ import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
+import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,7 +16,7 @@ import java.util.Queue;
  * @author Piotr Sukiennik
  * @date 14.02.14
  */
-public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> implements UpdateableSelectionHelper<T>, DataSourceSelectionHelper<T> {
+public class SchedulingSelectionHelper<T extends DataSourceSelectable> implements UpdateableSelectionHelper<T>, DataSourceSelectionHelper<T> {
 
     private UpdateableSelectionHelper<T> updateableSelectionHelper;
 
@@ -21,7 +24,8 @@ public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> imple
 
     private FitnessCalculator fitnessCalculator;
 
-    public DataSourceSelectionHelperImpl( UpdateableSelectionHelper<T> updateableSelectionHelper, FitnessCalculator fitnessCalculator ) {
+
+    public SchedulingSelectionHelper( UpdateableSelectionHelper<T> updateableSelectionHelper, FitnessCalculator fitnessCalculator ) {
         this.fitnessCalculator = fitnessCalculator;
         this.updateableSelectionHelper = updateableSelectionHelper;
     }
@@ -45,30 +49,40 @@ public class DataSourceSelectionHelperImpl<T extends DataSourceSelectable> imple
 
     @Override
     public T select() {
-        if ( !scheduled.isEmpty() ) {
-            return scheduled.poll();
-        }
-        else {
+        if ( scheduled.isEmpty() ) {
             return updateableSelectionHelper.select();
-
         }
+        return scheduled.poll();
+
     }
 
     @Override
     public void submit( T selectable ) {
+        scheduled.add( selectable );
+        updateableSelectionHelper.submit( selectable );
+    }
+
+    @Override
+    public void submit( DataRetrieval dataRetrieval, T selectable ) {
         selectable.setFitness( fitnessCalculator.calc( selectable ) );
         updateableSelectionHelper.submit( selectable );
-
     }
 
     @Override
     public void schedule( T selectable ) {
-        scheduled.add( selectable );
+        if (!scheduled.contains( selectable )){
+            scheduled.add( selectable );
+        }
     }
 
 
     @Override
     public T getSelection( Identifier identifier ) {
         return updateableSelectionHelper.getSelection( identifier );
+    }
+
+    @Override
+    public Collection<T> getOptions() {
+        return updateableSelectionHelper.getOptions();
     }
 }

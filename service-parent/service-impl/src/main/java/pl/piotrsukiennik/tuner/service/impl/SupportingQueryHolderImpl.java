@@ -14,8 +14,8 @@ import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.impl.cache.HashesHolder;
-import pl.piotrsukiennik.tuner.service.impl.cache.SupportingHashesHolder;
+import pl.piotrsukiennik.tuner.service.impl.cache.QueryHolder;
+import pl.piotrsukiennik.tuner.service.impl.cache.SupportingQueryHolder;
 
 import java.util.Collection;
 
@@ -24,26 +24,26 @@ import java.util.Collection;
  * @date 28.02.14
  */
 @Service
-public class SupportingHashesHolderImpl implements SupportingHashesHolder<ReadQuery> {
+public class SupportingQueryHolderImpl implements SupportingQueryHolder<ReadQuery> {
 
     public static final String STAR_PROJECTION_COLUMN_NAME = "*";
 
     @Autowired
-    private HashesHolder<String, ReadQuery> hashesHolder;
+    private QueryHolder<String, ReadQuery> queryHolder;
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedBy( Table table ) {
-        return hashesHolder.get( getPath( table ) );
+        return queryHolder.get( getPath( table ) );
     }
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedBy( Column column ) {
-        return hashesHolder.get( getPath( column ) );
+        return queryHolder.get( getPath( column ) );
     }
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedByStar( Table table ) {
-        return hashesHolder.get( getStarPath( table ) );
+        return queryHolder.get( getStarPath( table ) );
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SupportingHashesHolderImpl implements SupportingHashesHolder<ReadQu
             if ( selectQuery.getProjections() != null ) {
                 for ( Expression projection : selectQuery.getProjections() ) {
                     if ( projection instanceof ColumnProjection ) {
-                        hashesHolder.put( getPath( ( (ColumnProjection) projection ).getColumn() ), objectToStore );
+                        queryHolder.put( getPath( ( (ColumnProjection) projection ).getColumn() ), objectToStore );
                     }
                     else if ( projection instanceof SourceProjection ) {
                         Source source = ( (SourceProjection) projection ).getSource();
@@ -67,7 +67,7 @@ public class SupportingHashesHolderImpl implements SupportingHashesHolder<ReadQu
                             putQuery( ( (SubQuerySource) source ).getSelectQuery(), objectToStore );
                         }
                         else if ( source instanceof TableSource ) {
-                            hashesHolder.put( getStarPath( ( (TableSource) source ).getTable() ), objectToStore );
+                            queryHolder.put( getStarPath( ( (TableSource) source ).getTable() ), objectToStore );
                         }
                     }
                 }

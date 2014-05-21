@@ -65,4 +65,12 @@ public class DataSourceIdentity extends ValueEntity {
         result = 31 * result + ( clazz != null ? clazz.hashCode() : 0 );
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DataSourceIdentity{" +
+         "identifier='" + identifier + '\'' +
+         ", clazz='" + clazz + '\'' +
+         '}';
+    }
 }
