@@ -5,11 +5,13 @@ import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.service.QueryComplexityStatistics;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -18,14 +20,15 @@ import java.util.*;
  */
 public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
 
+    @Resource
+    private QueryComplexityStatistics queryComplexityStatistics;
+
+
+
     public DataSourceSelectorImpl(GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder,FitnessCalculator fitnessCalculator) {
         super( fitnessCalculator, selectionHelperBuilder );
     }
 
-    @Override
-    public <DS extends DataSource> Collection<DS> possible( Collection<DS> dataSources, ReadQuery readQuery, DataRetrieval dataRetrieval ) {
-        return dataSources;
-    }
 
     @Override
     public Collection<DataSourceIdentity> supporting( ReadQuery readQuery ) {
@@ -53,17 +56,17 @@ public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
 
 
     @Override
-    public void submit( DataRetrieval dataRetrieval ) {
-        ReadQuery readQuery = dataRetrieval.getReadQuery();
-        DataSourceIdentity dataSource = dataRetrieval.getDataSource();
+    public void submit( ReadQueryExecutionResult readQueryExecutionResult ) {
+        ReadQuery readQuery = readQueryExecutionResult.getReadQuery();
+        DataSourceIdentity dataSource = readQueryExecutionResult.getDataSource();
         DataSourceIdentifier dataSourceIdentifier =  new DataSourceIdentifier( dataSource );
         DataSourceSelectionHelper<DataSourceSelectable> selectionHelper = getDataSourceSelectionHelper( readQuery );
         DataSourceSelectable selectableDataSource = selectionHelper.getSelection( dataSourceIdentifier );
         if ( selectableDataSource == null ) {
-            selectionHelper.submit( dataRetrieval, new DataSourceSelectableImpl( dataRetrieval ) );
+            selectionHelper.submit( readQueryExecutionResult, new DataSourceSelectableImpl( readQueryExecutionResult ) );
         }
         else {
-            selectableDataSource.updateExecutionTime( dataRetrieval.getExecutionTimeNano() );
+            selectableDataSource.updateExecutionTime( readQueryExecutionResult.getExecutionTimeNano() );
             selectionHelper.update( selectableDataSource );
         }
     }

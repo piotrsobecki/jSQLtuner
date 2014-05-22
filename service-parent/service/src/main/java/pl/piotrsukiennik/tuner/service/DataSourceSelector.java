@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
@@ -15,11 +15,9 @@ public interface DataSourceSelector {
 
     DataSourceIdentity select( ReadQuery readQuery );
 
-    <DS extends DataSource> Collection<DS> possible( Collection<DS> dataSources, ReadQuery readQuery, DataRetrieval dataRetrieval );
-
     Collection<DataSourceIdentity> supporting( ReadQuery readQuery );
 
-    void submit( DataRetrieval dataRetrieval );
+    void submit( ReadQueryExecutionResult readQueryExecutionResult );
 
     void schedule( ReadQuery readQuery, DataSource dataSource );
 

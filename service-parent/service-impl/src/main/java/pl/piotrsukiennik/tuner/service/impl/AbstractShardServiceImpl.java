@@ -3,9 +3,10 @@ package pl.piotrsukiennik.tuner.service.impl;
 import com.google.common.base.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.LoggableService;
 import pl.piotrsukiennik.tuner.ShardNode;
 import pl.piotrsukiennik.tuner.ShardService;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
@@ -16,6 +17,7 @@ import pl.piotrsukiennik.tuner.util.RowSet;
 import javax.sql.rowset.CachedRowSet;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  * @author Piotr Sukiennik
@@ -30,6 +32,9 @@ public abstract class AbstractShardServiceImpl implements ShardService {
     @Autowired
     private DataRetrievalService dataRetrievalService;
 
+    @Autowired
+    private LoggableService loggableService;
+
     protected ShardNode getShardNode(DataSourceIdentity dataSourceIdentity){
         for (ShardNode shardNode:nodes){
             if ( Objects.equal( dataSourceIdentity, shardNode.getDataSourceIdentity() ) ){
@@ -39,12 +44,12 @@ public abstract class AbstractShardServiceImpl implements ShardService {
         return null;
     }
 
-    protected DataRetrieval getUsingDefault(  ReadQuery query ) throws DataRetrievalException {
+    protected ReadQueryExecutionResult getUsingDefault(  ReadQuery query ) throws DataRetrievalException {
         DataSource dataSource =  dataSourceService.getDataSourceDefault( query );
         return getUsingDataSource( dataSource, query );
     }
 
-    protected DataRetrieval getUsingDataSource( DataSourceIdentity dataSourceIdentity, ReadQuery query ) throws DataRetrievalException {
+    protected ReadQueryExecutionResult getUsingDataSource( DataSourceIdentity dataSourceIdentity, ReadQuery query ) throws DataRetrievalException {
         DataSource dataSource =dataSourceService.getDataSource( query, dataSourceIdentity );
         if (dataSource!=null){
             return getUsingDataSource( dataSource,query );
@@ -52,12 +57,33 @@ public abstract class AbstractShardServiceImpl implements ShardService {
         return null;
     }
 
-    protected DataRetrieval getUsingDataSource( DataSource dataSource, ReadQuery query ) throws DataRetrievalException {
-        DataRetrieval dataRetrieval = dataRetrievalService.get( dataSource, query );
-        CachedRowSet cachedRowSet = RowSet.clone( dataRetrieval.getResultSet() );
-        dataRetrieval.setResultSet( cachedRowSet );
+    protected ReadQueryExecutionResult getUsingDataSource( DataSource dataSource, ReadQuery query ) throws DataRetrievalException {
+        ReadQueryExecutionResult readQueryExecutionResult = dataRetrievalService.get( dataSource, query );
+        CachedRowSet cachedRowSet = RowSet.clone( readQueryExecutionResult.getResultSet() );
+        readQueryExecutionResult.setResultSet( cachedRowSet );
         query.setRows( cachedRowSet.size() );
-        return dataRetrieval;
+        return readQueryExecutionResult;
+    }
+
+    protected Collection<ShardNode> minus(Collection<ShardNode> shardNodes, Collection<DataSourceIdentity> dataSourceIdentities){
+        //Prepare output list
+        Collection<ShardNode> newNodes = new LinkedList<>(  );
+        //filter nodes
+        for (ShardNode shardNode: shardNodes){
+            //If no data source identity in identities list
+            if (!dataSourceIdentities.contains( shardNode.getDataSourceIdentity())){
+                //Add node to output
+                newNodes.add( shardNode );
+            }
+        }
+        return newNodes;
+    }
+    protected void log( DataRetrievalException exception ){
+        loggableService.log( exception );
+    }
+
+    protected void log( ReadQueryExecutionResult data ){
+        loggableService.log( data );
     }
 
     @Autowired

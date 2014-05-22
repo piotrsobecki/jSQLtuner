@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.ai;
 
 import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 
 /**
  * @author Piotr Sukiennik
@@ -9,7 +9,7 @@ import pl.piotrsukiennik.tuner.dto.DataRetrieval;
  */
 public interface DataSourceSelectionHelper<T extends DataSourceSelectable> extends UpdateableSelectionHelper<T> {
 
-    void submit( DataRetrieval dataRetrieval,T selectable );
+    void submit( ReadQueryExecutionResult readQueryExecutionResult,T selectable );
 
     void schedule( T selectable );
 }

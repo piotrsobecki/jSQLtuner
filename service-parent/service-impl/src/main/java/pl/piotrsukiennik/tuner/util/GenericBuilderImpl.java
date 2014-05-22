@@ -6,14 +6,14 @@ package pl.piotrsukiennik.tuner.util;
  */
 public class GenericBuilderImpl<T> implements GenericBuilder<T> {
 
-    private Class<T> buildable;
+    private Class<? extends T> buildable;
 
-    public GenericBuilderImpl( Class<T> buildable ) {
+    public GenericBuilderImpl( Class<? extends T> buildable ) {
         this.buildable = buildable;
     }
 
     @Override
-    public T build(){
+    public  T build(){
         return Objects2.newInstance( buildable );
     }
 }

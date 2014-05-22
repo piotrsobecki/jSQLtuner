@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.LoggableMessage;
 import pl.piotrsukiennik.tuner.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.LoggableService;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryInterceptionNotSupportedException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
@@ -37,9 +37,9 @@ public class LoggableServiceHolderImpl extends LoggableServiceHolder implements 
     }
 
     @Override
-    public void log( DataRetrieval dataRetrieval ) {
+    public void log( ReadQueryExecutionResult readQueryExecutionResult ) {
         if ( LOG.isInfoEnabled() ) {
-            LOG.info( LoggableMessageEnum.EXECUTION.getMessage( dataRetrieval ) );
+            LOG.info( LoggableMessageEnum.EXECUTION.getMessage( readQueryExecutionResult ) );
         }
     }
 

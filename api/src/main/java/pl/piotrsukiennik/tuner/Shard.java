@@ -1,10 +1,8 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-
-import javax.sql.rowset.CachedRowSet;
 
 /**
  * Author: Piotr Sukiennik
@@ -14,7 +12,7 @@ import javax.sql.rowset.CachedRowSet;
 public interface Shard {
     boolean contains( ReadQuery query );
 
-    void put( ReadQuery query, DataRetrieval data  );
+    void put( ReadQueryExecutionResult data  );
 
     void delete( Query query );
 }

@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
@@ -11,7 +11,7 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
  */
 public interface ShardService extends Shard {
 
-    DataRetrieval get( ReadQuery query ) throws DataRetrievalException;
+    ReadQueryExecutionResult get( ReadQuery query ) throws DataRetrievalException;
 
     void setDefaultDataSource( ReadQuery query, DataSource dataSource );
 

@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.datasource;
 
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ShardNode;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
@@ -32,9 +32,9 @@ public abstract class AbstractDataSource implements DataSource, ShardNode {
         return dataSourceIdentity;
     }
 
-
     @Override
-    public void put( ReadQuery query, DataRetrieval data ) {
+    public void put(  ReadQueryExecutionResult data ) {
+        ReadQuery query =data.getReadQuery();
         put( query, data.getResultSet() );
         supportedQueries.add( query.getHash() );
     }
@@ -57,7 +57,6 @@ public abstract class AbstractDataSource implements DataSource, ShardNode {
             delete( readQuery );
         }
     }
-
 
     @Override
     public boolean equals( Object o ) {

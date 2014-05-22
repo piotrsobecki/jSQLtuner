@@ -6,7 +6,7 @@ import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ParsingQueryService;
 import pl.piotrsukiennik.tuner.ShardService;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;
@@ -66,8 +66,8 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
             shardService.setDefaultDataSource( readQuery, rootDataSource );
-            DataRetrieval dataRetrieval = shardService.get( readQuery );
-            return dataRetrieval.getResultSet();
+            ReadQueryExecutionResult readQueryExecutionResult = shardService.get( readQuery );
+            return readQueryExecutionResult.getResultSet();
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );

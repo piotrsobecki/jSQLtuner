@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryInterceptionNotSupportedException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
@@ -19,7 +19,7 @@ public interface LoggableService {
 
     void log( QueryParsingNotSupportedException exception );
 
-    void log( DataRetrieval dataRetrieval );
+    void log( ReadQueryExecutionResult readQueryExecutionResult );
 
     void log( Query query, LoggableMessage loggableMessage, TimeUnit timeUnit, long duration );
 }

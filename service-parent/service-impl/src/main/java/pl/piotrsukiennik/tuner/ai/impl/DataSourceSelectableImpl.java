@@ -3,7 +3,7 @@ package pl.piotrsukiennik.tuner.ai.impl;
 import pl.piotrsukiennik.ai.selectable.AbstractSelectable;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 
 /**
@@ -33,11 +33,11 @@ public class DataSourceSelectableImpl extends AbstractSelectable<DataSourceIdent
         this.dataSource = dataSource;
     }
 
-    DataSourceSelectableImpl( DataRetrieval dataRetrieval ) {
-        super( new DataSourceIdentifier( dataRetrieval.getDataSource() ) );
-        this.dataSource = dataRetrieval.getDataSource();
-        this.rows = dataRetrieval.getRows();
-        this.updateExecutionTime( dataRetrieval.getExecutionTimeNano() );
+    DataSourceSelectableImpl( ReadQueryExecutionResult readQueryExecutionResult ) {
+        super( new DataSourceIdentifier( readQueryExecutionResult.getDataSource() ) );
+        this.dataSource = readQueryExecutionResult.getDataSource();
+        this.rows = readQueryExecutionResult.getRows();
+        this.updateExecutionTime( readQueryExecutionResult.getExecutionTimeNano() );
     }
 
     @Override

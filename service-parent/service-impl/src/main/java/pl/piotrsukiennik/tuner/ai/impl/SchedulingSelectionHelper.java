@@ -5,8 +5,7 @@ import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
-import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -63,7 +62,7 @@ public class SchedulingSelectionHelper<T extends DataSourceSelectable> implement
     }
 
     @Override
-    public void submit( DataRetrieval dataRetrieval, T selectable ) {
+    public void submit( ReadQueryExecutionResult readQueryExecutionResult, T selectable ) {
         selectable.setFitness( fitnessCalculator.calc( selectable ) );
         updateableSelectionHelper.submit( selectable );
     }

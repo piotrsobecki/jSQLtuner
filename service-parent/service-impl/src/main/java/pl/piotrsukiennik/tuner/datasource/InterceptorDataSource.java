@@ -21,13 +21,11 @@ import java.util.Collection;
  */
 public abstract class InterceptorDataSource extends AbstractDataSource {
 
-    private static final String GET_DATA_EXCEPTION_FORMAT = InterceptorDataSource.class.getSimpleName() + " does not support query (%s).";
-
     private ReadQuery query;
 
     public InterceptorDataSource( Statement statement,
                                   ReadQuery query ) throws SQLException {
-        super( new DataSourceIdentity( InterceptorDataSource.class, statement.getConnection().getMetaData().getURL() ) );
+        super( new DataSourceIdentity( InterceptorDataSource.class, statement.getConnection().getMetaData().getURL(),true ) );
         this.query = query;
     }
 

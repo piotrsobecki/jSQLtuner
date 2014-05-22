@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.query.Query;
 
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ public enum LoggableMessageEnum implements LoggableMessage {
         return String.format( messageFormat, query, duration, timeUnit.name() );
     }
 
-    public String getMessage( DataRetrieval dataRetrieval ) {
-        return String.format( messageFormatDataSource, dataRetrieval.getReadQuery(), dataRetrieval.getExecutionTimeNano(), TimeUnit.NANOSECONDS.name(), dataRetrieval.getDataSource().getClazz(), dataRetrieval.getDataSource().getIdentifier() );
+    public String getMessage( ReadQueryExecutionResult readQueryExecutionResult ) {
+        return String.format( messageFormatDataSource, readQueryExecutionResult.getReadQuery(), readQueryExecutionResult.getExecutionTimeNano(), TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
     }
 }

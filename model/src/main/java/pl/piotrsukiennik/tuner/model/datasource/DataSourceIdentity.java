@@ -14,6 +14,8 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class DataSourceIdentity extends ValueEntity {
+
+    private Boolean defaultDataSource;
     private String identifier;
 
     private String clazz;
@@ -24,6 +26,21 @@ public class DataSourceIdentity extends ValueEntity {
     public DataSourceIdentity( Class clazz, String identifier ) {
         this.identifier = identifier;
         this.clazz = clazz.getSimpleName();
+        this.defaultDataSource=false;
+    }
+
+    public DataSourceIdentity( Class clazz, String identifier,Boolean defaultDataSource ) {
+        this.identifier = identifier;
+        this.clazz = clazz.getSimpleName();
+        this.defaultDataSource=defaultDataSource;
+    }
+
+    public Boolean getDefaultDataSource() {
+        return defaultDataSource;
+    }
+
+    public void setDefaultDataSource( Boolean defaultDataSource ) {
+        this.defaultDataSource = defaultDataSource;
     }
 
     public String getIdentifier() {

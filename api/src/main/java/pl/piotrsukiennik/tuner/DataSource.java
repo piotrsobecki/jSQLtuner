@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner;
 
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
@@ -15,15 +15,10 @@ import java.sql.ResultSet;
  * Time: 22:00
  */
 public interface DataSource {
-
     DataSourceIdentity getDataSourceIdentity();
-
     ResultSet get( ReadQuery query ) throws DataRetrievalException;
-
-    void put( ReadQuery query, DataRetrieval dataRetrieval );
+    void put( ReadQueryExecutionResult readQueryExecutionResult );
     void put( ReadQuery query, CachedRowSet data );
-
     void delete( Query query );
-
     boolean contains( ReadQuery query );
 }

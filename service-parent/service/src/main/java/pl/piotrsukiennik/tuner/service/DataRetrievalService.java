@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.dto.DataRetrieval;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
@@ -10,5 +10,5 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
  * @date 17.02.14
  */
 public interface DataRetrievalService {
-    DataRetrieval get( DataSource dataSource, ReadQuery query ) throws DataRetrievalException;
+    ReadQueryExecutionResult get( DataSource dataSource, ReadQuery query ) throws DataRetrievalException;
 }

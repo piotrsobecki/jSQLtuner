@@ -4,14 +4,13 @@ import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 import javax.sql.rowset.CachedRowSet;
-import java.sql.ResultSet;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 01.09.13
  * Time: 13:29
  */
-public class DataRetrieval {
+public class ReadQueryExecutionResult {
 
     private DataSourceIdentity dataSource;
 
@@ -23,21 +22,21 @@ public class DataRetrieval {
 
     private long rows;
 
-    private long resultSetSize;
+    private long rowSize;
 
-    public DataRetrieval( ReadQuery readQuery,
-                          DataSourceIdentity dataSource,
-                          CachedRowSet resultSet,
-                          long executionTimeNano,
-                          long rows,
-                          long resultSetSize) {
+    public ReadQueryExecutionResult( ReadQuery readQuery,
+                                     DataSourceIdentity dataSource,
+                                     CachedRowSet resultSet,
+                                     long executionTimeNano,
+                                     long rows,
+                                     long rowSize ) {
 
         this.readQuery = readQuery;
         this.dataSource = dataSource;
         this.resultSet = resultSet;
         this.executionTimeNano = executionTimeNano;
         this.rows = rows;
-        this.resultSetSize=resultSetSize;
+        this.rowSize = rowSize;
     }
 
     public ReadQuery getReadQuery() {
@@ -53,8 +52,8 @@ public class DataRetrieval {
         this.resultSet = resultSet;
     }
 
-    public long getResultSetSize() {
-        return resultSetSize;
+    public long getRowSize() {
+        return rowSize;
     }
 
     public long getExecutionTimeNano() {
