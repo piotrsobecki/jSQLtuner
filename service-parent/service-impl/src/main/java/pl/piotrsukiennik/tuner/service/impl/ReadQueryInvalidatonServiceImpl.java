@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.QueryInvalidatonService;
+import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonService;
 import pl.piotrsukiennik.tuner.service.impl.querytree.SupportingQueryHolder;
 
 import java.util.Collection;
@@ -21,7 +21,7 @@ import java.util.Set;
  * Time: 21:04
  */
 @Service
-class QueryInvalidatonServiceImpl implements QueryInvalidatonService {
+class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
 
     @Autowired
     private SupportingQueryHolder<ReadQuery> supportingQueryHolder;

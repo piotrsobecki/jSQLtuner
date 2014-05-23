@@ -9,6 +9,6 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 14.01.14
  */
-public interface QueryInvalidatonService extends QueryInvalidaton<Collection<ReadQuery>> {
+public interface ReadQueryInvalidatonService extends QueryInvalidaton<Collection<ReadQuery>> {
     void putCachedQuery( ReadQuery query );
 }

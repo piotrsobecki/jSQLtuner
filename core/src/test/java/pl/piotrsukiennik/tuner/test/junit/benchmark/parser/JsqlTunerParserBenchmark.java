@@ -9,7 +9,7 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.piotrsukiennik.tuner.test.junit.benchmark.H2ConsumerFactory;
-import pl.piotrsukiennik.tuner.test.junit.unit.parser.JsqlTunerParserTest;
+import pl.piotrsukiennik.tuner.test.junit.unit.parser.JsqlTunerQueryProviderServiceTest;
 
 /**
  * @author Piotr Sukiennik
@@ -18,7 +18,7 @@ import pl.piotrsukiennik.tuner.test.junit.unit.parser.JsqlTunerParserTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @AxisRange(min = 0, max = 1)
 @BenchmarkMethodChart
-public class JsqlTunerParserBenchmark extends JsqlTunerParserTest {
+public class JsqlTunerParserBenchmark extends JsqlTunerQueryProviderServiceTest {
 
     protected static final H2Consumer H2_CONSUMER = H2ConsumerFactory.getH2Consumer( JsqlTunerParserBenchmark.class );
 

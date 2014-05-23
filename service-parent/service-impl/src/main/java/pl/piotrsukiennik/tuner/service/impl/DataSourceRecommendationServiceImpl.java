@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
 import pl.piotrsukiennik.tuner.datasource.RecommendationContext;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.DataSourceRecommendationService;
 
@@ -26,7 +27,7 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
     private final static double REQUIRED_CUMULATIVE_PROBABILITY = 0.1;
 
     @Override
-    public <DS extends DataSource> Collection<DS> possible( RecommendationContext<RQ,DS> context ){
+    public <DS extends DataSourceIdentity> Collection<DS> possible( RecommendationContext<RQ,DS> context ){
         if (isShardable( context )){
             return context.getNodes();
         }
@@ -34,7 +35,7 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
     }
 
 
-    public <DS extends DataSource> boolean isShardable( RecommendationContext<RQ,DS> context ){
+    public <DS extends DataSourceIdentity> boolean isShardable( RecommendationContext<RQ,DS> context ){
         ContinuousDistribution distribution = context.getQueryDistributions().get( ComplexityEstimation.Type.EXECUTION_COMPLEXITY );
         try {
             double cumulativeProbability = distribution.cumulativeProbability(

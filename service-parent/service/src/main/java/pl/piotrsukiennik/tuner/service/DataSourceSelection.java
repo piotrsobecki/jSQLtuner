@@ -11,15 +11,17 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 13.02.14
  */
-public interface DataSourceSelector {
+public interface DataSourceSelection {
 
     DataSourceIdentity selectDataSource( ReadQuery readQuery );
 
     Collection<DataSourceIdentity> getSupportingDataSources( ReadQuery readQuery );
 
-    void submitExecution( ReadQueryExecutionResult readQueryExecutionResult );
+    public Collection<DataSourceIdentity>  getNewSupportingDataSources(Collection<DataSourceIdentity> dataSourceIdentities,ReadQueryExecutionResult data);
 
-    void scheduleSelection( ReadQuery readQuery, DataSource dataSource );
+    void  submitExecution( ReadQueryExecutionResult readQueryExecutionResult );
+
+    void scheduleSelection( ReadQuery readQuery, DataSourceIdentity dataSource );
 
     void removeSelectionOptions( ReadQuery query );
 }

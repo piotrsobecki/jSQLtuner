@@ -5,7 +5,7 @@ import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.service.DataSourceSelector;
+import pl.piotrsukiennik.tuner.service.DataSourceSelection;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
 
 import java.util.LinkedHashMap;
@@ -15,14 +15,18 @@ import java.util.Map;
  * @author Piotr Sukiennik
  * @date 22.05.14
  */
-public abstract class AbstractDataSourceSelectorImpl implements DataSourceSelector {
+public abstract class AbstractDataSourceSelectionImpl implements DataSourceSelection {
+
     private Map<String, DataSourceSelectionHelper<DataSourceSelectable>> selectionHelperForQuery = new LinkedHashMap<>();
 
     private GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder;
 
     private FitnessCalculator fitnessCalculator;
 
-    public AbstractDataSourceSelectorImpl( FitnessCalculator fitnessCalculator, GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder ) {
+    public AbstractDataSourceSelectionImpl(
+     FitnessCalculator fitnessCalculator,
+     GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder
+    ) {
         this.fitnessCalculator=fitnessCalculator;
         this.selectionHelperBuilder=selectionHelperBuilder;
     }

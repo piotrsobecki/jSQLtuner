@@ -8,6 +8,6 @@ import pl.piotrsukiennik.tuner.model.query.Query;
  * Date: 30.06.13
  * Time: 17:44
  */
-public interface Parser {
-    <T extends Query> T parse( String databaseStr, String schemaStr, String queryStr ) throws QueryParsingNotSupportedException;
+public interface QueryProviderService {
+    <T extends Query> T provide( String databaseStr, String schemaStr, String queryStr ) throws QueryParsingNotSupportedException;
 }

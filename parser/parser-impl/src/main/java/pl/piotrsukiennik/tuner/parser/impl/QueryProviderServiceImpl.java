@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.LoggableService;
-import pl.piotrsukiennik.tuner.Parser;
+import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
@@ -25,10 +25,10 @@ import java.util.concurrent.TimeUnit;
  * Date: 05.07.13
  * Time: 19:05
  */
-@Service
-class ParserImpl implements Parser {
+@Service("parsingQueryProviderService")
+class QueryProviderServiceImpl implements QueryProviderService {
 
-    //private static final Log LOG = LogFactory.getLog( Parser.class );
+    //private static final Log LOG = LogFactory.getLog( QueryProviderService.class );
 
     @Autowired
     private QueryParsingContextBuilder<JsqlParserQueryParsingContext> queryParsingContextBuilder;
@@ -38,7 +38,7 @@ class ParserImpl implements Parser {
 
 
     @Override
-    public <T extends Query> T parse( String database, String schema, String query ) throws QueryParsingNotSupportedException {
+    public <T extends Query> T provide( String database, String schema, String query ) throws QueryParsingNotSupportedException {
         T parsedQuery;
         TimedCallable<T> timedCallable = getParserCallable( database, schema, query );
         try {

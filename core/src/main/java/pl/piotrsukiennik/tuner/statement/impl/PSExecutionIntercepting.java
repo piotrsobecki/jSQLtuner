@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.statement.impl;
 
 import pl.piotrsukiennik.tuner.CompositeDataSource;
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.ParsingQueryService;
+import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
@@ -24,7 +24,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected CompositeDataSource compositeDataSource;
 
-    protected ParsingQueryService queryService;
+    protected QueryProviderService queryService;
 
     protected String database;
 
@@ -32,7 +32,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected String sql;
 
-    public PSExecutionIntercepting( T preparedStatement, CompositeDataSource compositeDataSource, ParsingQueryService queryService, String database, String schema, String sql ) {
+    public PSExecutionIntercepting( T preparedStatement, CompositeDataSource compositeDataSource, QueryProviderService queryService, String database, String schema, String sql ) {
         super( preparedStatement );
         this.compositeDataSource = compositeDataSource;
         this.queryService = queryService;
@@ -58,8 +58,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            compositeDataSource.setDefaultDataSource( readQuery, rootDataSource );
-            return  compositeDataSource.execute( readQuery );
+            return  compositeDataSource.execute(  rootDataSource, readQuery );
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );
@@ -68,7 +67,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected <T extends Query> T getQuery( String sql ) throws QueryParsingNotSupportedException {
         String sqlQueryWithParams = Statements.bind( sql, preparedStatement.getParameterSet() );
-        return (T) queryService.get( database, schema, sqlQueryWithParams );
+        return (T) queryService.provide( database, schema, sqlQueryWithParams );
     }
 
     //WRITE EXECUTIONS

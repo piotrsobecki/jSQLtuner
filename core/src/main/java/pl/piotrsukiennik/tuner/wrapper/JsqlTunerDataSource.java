@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.wrapper;
 
-import pl.piotrsukiennik.tuner.PreparedStatementBuilder;
+import pl.piotrsukiennik.tuner.statement.PreparedStatementBuilder;
 
 import java.sql.Connection;
 import java.sql.SQLException;

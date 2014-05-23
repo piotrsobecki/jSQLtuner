@@ -20,7 +20,7 @@
     </context:component-scan>
 
     
-    <bean class="pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectorImpl">
+    <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceSelectionImpl">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.util.GenericBuilderImpl">
                 <constructor-arg value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>

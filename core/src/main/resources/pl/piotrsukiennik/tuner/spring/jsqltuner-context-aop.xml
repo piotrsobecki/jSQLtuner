@@ -16,6 +16,7 @@
     <aop:config/>
     <aop:aspectj-autoproxy/>
 
+    <bean id="preparedStatementBuilder" class="pl.piotrsukiennik.tuner.statement.PreparedStatementBuilderImpl"/>
 
     <bean id="preparedStatementInterceptingAdvisor"
           class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">

@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner;
+package pl.piotrsukiennik.tuner.statement;
 
 import java.sql.Statement;
 

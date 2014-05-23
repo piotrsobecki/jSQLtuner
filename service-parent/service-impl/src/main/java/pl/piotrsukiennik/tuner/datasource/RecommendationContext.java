@@ -3,6 +3,7 @@ package pl.piotrsukiennik.tuner.datasource;
 import org.apache.commons.math.distribution.ContinuousDistribution;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
 
@@ -13,14 +14,14 @@ import java.util.Map;
  * @author Piotr Sukiennik
  * @date 22.05.14
  */
-public class RecommendationContext<RQ extends ReadQuery,DS extends DataSource> {
+public class RecommendationContext<RQ extends ReadQuery,DS extends DataSourceIdentity> {
 
     private Collection<DS> nodes;
     private RQ readQuery;
     private Map<ComplexityEstimation.Type,? extends ContinuousDistribution> queryDistributions;
     private ComplexityEstimation complexityEstimation;
 
-    public static class Builder<RQ extends ReadQuery,DS extends DataSource> implements GenericBuilder<RecommendationContext>{
+    public static class Builder<RQ extends ReadQuery,DS extends DataSourceIdentity> implements GenericBuilder<RecommendationContext>{
 
         private Collection<DS> nodes;
         private RQ readQuery;

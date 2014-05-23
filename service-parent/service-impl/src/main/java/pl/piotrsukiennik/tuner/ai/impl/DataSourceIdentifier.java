@@ -9,8 +9,8 @@ import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
  * @date 13.02.14
  */
 public class DataSourceIdentifier extends GenericIdentifier<String> {
-    public DataSourceIdentifier( DataSourceIdentity dataSource ) {
-        super( dataSource.getIdentifier() );
+    public DataSourceIdentifier( DataSourceIdentity dataSourceIdentity ) {
+        super( dataSourceIdentity.getIdentifier() );
     }
     public DataSourceIdentifier( DataSource dataSource ) {
         this( dataSource.getDataSourceIdentity() );

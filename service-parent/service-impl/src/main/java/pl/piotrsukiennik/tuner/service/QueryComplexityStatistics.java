@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 22.05.14
  */
 public interface QueryComplexityStatistics {
-    Map<ComplexityEstimation.Type,? extends ContinuousDistribution> increment(Query query, ComplexityEstimation complexityEstimation);
+    void increment(Query query, ComplexityEstimation complexityEstimation);
     Map<ComplexityEstimation.Type,? extends ContinuousDistribution> getDistributions(Query query);
 
     ContinuousDistribution getDistribution(Query query, ComplexityEstimation.Type type );

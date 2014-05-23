@@ -12,7 +12,6 @@ import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
  */
 public class DataSourceSelectableImpl extends AbstractSelectable<DataSourceIdentifier> implements DataSourceSelectable<DataSourceIdentifier> {
 
-
     private DataSourceIdentity dataSource;
 
     private double averageExecutionTime = 0;
@@ -23,23 +22,19 @@ public class DataSourceSelectableImpl extends AbstractSelectable<DataSourceIdent
 
     private double fitness = 0;
 
-    DataSourceSelectableImpl( DataSource dataSource ) {
-        super( new DataSourceIdentifier( dataSource.getDataSourceIdentity() ) );
-        this.dataSource = dataSource.getDataSourceIdentity();
+    public DataSourceSelectableImpl( DataSourceIdentity identifier ) {
+        super( new DataSourceIdentifier( identifier ) );
+        this.dataSource=identifier;
     }
 
-    DataSourceSelectableImpl( DataSourceIdentity dataSource ) {
-        super( new DataSourceIdentifier( dataSource ) );
-        this.dataSource = dataSource;
+    public DataSourceSelectableImpl( ReadQueryExecutionResult executionResult, DataSourceIdentifier dataSourceIdentifier ) {
+        super( dataSourceIdentifier );
+        this.dataSource=executionResult.getDataSource();
+        this.executions=1;
+        this.averageExecutionTime=executionResult.getExecutionTimeNano();
+        this.rows=executionResult.getRows();
+        this.fitness=0;
     }
-
-    DataSourceSelectableImpl( ReadQueryExecutionResult readQueryExecutionResult ) {
-        super( new DataSourceIdentifier( readQueryExecutionResult.getDataSource() ) );
-        this.dataSource = readQueryExecutionResult.getDataSource();
-        this.rows = readQueryExecutionResult.getRows();
-        this.updateExecutionTime( readQueryExecutionResult.getExecutionTimeNano() );
-    }
-
     @Override
     public void updateExecutionTime( double executionTime ) {
         this.averageExecutionTime = ( ( executions * averageExecutionTime ) + executionTime ) / ++executions;

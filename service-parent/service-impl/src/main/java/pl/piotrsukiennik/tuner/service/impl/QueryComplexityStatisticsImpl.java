@@ -31,12 +31,10 @@ public class QueryComplexityStatisticsImpl implements QueryComplexityStatistics 
     }
 
     @Override
-    public Map<ComplexityEstimation.Type,IncrContDistr> increment( Query query, ComplexityEstimation complexityEstimation ) {
-        Map<ComplexityEstimation.Type,IncrContDistr> map = new HashMap<>(  );
+    public void increment( Query query, ComplexityEstimation complexityEstimation ) {
         for (ComplexityEstimation.Type type : ComplexityEstimation.Type.values()){
-            map.put( type, incrementDistribution( query, type, type.retrieve( complexityEstimation ) ) );
+            incrementDistribution( query, type, type.retrieve( complexityEstimation ) );
         }
-        return map;
     }
 
     @Override
