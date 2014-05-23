@@ -11,6 +11,7 @@
     </parent>
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>util</artifactId>
+    <packaging>jar</packaging>
     <version>2.1-SNAPSHOT</version>
     <name>jSQLtuner :: util</name>
     <url>http://maven.apache.org</url>
