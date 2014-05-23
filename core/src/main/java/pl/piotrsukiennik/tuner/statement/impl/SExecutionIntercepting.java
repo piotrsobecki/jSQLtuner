@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.QueryProviderService;
-import pl.piotrsukiennik.tuner.CompositeDataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
@@ -26,7 +26,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
     private static final Log LOG = LogFactory.getLog( SExecutionIntercepting.class );
 
-    protected CompositeDataSource compositeDataSource;
+    protected DataSourceManager dataSourceManager;
 
     protected QueryProviderService queryService;
 
@@ -36,12 +36,12 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
 
     public SExecutionIntercepting( T statement,
-                                   CompositeDataSource compositeDataSource,
+                                   DataSourceManager dataSourceManager,
                                    QueryProviderService queryService,
                                    String database,
                                    String schema ) {
         super( statement );
-        this.compositeDataSource = compositeDataSource;
+        this.dataSourceManager = dataSourceManager;
         this.queryService = queryService;
         this.database = database;
         this.schema = schema;
@@ -54,7 +54,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
         writeQueryExecution.setTimestamp( new Timestamp( System.currentTimeMillis() ) );
         writeQueryExecution.setQuery( query );
         if ( rowsAffected > 0 ) {
-            compositeDataSource.delete( query );
+            dataSourceManager.delete( query );
         }
     }
 
@@ -64,7 +64,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            return compositeDataSource.execute( rootDataSource, readQuery );
+            return dataSourceManager.execute( rootDataSource, readQuery );
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );

@@ -2,12 +2,11 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.CompositeDataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.DataSourceService;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.service.DefaultDataSourceAwareService;
-
 import java.util.*;
 
 /**
@@ -15,7 +14,7 @@ import java.util.*;
  * @date 23.05.14
  */
 @Service
-public class DataSourcesAwareService implements DefaultDataSourceAwareService {
+public class DataSourceServiceImpl implements DataSourceService {
 
     private Map<DataSourceIdentity, DataSource> dataSources = new HashMap<>(  );
 
@@ -66,7 +65,7 @@ public class DataSourcesAwareService implements DefaultDataSourceAwareService {
     @Autowired
     public void setDataSources( Collection<DataSource> dataSources ) {
         for (DataSource dataSource: dataSources ){
-            if (!(dataSource instanceof CompositeDataSource )){
+            if (!(dataSource instanceof DataSourceManager )){
                 add( dataSource );
             }
         }

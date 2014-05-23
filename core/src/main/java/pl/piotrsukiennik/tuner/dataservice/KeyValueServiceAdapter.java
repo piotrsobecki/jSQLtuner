@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service;
+package pl.piotrsukiennik.tuner.dataservice;
 
 import pl.piotrsukiennik.tuner.KeyValueService;
 import pl.piotrsukiennik.tuner.datasource.AbstractDataSource;

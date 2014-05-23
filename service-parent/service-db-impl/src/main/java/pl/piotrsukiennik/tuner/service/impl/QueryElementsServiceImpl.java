@@ -8,14 +8,14 @@ import pl.piotrsukiennik.tuner.model.other.*;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.persistence.Dao;
 import pl.piotrsukiennik.tuner.persistence.QueryElementDao;
-import pl.piotrsukiennik.tuner.service.QueryElementService;
+import pl.piotrsukiennik.tuner.service.QueryElementsService;
 
 /**
  * @author Piotr Sukiennik
  * @date 28.02.14
  */
 @Service
-public class QueryElementServiceImpl implements QueryElementService {
+public class QueryElementsServiceImpl implements QueryElementsService {
 
     protected QueryElementDao getQueryElementDao() {
         return Dao.getQueryElement();

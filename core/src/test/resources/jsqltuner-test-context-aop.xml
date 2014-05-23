@@ -6,6 +6,6 @@
     <jsqltuner:aop-context/>
 
 
-    <import resource="../jsqltuner-test-hibernate-context.xml"/>
+    <import resource="jsqltuner-test-hibernate-context.xml"/>
 
 </beans>

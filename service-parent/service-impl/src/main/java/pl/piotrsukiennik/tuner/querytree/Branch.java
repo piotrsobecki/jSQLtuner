@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.querytree;
+package pl.piotrsukiennik.tuner.querytree;
 
 /**
  * Author: Piotr Sukiennik

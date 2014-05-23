@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
 
     <jsqltuner:wrapper-context/>
-    <import resource="jsqltuner-test-hibernate-context.xml"/>
+    <import resource="classpath*:jsqltuner-test-hibernate-context-wrapper.xml"/>
 
 </beans>

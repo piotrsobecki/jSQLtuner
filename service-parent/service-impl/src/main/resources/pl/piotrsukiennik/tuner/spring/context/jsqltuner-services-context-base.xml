@@ -12,15 +12,13 @@
     <context:annotation-config/>
 
     <context:component-scan base-package="pl.piotrsukiennik.tuner.complexity"/>
-
     <context:component-scan base-package="pl.piotrsukiennik.tuner.size"/>
-
+    <context:component-scan base-package="pl.piotrsukiennik.tuner.querytree"/>
     <context:component-scan base-package="pl.piotrsukiennik.tuner.service">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
-    
-    <bean class="pl.piotrsukiennik.tuner.service.impl.DataSourceSelectionImpl">
+    <bean id="dataSourceSelectionHelperBuilder" class="pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelperBuilder">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.util.GenericBuilderImpl">
                 <constructor-arg value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
@@ -32,6 +30,5 @@
             </bean>
         </constructor-arg>
     </bean>
-
 
 </beans>

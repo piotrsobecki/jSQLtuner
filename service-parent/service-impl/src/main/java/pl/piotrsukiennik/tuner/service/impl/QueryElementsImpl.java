@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.model.other.JoinFragment;
 import pl.piotrsukiennik.tuner.model.other.OrderByFragment;
 import pl.piotrsukiennik.tuner.model.schema.*;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryElementService;
+import pl.piotrsukiennik.tuner.service.QueryElementsService;
 import pl.piotrsukiennik.tuner.service.QueryElements;
 import pl.piotrsukiennik.tuner.service.SchemaService;
 
@@ -24,19 +24,19 @@ public class QueryElementsImpl implements QueryElements {
 
     protected SchemaService schemaService;
 
-    protected QueryElementService elementService;
+    protected QueryElementsService elementService;
 
     private Database database;
 
     private Schema schema;
 
-    public QueryElementsImpl( SchemaService schemaService, QueryElementService elementService, String database, String schema ) {
+    QueryElementsImpl( SchemaService schemaService, QueryElementsService elementService, String database, String schema ) {
         this( schemaService, elementService, new QueryElementsCache() );
         this.database = this.getDatabase( database );
         this.schema = this.getSchema( schema );
     }
 
-    public QueryElementsImpl( SchemaService schemaService, QueryElementService elementService, QueryElementsCache queryElementsCache ) {
+    QueryElementsImpl( SchemaService schemaService, QueryElementsService elementService, QueryElementsCache queryElementsCache ) {
         this.queryElementsCache = queryElementsCache;
         this.schemaService = schemaService;
         this.elementService = elementService;

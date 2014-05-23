@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "classpath*:jsqltuner-test-context.xml" } )
 public class JsqlTunerQueryProviderServiceTest {
 
-    @Resource(name = "parserServiceImpl")
+    @Resource(name = "parsingQueryProviderService")
     private QueryProviderService queryProviderService;
 
     @Test

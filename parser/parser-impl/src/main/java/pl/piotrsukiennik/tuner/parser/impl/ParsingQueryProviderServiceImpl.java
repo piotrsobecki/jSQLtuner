@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * Time: 19:05
  */
 @Service("parsingQueryProviderService")
-class QueryProviderServiceImpl implements QueryProviderService {
+class ParsingQueryProviderServiceImpl implements QueryProviderService {
 
     //private static final Log LOG = LogFactory.getLog( QueryProviderService.class );
 

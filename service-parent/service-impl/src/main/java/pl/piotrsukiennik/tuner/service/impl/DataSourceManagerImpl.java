@@ -2,8 +2,9 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.CompositeDataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.DataSourceService;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
@@ -22,10 +23,10 @@ import java.util.*;
  * Time: 18:58
  */
 @Service
-public class CompositeDataSourceImpl implements CompositeDataSource {
+public class DataSourceManagerImpl implements DataSourceManager {
 
     @Autowired
-    private DataSourceSelection dataSourceSelection;
+    private DataSourceSelectionService dataSourceSelectionService;
 
     @Autowired
     private ReadQueryExecutionService readQueryExecutionService;
@@ -34,16 +35,16 @@ public class CompositeDataSourceImpl implements CompositeDataSource {
     private ReadQueryInvalidatonService invalidatorService;
 
     @Autowired
-    private DefaultDataSourceAwareService dataSourcesAwareService;
+    private DataSourceService dataSourceService;
 
     @Override
     public DataSourceIdentity getDataSourceIdentity() {
-        return new DataSourceIdentity( CompositeDataSourceImpl.class,"CompositeDataSource" );
+        return new DataSourceIdentity( DataSourceManagerImpl.class,"DataSourceManager" );
     }
 
     @Override
     public ResultSet execute( DataSource defaultDataSource, ReadQuery query ) throws DataRetrievalException {
-        dataSourcesAwareService.setDefaultDataSource( query, defaultDataSource );
+        dataSourceService.setDefaultDataSource( query, defaultDataSource );
         return execute( query );
     }
 
@@ -58,11 +59,11 @@ public class CompositeDataSourceImpl implements CompositeDataSource {
         ReadQueryExecutionResult readQueryExecutionResult = null;
         if (dataSourceIdentity == null || dataSourceIdentity.getDefaultDataSource()){
             //Get default data source
-            dataSource =  dataSourcesAwareService.getDefaultDataSource( query );
+            dataSource =  dataSourceService.getDefaultDataSource( query );
             //Execute using default data source
             readQueryExecutionResult =  readQueryExecutionService.execute( dataSource, query );
         } else {
-            dataSource = dataSourcesAwareService.getDataSource( dataSourceIdentity );
+            dataSource = dataSourceService.getDataSource( dataSourceIdentity );
             try {
                 //Get using selected data source identity by the selector
                 readQueryExecutionResult = readQueryExecutionService.execute( dataSource,query );
@@ -78,27 +79,23 @@ public class CompositeDataSourceImpl implements CompositeDataSource {
 
 
     protected ReadQueryExecutionResult doExecute( ReadQuery query ) throws DataRetrievalException {
-        //Select the data source for query using dataSourceSelection
-        DataSourceIdentity dataSourceIdentity = dataSourceSelection.selectDataSource( query );
+        //Select the data source for query using dataSourceSelectionService
+        DataSourceIdentity dataSourceIdentity = dataSourceSelectionService.selectDataSource( query );
         ReadQueryExecutionResult readQueryExecutionResult =  execute(dataSourceIdentity,query);
         //Propagate data if shardeable
         distribute( readQueryExecutionResult );
         //Log retrieval
         LoggableServiceHolder.get().log( readQueryExecutionResult );
         //Feedback retrieval to data source selector for learning
-        dataSourceSelection.submitExecution( readQueryExecutionResult );
+        dataSourceSelectionService.submitExecution( readQueryExecutionResult );
         return readQueryExecutionResult;
     }
 
     @Override
     public void distribute( ReadQueryExecutionResult data ) {
-        dataSourceSelection.submitExecution( data );
+        dataSourceSelectionService.submitExecution( data );
 
-        Collection<DataSourceIdentity> newIdentities =
-             dataSourceSelection.getNewSupportingDataSources(
-                  dataSourcesAwareService.getDataSourceIdentities(),
-                  data
-             );
+        Collection<DataSourceIdentity> newIdentities = dataSourceSelectionService.getNewSupportingDataSources(data );
         if (!newIdentities.isEmpty()){
             //Clone the result set
             ReadQueryExecutionResult readQueryExecutionResult = new ReadQueryExecutionResultBuilder( data )
@@ -114,11 +111,11 @@ public class CompositeDataSourceImpl implements CompositeDataSource {
         ReadQuery query = data.getReadQuery();
         //Clone data for dataSources
         for ( DataSourceIdentity identity : selectedNodes ) {
-            DataSource dataSource = dataSourcesAwareService.getDataSource( identity );
+            DataSource dataSource = dataSourceService.getDataSource( identity );
             //Distribute data for node
             dataSource.distribute( data );
             //Schedule the selection using the node
-            dataSourceSelection.scheduleSelection( query, identity );
+            dataSourceSelectionService.scheduleSelection( query, identity );
         }
         //Inform invalidator service about new supported query
         invalidatorService.putCachedQuery( query );
@@ -131,7 +128,7 @@ public class CompositeDataSourceImpl implements CompositeDataSource {
         Collection<ReadQuery> queriesToInvalidate = query.invalidates( invalidatorService );
         //Remove option of selection
         for ( ReadQuery selectQuery : queriesToInvalidate ) {
-            dataSourceSelection.removeSelectionOptions( selectQuery );
+            dataSourceSelectionService.removeSelectionOptions( selectQuery );
         }
     }
 

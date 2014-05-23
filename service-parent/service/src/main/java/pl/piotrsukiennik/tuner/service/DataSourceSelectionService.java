@@ -11,13 +11,13 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 13.02.14
  */
-public interface DataSourceSelection {
+public interface DataSourceSelectionService {
 
     DataSourceIdentity selectDataSource( ReadQuery readQuery );
 
     Collection<DataSourceIdentity> getSupportingDataSources( ReadQuery readQuery );
 
-    public Collection<DataSourceIdentity>  getNewSupportingDataSources(Collection<DataSourceIdentity> dataSourceIdentities,ReadQueryExecutionResult data);
+    public Collection<DataSourceIdentity>  getNewSupportingDataSources(ReadQueryExecutionResult data);
 
     void  submitExecution( ReadQueryExecutionResult readQueryExecutionResult );
 

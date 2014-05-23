@@ -7,16 +7,6 @@
 
     <context:annotation-config/>
 
-<!--
-    <context:property-placeholder
-            ignore-resource-not-found="true" ignore-unresolvable="true"
-            location="classpath:/jsqltuner.properties,classpath:jsqltuner-ext.properties" />
--->
-
-    <context:component-scan base-package="pl.piotrsukiennik.tuner.impl">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-    </context:component-scan>
-
     <import resource="classpath*:pl/piotrsukiennik/tuner/spring/context/jsqltuner-*-context.xml"/>
 
     <jsqltuner:keyValueDataSource id="localKeyValueDataSource" keyValueService-ref="keyValueLocalService"/>

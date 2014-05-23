@@ -2,8 +2,7 @@ package pl.piotrsukiennik.tuner.statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.CompositeDataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
 import pl.piotrsukiennik.tuner.statement.impl.PSExecutionIntercepting;
@@ -22,18 +21,18 @@ public class PreparedStatementBuilderImpl implements PreparedStatementBuilder, S
 
     private QueryProviderService queryProviderService;
 
-    private CompositeDataSource compositeDataSource;
+    private DataSourceManager dataSourceManager;
 
     private DataSourceContext dataSourceContext;
 
     @Autowired
     public PreparedStatementBuilderImpl(
         @Qualifier("queryProviderService") QueryProviderService queryProviderService,
-        CompositeDataSource compositeDataSource,
+        DataSourceManager dataSourceManager,
         DataSourceContext dataSourceContext
     ) {
         this.queryProviderService = queryProviderService;
-        this.compositeDataSource = compositeDataSource;
+        this.dataSourceManager = dataSourceManager;
         this.dataSourceContext = dataSourceContext;
     }
 
@@ -42,7 +41,7 @@ public class PreparedStatementBuilderImpl implements PreparedStatementBuilder, S
         String database = Statements.getDatabase( statement );
         String schema = Statements.getSchema( statement );
         if ( !dataSourceContext.contains( database, schema ) ) {
-            return new SExecutionIntercepting<>( statement, compositeDataSource, queryProviderService, database, schema );
+            return new SExecutionIntercepting<>( statement, dataSourceManager, queryProviderService, database, schema );
         }
         return statement;
     }
@@ -53,7 +52,7 @@ public class PreparedStatementBuilderImpl implements PreparedStatementBuilder, S
         String schema = Statements.getSchema( preparedStatement );
         if ( !dataSourceContext.contains( database, schema ) ) {
             PSParametersIntercepting<PreparedStatement> parametersIntercepting = new PSParametersIntercepting<>( preparedStatement );
-            return new PSExecutionIntercepting<>( parametersIntercepting, compositeDataSource, queryProviderService, database, schema, sql );
+            return new PSExecutionIntercepting<>( parametersIntercepting, dataSourceManager, queryProviderService, database, schema, sql );
         }
         return preparedStatement;
     }

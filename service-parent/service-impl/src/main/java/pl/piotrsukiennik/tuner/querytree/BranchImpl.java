@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.querytree;
+package pl.piotrsukiennik.tuner.querytree;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

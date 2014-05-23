@@ -13,5 +13,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
   </component>
+  <component name="SonarSettingsModuleComponent">
+    <option name="host" value="" />
+    <option name="user" value="" />
+    <option name="password" value="" />
+    <option name="resource" value="" />
+  </component>
 </module>
 

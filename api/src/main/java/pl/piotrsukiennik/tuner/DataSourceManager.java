@@ -12,6 +12,6 @@ import java.sql.ResultSet;
  * Date: 31.08.13
  * Time: 18:57
  */
-public interface CompositeDataSource extends DataSource {
+public interface DataSourceManager extends DataSource {
     ResultSet execute( DataSource defaultDataSource,ReadQuery query ) throws DataRetrievalException;
 }

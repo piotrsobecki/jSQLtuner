@@ -6,14 +6,14 @@ import pl.piotrsukiennik.tuner.model.expression.OperatorExpression;
 import pl.piotrsukiennik.tuner.model.expression.projection.Projection;
 import pl.piotrsukiennik.tuner.model.other.*;
 import pl.piotrsukiennik.tuner.model.source.Source;
-import pl.piotrsukiennik.tuner.service.QueryElementService;
+import pl.piotrsukiennik.tuner.service.QueryElementsService;
 
 /**
  * @author Piotr Sukiennik
  * @date 28.02.14
  */
 @Service
-public class BlankQueryElementServiceImpl implements QueryElementService {
+public class BlankQueryElementsServiceImpl implements QueryElementsService {
 
     public OperatorExpression getOrCreate( OperatorExpression expression ) {
         return expression;

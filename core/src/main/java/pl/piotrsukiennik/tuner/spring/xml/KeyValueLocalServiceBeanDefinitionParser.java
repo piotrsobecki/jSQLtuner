@@ -4,7 +4,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-import pl.piotrsukiennik.tuner.service.KeyValueServiceLocalImpl;
+import pl.piotrsukiennik.tuner.dataservice.KeyValueServiceLocalImpl;
 
 /**
  * @author Piotr Sukiennik

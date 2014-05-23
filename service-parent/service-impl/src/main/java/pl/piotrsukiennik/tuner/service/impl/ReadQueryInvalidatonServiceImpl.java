@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonService;
-import pl.piotrsukiennik.tuner.service.impl.querytree.SupportingQueryHolder;
+import pl.piotrsukiennik.tuner.querytree.ReadQueryTree;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,21 +24,21 @@ import java.util.Set;
 class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
 
     @Autowired
-    private SupportingQueryHolder<ReadQuery> supportingQueryHolder;
+    private ReadQueryTree<ReadQuery> readQueryTree;
 
     @Override
     public void putCachedQuery( ReadQuery query ) {
-        supportingQueryHolder.putQuery( query );
+        readQueryTree.putQuery( query );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( InsertQuery insertQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( insertQuery.getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( insertQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( DeleteQuery deleteQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
     }
 
     @Override
@@ -48,10 +48,10 @@ class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
             Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
             for ( ColumnValue columnValue : updateQuery.getColumnValues() ) {
                 tablesToStarInvalidate.add( columnValue.getColumn().getTable() );
-                queriesToInvalidate.addAll( supportingQueryHolder.getQueriesInvalidatedBy( columnValue.getColumn() ) );
+                queriesToInvalidate.addAll( readQueryTree.getQueriesInvalidatedBy( columnValue.getColumn() ) );
             }
             for ( Table table : tablesToStarInvalidate ) {
-                queriesToInvalidate.addAll( supportingQueryHolder.getQueriesInvalidatedByStar( table ) );
+                queriesToInvalidate.addAll( readQueryTree.getQueriesInvalidatedByStar( table ) );
             }
             return queriesToInvalidate;
         }
@@ -60,22 +60,22 @@ class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
 
     @Override
     public Collection<ReadQuery> invalidates( AlterTableQuery alterTableQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( alterTableQuery.getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( alterTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( CreateTableQuery createTableQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( createTableQuery.getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( createTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( TruncateQuery truncateQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( truncateQuery.getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( truncateQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> invalidates( DropTableQuery dropTableQuery ) {
-        return supportingQueryHolder.getQueriesInvalidatedBy( dropTableQuery.getTable() );
+        return readQueryTree.getQueriesInvalidatedBy( dropTableQuery.getTable() );
     }
 
     @Override

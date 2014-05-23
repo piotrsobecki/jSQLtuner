@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service;
+package pl.piotrsukiennik.tuner.dataservice;
 
 import net.spy.memcached.MemcachedClient;
 import pl.piotrsukiennik.tuner.KeyValueService;

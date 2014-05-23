@@ -10,7 +10,7 @@ import pl.piotrsukiennik.tuner.model.source.Source;
  * @author Piotr Sukiennik
  * @date 28.02.14
  */
-public interface QueryElementService {
+public interface QueryElementsService {
 
     OperatorExpression getOrCreate( OperatorExpression expression );
 

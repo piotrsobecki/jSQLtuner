@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.querytree;
+package pl.piotrsukiennik.tuner.querytree;
 
 import pl.piotrsukiennik.tuner.model.schema.Column;
 import pl.piotrsukiennik.tuner.model.schema.Table;
@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public interface SupportingQueryHolder<K> {
+public interface ReadQueryTree<K> {
 
     Collection<K> getQueriesInvalidatedBy( Table table );
 

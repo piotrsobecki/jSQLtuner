@@ -14,8 +14,8 @@ import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.impl.querytree.Tree;
-import pl.piotrsukiennik.tuner.service.impl.querytree.SupportingQueryHolder;
+import pl.piotrsukiennik.tuner.querytree.Tree;
+import pl.piotrsukiennik.tuner.querytree.ReadQueryTree;
 
 import java.util.Collection;
 
@@ -24,7 +24,7 @@ import java.util.Collection;
  * @date 28.02.14
  */
 @Service
-public class SupportingQueryHolderImpl implements SupportingQueryHolder<ReadQuery> {
+public class ReadQueryTreeImpl implements ReadQueryTree<ReadQuery> {
 
     public static final String STAR_PROJECTION_COLUMN_NAME = "*";
 

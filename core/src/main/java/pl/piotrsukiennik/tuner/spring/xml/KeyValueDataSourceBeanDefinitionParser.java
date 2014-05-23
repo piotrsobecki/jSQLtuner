@@ -5,7 +5,7 @@ import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
-import pl.piotrsukiennik.tuner.service.KeyValueServiceAdapter;
+import pl.piotrsukiennik.tuner.dataservice.KeyValueServiceAdapter;
 
 /**
  * @author Piotr Sukiennik

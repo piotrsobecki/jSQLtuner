@@ -1,6 +1,6 @@
 package pl.piotrsukiennik.tuner.statement.impl;
 
-import pl.piotrsukiennik.tuner.CompositeDataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
@@ -22,7 +22,7 @@ import java.sql.Timestamp;
  */
 public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> extends PSWrapper<T> {
 
-    protected CompositeDataSource compositeDataSource;
+    protected DataSourceManager dataSourceManager;
 
     protected QueryProviderService queryService;
 
@@ -32,9 +32,9 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected String sql;
 
-    public PSExecutionIntercepting( T preparedStatement, CompositeDataSource compositeDataSource, QueryProviderService queryService, String database, String schema, String sql ) {
+    public PSExecutionIntercepting( T preparedStatement, DataSourceManager dataSourceManager, QueryProviderService queryService, String database, String schema, String sql ) {
         super( preparedStatement );
-        this.compositeDataSource = compositeDataSource;
+        this.dataSourceManager = dataSourceManager;
         this.queryService = queryService;
         this.database = database;
         this.schema = schema;
@@ -52,13 +52,13 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
         writeQueryExecution.setTimestamp( new Timestamp( System.currentTimeMillis() ) );
         writeQueryExecution.setQuery( query );
         if ( rowsAffected > 0 ) {
-            compositeDataSource.delete( query );
+            dataSourceManager.delete( query );
         }
     }
 
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            return  compositeDataSource.execute(  rootDataSource, readQuery );
+            return  dataSourceManager.execute(  rootDataSource, readQuery );
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );

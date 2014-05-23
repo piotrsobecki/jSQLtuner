@@ -2,12 +2,11 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.apache.commons.math.distribution.ContinuousDistribution;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
-import pl.piotrsukiennik.tuner.DataSources;
+import pl.piotrsukiennik.tuner.*;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
-import pl.piotrsukiennik.tuner.ai.FitnessCalculator;
-import pl.piotrsukiennik.tuner.ai.impl.AbstractDataSourceSelectionImpl;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceIdentifier;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectableImpl;
 import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
@@ -17,16 +16,22 @@ import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.DataSourceRecommendationService;
+import pl.piotrsukiennik.tuner.service.DataSourceSelectionService;
 import pl.piotrsukiennik.tuner.service.QueryComplexityStatistics;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
  * @author Piotr Sukiennik
  * @date 13.02.14
  */
-public class DataSourceSelectionImpl extends AbstractDataSourceSelectionImpl {
+@Service
+public class DataSourceSelectionServiceImpl implements DataSourceSelectionService {
+
+    @Autowired
+    private DataSourceService dataSourceService;
 
     @Autowired
     private QueryComplexityStatistics queryComplexityStatistics;
@@ -37,9 +42,11 @@ public class DataSourceSelectionImpl extends AbstractDataSourceSelectionImpl {
     @Autowired
     private ComplexityEstimator complexityEstimator;
 
-    public DataSourceSelectionImpl( GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder, FitnessCalculator fitnessCalculator ) {
-        super( fitnessCalculator, selectionHelperBuilder );
-    }
+    @Resource(name = "dataSourceSelectionHelperBuilder")
+    private GenericBuilder<DataSourceSelectionHelper<DataSourceSelectable>> selectionHelperBuilder;
+
+    private Map<String, DataSourceSelectionHelper<DataSourceSelectable>> selectionHelperForQuery =
+     new HashMap<>();
 
     @Override
     public Collection<DataSourceIdentity> getSupportingDataSources( ReadQuery readQuery ) {
@@ -81,41 +88,43 @@ public class DataSourceSelectionImpl extends AbstractDataSourceSelectionImpl {
     }
 
     @Override
-    public Collection<DataSourceIdentity>  getNewSupportingDataSources(
-     Collection<DataSourceIdentity> dataSourceIdentities,
-     ReadQueryExecutionResult data
-    ){
-        //Get all supporting data sources
+    public Collection<DataSourceIdentity>  getNewSupportingDataSources(ReadQueryExecutionResult data ){
+        //Get all supporting data sources for query
         Collection<DataSourceIdentity> supportingDataSources = getSupportingDataSources( data.getReadQuery() );
+        int supportingDataSourcesSize = supportingDataSources.size();
+        //Nodes minus default data source
+        int supportingNodesSize = supportingDataSourcesSize>0?(supportingDataSourcesSize-1):0;
+
+        //Get all data sources
+        Collection<DataSourceIdentity> allDataSourceIdentities = dataSourceService.getDataSourceIdentities();
+
+        //If nothing new can be introduced
+        if (supportingNodesSize>=allDataSourceIdentities.size()){
+            return Collections.EMPTY_LIST;
+        }
 
         //Get complexityEstimation
         ComplexityEstimation complexityEstimation = complexityEstimator.estimate( data );
         //Complexity distributions for query type
         Map<ComplexityEstimation.Type,? extends ContinuousDistribution> distributions
          =queryComplexityStatistics.getDistributions( data.getReadQuery() );
-        //Prepare RecommendationContext builder
-        RecommendationContext.Builder<ReadQuery, DataSourceIdentity> recommendationBuilder =
-         new RecommendationContext.Builder<ReadQuery, DataSourceIdentity>()
-          .withDataSources( dataSourceIdentities )
-          .withComplexityEstimation( complexityEstimation )
-          .withReadQuery( data.getReadQuery() )
-          .withDistributions( distributions );
-
         //Get dataSources possible for sharding
         Collection<DataSourceIdentity> selectedNodes = dataSourceRecommendationService.possible(
-         recommendationBuilder.build()
+            new RecommendationContext.Builder<>()
+                 .withDataSources( allDataSourceIdentities )
+                 .withComplexityEstimation( complexityEstimation )
+                 .withReadQuery( data.getReadQuery() )
+                 .withDistributions( distributions )
+             .build()
         );
-
-        int supportingDataSourcesSize = supportingDataSources.size();
-        //Nodes minus default data source
-        int supportingNodesSize = supportingDataSourcesSize>0?(supportingDataSourcesSize-1):0;
         //New Nodes
         int newNodesSize = selectedNodes.size() - supportingNodesSize;
         Collection<DataSourceIdentity> newNodes = null;
         //If there are some new dataSources for query
         if ( newNodesSize > 0){
             //Get new dataSources
-            newNodes = DataSources.minus( selectedNodes, supportingDataSources );
+            newNodes = new HashSet<>(selectedNodes);
+            newNodes.removeAll( supportingDataSources );
         } else {
             newNodes = Collections.EMPTY_LIST;
         }
@@ -146,4 +155,20 @@ public class DataSourceSelectionImpl extends AbstractDataSourceSelectionImpl {
     }
 
 
+
+    protected DataSourceSelectionHelper<DataSourceSelectable> getDataSourceSelectionHelper( ReadQuery readQuery ){
+        DataSourceSelectionHelper<DataSourceSelectable> selectionHelper = selectionHelperForQuery.get( readQuery.getHash() );
+        if ( selectionHelper == null ) {
+            selectionHelperForQuery.put(
+                 readQuery.getHash(),
+                 selectionHelperBuilder.build()
+            );
+        }
+        return selectionHelper;
+    }
+
+    @Override
+    public void removeSelectionOptions( ReadQuery query ) {
+        selectionHelperForQuery.remove( query.getHash() );
+    }
 }
