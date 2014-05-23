@@ -11,87 +11,73 @@
 
     <util:map id="perQueryDistributions" key-type="java.lang.Class" value-type="java.util.Map">
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.AlterTableQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.CallQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.CreateIndexQuery ">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.CreateTableQuery ">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.CreateViewQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.DeleteQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.DropTableQuery ">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.GenericDropQuery ">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.InsertAsSelectQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.InsertWithValuesQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.ReplaceQuery ">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.SelectQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.TruncateQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
         <entry key="pl.piotrsukiennik.tuner.model.query.impl.UpdateQuery">
-            <util:map key-type="pl.piotrsukiennik.tuner.complexity.ComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
+            <util:map key-type="pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation.Type" value-type="pl.piotrsukiennik.tuner.statistics.IncrContDistr">
                 <entry key="EXECUTION_COMPLEXITY" value-ref="normalDistribution"/>
-                <entry key="SQL_COMPLEXITY" value-ref="normalDistribution"/>
             </util:map>
         </entry>
     </util:map>

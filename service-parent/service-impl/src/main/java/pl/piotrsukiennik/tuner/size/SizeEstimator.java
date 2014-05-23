@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author Piotr Sukiennik
  * @date 22.05.14
  */
-public interface RowSetSizeEstimator {
+public interface SizeEstimator {
     int sizeof(CachedRowSet rowSet)  throws SQLException;
     int sizeof(ResultSetMetaData metaData) throws SQLException;
 }

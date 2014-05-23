@@ -9,7 +9,7 @@ import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceIdentifier;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectableImpl;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.complexity.ComplexityEstimator;
 import pl.piotrsukiennik.tuner.datasource.RecommendationContext;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
@@ -103,16 +103,16 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
             return Collections.EMPTY_LIST;
         }
 
-        //Get complexityEstimation
-        ComplexityEstimation complexityEstimation = complexityEstimator.estimate( data );
+        //Get queryComplexityEstimation
+        QueryComplexityEstimation queryComplexityEstimation = complexityEstimator.estimate( data );
         //Complexity distributions for query type
-        Map<ComplexityEstimation.Type,? extends ContinuousDistribution> distributions
+        Map<QueryComplexityEstimation.Type,? extends ContinuousDistribution> distributions
          =queryComplexityStatistics.getDistributions( data.getReadQuery() );
         //Get dataSources possible for sharding
         Collection<DataSourceIdentity> selectedNodes = dataSourceRecommendationService.possible(
             new RecommendationContext.Builder<>()
                  .withDataSources( allDataSourceIdentities )
-                 .withComplexityEstimation( complexityEstimation )
+                 .withComplexityEstimation( queryComplexityEstimation )
                  .withReadQuery( data.getReadQuery() )
                  .withDistributions( distributions )
              .build()
@@ -133,12 +133,12 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
 
 
     public void updateComplexityEstimations(ReadQueryExecutionResult data){
-        //Get complexityEstimation
-        ComplexityEstimation complexityEstimation = complexityEstimator.estimate( data );
+        //Get queryComplexityEstimation
+        QueryComplexityEstimation queryComplexityEstimation = complexityEstimator.estimate( data );
         //If data has been received using default dataSource
         if (data.getDataSource().getDefaultDataSource()){
             //Provide execution data
-            queryComplexityStatistics.increment( data.getReadQuery(), complexityEstimation );
+            queryComplexityStatistics.increment( data.getReadQuery(), queryComplexityEstimation );
         }
     }
 

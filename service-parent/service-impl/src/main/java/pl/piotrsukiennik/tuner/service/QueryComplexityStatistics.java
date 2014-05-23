@@ -1,9 +1,8 @@
 package pl.piotrsukiennik.tuner.service;
 
 import org.apache.commons.math.distribution.ContinuousDistribution;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.model.query.Query;
-import pl.piotrsukiennik.tuner.statistics.IncrContDistr;
 
 import java.util.Map;
 
@@ -12,9 +11,9 @@ import java.util.Map;
  * @date 22.05.14
  */
 public interface QueryComplexityStatistics {
-    void increment(Query query, ComplexityEstimation complexityEstimation);
-    Map<ComplexityEstimation.Type,? extends ContinuousDistribution> getDistributions(Query query);
+    void increment(Query query, QueryComplexityEstimation queryComplexityEstimation );
+    Map<QueryComplexityEstimation.Type,? extends ContinuousDistribution> getDistributions(Query query);
 
-    ContinuousDistribution getDistribution(Query query, ComplexityEstimation.Type type );
-    ContinuousDistribution incrementDistribution(Query query, ComplexityEstimation.Type type, double value);
+    ContinuousDistribution getDistribution(Query query, QueryComplexityEstimation.Type type );
+    ContinuousDistribution incrementDistribution(Query query, QueryComplexityEstimation.Type type, double value);
 }

@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.InsertQuery;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
-import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonService;
+import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonVisitorService;
 import pl.piotrsukiennik.tuner.querytree.ReadQueryTree;
 
 import java.util.Collection;
@@ -21,7 +21,7 @@ import java.util.Set;
  * Time: 21:04
  */
 @Service
-class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
+class ReadQueryInvalidatonVisitorServiceImpl implements ReadQueryInvalidatonVisitorService {
 
     @Autowired
     private ReadQueryTree<ReadQuery> readQueryTree;
@@ -32,17 +32,17 @@ class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( InsertQuery insertQuery ) {
+    public Collection<ReadQuery> visit( InsertQuery insertQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( insertQuery.getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( DeleteQuery deleteQuery ) {
+    public Collection<ReadQuery> visit( DeleteQuery deleteQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( UpdateQuery updateQuery ) {
+    public Collection<ReadQuery> visit( UpdateQuery updateQuery ) {
         Collection<ReadQuery> queriesToInvalidate = new LinkedHashSet<ReadQuery>();
         if ( updateQuery.getColumnValues() != null ) {
             Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
@@ -59,53 +59,53 @@ class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService {
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( AlterTableQuery alterTableQuery ) {
+    public Collection<ReadQuery> visit( AlterTableQuery alterTableQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( alterTableQuery.getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( CreateTableQuery createTableQuery ) {
+    public Collection<ReadQuery> visit( CreateTableQuery createTableQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( createTableQuery.getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( TruncateQuery truncateQuery ) {
+    public Collection<ReadQuery> visit( TruncateQuery truncateQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( truncateQuery.getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( DropTableQuery dropTableQuery ) {
+    public Collection<ReadQuery> visit( DropTableQuery dropTableQuery ) {
         return readQueryTree.getQueriesInvalidatedBy( dropTableQuery.getTable() );
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( SelectQuery selectQuery ) {
+    public Collection<ReadQuery> visit( SelectQuery selectQuery ) {
         return Collections.EMPTY_LIST;
     }
 
 
     @Override
-    public Collection<ReadQuery> invalidates( CreateViewQuery createViewQuery ) {
+    public Collection<ReadQuery> visit( CreateViewQuery createViewQuery ) {
         return Collections.EMPTY_LIST;
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( CreateIndexQuery createIndexQuery ) {
+    public Collection<ReadQuery> visit( CreateIndexQuery createIndexQuery ) {
         return Collections.EMPTY_LIST;
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( CallQuery callQuery ) {
+    public Collection<ReadQuery> visit( CallQuery callQuery ) {
         return Collections.EMPTY_LIST;
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( GenericDropQuery genericDropQuery ) {
+    public Collection<ReadQuery> visit( GenericDropQuery genericDropQuery ) {
         return Collections.EMPTY_LIST;
     }
 
     @Override
-    public Collection<ReadQuery> invalidates( ReplaceQuery replaceQuery ) {
+    public Collection<ReadQuery> visit( ReplaceQuery replaceQuery ) {
         return Collections.EMPTY_LIST;
     }
 

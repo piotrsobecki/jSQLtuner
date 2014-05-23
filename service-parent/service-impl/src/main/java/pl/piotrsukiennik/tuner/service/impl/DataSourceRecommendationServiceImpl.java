@@ -5,8 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.distribution.ContinuousDistribution;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.datasource.RecommendationContext;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
@@ -36,10 +35,10 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
 
 
     public <DS extends DataSourceIdentity> boolean isShardable( RecommendationContext<RQ,DS> context ){
-        ContinuousDistribution distribution = context.getQueryDistributions().get( ComplexityEstimation.Type.EXECUTION_COMPLEXITY );
+        ContinuousDistribution distribution = context.getQueryDistributions().get( QueryComplexityEstimation.Type.EXECUTION_COMPLEXITY );
         try {
             double cumulativeProbability = distribution.cumulativeProbability(
-             context.getComplexityEstimation().getExecutionComplexity()
+             context.getQueryComplexityEstimation().getExecutionComplexity()
             );
             if ( REQUIRED_CUMULATIVE_PROBABILITY <cumulativeProbability){
                 return true;

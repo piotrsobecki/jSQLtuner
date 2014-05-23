@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.ReadQueryExecutionService;
-import pl.piotrsukiennik.tuner.size.RowSetSizeEstimator;
+import pl.piotrsukiennik.tuner.size.SizeEstimator;
 import pl.piotrsukiennik.tuner.util.RowSet;
 import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService {
 
     @Resource
-    private RowSetSizeEstimator rowSetSizeEstimator;
+    private SizeEstimator sizeEstimator;
 
     private class ObtainResultSet implements Callable<ResultSet> {
 
@@ -79,7 +79,7 @@ public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService 
                  .withResultSet( cachedRowSet )
                  .withExecutionTimeNano( timedCallable.getDuration( TimeUnit.NANOSECONDS ) )
                  .withRows( cachedRowSet.size() )
-                 .withRowSize( rowSetSizeEstimator.sizeof( cachedRowSet.getMetaData() ) )
+                 .withRowSize( sizeEstimator.sizeof( cachedRowSet.getMetaData() ) )
                  .build();
         }
         catch ( Exception e ) {

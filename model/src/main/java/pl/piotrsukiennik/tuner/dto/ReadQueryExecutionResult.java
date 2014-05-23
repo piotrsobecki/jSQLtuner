@@ -47,20 +47,12 @@ public class ReadQueryExecutionResult {
         return resultSet;
     }
 
-    public void setResultSet( CachedRowSet resultSet ) {
-        this.resultSet = resultSet;
-    }
-
     public long getRowSize() {
         return rowSize;
     }
 
     public long getExecutionTimeNano() {
         return executionTimeNano;
-    }
-
-    public void setExecutionTimeNano( long executionTimeNano ) {
-        this.executionTimeNano = executionTimeNano;
     }
 
     public long getRows() {
@@ -73,14 +65,6 @@ public class ReadQueryExecutionResult {
 
     public void setDataSource( DataSourceIdentity dataSource ) {
         this.dataSource = dataSource;
-    }
-
-    public void setReadQuery( ReadQuery readQuery ) {
-        this.readQuery = readQuery;
-    }
-
-    public void setRows( long rows ) {
-        this.rows = rows;
     }
 
 

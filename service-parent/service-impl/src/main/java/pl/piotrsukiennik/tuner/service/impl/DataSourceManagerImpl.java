@@ -32,7 +32,7 @@ public class DataSourceManagerImpl implements DataSourceManager {
     private ReadQueryExecutionService readQueryExecutionService;
 
     @Autowired
-    private ReadQueryInvalidatonService invalidatorService;
+    private ReadQueryInvalidatonVisitorService invalidatorService;
 
     @Autowired
     private DataSourceService dataSourceService;
@@ -124,8 +124,8 @@ public class DataSourceManagerImpl implements DataSourceManager {
 
     @Override
     public void delete( Query query ) {
-        //Get read queries that this query invalidates
-        Collection<ReadQuery> queriesToInvalidate = query.invalidates( invalidatorService );
+        //Get read queries that this query accept
+        Collection<ReadQuery> queriesToInvalidate = query.accept( invalidatorService );
         //Remove option of selection
         for ( ReadQuery selectQuery : queriesToInvalidate ) {
             dataSourceSelectionService.removeSelectionOptions( selectQuery );

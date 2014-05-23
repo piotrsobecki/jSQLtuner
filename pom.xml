@@ -170,6 +170,7 @@
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
+                <version>0.9</version>
                 <inherited>false</inherited>
                 <configuration>
                     <message>Creating site for ${project.version}</message>

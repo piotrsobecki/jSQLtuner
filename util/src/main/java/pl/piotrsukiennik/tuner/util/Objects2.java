@@ -1,8 +1,5 @@
 package pl.piotrsukiennik.tuner.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Author: Piotr Sukiennik
  * Date: 12.09.13
@@ -10,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Objects2 {
 
-    private static final Log LOG = LogFactory.getLog( Objects2.class );
 
     private Objects2() {
     }
@@ -24,9 +20,6 @@ public class Objects2 {
             return clazz.newInstance();
         }
         catch ( IllegalAccessException | InstantiationException ie ) {
-            if ( LOG.isErrorEnabled() ) {
-                LOG.error( ie );
-            }
             throw new NewInstanceException( ie );
         }
     }

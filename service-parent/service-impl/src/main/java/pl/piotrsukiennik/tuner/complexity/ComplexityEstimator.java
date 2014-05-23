@@ -1,5 +1,6 @@
 package pl.piotrsukiennik.tuner.complexity;
 
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 
 /**
@@ -7,5 +8,5 @@ import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
  * @date 22.05.14
  */
 public interface ComplexityEstimator {
-    ComplexityEstimation estimate(ReadQueryExecutionResult readQueryExecutionResult );
+    QueryComplexityEstimation estimate(ReadQueryExecutionResult readQueryExecutionResult );
 }

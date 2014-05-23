@@ -19,5 +19,10 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>util</artifactId>
+        </dependency>
     </dependencies>
 </project>

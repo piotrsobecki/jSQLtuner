@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner.util.hash;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -17,7 +15,6 @@ import java.security.NoSuchAlgorithmException;
  * @author Javin Paul
  */
 public class MD5Hash {
-    private static Log LOG = LogFactory.getLog( MD5Hash.class );
 
     public static String toMd5( String message ) {
         String digest = null;
@@ -34,9 +31,6 @@ public class MD5Hash {
 
         }
         catch ( UnsupportedEncodingException | NoSuchAlgorithmException ex ) {
-            if ( LOG.isErrorEnabled() ) {
-                LOG.error( ex );
-            }
             throw new HashGeneratorException( ex );
         }
         return digest;

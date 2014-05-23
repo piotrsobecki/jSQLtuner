@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.apache.commons.math.distribution.ContinuousDistribution;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.service.QueryComplexityStatistics;
 import pl.piotrsukiennik.tuner.statistics.IncrContDistr;
@@ -19,38 +19,38 @@ import java.util.Map;
 @Service
 public class QueryComplexityStatisticsImpl implements QueryComplexityStatistics {
 
-    private Map<Class<? extends Query>, Map<ComplexityEstimation.Type,IncrContDistr>> distributions;
+    private Map<Class<? extends Query>, Map<QueryComplexityEstimation.Type,IncrContDistr>> distributions;
 
     @Override
-    public Map<ComplexityEstimation.Type, ? extends ContinuousDistribution> getDistributions( Query query ) {
-        Map<ComplexityEstimation.Type,IncrContDistr> map = new HashMap<>(  );
-        for (ComplexityEstimation.Type type : ComplexityEstimation.Type.values()){
+    public Map<QueryComplexityEstimation.Type, ? extends ContinuousDistribution> getDistributions( Query query ) {
+        Map<QueryComplexityEstimation.Type,IncrContDistr> map = new HashMap<>(  );
+        for (QueryComplexityEstimation.Type type : QueryComplexityEstimation.Type.values()){
             map.put( type, getDistribution( query, type ) );
         }
         return map;
     }
 
     @Override
-    public void increment( Query query, ComplexityEstimation complexityEstimation ) {
-        for (ComplexityEstimation.Type type : ComplexityEstimation.Type.values()){
-            incrementDistribution( query, type, type.retrieve( complexityEstimation ) );
+    public void increment( Query query, QueryComplexityEstimation queryComplexityEstimation ) {
+        for (QueryComplexityEstimation.Type type : QueryComplexityEstimation.Type.values()){
+            incrementDistribution( query, type, type.retrieve( queryComplexityEstimation ) );
         }
     }
 
     @Override
-    public IncrContDistr incrementDistribution(Query query, ComplexityEstimation.Type type, double value){
+    public IncrContDistr incrementDistribution(Query query, QueryComplexityEstimation.Type type, double value){
         IncrContDistr distr = getDistribution( query, type );
         distr.increment( value );
         return distr;
     }
 
     @Override
-    public IncrContDistr getDistribution(Query query, ComplexityEstimation.Type type ){
+    public IncrContDistr getDistribution(Query query, QueryComplexityEstimation.Type type ){
         return distributions.get( query.getClass() ).get( type );
     }
 
     @Resource(name = "perQueryDistributions")
-    public void setDistributions( Map<Class<? extends Query>, Map<ComplexityEstimation.Type, IncrContDistr>> distributions ) {
+    public void setDistributions( Map<Class<? extends Query>, Map<QueryComplexityEstimation.Type, IncrContDistr>> distributions ) {
         this.distributions = Collections.unmodifiableMap(distributions);
     }
 }

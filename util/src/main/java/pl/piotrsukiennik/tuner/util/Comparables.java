@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.ai.utils;
+package pl.piotrsukiennik.tuner.util;
 
 /**
  * @author Piotr Sukiennik

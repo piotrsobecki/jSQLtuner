@@ -1,8 +1,7 @@
 package pl.piotrsukiennik.tuner.datasource;
 
 import org.apache.commons.math.distribution.ContinuousDistribution;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimation;
+import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
@@ -18,15 +17,15 @@ public class RecommendationContext<RQ extends ReadQuery,DS extends DataSourceIde
 
     private Collection<DS> nodes;
     private RQ readQuery;
-    private Map<ComplexityEstimation.Type,? extends ContinuousDistribution> queryDistributions;
-    private ComplexityEstimation complexityEstimation;
+    private Map<QueryComplexityEstimation.Type,? extends ContinuousDistribution> queryDistributions;
+    private QueryComplexityEstimation queryComplexityEstimation;
 
     public static class Builder<RQ extends ReadQuery,DS extends DataSourceIdentity> implements GenericBuilder<RecommendationContext>{
 
         private Collection<DS> nodes;
         private RQ readQuery;
-        private Map<ComplexityEstimation.Type,? extends ContinuousDistribution> queryDistributions;
-        private ComplexityEstimation complexityEstimation;
+        private Map<QueryComplexityEstimation.Type,? extends ContinuousDistribution> queryDistributions;
+        private QueryComplexityEstimation queryComplexityEstimation;
 
         public Builder<RQ,DS> withDataSources( Collection<DS> nodes ){
             this.nodes=nodes;
@@ -38,13 +37,13 @@ public class RecommendationContext<RQ extends ReadQuery,DS extends DataSourceIde
             return this;
         }
 
-        public Builder<RQ,DS> withDistributions( Map<ComplexityEstimation.Type, ? extends ContinuousDistribution> queryDistributions ){
+        public Builder<RQ,DS> withDistributions( Map<QueryComplexityEstimation.Type, ? extends ContinuousDistribution> queryDistributions ){
             this.queryDistributions=queryDistributions;
             return this;
         }
 
-        public Builder<RQ,DS> withComplexityEstimation( ComplexityEstimation complexityEstimation ){
-            this.complexityEstimation=complexityEstimation;
+        public Builder<RQ,DS> withComplexityEstimation( QueryComplexityEstimation queryComplexityEstimation ){
+            this.queryComplexityEstimation = queryComplexityEstimation;
             return this;
         }
 
@@ -54,7 +53,7 @@ public class RecommendationContext<RQ extends ReadQuery,DS extends DataSourceIde
             context.nodes=nodes;
             context.readQuery=readQuery;
             context.queryDistributions=queryDistributions;
-            context.complexityEstimation=complexityEstimation;
+            context.queryComplexityEstimation = queryComplexityEstimation;
             return context;
         }
     }
@@ -70,11 +69,11 @@ public class RecommendationContext<RQ extends ReadQuery,DS extends DataSourceIde
         return readQuery;
     }
 
-    public Map<ComplexityEstimation.Type, ? extends ContinuousDistribution> getQueryDistributions() {
+    public Map<QueryComplexityEstimation.Type, ? extends ContinuousDistribution> getQueryDistributions() {
         return queryDistributions;
     }
 
-    public ComplexityEstimation getComplexityEstimation() {
-        return complexityEstimation;
+    public QueryComplexityEstimation getQueryComplexityEstimation() {
+        return queryComplexityEstimation;
     }
 }

@@ -2,8 +2,6 @@ package pl.piotrsukiennik.tuner.size;
 
 import org.springframework.stereotype.Component;
 
-import javax.sql.RowSet;
-import javax.sql.RowSetMetaData;
 import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
  * @date 22.05.14
  */
 @Component
-public class RowSetSizeEstimatorImpl implements RowSetSizeEstimator {
+public class SizeEstimatorImpl implements SizeEstimator {
     public int sizeof( CachedRowSet rowSet ) throws SQLException{
         return rowSet.size() * sizeof( rowSet.getMetaData() );
     }

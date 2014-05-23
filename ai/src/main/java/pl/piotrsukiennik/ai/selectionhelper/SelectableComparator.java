@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.ai.selectionhelper;
 
 import pl.piotrsukiennik.ai.selectable.Selectable;
-import pl.piotrsukiennik.ai.utils.Comparables;
+import pl.piotrsukiennik.tuner.util.Comparables;
 
 import java.util.Comparator;
 

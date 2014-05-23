@@ -1,8 +1,5 @@
 package pl.piotrsukiennik.tuner.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.util.Collection;
 
 /**
@@ -11,8 +8,6 @@ import java.util.Collection;
  * Time: 21:14
  */
 public class Collections3 {
-
-    private static final Log LOG = LogFactory.getLog( Collections3.class );
 
     private Collections3() {
     }
