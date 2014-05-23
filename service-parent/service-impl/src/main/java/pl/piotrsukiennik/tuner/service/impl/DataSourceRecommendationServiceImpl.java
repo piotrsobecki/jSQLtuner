@@ -23,7 +23,7 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
 
     private static final Log LOG = LogFactory.getLog( DataSourceRecommendationServiceImpl.class );
 
-    private final static double REQUIRED_CUMULATIVE_PROBABILITY = 0.5;
+    private final static double REQUIRED_CUMULATIVE_PROBABILITY = 0.1;
 
     @Override
     public <DS extends DataSource> Collection<DS> possible( RecommendationContext<RQ,DS> context ){

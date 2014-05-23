@@ -19,17 +19,14 @@
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>model</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>persistence</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>api</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

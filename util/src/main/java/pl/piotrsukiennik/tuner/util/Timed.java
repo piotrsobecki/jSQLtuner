@@ -7,5 +7,5 @@ import java.util.concurrent.TimeUnit;
  * @date 19.02.14
  */
 public interface Timed {
-    long getTime( TimeUnit timeUnit );
+    long getDuration( TimeUnit timeUnit );
 }

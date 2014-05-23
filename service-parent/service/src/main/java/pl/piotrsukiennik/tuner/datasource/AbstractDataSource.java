@@ -1,27 +1,20 @@
 package pl.piotrsukiennik.tuner.datasource;
 
 import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.ShardNode;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
-import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 import javax.sql.rowset.CachedRowSet;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 26.08.13
  * Time: 22:24
  */
-public abstract class AbstractDataSource implements DataSource, ShardNode {
+public abstract class AbstractDataSource implements DataSource {
 
     private DataSourceIdentity dataSourceIdentity;
-
-    private Set<String> supportedQueries = new LinkedHashSet<String>();
 
     protected AbstractDataSource( DataSourceIdentity dataSourceIdentity ) {
         this.dataSourceIdentity = dataSourceIdentity;
@@ -32,31 +25,14 @@ public abstract class AbstractDataSource implements DataSource, ShardNode {
         return dataSourceIdentity;
     }
 
+
     @Override
-    public void put(  ReadQueryExecutionResult data ) {
+    public void distribute( ReadQueryExecutionResult data ) {
         ReadQuery query =data.getReadQuery();
         put( query, data.getResultSet() );
-        supportedQueries.add( query.getHash() );
-    }
-    @Override
-    public abstract void put( ReadQuery query, CachedRowSet data );
-
-
-    @Override
-    public boolean contains( ReadQuery query ) {
-        return supportedQueries.contains( query.getHash() );
     }
 
-    @Override
-    public void delete( Query query ) {
-        supportedQueries.remove( query.getHash() );
-    }
-    @Override
-    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
-        for ( ReadQuery readQuery : queriesToInvalidate ) {
-            delete( readQuery );
-        }
-    }
+    abstract protected void put( ReadQuery query, CachedRowSet data );
 
     @Override
     public boolean equals( Object o ) {

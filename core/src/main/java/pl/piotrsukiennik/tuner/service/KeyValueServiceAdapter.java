@@ -1,32 +1,29 @@
-
-
-package pl.piotrsukiennik.tuner.datasource;
+package pl.piotrsukiennik.tuner.service;
 
 import pl.piotrsukiennik.tuner.KeyValueService;
-import pl.piotrsukiennik.tuner.KeyValueShardNode;
+import pl.piotrsukiennik.tuner.datasource.AbstractDataSource;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 import javax.sql.rowset.CachedRowSet;
-import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
  * Date: 31.08.13
  * Time: 19:17
  */
-public class KeyValueDataSourceImpl extends AbstractDataSource implements KeyValueShardNode {
+public class KeyValueServiceAdapter extends AbstractDataSource {
 
     private KeyValueService keyValueService;
 
-    public KeyValueDataSourceImpl( KeyValueService keyValueService ) {
-        super( new DataSourceIdentity( KeyValueShardNode.class, keyValueService.getIdentifier() ) );
+    public KeyValueServiceAdapter( KeyValueService keyValueService ) {
+        super( new DataSourceIdentity( KeyValueServiceAdapter.class, keyValueService.getIdentifier() ) );
         this.keyValueService = keyValueService;
     }
 
     @Override
-    public CachedRowSet get( ReadQuery query ) {
+    public CachedRowSet execute( ReadQuery query ) {
         String key = getKey( query.getHash() );
         return (CachedRowSet) keyValueService.get( key );
     }
@@ -37,13 +34,11 @@ public class KeyValueDataSourceImpl extends AbstractDataSource implements KeyVal
         keyValueService.put( key, data );
     }
 
- /*   @Override
+    @Override
     public void delete( Query query ) {
         String key = getKey( query.getHash() );
         keyValueService.delete( key );
     }
-
-*/
 
     protected String getKey( String suffix ) {
         return suffix;

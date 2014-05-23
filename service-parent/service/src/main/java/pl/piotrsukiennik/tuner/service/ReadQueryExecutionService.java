@@ -9,6 +9,6 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
  * @author Piotr Sukiennik
  * @date 17.02.14
  */
-public interface DataRetrievalService {
-    ReadQueryExecutionResult get( DataSource dataSource, ReadQuery query ) throws DataRetrievalException;
+public interface ReadQueryExecutionService {
+    ReadQueryExecutionResult execute( DataSource dataSource, ReadQuery query ) throws DataRetrievalException;
 }

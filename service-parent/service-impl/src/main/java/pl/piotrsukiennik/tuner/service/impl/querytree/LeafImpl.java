@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.cache;
+package pl.piotrsukiennik.tuner.service.impl.querytree;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,11 +8,11 @@ import java.util.Collection;
  * Date: 12.09.13
  * Time: 22:00
  */
-public class HolderImpl<T> implements Holder<T> {
+public class LeafImpl<T> implements Leaf<T> {
 
     private Collection<T> root;
 
-    public HolderImpl( Collection<T> root ) {
+    public LeafImpl( Collection<T> root ) {
         this.root = root;
     }
 

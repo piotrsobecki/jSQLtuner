@@ -5,7 +5,7 @@ import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
-import pl.piotrsukiennik.tuner.datasource.KeyValueDataSourceImpl;
+import pl.piotrsukiennik.tuner.service.KeyValueServiceAdapter;
 
 /**
  * @author Piotr Sukiennik
@@ -16,7 +16,7 @@ public class KeyValueDataSourceBeanDefinitionParser extends AbstractSingleBeanDe
 
     @Override
     protected Class<?> getBeanClass( Element element ) {
-        return KeyValueDataSourceImpl.class;
+        return KeyValueServiceAdapter.class;
     }
 
     @Override

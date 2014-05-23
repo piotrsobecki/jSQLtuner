@@ -16,9 +16,7 @@ import java.sql.ResultSet;
  */
 public interface DataSource {
     DataSourceIdentity getDataSourceIdentity();
-    ResultSet get( ReadQuery query ) throws DataRetrievalException;
-    void put( ReadQueryExecutionResult readQueryExecutionResult );
-    void put( ReadQuery query, CachedRowSet data );
+    ResultSet execute( ReadQuery query ) throws DataRetrievalException;
+    void distribute( ReadQueryExecutionResult data );
     void delete( Query query );
-    boolean contains( ReadQuery query );
 }

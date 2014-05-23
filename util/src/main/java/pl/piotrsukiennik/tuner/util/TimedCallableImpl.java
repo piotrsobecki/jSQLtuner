@@ -26,7 +26,7 @@ public class TimedCallableImpl<V> implements TimedCallable<V> {
     }
 
     @Override
-    public long getTime( TimeUnit timeUnit ) {
+    public long getDuration( TimeUnit timeUnit ) {
         return timeUnit.convert( execTimeNano, TimeUnit.NANOSECONDS );
     }
 }

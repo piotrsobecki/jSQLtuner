@@ -15,7 +15,7 @@ import org.springframework.context.annotation.PropertySource;
     },
     ignoreResourceNotFound = true
 )
-@ImportResource( { "classpath:/pl/piotrsukiennik/tuner/spring/jsqltuner-wrapper-context.xml" } )
+@ImportResource( { "classpath:/pl/piotrsukiennik/tuner/spring/jsqltuner-context-wrapper.xml" } )
 public class JsqlTunerWrapperConfiguration {
 
 }

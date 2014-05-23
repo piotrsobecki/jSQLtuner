@@ -1,6 +1,5 @@
 package pl.piotrsukiennik.tuner.service;
 
-
 import pl.piotrsukiennik.tuner.LoggableService;
 
 /**
@@ -17,6 +16,5 @@ public abstract class LoggableServiceHolder implements LoggableService {
     protected static void setLogService( LoggableServiceHolder logService ) {
         LoggableServiceHolder.logService = logService;
     }
-
 
 }

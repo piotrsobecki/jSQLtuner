@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.cache;
+package pl.piotrsukiennik.tuner.service.impl.querytree;
 
 import pl.piotrsukiennik.tuner.model.schema.Column;
 import pl.piotrsukiennik.tuner.model.schema.Table;

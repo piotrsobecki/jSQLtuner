@@ -1,14 +1,12 @@
 package pl.piotrsukiennik.tuner.exception;
 
-import pl.piotrsukiennik.tuner.Loggable;
-import pl.piotrsukiennik.tuner.LoggableService;
 import pl.piotrsukiennik.tuner.model.query.Query;
 
 /**
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public class QueryParsingNotSupportedException extends AbstractQueryException implements Loggable {
+public class QueryParsingNotSupportedException extends AbstractQueryException  {
 
     public QueryParsingNotSupportedException( String sql ) {
         super( sql );
@@ -50,8 +48,4 @@ public class QueryParsingNotSupportedException extends AbstractQueryException im
         super( message, cause, enableSuppression, writableStackTrace, query );
     }
 
-    @Override
-    public void accept( LoggableService log ) {
-        log.log( this );
-    }
 }

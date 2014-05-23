@@ -14,8 +14,8 @@ import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.SubQuerySource;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.impl.cache.QueryHolder;
-import pl.piotrsukiennik.tuner.service.impl.cache.SupportingQueryHolder;
+import pl.piotrsukiennik.tuner.service.impl.querytree.Tree;
+import pl.piotrsukiennik.tuner.service.impl.querytree.SupportingQueryHolder;
 
 import java.util.Collection;
 
@@ -29,21 +29,21 @@ public class SupportingQueryHolderImpl implements SupportingQueryHolder<ReadQuer
     public static final String STAR_PROJECTION_COLUMN_NAME = "*";
 
     @Autowired
-    private QueryHolder<String, ReadQuery> queryHolder;
+    private Tree<String, ReadQuery> tree;
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedBy( Table table ) {
-        return queryHolder.get( getPath( table ) );
+        return tree.get( getPath( table ) );
     }
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedBy( Column column ) {
-        return queryHolder.get( getPath( column ) );
+        return tree.get( getPath( column ) );
     }
 
     @Override
     public Collection<ReadQuery> getQueriesInvalidatedByStar( Table table ) {
-        return queryHolder.get( getStarPath( table ) );
+        return tree.get( getStarPath( table ) );
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SupportingQueryHolderImpl implements SupportingQueryHolder<ReadQuer
             if ( selectQuery.getProjections() != null ) {
                 for ( Expression projection : selectQuery.getProjections() ) {
                     if ( projection instanceof ColumnProjection ) {
-                        queryHolder.put( getPath( ( (ColumnProjection) projection ).getColumn() ), objectToStore );
+                        tree.put( getPath( ( (ColumnProjection) projection ).getColumn() ), objectToStore );
                     }
                     else if ( projection instanceof SourceProjection ) {
                         Source source = ( (SourceProjection) projection ).getSource();
@@ -67,7 +67,7 @@ public class SupportingQueryHolderImpl implements SupportingQueryHolder<ReadQuer
                             putQuery( ( (SubQuerySource) source ).getSelectQuery(), objectToStore );
                         }
                         else if ( source instanceof TableSource ) {
-                            queryHolder.put( getStarPath( ( (TableSource) source ).getTable() ), objectToStore );
+                            tree.put( getStarPath( ( (TableSource) source ).getTable() ), objectToStore );
                         }
                     }
                 }

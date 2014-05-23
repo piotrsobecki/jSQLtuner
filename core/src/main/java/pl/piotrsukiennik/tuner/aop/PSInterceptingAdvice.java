@@ -14,18 +14,19 @@ import java.sql.PreparedStatement;
  * Date: 09.07.13
  * Time: 00:47
  */
-@Component("preparedStatementInterceptingAdvice")
 public class PSInterceptingAdvice implements InterceptingAdvice<PreparedStatement> {
+    private PreparedStatementBuilder preparedStatementBuilder;
 
-    @Autowired
-    private PreparedStatementBuilder PreparedStatementBuilder;
+    public PSInterceptingAdvice( PreparedStatementBuilder preparedStatementBuilder ) {
+        this.preparedStatementBuilder = preparedStatementBuilder;
+    }
 
     @Override
     public PreparedStatement invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
         try {
             PreparedStatement preparedStatement = (PreparedStatement) methodInvocation.proceed();
             String queryString = (String) methodInvocation.getArguments()[0];
-            return PreparedStatementBuilder.build( preparedStatement, queryString );
+            return preparedStatementBuilder.build( preparedStatement, queryString );
         }
         catch ( Throwable throwable ) {
             throw new PreparedStatementInterceptException( throwable );

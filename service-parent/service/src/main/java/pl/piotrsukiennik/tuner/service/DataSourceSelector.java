@@ -13,13 +13,13 @@ import java.util.Collection;
  */
 public interface DataSourceSelector {
 
-    DataSourceIdentity select( ReadQuery readQuery );
+    DataSourceIdentity selectDataSource( ReadQuery readQuery );
 
-    Collection<DataSourceIdentity> supporting( ReadQuery readQuery );
+    Collection<DataSourceIdentity> getSupportingDataSources( ReadQuery readQuery );
 
-    void submit( ReadQueryExecutionResult readQueryExecutionResult );
+    void submitExecution( ReadQueryExecutionResult readQueryExecutionResult );
 
-    void schedule( ReadQuery readQuery, DataSource dataSource );
+    void scheduleSelection( ReadQuery readQuery, DataSource dataSource );
 
-    void removeOptions( ReadQuery query );
+    void removeSelectionOptions( ReadQuery query );
 }

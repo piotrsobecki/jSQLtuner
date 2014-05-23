@@ -12,7 +12,6 @@ import javax.sql.rowset.CachedRowSet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
@@ -30,7 +29,7 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
     }
 
     @Override
-    public ResultSet get( ReadQuery query ) throws DataRetrievalException {
+    public ResultSet execute( ReadQuery query ) throws DataRetrievalException {
         try {
             if ( Objects2.eq( this.query, query ) ) {
                 return proceed();
@@ -55,11 +54,6 @@ public abstract class InterceptorDataSource extends AbstractDataSource {
 
     @Override
     public void delete( Query query ) {
-        throw new WriteToStatementException();
-    }
-
-    @Override
-    public void delete( Query query, Collection<ReadQuery> queriesToInvalidate ) {
         throw new WriteToStatementException();
     }
 

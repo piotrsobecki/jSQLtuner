@@ -1,13 +1,10 @@
 package pl.piotrsukiennik.tuner.exception;
 
-import pl.piotrsukiennik.tuner.Loggable;
-import pl.piotrsukiennik.tuner.LoggableService;
-
 /**
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public class QueryInterceptionNotSupportedException extends RuntimeException implements Loggable {
+public class QueryInterceptionNotSupportedException extends RuntimeException {
 
     private String query;
 
@@ -24,8 +21,4 @@ public class QueryInterceptionNotSupportedException extends RuntimeException imp
         return query;
     }
 
-    @Override
-    public void accept( LoggableService log ) {
-        log.log( this );
-    }
 }

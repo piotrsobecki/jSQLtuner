@@ -24,14 +24,13 @@ public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
     private QueryComplexityStatistics queryComplexityStatistics;
 
 
-
     public DataSourceSelectorImpl(GenericBuilder<UpdateableSelectionHelper<DataSourceSelectable>> selectionHelperBuilder,FitnessCalculator fitnessCalculator) {
         super( fitnessCalculator, selectionHelperBuilder );
     }
 
 
     @Override
-    public Collection<DataSourceIdentity> supporting( ReadQuery readQuery ) {
+    public Collection<DataSourceIdentity> getSupportingDataSources( ReadQuery readQuery ) {
         List<DataSourceIdentity> dataSourceIdentities = new LinkedList<>(  );
         UpdateableSelectionHelper<DataSourceSelectable> selectionHelper = getDataSourceSelectionHelper( readQuery );
         Collection<DataSourceSelectable> dataSourceSelectables = selectionHelper.getOptions();
@@ -42,7 +41,7 @@ public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
     }
 
     @Override
-    public DataSourceIdentity select( ReadQuery readQuery ) {
+    public DataSourceIdentity selectDataSource( ReadQuery readQuery ) {
         UpdateableSelectionHelper<DataSourceSelectable> selectionHelper = getDataSourceSelectionHelper( readQuery );
         if ( selectionHelper == null ) {
             return null;
@@ -56,7 +55,7 @@ public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
 
 
     @Override
-    public void submit( ReadQueryExecutionResult readQueryExecutionResult ) {
+    public void submitExecution( ReadQueryExecutionResult readQueryExecutionResult ) {
         ReadQuery readQuery = readQueryExecutionResult.getReadQuery();
         DataSourceIdentity dataSource = readQueryExecutionResult.getDataSource();
         DataSourceIdentifier dataSourceIdentifier =  new DataSourceIdentifier( dataSource );
@@ -72,7 +71,7 @@ public class DataSourceSelectorImpl extends AbstractDataSourceSelectorImpl {
     }
 
     @Override
-    public void schedule( ReadQuery readQuery, DataSource dataSource ) {
+    public void scheduleSelection( ReadQuery readQuery, DataSource dataSource ) {
         DataSourceSelectionHelper<DataSourceSelectable> selectionHelper =getDataSourceSelectionHelper( readQuery );
         selectionHelper.schedule(  new DataSourceSelectableImpl( dataSource ) );
     }

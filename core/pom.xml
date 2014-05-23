@@ -18,18 +18,10 @@
         <jsqltuner.test.method>aop</jsqltuner.test.method>
         <jsqltuner.test.logger.level>ERROR</jsqltuner.test.logger.level>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
-        <jsqltuner.datasources.memcached.servers/>
-        <jsqltuner.datasources.memcached.protocol/>
         <!--jSQLtuner : service : blank -->
         <jsqltuner.service.impl.artifactId>service-blank-impl</jsqltuner.service.impl.artifactId>
         <!--jSQLtuner : test : db : h2-->
-        <jsqltuner.test.jdbc.import>import-sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
-        <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
-        <jsqltuner.test.jdbc.url>jdbc:h2:target/db/${jsqltuner.test.jdbc.schema}</jsqltuner.test.jdbc.url>
-        <jsqltuner.test.jdbc.driver>org.h2.Driver</jsqltuner.test.jdbc.driver>
-        <jsqltuner.test.jdbc.username>sa</jsqltuner.test.jdbc.username>
-        <jsqltuner.test.jdbc.password/>
-        <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.H2Dialect</jsqltuner.test.hibernate.dialect>
+        <jsqltuner.test.jdbc.provider>h2</jsqltuner.test.jdbc.provider>
         <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
         <jsqltuner.test.dep.jdbc.artifactId>h2</jsqltuner.test.dep.jdbc.artifactId>
         <jsqltuner.test.dep.jdbc.version>${h2.version}</jsqltuner.test.dep.jdbc.version>
@@ -43,10 +35,6 @@
         </profile>
         <profile>
             <id>test-datasources-memcached</id>
-            <properties>
-                <jsqltuner.datasources.memcached.servers>localhost:11211</jsqltuner.datasources.memcached.servers>
-                <jsqltuner.datasources.memcached.protocol>BINARY</jsqltuner.datasources.memcached.protocol>
-            </properties>
             <build>
                 <testResources>
                     <testResource>
@@ -75,14 +63,7 @@
         <profile>
             <id>test-db-mysql</id>
             <properties>
-                <jsqltuner.test.jdbc.import>import-sql/import_mock_data.sql</jsqltuner.test.jdbc.import>
-                <jsqltuner.test.jdbc.schema>jsqltunertest</jsqltuner.test.jdbc.schema>
-                <jsqltuner.test.jdbc.url>jdbc:mysql://localhost:3306/${jsqltuner.test.jdbc.schema}
-                </jsqltuner.test.jdbc.url>
-                <jsqltuner.test.jdbc.driver>com.mysql.jdbc.Driver</jsqltuner.test.jdbc.driver>
-                <jsqltuner.test.jdbc.username>jsqltunertest</jsqltuner.test.jdbc.username>
-                <jsqltuner.test.jdbc.password>jsqltunertest</jsqltuner.test.jdbc.password>
-                <jsqltuner.test.hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</jsqltuner.test.hibernate.dialect>
+                <jsqltuner.test.jdbc.provider>mysql</jsqltuner.test.jdbc.provider>
                 <jsqltuner.test.dep.jdbc.groupId>mysql</jsqltuner.test.dep.jdbc.groupId>
                 <jsqltuner.test.dep.jdbc.artifactId>mysql-connector-java</jsqltuner.test.dep.jdbc.artifactId>
                 <jsqltuner.test.dep.jdbc.version>5.1.9</jsqltuner.test.dep.jdbc.version>
@@ -109,6 +90,11 @@
         </profile>
     </profiles>
     <build>
+        <filters>
+            <filter>src/main/filters/memcached.properties</filter>
+            <filter>src/main/filters/${jsqltuner.jdbc.provider}.properties</filter>
+            <filter>src/main/filters/${jsqltuner.test.jdbc.provider}-test.properties</filter>
+        </filters>
         <resources>
             <resource>
                 <directory>src/main/resources/</directory>
@@ -152,7 +138,6 @@
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>service</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
@@ -162,23 +147,18 @@
         <dependency>
         <groupId>pl.piotrsukiennik.tuner.parser</groupId>
             <artifactId>parser-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner.parser</groupId>
             <artifactId>parser-impl</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>api</artifactId>
-            <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>model</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -222,54 +202,43 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${google.guava.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -287,7 +256,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
     </dependencies>
 

@@ -24,7 +24,7 @@ public class ReadQueryExecutionResult {
 
     private long rowSize;
 
-    public ReadQueryExecutionResult( ReadQuery readQuery,
+    ReadQueryExecutionResult( ReadQuery readQuery,
                                      DataSourceIdentity dataSource,
                                      CachedRowSet resultSet,
                                      long executionTimeNano,
@@ -48,7 +48,6 @@ public class ReadQueryExecutionResult {
     }
 
     public void setResultSet( CachedRowSet resultSet ) {
-        setRows( ( resultSet ).size() );
         this.resultSet = resultSet;
     }
 

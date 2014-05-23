@@ -1,10 +1,9 @@
 package pl.piotrsukiennik.tuner.statement.impl;
 
+import pl.piotrsukiennik.tuner.CompositeDataSource;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ParsingQueryService;
-import pl.piotrsukiennik.tuner.ShardService;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;
@@ -23,7 +22,7 @@ import java.sql.Timestamp;
  */
 public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> extends PSWrapper<T> {
 
-    protected ShardService shardService;
+    protected CompositeDataSource compositeDataSource;
 
     protected ParsingQueryService queryService;
 
@@ -33,9 +32,9 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
 
     protected String sql;
 
-    public PSExecutionIntercepting( T preparedStatement, ShardService shardService, ParsingQueryService queryService, String database, String schema, String sql ) {
+    public PSExecutionIntercepting( T preparedStatement, CompositeDataSource compositeDataSource, ParsingQueryService queryService, String database, String schema, String sql ) {
         super( preparedStatement );
-        this.shardService = shardService;
+        this.compositeDataSource = compositeDataSource;
         this.queryService = queryService;
         this.database = database;
         this.schema = schema;
@@ -53,15 +52,14 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
         writeQueryExecution.setTimestamp( new Timestamp( System.currentTimeMillis() ) );
         writeQueryExecution.setQuery( query );
         if ( rowsAffected > 0 ) {
-            shardService.delete( query );
+            compositeDataSource.delete( query );
         }
     }
 
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            shardService.setDefaultDataSource( readQuery, rootDataSource );
-            ReadQueryExecutionResult readQueryExecutionResult = shardService.get( readQuery );
-            return readQueryExecutionResult.getResultSet();
+            compositeDataSource.setDefaultDataSource( readQuery, rootDataSource );
+            return  compositeDataSource.execute( readQuery );
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );
@@ -88,7 +86,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -102,7 +100,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+            LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -115,7 +113,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -128,7 +126,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -141,7 +139,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
     }
@@ -154,7 +152,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
     }
@@ -167,7 +165,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
     }
@@ -180,7 +178,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
     }
@@ -194,7 +192,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
     }
@@ -207,7 +205,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             proceed( query, affected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return affected;
 
@@ -228,7 +226,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             return getResultSet( readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
             return super.executeQuery( sql );
         }
     }
@@ -246,7 +244,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             return getResultSet( readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
             return super.executeQuery();
         }
     }
@@ -264,7 +262,7 @@ public class PSExecutionIntercepting<T extends PSParametersIntercepting<?>> exte
             return getResultSet( readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
             return super.getResultSet();
         }
 

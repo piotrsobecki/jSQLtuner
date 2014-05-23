@@ -4,9 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import pl.piotrsukiennik.tuner.DataSource;
 import pl.piotrsukiennik.tuner.ParsingQueryService;
-import pl.piotrsukiennik.tuner.ShardService;
+import pl.piotrsukiennik.tuner.CompositeDataSource;
 import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;
@@ -27,7 +26,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
     private static final Log LOG = LogFactory.getLog( SExecutionIntercepting.class );
 
-    protected ShardService shardService;
+    protected CompositeDataSource compositeDataSource;
 
     protected ParsingQueryService queryService;
 
@@ -37,12 +36,12 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
 
     public SExecutionIntercepting( T statement,
-                                   ShardService shardService,
+                                   CompositeDataSource compositeDataSource,
                                    ParsingQueryService queryService,
                                    String database,
                                    String schema ) {
         super( statement );
-        this.shardService = shardService;
+        this.compositeDataSource = compositeDataSource;
         this.queryService = queryService;
         this.database = database;
         this.schema = schema;
@@ -55,7 +54,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
         writeQueryExecution.setTimestamp( new Timestamp( System.currentTimeMillis() ) );
         writeQueryExecution.setQuery( query );
         if ( rowsAffected > 0 ) {
-            shardService.delete( query );
+            compositeDataSource.delete( query );
         }
     }
 
@@ -65,9 +64,8 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
 
     protected ResultSet getResultSet( ReadQuery readQuery, DataSource rootDataSource ) throws SQLException {
         try {
-            shardService.setDefaultDataSource( readQuery, rootDataSource );
-            ReadQueryExecutionResult readQueryExecutionResult = shardService.get( readQuery );
-            return readQueryExecutionResult.getResultSet();
+            compositeDataSource.setDefaultDataSource( readQuery, rootDataSource );
+            return compositeDataSource.execute( readQuery );
         }
         catch ( DataRetrievalException e ) {
             throw new SQLException( e );
@@ -107,7 +105,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             return getResultSet( readQuery, rootDs );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
             return super.getResultSet();
         }
     }
@@ -127,7 +125,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -140,7 +138,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -153,7 +151,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -166,7 +164,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -179,7 +177,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -192,7 +190,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -205,7 +203,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }
@@ -218,7 +216,7 @@ public class SExecutionIntercepting<T extends Statement> extends SWrapper<T> imp
             proceed( query, rowsAffected );
         }
         catch ( QueryParsingNotSupportedException e ) {
-            e.accept( LoggableServiceHolder.get() );
+             LoggableServiceHolder.get().log( e );
         }
         return rowsAffected;
     }

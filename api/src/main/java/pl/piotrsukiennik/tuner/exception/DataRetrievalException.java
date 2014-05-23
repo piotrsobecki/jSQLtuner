@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner.exception;
 
-import pl.piotrsukiennik.tuner.Loggable;
-import pl.piotrsukiennik.tuner.LoggableService;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 
@@ -9,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
  * @author Piotr Sukiennik
  * @date 22.01.14
  */
-public class DataRetrievalException extends AbstractQueryException implements Loggable {
+public class DataRetrievalException extends AbstractQueryException {
 
     private DataSourceIdentity dataSourceIdentity;
 
@@ -63,8 +61,4 @@ public class DataRetrievalException extends AbstractQueryException implements Lo
         this.dataSourceIdentity = dataSourceIdentity;
     }
 
-    @Override
-    public void accept( LoggableService log ) {
-        log.log( this );
-    }
 }

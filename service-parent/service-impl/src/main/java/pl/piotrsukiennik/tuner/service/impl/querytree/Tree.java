@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.cache;
+package pl.piotrsukiennik.tuner.service.impl.querytree;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import java.util.Collection;
  * @author Piotr Sukiennik
  * @date 16.02.14
  */
-public interface QueryHolder<P, K> {
+public interface Tree<P, K> {
     void put( P[] path, K hash );
 
     Collection<K> get( P[] path );

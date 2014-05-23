@@ -43,7 +43,7 @@ class ParserImpl implements Parser {
         TimedCallable<T> timedCallable = getParserCallable( database, schema, query );
         try {
             parsedQuery = timedCallable.call();
-            logger.log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getTime( TimeUnit.NANOSECONDS ) );
+            logger.log( parsedQuery, LoggableMessageEnum.PARSING, TimeUnit.NANOSECONDS, timedCallable.getDuration( TimeUnit.NANOSECONDS ) );
             return parsedQuery;
         }
         catch ( Exception e ) {

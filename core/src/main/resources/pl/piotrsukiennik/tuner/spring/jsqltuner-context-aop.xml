@@ -16,18 +16,27 @@
     <aop:config/>
     <aop:aspectj-autoproxy/>
 
+
     <bean id="preparedStatementInterceptingAdvisor"
           class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
         <property name="expression"
                   value="execution (java.sql.PreparedStatement java.sql.Connection.*(..))"/>
-        <property name="advice" ref="preparedStatementInterceptingAdvice"/>
+        <property name="advice">
+            <bean class="pl.piotrsukiennik.tuner.aop.PSInterceptingAdvice">
+                <constructor-arg ref="preparedStatementBuilder"/>
+            </bean>
+        </property>
     </bean>
 
     <bean id="statementInterceptingAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
         <qualifier value="connectionAdvisor"/>
         <property name="expression" value="execution (java.sql.Statement java.sql.Connection.*(..))"/>
-        <property name="advice" ref="statementInterceptingAdvice"/>
+        <property name="advice">
+            <bean class="pl.piotrsukiennik.tuner.aop.SInterceptingAdvice">
+                <constructor-arg ref="preparedStatementBuilder"/>
+            </bean>
+        </property>
     </bean>
 
 

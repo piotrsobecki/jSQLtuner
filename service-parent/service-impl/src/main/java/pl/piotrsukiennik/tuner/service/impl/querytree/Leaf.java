@@ -1,4 +1,4 @@
-package pl.piotrsukiennik.tuner.service.impl.cache;
+package pl.piotrsukiennik.tuner.service.impl.querytree;
 
 import java.util.Collection;
 
@@ -7,7 +7,7 @@ import java.util.Collection;
  * Date: 12.09.13
  * Time: 21:37
  */
-public interface Holder<T> {
+public interface Leaf<T> {
     Collection<T> get();
 
     void add( T queryHash );

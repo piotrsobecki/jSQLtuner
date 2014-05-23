@@ -40,7 +40,7 @@ public abstract class AbstractDataSourceSelectorImpl implements DataSourceSelect
     }
 
     @Override
-    public void removeOptions( ReadQuery query ) {
+    public void removeSelectionOptions( ReadQuery query ) {
         selectionHelperForQuery.remove( query.getHash() );
     }
 }

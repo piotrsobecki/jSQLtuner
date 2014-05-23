@@ -14,11 +14,13 @@ import java.sql.Statement;
  * Date: 09.07.13
  * Time: 00:47
  */
-@Component("statementInterceptingAdvice")
 public class SInterceptingAdvice implements InterceptingAdvice<Statement> {
 
-    @Autowired
     private StatementBuilder statementBuilder;
+
+    public SInterceptingAdvice( StatementBuilder statementBuilder ) {
+        this.statementBuilder = statementBuilder;
+    }
 
     @Override
     public Statement invoke( final MethodInvocation methodInvocation ) throws PreparedStatementInterceptException {
@@ -30,6 +32,8 @@ public class SInterceptingAdvice implements InterceptingAdvice<Statement> {
             throw new PreparedStatementInterceptException( throwable );
         }
     }
+
+
 
 
 }
