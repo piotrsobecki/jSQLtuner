@@ -18,25 +18,17 @@ public class ReadQueryExecutionResult {
 
     private ReadQuery readQuery;
 
-    private long executionTimeNano;
-
-    private long rows;
-
-    private long rowSize;
+    private ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation;
 
     ReadQueryExecutionResult( ReadQuery readQuery,
                                      DataSourceIdentity dataSource,
                                      CachedRowSet resultSet,
-                                     long executionTimeNano,
-                                     long rows,
-                                     long rowSize ) {
+                                     ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation ) {
 
         this.readQuery = readQuery;
         this.dataSource = dataSource;
         this.resultSet = resultSet;
-        this.executionTimeNano = executionTimeNano;
-        this.rows = rows;
-        this.rowSize = rowSize;
+        this.readQueryExecutionComplexityEstimation = readQueryExecutionComplexityEstimation;
     }
 
     public ReadQuery getReadQuery() {
@@ -47,24 +39,13 @@ public class ReadQueryExecutionResult {
         return resultSet;
     }
 
-    public long getRowSize() {
-        return rowSize;
+    public ReadQueryExecutionComplexityEstimation getReadQueryExecutionComplexityEstimation() {
+        return readQueryExecutionComplexityEstimation;
     }
 
-    public long getExecutionTimeNano() {
-        return executionTimeNano;
-    }
-
-    public long getRows() {
-        return rows;
-    }
 
     public DataSourceIdentity getDataSource() {
         return dataSource;
-    }
-
-    public void setDataSource( DataSourceIdentity dataSource ) {
-        this.dataSource = dataSource;
     }
 
 

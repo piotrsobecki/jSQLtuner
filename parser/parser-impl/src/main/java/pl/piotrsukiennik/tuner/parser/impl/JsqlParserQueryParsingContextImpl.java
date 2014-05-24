@@ -21,7 +21,7 @@ import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.TableSourceManager;
 import pl.piotrsukiennik.tuner.parser.impl.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.parser.impl.element.FromItemParser;
-import pl.piotrsukiennik.tuner.service.QueryElements;
+import pl.piotrsukiennik.tuner.service.QueryElementsContext;
 
 /**
  * @author Piotr Sukiennik
@@ -31,17 +31,17 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
 
     private TableSourceManager tableSourceManager = new TableSourceManagerImpl();
 
-    private QueryElements queryElements;
+    private QueryElementsContext queryElementsContext;
 
 
-    public JsqlParserQueryParsingContextImpl( QueryElements queryElements ) {
-        this.queryElements = queryElements;
+    public JsqlParserQueryParsingContextImpl( QueryElementsContext queryElementsContext ) {
+        this.queryElementsContext = queryElementsContext;
     }
 
     @Override
     public Expression getExpression( Expression expression ) {
         if ( expression.getId() == 0 ) {
-            return queryElements.getExpression( expression );
+            return queryElementsContext.getExpression( expression );
         }
         return expression;
     }
@@ -53,12 +53,12 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
         ExpresionParser orderByExpresionParser = new ExpresionParser( this );
         orderByElement.getExpression().accept( orderByExpresionParser );
         orderByFragment.setOrderByExpression( orderByExpresionParser.getExpression() );
-        orderByFragment = queryElements.getOrderByFragment( orderByFragment );
+        orderByFragment = queryElementsContext.getOrderByFragment( orderByFragment );
         return orderByFragment;
     }
 
     public pl.piotrsukiennik.tuner.model.schema.Table getTable( String table ) {
-        return queryElements.getTable( table );
+        return queryElementsContext.getTable( table );
     }
 
     public pl.piotrsukiennik.tuner.model.schema.Table getTable( Table table ) {
@@ -84,17 +84,17 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
         TableSource tableSource = getTableSourceForProjection( allColumns.getTable() );
         StarProjection columnProjection = new StarProjection();
         columnProjection.setSource( tableSource );
-        columnProjection = queryElements.getColumnProjection( columnProjection );
+        columnProjection = queryElementsContext.getColumnProjection( columnProjection );
         return columnProjection;
     }
 
     public ColumnProjection getColumnProjection( net.sf.jsqlparser.schema.Column tableColumn ) {
         TableSource tableSource = getTableSourceForProjection( tableColumn.getTable() );
-        pl.piotrsukiennik.tuner.model.schema.Column col = queryElements.getColumn( tableSource.getTable(), tableColumn.getColumnName() );
+        pl.piotrsukiennik.tuner.model.schema.Column col = queryElementsContext.getColumn( tableSource.getTable(), tableColumn.getColumnName() );
         ColumnProjection columnProjection = new ColumnProjection();
         columnProjection.setColumn( col );
         columnProjection.setSource( tableSource );
-        columnProjection = queryElements.getColumnProjection( columnProjection );
+        columnProjection = queryElementsContext.getColumnProjection( columnProjection );
         return columnProjection;
     }
 
@@ -102,10 +102,10 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
         TableSource tableSource = new TableSource();
         tableSource.setAlias( getTableAlias( tableName.getAlias() ) );
         tableSource.setValue( getTableSourceValue( tableName ) );
-        tableSource.setTable( queryElements.getTable( tableName.getWholeTableName() ) );
+        tableSource.setTable( queryElementsContext.getTable( tableName.getWholeTableName() ) );
         tableSource = tableSourceManager.mergeTableSource( tableSource );
         if ( tableSource.getId() == 0 ) {
-            tableSource = queryElements.getTableSource( tableSource );
+            tableSource = queryElementsContext.getTableSource( tableSource );
         }
         return tableSource;
     }
@@ -139,7 +139,7 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
         ExpresionParser parser = new ExpresionParser( this );
         join.getOnExpression().accept( parser );
         joinFragment.setOn( parser.getExpression() );
-        joinFragment = queryElements.getJoinFragment( joinFragment );
+        joinFragment = queryElementsContext.getJoinFragment( joinFragment );
         return joinFragment;
     }
 
@@ -147,12 +147,12 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
     public StarProjection getStarProjection( Source source ) {
         StarProjection columnProjection = new StarProjection();
         columnProjection.setSource( source );
-        columnProjection = queryElements.getColumnProjection( columnProjection );
+        columnProjection = queryElementsContext.getColumnProjection( columnProjection );
         return columnProjection;
     }
 
     public Column getColumn( net.sf.jsqlparser.schema.Column column ) {
-        Column col = this.queryElements.getColumn( column.getTable().getWholeTableName(), column.getColumnName() );
+        Column col = this.queryElementsContext.getColumn( column.getTable().getWholeTableName(), column.getColumnName() );
         pl.piotrsukiennik.tuner.model.schema.Table table = col.getTable();
         Schema schema = table.getSchema();
         Database database = schema.getDatabase();
@@ -163,11 +163,11 @@ public class JsqlParserQueryParsingContextImpl implements JsqlParserQueryParsing
 
     @Override
     public Column getColumn( pl.piotrsukiennik.tuner.model.schema.Table table, net.sf.jsqlparser.schema.Column column ) {
-        return this.queryElements.getColumn( table, column.getColumnName() );
+        return this.queryElementsContext.getColumn( table, column.getColumnName() );
     }
 
     public Index getIndex( pl.piotrsukiennik.tuner.model.schema.Table table, net.sf.jsqlparser.statement.create.table.Index index ) {
-        return queryElements.getIndex( table, index.getName() );
+        return queryElementsContext.getIndex( table, index.getName() );
     }
 
 }

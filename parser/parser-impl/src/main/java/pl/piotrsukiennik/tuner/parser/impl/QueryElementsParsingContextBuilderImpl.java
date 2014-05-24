@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.parser.impl;
 
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
-import pl.piotrsukiennik.tuner.service.QueryElements;
+import pl.piotrsukiennik.tuner.service.QueryElementsContext;
 import pl.piotrsukiennik.tuner.service.QueryElementsParsingContextBuilder;
 
 /**
@@ -12,7 +12,7 @@ import pl.piotrsukiennik.tuner.service.QueryElementsParsingContextBuilder;
 @Service("pl.piotrsukiennik.tuner.service.QueryElementsParsingContextBuilder.impl")
 public class QueryElementsParsingContextBuilderImpl implements QueryElementsParsingContextBuilder<JsqlParserQueryParsingContext> {
     @Override
-    public JsqlParserQueryParsingContext getQueryContext( QueryElements queryElements ) {
-        return new JsqlParserQueryParsingContextImpl( queryElements );
+    public JsqlParserQueryParsingContext getQueryContext( QueryElementsContext queryElementsContext ) {
+        return new JsqlParserQueryParsingContextImpl( queryElementsContext );
     }
 }

@@ -5,10 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.distribution.ContinuousDistribution;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
-import pl.piotrsukiennik.tuner.datasource.RecommendationContext;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionComplexityEstimation;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.service.DataSourceRecommendationContext;
 import pl.piotrsukiennik.tuner.service.DataSourceRecommendationService;
 
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
     private final static double REQUIRED_CUMULATIVE_PROBABILITY = 0.1;
 
     @Override
-    public <DS extends DataSourceIdentity> Collection<DS> possible( RecommendationContext<RQ,DS> context ){
+    public <DS extends DataSourceIdentity> Collection<DS> possible( DataSourceRecommendationContext<RQ,DS> context ){
         if (isShardable( context )){
             return context.getNodes();
         }
@@ -34,11 +34,11 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
     }
 
 
-    public <DS extends DataSourceIdentity> boolean isShardable( RecommendationContext<RQ,DS> context ){
-        ContinuousDistribution distribution = context.getQueryDistributions().get( QueryComplexityEstimation.Type.EXECUTION_COMPLEXITY );
+    public <DS extends DataSourceIdentity> boolean isShardable( DataSourceRecommendationContext<RQ,DS> context ){
+        ContinuousDistribution distribution = context.getQueryDistributions().get( ReadQueryExecutionComplexityEstimation.Type.EXECUTION_COMPLEXITY );
         try {
             double cumulativeProbability = distribution.cumulativeProbability(
-             context.getQueryComplexityEstimation().getExecutionComplexity()
+             context.getReadQueryExecutionComplexityEstimation().getExecutionComplexity()
             );
             if ( REQUIRED_CUMULATIVE_PROBABILITY <cumulativeProbability){
                 return true;

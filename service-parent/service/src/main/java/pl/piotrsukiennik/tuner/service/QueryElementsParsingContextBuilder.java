@@ -5,5 +5,5 @@ package pl.piotrsukiennik.tuner.service;
  * @date 21.02.14
  */
 public interface QueryElementsParsingContextBuilder<C extends QueryParsingContext> {
-    C getQueryContext( QueryElements queryElements );
+    C getQueryContext( QueryElementsContext queryElementsContext );
 }

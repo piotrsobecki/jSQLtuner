@@ -1,14 +1,15 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
+import com.sun.rowset.CachedRowSets;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionComplexityEstimation;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.service.QueryExecutionComplexityService;
 import pl.piotrsukiennik.tuner.service.ReadQueryExecutionService;
-import pl.piotrsukiennik.tuner.size.SizeEstimator;
-import pl.piotrsukiennik.tuner.util.RowSet;
 import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
@@ -26,7 +27,8 @@ import java.util.concurrent.TimeUnit;
 public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService {
 
     @Resource
-    private SizeEstimator sizeEstimator;
+    private QueryExecutionComplexityService queryExecutionComplexityService;
+
 
     private class ObtainResultSet implements Callable<ResultSet> {
 
@@ -54,7 +56,7 @@ public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService 
 
         @Override
         public CachedRowSet call() throws Exception {
-            return RowSet.clone( resultSetCallable.call() );
+            return CachedRowSets.clone( resultSetCallable.call() );
         }
     }
 
@@ -73,14 +75,15 @@ public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService 
 
         try {
             CachedRowSet cachedRowSet = timedCallable.call();
-            return new ReadQueryExecutionResultBuilder()
-                 .withReadQuery( query )
-                 .withDataSource( dataSource.getDataSourceIdentity() )
-                 .withResultSet( cachedRowSet )
-                 .withExecutionTimeNano( timedCallable.getDuration( TimeUnit.NANOSECONDS ) )
-                 .withRows( cachedRowSet.size() )
-                 .withRowSize( sizeEstimator.sizeof( cachedRowSet.getMetaData() ) )
-                 .build();
+            long executionTimeNano = timedCallable.getDuration( TimeUnit.NANOSECONDS );
+            ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation =  queryExecutionComplexityService.estimate( query, cachedRowSet, executionTimeNano );
+            return new ReadQueryExecutionResultBuilder( )
+                   .withReadQuery( query )
+                   .withDataSource( dataSource.getDataSourceIdentity() )
+                   .withResultSet( cachedRowSet )
+                   .withQueryComplexityEstimation( readQueryExecutionComplexityEstimation )
+                   .build();
+
         }
         catch ( Exception e ) {
             throw new DataRetrievalException( e, query, dataSource.getDataSourceIdentity() );

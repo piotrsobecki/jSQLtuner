@@ -26,6 +26,10 @@ public class DataRetrievalException extends AbstractQueryException {
         this.dataSourceIdentity = dataSourceIdentity;
     }
 
+    public DataRetrievalException( String message, Throwable cause, String query ) {
+        super( message, cause, query );
+    }
+
     public DataRetrievalException( Throwable cause, String query, DataSourceIdentity dataSourceIdentity ) {
         super( cause, query );
         this.dataSourceIdentity = dataSourceIdentity;
@@ -60,5 +64,6 @@ public class DataRetrievalException extends AbstractQueryException {
         super( message, cause, enableSuppression, writableStackTrace, query );
         this.dataSourceIdentity = dataSourceIdentity;
     }
+
 
 }

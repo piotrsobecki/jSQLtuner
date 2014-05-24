@@ -6,12 +6,12 @@
     <parent>
         <groupId>pl.piotrsukiennik</groupId>
         <artifactId>tuner</artifactId>
-        <version>2.1-SNAPSHOT</version>
+        <version>2.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>ai</artifactId>
-    <version>2.1-SNAPSHOT</version>
+    <version>2.2-SNAPSHOT</version>
     <name>jSQLtuner :: ai</name>
     <description>SQL tuner artificial intelligence</description>
     <dependencies>
@@ -22,7 +22,7 @@
 
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>util</artifactId>
+            <artifactId>commons</artifactId>
         </dependency>
     </dependencies>
 </project>

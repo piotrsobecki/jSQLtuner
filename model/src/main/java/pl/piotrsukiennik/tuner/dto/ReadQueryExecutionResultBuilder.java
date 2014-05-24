@@ -12,11 +12,7 @@ public class ReadQueryExecutionResultBuilder {
 
     private CachedRowSet resultSet;
 
-    private long executionTimeNano;
-
-    private long rows;
-
-    private long rowSize;
+    private ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation;
 
     public ReadQueryExecutionResultBuilder() {
     }
@@ -24,10 +20,8 @@ public class ReadQueryExecutionResultBuilder {
     public ReadQueryExecutionResultBuilder( ReadQueryExecutionResult readQueryExecutionResult) {
         this.readQuery=readQueryExecutionResult.getReadQuery();
         this.dataSource=readQueryExecutionResult.getDataSource();
-        this.executionTimeNano=readQueryExecutionResult.getExecutionTimeNano();
         this.resultSet=readQueryExecutionResult.getResultSet();
-        this.rows=readQueryExecutionResult.getRows();
-        this.rowSize=readQueryExecutionResult.getRowSize();
+        this.readQueryExecutionComplexityEstimation =readQueryExecutionResult.getReadQueryExecutionComplexityEstimation();
     }
     
     public ReadQueryExecutionResultBuilder withReadQuery( ReadQuery readQuery ) {
@@ -45,22 +39,13 @@ public class ReadQueryExecutionResultBuilder {
         return this;
     }
 
-    public ReadQueryExecutionResultBuilder withExecutionTimeNano( long executionTimeNano ) {
-        this.executionTimeNano = executionTimeNano;
-        return this;
-    }
 
-    public ReadQueryExecutionResultBuilder withRows( long rows ) {
-        this.rows = rows;
-        return this;
-    }
-
-    public ReadQueryExecutionResultBuilder withRowSize( long rowSize ) {
-        this.rowSize = rowSize;
+    public ReadQueryExecutionResultBuilder withQueryComplexityEstimation( ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation ) {
+        this.readQueryExecutionComplexityEstimation = readQueryExecutionComplexityEstimation;
         return this;
     }
 
     public ReadQueryExecutionResult build() {
-        return new ReadQueryExecutionResult( readQuery, dataSource, resultSet, executionTimeNano, rows, rowSize );
+        return new ReadQueryExecutionResult( readQuery, dataSource, resultSet, readQueryExecutionComplexityEstimation );
     }
 }

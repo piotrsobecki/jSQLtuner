@@ -2,6 +2,7 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.piotrsukiennik.tuner.dto.QueryElementsCache;
 import pl.piotrsukiennik.tuner.service.*;
 
 import javax.annotation.Resource;
@@ -25,12 +26,13 @@ public class QueryParsingContextBuilderImpl<C extends QueryParsingContext> imple
 
     @Override
     public C getQueryContext( String database, String schema ) {
-        QueryElements queryElements = new QueryElementsBuilder()
+        QueryElementsContext queryElementsContext = new QueryElementsContextBuilder()
          .withSchemaService( schemaService )
          .withElementService( queryElementService )
          .withDatabase( database )
          .withSchema( schema )
+         .withQueryElementsCache( new QueryElementsCache() )
         .build();
-        return queryParsingContextBuilder.getQueryContext( queryElements );
+        return queryParsingContextBuilder.getQueryContext( queryElementsContext );
     }
 }

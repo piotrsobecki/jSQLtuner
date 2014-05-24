@@ -1,9 +1,10 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
+import com.sun.rowset.CachedRowSets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSourceService;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
@@ -11,11 +12,13 @@ import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.service.*;
-import pl.piotrsukiennik.tuner.util.RowSet;
+import pl.piotrsukiennik.tuner.service.DataSourceSelectionService;
+import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
+import pl.piotrsukiennik.tuner.service.ReadQueryExecutionService;
+import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonVisitorService;
 
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.Collection;
 
 /**
  * Author: Piotr Sukiennik
@@ -99,7 +102,7 @@ public class DataSourceManagerImpl implements DataSourceManager {
         if (!newIdentities.isEmpty()){
             //Clone the result set
             ReadQueryExecutionResult readQueryExecutionResult = new ReadQueryExecutionResultBuilder( data )
-             .withResultSet( RowSet.clone( data.getResultSet() ) )
+             .withResultSet( CachedRowSets.clone( data.getResultSet() ) )
              .build();
             distribute( newIdentities,readQueryExecutionResult );
         }

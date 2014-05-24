@@ -8,7 +8,7 @@ import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
 import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonVisitorService;
-import pl.piotrsukiennik.tuner.querytree.ReadQueryTree;
+import pl.piotrsukiennik.tuner.service.ReadQueryTreeService;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,21 +24,21 @@ import java.util.Set;
 class ReadQueryInvalidatonVisitorServiceImpl implements ReadQueryInvalidatonVisitorService {
 
     @Autowired
-    private ReadQueryTree<ReadQuery> readQueryTree;
+    private ReadQueryTreeService<ReadQuery> readQueryTreeService;
 
     @Override
     public void putCachedQuery( ReadQuery query ) {
-        readQueryTree.putQuery( query );
+        readQueryTreeService.putQuery( query );
     }
 
     @Override
     public Collection<ReadQuery> visit( InsertQuery insertQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( insertQuery.getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( insertQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> visit( DeleteQuery deleteQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( deleteQuery.getTableSource().getTable() );
     }
 
     @Override
@@ -48,10 +48,10 @@ class ReadQueryInvalidatonVisitorServiceImpl implements ReadQueryInvalidatonVisi
             Set<Table> tablesToStarInvalidate = new LinkedHashSet<Table>();
             for ( ColumnValue columnValue : updateQuery.getColumnValues() ) {
                 tablesToStarInvalidate.add( columnValue.getColumn().getTable() );
-                queriesToInvalidate.addAll( readQueryTree.getQueriesInvalidatedBy( columnValue.getColumn() ) );
+                queriesToInvalidate.addAll( readQueryTreeService.getQueriesInvalidatedBy( columnValue.getColumn() ) );
             }
             for ( Table table : tablesToStarInvalidate ) {
-                queriesToInvalidate.addAll( readQueryTree.getQueriesInvalidatedByStar( table ) );
+                queriesToInvalidate.addAll( readQueryTreeService.getQueriesInvalidatedByStar( table ) );
             }
             return queriesToInvalidate;
         }
@@ -60,22 +60,22 @@ class ReadQueryInvalidatonVisitorServiceImpl implements ReadQueryInvalidatonVisi
 
     @Override
     public Collection<ReadQuery> visit( AlterTableQuery alterTableQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( alterTableQuery.getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( alterTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> visit( CreateTableQuery createTableQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( createTableQuery.getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( createTableQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> visit( TruncateQuery truncateQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( truncateQuery.getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( truncateQuery.getTable() );
     }
 
     @Override
     public Collection<ReadQuery> visit( DropTableQuery dropTableQuery ) {
-        return readQueryTree.getQueriesInvalidatedBy( dropTableQuery.getTable() );
+        return readQueryTreeService.getQueriesInvalidatedBy( dropTableQuery.getTable() );
     }
 
     @Override

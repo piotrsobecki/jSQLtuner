@@ -1,9 +1,9 @@
 package pl.piotrsukiennik.tuner.statement.impl;
 
-import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.DataSource;
+import pl.piotrsukiennik.tuner.DataSourceManager;
 import pl.piotrsukiennik.tuner.QueryProviderService;
-import pl.piotrsukiennik.tuner.datasource.InterceptorDataSource;
+import pl.piotrsukiennik.tuner.dataservice.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;

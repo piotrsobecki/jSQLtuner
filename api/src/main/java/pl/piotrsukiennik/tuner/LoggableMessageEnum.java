@@ -33,6 +33,7 @@ public enum LoggableMessageEnum implements LoggableMessage {
     }
 
     public String getMessage( ReadQueryExecutionResult readQueryExecutionResult ) {
-        return String.format( messageFormatDataSource, readQueryExecutionResult.getReadQuery(), readQueryExecutionResult.getExecutionTimeNano(), TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
+        long executionTimeNano = readQueryExecutionResult.getReadQueryExecutionComplexityEstimation().getExecutionTimeNano();
+        return String.format( messageFormatDataSource, readQueryExecutionResult.getReadQuery(), executionTimeNano, TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
     }
 }

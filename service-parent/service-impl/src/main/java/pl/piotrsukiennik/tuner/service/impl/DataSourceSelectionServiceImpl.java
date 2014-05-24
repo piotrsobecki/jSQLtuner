@@ -4,20 +4,18 @@ import org.apache.commons.math.distribution.ContinuousDistribution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.ai.selectionhelper.UpdateableSelectionHelper;
-import pl.piotrsukiennik.tuner.*;
+import pl.piotrsukiennik.tuner.DataSourceService;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectable;
 import pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelper;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceIdentifier;
 import pl.piotrsukiennik.tuner.ai.impl.DataSourceSelectableImpl;
-import pl.piotrsukiennik.tuner.dto.QueryComplexityEstimation;
-import pl.piotrsukiennik.tuner.complexity.ComplexityEstimator;
-import pl.piotrsukiennik.tuner.datasource.RecommendationContext;
+import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionComplexityEstimation;
 import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.DataSourceRecommendationService;
 import pl.piotrsukiennik.tuner.service.DataSourceSelectionService;
-import pl.piotrsukiennik.tuner.service.QueryComplexityStatistics;
+import pl.piotrsukiennik.tuner.service.QueryExecutionComplexityStatisticsService;
 import pl.piotrsukiennik.tuner.util.GenericBuilder;
 
 import javax.annotation.Resource;
@@ -34,13 +32,11 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
     private DataSourceService dataSourceService;
 
     @Autowired
-    private QueryComplexityStatistics queryComplexityStatistics;
+    private QueryExecutionComplexityStatisticsService queryExecutionComplexityStatisticsService;
 
     @Autowired
     private DataSourceRecommendationService<ReadQuery> dataSourceRecommendationService;
 
-    @Autowired
-    private ComplexityEstimator complexityEstimator;
 
     @Resource(name = "dataSourceSelectionHelperBuilder")
     private GenericBuilder<DataSourceSelectionHelper<DataSourceSelectable>> selectionHelperBuilder;
@@ -79,10 +75,15 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
         DataSourceSelectionHelper<DataSourceSelectable> selectionHelper = getDataSourceSelectionHelper( readQuery );
         DataSourceSelectable selectableDataSource = selectionHelper.getSelection( dataSourceIdentifier );
         if ( selectableDataSource == null ) {
-            selectionHelper.submit( data, new DataSourceSelectableImpl( data,dataSourceIdentifier) );
+            selectionHelper.submit( data, new DataSourceSelectableImpl(
+                 data.getReadQueryExecutionComplexityEstimation(),
+                 dataSourceIdentifier
+            ));
         }
         else {
-            selectableDataSource.updateExecutionTime( data.getExecutionTimeNano() );
+            //Get readQueryExecutionComplexityEstimation
+            ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation = data.getReadQueryExecutionComplexityEstimation();
+            selectableDataSource.update( readQueryExecutionComplexityEstimation );
             selectionHelper.update( selectableDataSource );
         }
     }
@@ -103,16 +104,16 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
             return Collections.EMPTY_LIST;
         }
 
-        //Get queryComplexityEstimation
-        QueryComplexityEstimation queryComplexityEstimation = complexityEstimator.estimate( data );
+        //Get readQueryExecutionComplexityEstimation
+        ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation = data.getReadQueryExecutionComplexityEstimation();
         //Complexity distributions for query type
-        Map<QueryComplexityEstimation.Type,? extends ContinuousDistribution> distributions
-         =queryComplexityStatistics.getDistributions( data.getReadQuery() );
+        Map<ReadQueryExecutionComplexityEstimation.Type,? extends ContinuousDistribution> distributions
+         = queryExecutionComplexityStatisticsService.getDistributions( data.getReadQuery() );
         //Get dataSources possible for sharding
         Collection<DataSourceIdentity> selectedNodes = dataSourceRecommendationService.possible(
-            new RecommendationContext.Builder<>()
+            new DataSourceRecommendationContextBuilder<>()
                  .withDataSources( allDataSourceIdentities )
-                 .withComplexityEstimation( queryComplexityEstimation )
+                 .withComplexityEstimation( readQueryExecutionComplexityEstimation )
                  .withReadQuery( data.getReadQuery() )
                  .withDistributions( distributions )
              .build()
@@ -133,12 +134,12 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
 
 
     public void updateComplexityEstimations(ReadQueryExecutionResult data){
-        //Get queryComplexityEstimation
-        QueryComplexityEstimation queryComplexityEstimation = complexityEstimator.estimate( data );
+        //Get readQueryExecutionComplexityEstimation
+        ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation =  data.getReadQueryExecutionComplexityEstimation();
         //If data has been received using default dataSource
         if (data.getDataSource().getDefaultDataSource()){
             //Provide execution data
-            queryComplexityStatistics.increment( data.getReadQuery(), queryComplexityEstimation );
+            queryExecutionComplexityStatisticsService.increment( data.getReadQuery(), readQueryExecutionComplexityEstimation );
         }
     }
 
