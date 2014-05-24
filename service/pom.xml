@@ -27,6 +27,11 @@
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>model</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>pl.piotrsukiennik.tuner</groupId>
+            <artifactId>commons</artifactId>
+        </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>persistence</artifactId>

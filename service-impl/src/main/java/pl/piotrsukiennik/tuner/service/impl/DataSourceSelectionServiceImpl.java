@@ -99,7 +99,7 @@ public class DataSourceSelectionServiceImpl implements DataSourceSelectionServic
         //Get readQueryExecutionComplexityEstimation
         ExecutionComplexityEstimation executionComplexityEstimation = data.getReadQueryExecutionComplexityEstimation();
         //Complexity distributions for query type
-        Map<ReadQueryExecutionComplexityEstimationImpl.Type,? extends CumulativeProbabilityCapable> distributions
+        Map<ReadQueryExecutionComplexityEstimation.Type, ? extends CumulativeProbabilityCapable> distributions
          = queryExecutionComplexityStatisticsService.getDistributions( data.getQuery() );
         //Get dataSources possible for sharding
         Collection<DataSourceIdentity> selectedNodes = dataSourceRecommendationService.possible(
