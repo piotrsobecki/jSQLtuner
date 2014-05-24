@@ -6,6 +6,7 @@ import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.OrderByElement;
 import org.apache.commons.lang.StringUtils;
+import pl.piotrsukiennik.tuner.model.QueryElementsContext;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
@@ -21,7 +22,6 @@ import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.TableSourceManager;
 import pl.piotrsukiennik.tuner.parser.impl.element.ExpresionParser;
 import pl.piotrsukiennik.tuner.parser.impl.element.FromItemParser;
-import pl.piotrsukiennik.tuner.service.QueryElementsContext;
 
 /**
  * @author Piotr Sukiennik

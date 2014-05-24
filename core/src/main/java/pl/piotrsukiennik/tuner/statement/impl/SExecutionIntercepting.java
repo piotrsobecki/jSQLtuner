@@ -2,16 +2,16 @@ package pl.piotrsukiennik.tuner.statement.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.DataSourceManager;
-import pl.piotrsukiennik.tuner.QueryProviderService;
-import pl.piotrsukiennik.tuner.dataservice.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
+import pl.piotrsukiennik.tuner.model.DataSource;
+import pl.piotrsukiennik.tuner.model.InterceptorDataSource;
 import pl.piotrsukiennik.tuner.model.log.WriteQueryExecution;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.WriteQuery;
+import pl.piotrsukiennik.tuner.service.DataSourceManager;
 import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
+import pl.piotrsukiennik.tuner.service.QueryProviderService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

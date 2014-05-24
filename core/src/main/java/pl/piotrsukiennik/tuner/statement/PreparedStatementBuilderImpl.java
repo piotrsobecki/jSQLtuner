@@ -2,9 +2,9 @@ package pl.piotrsukiennik.tuner.statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import pl.piotrsukiennik.tuner.DataSourceManager;
-import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.service.DataSourceContext;
+import pl.piotrsukiennik.tuner.service.DataSourceManager;
+import pl.piotrsukiennik.tuner.service.QueryProviderService;
 import pl.piotrsukiennik.tuner.statement.impl.PSExecutionIntercepting;
 import pl.piotrsukiennik.tuner.statement.impl.PSParametersIntercepting;
 import pl.piotrsukiennik.tuner.statement.impl.SExecutionIntercepting;

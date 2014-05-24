@@ -1,7 +1,5 @@
 package pl.piotrsukiennik.tuner.service;
 
-import pl.piotrsukiennik.tuner.LoggableService;
-
 /**
  * @author Piotr Sukiennik
  * @date 19.02.14

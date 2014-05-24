@@ -56,9 +56,14 @@ public class IncrContNormalDistrImpl implements IncrContDistr, NormalDistributio
     }
 
     @Override
-    public double cumulativeProbability( double v ) throws MathException {
+    public double cumulativeProbability( double v ) {
         synchronized ( _lock ) {
-            return normalDistribution.cumulativeProbability( v );
+            try {
+                return normalDistribution.cumulativeProbability( v );
+            }
+            catch ( MathException e ) {
+                throw new RuntimeMathException( e );
+            }
         }
     }
 

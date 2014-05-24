@@ -2,7 +2,7 @@ package pl.piotrsukiennik.tuner.dataservice;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import pl.piotrsukiennik.tuner.KeyValueService;
+import pl.piotrsukiennik.tuner.service.KeyValueService;
 
 import java.util.concurrent.TimeUnit;
 

@@ -5,6 +5,7 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.OrderByElement;
+import pl.piotrsukiennik.tuner.model.QueryParsingContext;
 import pl.piotrsukiennik.tuner.model.expression.Expression;
 import pl.piotrsukiennik.tuner.model.expression.projection.ColumnProjection;
 import pl.piotrsukiennik.tuner.model.expression.projection.StarProjection;
@@ -14,7 +15,6 @@ import pl.piotrsukiennik.tuner.model.schema.Column;
 import pl.piotrsukiennik.tuner.model.schema.Index;
 import pl.piotrsukiennik.tuner.model.source.Source;
 import pl.piotrsukiennik.tuner.model.source.TableSource;
-import pl.piotrsukiennik.tuner.service.QueryParsingContext;
 
 /**
  * @author Piotr Sukiennik

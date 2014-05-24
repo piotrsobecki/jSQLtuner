@@ -3,19 +3,14 @@ package pl.piotrsukiennik.tuner.service.impl;
 import com.sun.rowset.CachedRowSets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.DataSourceManager;
-import pl.piotrsukiennik.tuner.DataSourceService;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
+import pl.piotrsukiennik.tuner.model.DataSource;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResult;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
-import pl.piotrsukiennik.tuner.service.DataSourceSelectionService;
-import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
-import pl.piotrsukiennik.tuner.service.ReadQueryExecutionService;
-import pl.piotrsukiennik.tuner.service.ReadQueryInvalidatonVisitor;
+import pl.piotrsukiennik.tuner.service.*;
 
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -35,7 +30,7 @@ public class DataSourceManagerImpl implements DataSourceManager {
     private ReadQueryExecutionService readQueryExecutionService;
 
     @Autowired
-    private ReadQueryInvalidatonVisitor<ReadQuery> invalidatorService;
+    private ReadQueryInvalidatonService<ReadQuery> invalidatorService;
 
     @Autowired
     private DataSourceService dataSourceService;
@@ -111,7 +106,7 @@ public class DataSourceManagerImpl implements DataSourceManager {
 
 
     protected void distribute(  Collection<DataSourceIdentity> selectedNodes,  ReadQueryExecutionResult data ) {
-        ReadQuery query = data.getReadQuery();
+        ReadQuery query = data.getQuery();
         //Clone data for dataSources
         for ( DataSourceIdentity identity : selectedNodes ) {
             DataSource dataSource = dataSourceService.getDataSource( identity );

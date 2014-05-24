@@ -1,9 +1,9 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
 import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.service.QueryProviderService;
 import pl.piotrsukiennik.tuner.service.QueryService;
 
 import javax.annotation.Resource;

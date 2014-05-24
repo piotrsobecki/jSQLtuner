@@ -1,8 +1,8 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
-import org.springframework.stereotype.Component;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionComplexityEstimation;
 import pl.piotrsukiennik.tuner.exception.ResultSetMetaDataRetrievalException;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionComplexityEstimation;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionComplexityEstimationImpl;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.QueryExecutionComplexityService;
 import pl.piotrsukiennik.tuner.service.RowSetSizeService;
@@ -16,20 +16,42 @@ import java.sql.SQLException;
  * @author Piotr Sukiennik
  * @date 22.05.14
  */
-@Component
-public class QueryExecutionComplexityServiceImpl implements QueryExecutionComplexityService {
+public abstract class QueryExecutionComplexityServiceImpl implements QueryExecutionComplexityService {
 
     @Resource
     private RowSetSizeService rowSetSizeService;
 
+    protected class ComplexityExpressionParams{
+        private long rowSize;
+        private long rows;
+        private long executionTimeNano;
+
+        private ComplexityExpressionParams( long rowSize, long rows, long executionTimeNano ) {
+            this.rowSize = rowSize;
+            this.rows = rows;
+            this.executionTimeNano = executionTimeNano;
+        }
+
+        public long getRowSize() {
+            return rowSize;
+        }
+
+        public long getRows() {
+            return rows;
+        }
+
+        public long getExecutionTimeNano() {
+            return executionTimeNano;
+        }
+    }
 
     @Override
     public ReadQueryExecutionComplexityEstimation estimate( ReadQuery readQuery, CachedRowSet cachedRowSet, long executionTimeNano ) throws ResultSetMetaDataRetrievalException{
         try {
             long rowSize = rowSetSizeService.sizeof( cachedRowSet );
             long rows = cachedRowSet.size();
-            double complexity = executionComplexity( rowSize,rows,executionTimeNano );
-            return  new ReadQueryExecutionComplexityEstimation.Builder()
+            double complexity = executionComplexity( new ComplexityExpressionParams( rowSize,rows,executionTimeNano ));
+            return  new ReadQueryExecutionComplexityEstimationImpl.Builder()
              .withExecutionTimeNano( executionTimeNano )
              .withRows( rows )
              .withRowSize( rowSize )
@@ -41,9 +63,5 @@ public class QueryExecutionComplexityServiceImpl implements QueryExecutionComple
         }
     }
 
-    protected double executionComplexity( long rowSize, long rows, long executionTimeNano ){
-        double size =rowSize * rows;
-        size = (size==0)?1:size;
-        return executionTimeNano / size;
-    }
+    abstract double executionComplexity( ComplexityExpressionParams complexityExpressionParams );
 }

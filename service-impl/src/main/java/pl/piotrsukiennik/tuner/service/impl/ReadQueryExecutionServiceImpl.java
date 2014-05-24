@@ -2,11 +2,11 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import com.sun.rowset.CachedRowSets;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionComplexityEstimation;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
+import pl.piotrsukiennik.tuner.model.DataSource;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionComplexityEstimation;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResult;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.QueryExecutionComplexityService;
 import pl.piotrsukiennik.tuner.service.ReadQueryExecutionService;
@@ -76,12 +76,12 @@ public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService 
         try {
             CachedRowSet cachedRowSet = timedCallable.call();
             long executionTimeNano = timedCallable.getDuration( TimeUnit.NANOSECONDS );
-            ReadQueryExecutionComplexityEstimation readQueryExecutionComplexityEstimation =  queryExecutionComplexityService.estimate( query, cachedRowSet, executionTimeNano );
+            ReadQueryExecutionComplexityEstimation executionComplexityEstimation =  queryExecutionComplexityService.estimate( query, cachedRowSet, executionTimeNano );
             return new ReadQueryExecutionResultBuilder( )
                    .withReadQuery( query )
                    .withDataSource( dataSource.getDataSourceIdentity() )
                    .withResultSet( cachedRowSet )
-                   .withQueryComplexityEstimation( readQueryExecutionComplexityEstimation )
+                   .withQueryComplexityEstimation( executionComplexityEstimation )
                    .build();
 
         }

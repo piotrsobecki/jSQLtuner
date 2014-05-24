@@ -1,7 +1,7 @@
 package pl.piotrsukiennik.tuner.dataservice;
 
 import net.spy.memcached.MemcachedClient;
-import pl.piotrsukiennik.tuner.KeyValueService;
+import pl.piotrsukiennik.tuner.service.KeyValueService;
 
 import java.net.SocketAddress;
 import java.util.concurrent.TimeUnit;

@@ -20,17 +20,18 @@
 
     <bean id="readQueryTree" class="pl.piotrsukiennik.tuner.tree.TreeImpl"/>
 
-    <bean id="dataSourceSelectionHelperBuilder" class="pl.piotrsukiennik.tuner.ai.DataSourceSelectionHelperBuilder">
+
+    <bean id="fitnessCalculator" class="pl.piotrsukiennik.tuner.service.impl.DataSourceFitnessServiceImpl">
+        <constructor-arg value="${jsqltuner.service.fitness.expression}"/>
+    </bean>
+
+    <bean id="dataSourceSelectionHelperBuilder" class="pl.piotrsukiennik.tuner.model.DataSourceSelectionHelperBuilder">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.util.GenericBuilderImpl">
                 <constructor-arg value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
             </bean>
         </constructor-arg>
-        <constructor-arg>
-            <bean class="pl.piotrsukiennik.tuner.ai.impl.FitnessCalculatorExpression">
-                <constructor-arg value="1/sqrt(averageExecutionTime)"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="fitnessCalculator"/>
     </bean>
 
     <beans profile="service-persistent">

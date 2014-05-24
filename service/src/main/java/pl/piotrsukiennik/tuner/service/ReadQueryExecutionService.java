@@ -1,8 +1,8 @@
 package pl.piotrsukiennik.tuner.service;
 
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
+import pl.piotrsukiennik.tuner.model.DataSource;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 
 /**

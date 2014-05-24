@@ -2,11 +2,11 @@ package pl.piotrsukiennik.tuner.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.DataSource;
-import pl.piotrsukiennik.tuner.DataSourceManager;
-import pl.piotrsukiennik.tuner.DataSourceService;
+import pl.piotrsukiennik.tuner.model.DataSource;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
+import pl.piotrsukiennik.tuner.service.DataSourceManager;
+import pl.piotrsukiennik.tuner.service.DataSourceService;
 
 import java.util.Collection;
 import java.util.HashMap;

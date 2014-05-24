@@ -5,14 +5,14 @@ import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.statement.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.LoggableMessageEnum;
-import pl.piotrsukiennik.tuner.LoggableService;
-import pl.piotrsukiennik.tuner.QueryProviderService;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
+import pl.piotrsukiennik.tuner.model.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.parser.JsqlParserQueryParsingContext;
 import pl.piotrsukiennik.tuner.parser.impl.statement.StatementParserVisitor;
-import pl.piotrsukiennik.tuner.service.QueryParsingContextBuilder;
+import pl.piotrsukiennik.tuner.service.LoggableService;
+import pl.piotrsukiennik.tuner.service.QueryParsingContextFactoryAdapter;
+import pl.piotrsukiennik.tuner.service.QueryProviderService;
 import pl.piotrsukiennik.tuner.util.TimedCallable;
 import pl.piotrsukiennik.tuner.util.TimedCallableImpl;
 
@@ -31,7 +31,7 @@ class ParsingQueryProviderServiceImpl implements QueryProviderService {
     //private static final Log LOG = LogFactory.getLog( QueryProviderService.class );
 
     @Autowired
-    private QueryParsingContextBuilder<JsqlParserQueryParsingContext> queryParsingContextBuilder;
+    private QueryParsingContextFactoryAdapter<JsqlParserQueryParsingContext> queryParsingContextFactoryAdapter;
 
     @Autowired
     private LoggableService logger;
@@ -68,7 +68,7 @@ class ParsingQueryProviderServiceImpl implements QueryProviderService {
     }
 
     protected <T extends Query> T parse( String database, String schema, String query, Statement statement ) throws QueryParsingNotSupportedException {
-        JsqlParserQueryParsingContext parsingContext = queryParsingContextBuilder.getQueryContext( database, schema );
+        JsqlParserQueryParsingContext parsingContext = queryParsingContextFactoryAdapter.getQueryContext( database, schema );
         StatementParserVisitor<T> statementParserVisitor = new StatementParserVisitor<T>( parsingContext, statement );
         T mappedQuery = (T) statementParserVisitor.getQuery();
         if ( mappedQuery == null ) {

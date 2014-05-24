@@ -3,14 +3,14 @@ package pl.piotrsukiennik.tuner.service.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
-import pl.piotrsukiennik.tuner.LoggableMessage;
-import pl.piotrsukiennik.tuner.LoggableMessageEnum;
-import pl.piotrsukiennik.tuner.LoggableService;
-import pl.piotrsukiennik.tuner.dto.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.exception.QueryInterceptionNotSupportedException;
 import pl.piotrsukiennik.tuner.exception.QueryParsingNotSupportedException;
+import pl.piotrsukiennik.tuner.model.LoggableMessage;
+import pl.piotrsukiennik.tuner.model.LoggableMessageEnum;
+import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.query.Query;
+import pl.piotrsukiennik.tuner.service.LoggableService;
 import pl.piotrsukiennik.tuner.service.LoggableServiceHolder;
 
 import java.util.concurrent.TimeUnit;
