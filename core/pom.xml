@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>tuner</artifactId>
-        <groupId>pl.piotrsukiennik</groupId>
+        <groupId>pl.piotrsukiennik.tuner</groupId>
         <version>2.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <version>2.2-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>pl.piotrsukiennik.tuner</groupId>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
     <name>jSQLtuner :: core</name>
@@ -19,7 +18,7 @@
         <jsqltuner.test.logger.level>ERROR</jsqltuner.test.logger.level>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
         <!--jSQLtuner : service : blank -->
-        <jsqltuner.service.impl.artifactId>service-blank-impl</jsqltuner.service.impl.artifactId>
+        <mvn.jsqltuner.service.persistent>false</mvn.jsqltuner.service.persistent>
         <!--jSQLtuner : test : db : h2-->
         <jsqltuner.test.jdbc.provider>h2</jsqltuner.test.jdbc.provider>
         <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
@@ -51,8 +50,14 @@
             <!-- Services saving query model and executions -->
             <id>services-persistent</id>
             <properties>
-                <jsqltuner.service.impl.artifactId>service-db-impl</jsqltuner.service.impl.artifactId>
+                <mvn.jsqltuner.service.persistent>true</mvn.jsqltuner.service.persistent>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>pl.piotrsukiennik.tuner</groupId>
+                    <artifactId>persistence-impl</artifactId>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>test-jsqltuner-method-datasource-wrapper</id>
@@ -141,8 +146,7 @@
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
-            <artifactId>${jsqltuner.service.impl.artifactId}</artifactId>
-            <version>${project.version}</version>
+            <artifactId>service-impl</artifactId>
         </dependency>
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
