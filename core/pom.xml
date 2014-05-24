@@ -145,14 +145,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-        <groupId>pl.piotrsukiennik.tuner.parser</groupId>
-            <artifactId>parser-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>pl.piotrsukiennik.tuner.parser</groupId>
-            <artifactId>parser-impl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>api</artifactId>
         </dependency>

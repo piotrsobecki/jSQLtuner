@@ -7,7 +7,7 @@
 
     <context:annotation-config/>
 
-    <import resource="classpath*:pl/piotrsukiennik/tuner/spring/context/jsqltuner-*-context.xml"/>
+    <import resource="classpath*:pl/piotrsukiennik/tuner/spring/context/jsqltuner-services-context.xml"/>
 
     <jsqltuner:keyValueDataSource id="localKeyValueDataSource" keyValueService-ref="keyValueLocalService"/>
     <jsqltuner:keyValueLocalService id="keyValueLocalService"/>

@@ -29,11 +29,11 @@ public enum LoggableMessageEnum implements LoggableMessage {
     }
 
     public String getMessage( Query query, TimeUnit timeUnit, long duration ) {
-        return String.format( messageFormat, query, duration, timeUnit.name() );
+        return String.format( messageFormat, query.getQueryString(), duration, timeUnit.name() );
     }
 
     public String getMessage( ReadQueryExecutionResult readQueryExecutionResult ) {
         long executionTimeNano = readQueryExecutionResult.getReadQueryExecutionComplexityEstimation().getExecutionTimeNano();
-        return String.format( messageFormatDataSource, readQueryExecutionResult.getReadQuery(), executionTimeNano, TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
+        return String.format( messageFormatDataSource, readQueryExecutionResult.getReadQuery().getQueryString(), executionTimeNano, TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
     }
 }

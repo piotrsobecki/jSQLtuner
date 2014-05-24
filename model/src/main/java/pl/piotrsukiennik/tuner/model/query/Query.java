@@ -3,10 +3,7 @@ package pl.piotrsukiennik.tuner.model.query;
 import pl.piotrsukiennik.tuner.cache.QueryInvalidation;
 import pl.piotrsukiennik.tuner.model.ValueEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 /**
  * Author: Piotr Sukiennik
@@ -16,8 +13,10 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Query extends ValueEntity implements ValueQuery, QueryInvalidation {
+
     private String hash;
 
+    protected String queryString;
 
     @Column(length = 32)
     public String getHash() {
@@ -28,4 +27,19 @@ public abstract class Query extends ValueEntity implements ValueQuery, QueryInva
         this.hash = hash;
     }
 
+    @Lob
+    @Column
+    public String getQueryString() {
+        return queryString;
+    }
+
+    public void setQueryString( String queryString ) {
+        this.queryString = queryString;
+    }
+
+    @Override
+    public void setValue( String value ) {
+        this.queryString=value;
+        super.setValue( value );
+    }
 }
