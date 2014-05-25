@@ -11,12 +11,12 @@ import java.util.concurrent.TimeUnit;
  */
 public enum LoggableMessageEnum implements LoggableMessage {
     PARSING(
-     "Query (%s) parsing took %d %s.",
+     "Query | parsing | took %d %s | String: %s",
      null
     ),
     EXECUTION(
-     "Query (%s) execution took %d %s.",
-     "Query (%s) execution took %d %s, using (%s:%s)"
+     "Query | execution | took %d %s",
+     "Query | execution | took %d %s | using [%s:%s] | String: %s"
     );
 
     protected String messageFormat;
@@ -29,11 +29,23 @@ public enum LoggableMessageEnum implements LoggableMessage {
     }
 
     public String getMessage( Query query, TimeUnit timeUnit, long duration ) {
-        return String.format( messageFormat, query.getQueryString(), duration, timeUnit.name() );
+        return String.format(
+             messageFormat,
+             duration,
+             timeUnit.name(),
+             query.getQueryString()
+        );
     }
 
     public String getMessage(  QueryExecutionResult<ReadQuery,ExecutionComplexityEstimation> readQueryExecutionResult ) {
         long executionTimeNano = readQueryExecutionResult.getReadQueryExecutionComplexityEstimation().getExecutionTimeNano();
-        return String.format( messageFormatDataSource, readQueryExecutionResult.getQuery().getQueryString(), executionTimeNano, TimeUnit.NANOSECONDS.name(), readQueryExecutionResult.getDataSource().getClazz(), readQueryExecutionResult.getDataSource().getIdentifier() );
+        return String.format(
+             messageFormatDataSource,
+             executionTimeNano,
+             TimeUnit.NANOSECONDS.name(),
+             readQueryExecutionResult.getDataSource().getClazz(),
+             readQueryExecutionResult.getDataSource().getIdentifier(),
+             readQueryExecutionResult.getQuery().getQueryString()
+        );
     }
 }

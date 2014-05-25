@@ -1,10 +1,13 @@
 package pl.piotrsukiennik.tuner.service.impl;
 
 import com.sun.rowset.CachedRowSets;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.exception.DataRetrievalException;
 import pl.piotrsukiennik.tuner.model.DataSource;
+import pl.piotrsukiennik.tuner.model.LoggableMessageEnum;
 import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResult;
 import pl.piotrsukiennik.tuner.model.ReadQueryExecutionResultBuilder;
 import pl.piotrsukiennik.tuner.model.datasource.DataSourceIdentity;
@@ -22,6 +25,8 @@ import java.util.Collection;
  */
 @Service
 public class DataSourceManagerImpl implements DataSourceManager {
+
+    private static final Log LOG = LogFactory.getLog( DataSourceManagerImpl.class );
 
     @Autowired
     private DataSourceSelectionService dataSourceSelectionService;
@@ -82,8 +87,10 @@ public class DataSourceManagerImpl implements DataSourceManager {
         ReadQueryExecutionResult readQueryExecutionResult =  execute(dataSourceIdentity,query);
         //Propagate data if shardeable
         distribute( readQueryExecutionResult );
-        //Log retrieval
-        LoggableServiceHolder.get().log( readQueryExecutionResult );
+        //Log
+        if (LOG.isDebugEnabled()){
+            LOG.debug( LoggableMessageEnum.EXECUTION.getMessage( readQueryExecutionResult ) );
+        }
         //Feedback retrieval to data source selector for learning
         dataSourceSelectionService.submitExecution( readQueryExecutionResult );
         return readQueryExecutionResult;

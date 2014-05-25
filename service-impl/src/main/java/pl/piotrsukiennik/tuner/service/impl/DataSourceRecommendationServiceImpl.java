@@ -29,9 +29,9 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
 
     private double requiredCumulativeProbability=DEFAULT_REQUIRED_CUMULATIVE_PROBABILITY;
 
-    private static final String MESSAGE_RETURNING_NODES = "DataSourceRecommendation | Returning nodes: %s";
-    private static final String MESSAGE_SHARDABLE = "DataSourceRecommendation | Context | Shardable | Cumulative Probability %s | Complexity Estimation %s";
-    private static final String MESSAGE_NOT_SHARDABLE = "DataSourceRecommendation | Context | Not Shardable | Cumulative Probability %s | Complexity Estimation %s";
+    private static final String MESSAGE_RETURNING_NODES = "Returning nodes: %s";
+    private static final String MESSAGE_SHARDABLE = "Context | Shardable | Cumulative Probability %s | Complexity Estimation %s";
+    private static final String MESSAGE_NOT_SHARDABLE = "Context | Not Shardable | Cumulative Probability %s | Complexity Estimation %s";
 
     @Autowired
     public DataSourceRecommendationServiceImpl( @Value( "${"+ Property.COMPLEXITY_DISTRIBUTION_CUMULATIVE +"}" )double requiredCumulativeProbability ) {

@@ -30,6 +30,7 @@ public class ReadQueryExecutionServiceImpl implements ReadQueryExecutionService 
     private QueryExecutionComplexityService queryExecutionComplexityService;
 
 
+
     private class ObtainResultSet implements Callable<ResultSet> {
 
         private DataSource dataSource;
