@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.piotrsukiennik.tuner.model.other.ColumnValue;
 import pl.piotrsukiennik.tuner.model.query.InsertQuery;
+import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.model.query.impl.*;
 import pl.piotrsukiennik.tuner.model.schema.Table;
@@ -25,6 +26,11 @@ class ReadQueryInvalidatonServiceImpl implements ReadQueryInvalidatonService<Rea
 
     @Autowired
     private ReadQueryTreeService<ReadQuery> readQueryTreeService;
+
+    @Override
+    public Collection<ReadQuery> getQueriesInvalidatedBy( Query query ) {
+        return query.accept( this );
+    }
 
     @Override
     public void submitInvalidatableReadQuery( ReadQuery query ) {

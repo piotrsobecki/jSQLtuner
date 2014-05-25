@@ -47,7 +47,6 @@ public class ReadQueryExecutionComplexityEstimationImpl implements ExecutionComp
     }
 
     private double executionComplexity;
-
     private long rowSize;
     private long rows;
     private long executionTimeNano;

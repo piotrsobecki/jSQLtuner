@@ -39,7 +39,7 @@ public class DataSourceRecommendationServiceImpl<RQ extends ReadQuery> implement
     }
 
     @Override
-    public <DS extends DataSourceIdentity> Collection<DS> possible( DataSourceRecommendationContext<RQ,DS> context ){
+    public <DS extends DataSourceIdentity> Collection<DS> recommended( DataSourceRecommendationContext<RQ, DS> context ){
         if (isShardable( context )){
             Collection<DS> nodes =  context.getNodes();
             if (LOG.isDebugEnabled()){

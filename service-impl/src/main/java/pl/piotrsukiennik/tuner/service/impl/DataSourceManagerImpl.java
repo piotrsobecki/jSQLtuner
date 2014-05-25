@@ -123,7 +123,7 @@ public class DataSourceManagerImpl implements DataSourceManager {
     @Override
     public void delete( Query query ) {
         //Get read queries that this query accept
-        Collection<ReadQuery> queriesToInvalidate = query.accept( invalidatorService );
+        Collection<ReadQuery> queriesToInvalidate = invalidatorService.getQueriesInvalidatedBy( query );
         //Remove option of selection
         for ( ReadQuery selectQuery : queriesToInvalidate ) {
             dataSourceSelectionService.removeSelectionOptions( selectQuery );
