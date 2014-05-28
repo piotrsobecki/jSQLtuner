@@ -14,7 +14,6 @@
     <packaging>jar</packaging>
     <name>jSQLtuner :: core</name>
     <properties>
-        <jsqltuner.test.method>aop</jsqltuner.test.method>
         <jsqltuner.test.logger.level>ERROR</jsqltuner.test.logger.level>
         <jsqltuner.build.directory>../</jsqltuner.build.directory>
         <!--jSQLtuner : service : blank -->
@@ -24,27 +23,56 @@
         <jsqltuner.test.dep.jdbc.groupId>com.h2database</jsqltuner.test.dep.jdbc.groupId>
         <jsqltuner.test.dep.jdbc.artifactId>h2</jsqltuner.test.dep.jdbc.artifactId>
         <jsqltuner.test.dep.jdbc.version>${h2.version}</jsqltuner.test.dep.jdbc.version>
+        <jsqltuner.config>conf</jsqltuner.config>
     </properties>
     <profiles>
+        <profile>
+            <id>TestConfiguration1</id><!--[BS,M]-->
+            <properties>
+                <jsqltuner.config>conf_it_1</jsqltuner.config>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>TestConfiguration2</id><!--[BS]-->
+            <properties>
+                <jsqltuner.config>conf_it_2</jsqltuner.config>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>TestConfiguration3</id><!--[RR,M]-->
+            <properties>
+                <jsqltuner.config>conf_it_3</jsqltuner.config>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>TestConfiguration4</id><!--[RR]-->
+            <properties>
+                <jsqltuner.config>conf_it_4</jsqltuner.config>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>TestConfiguration5</id><!--[RW,M]-->
+            <properties>
+                <jsqltuner.config>conf_it_5</jsqltuner.config>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>TestConfiguration6</id><!--[RW]-->
+            <properties>
+                <jsqltuner.config>conf_it_6</jsqltuner.config>
+            </properties>
+        </profile>
+
         <profile>
             <id>test-logger-info</id>
             <properties>
                 <jsqltuner.test.logger.level>INFO</jsqltuner.test.logger.level>
             </properties>
-        </profile>
-        <profile>
-            <id>test-datasources-memcached</id>
-            <build>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources/</directory>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>jsqltuner-test-datasources-memcached*</include>
-                        </includes>
-                    </testResource>
-                </testResources>
-            </build>
         </profile>
         <profile>
             <!-- Services saving query model and executions -->
@@ -62,7 +90,7 @@
         <profile>
             <id>test-jsqltuner-method-datasource-wrapper</id>
             <properties>
-                <jsqltuner.test.method>wrapper</jsqltuner.test.method>
+                <jsqltuner.test.context>classpath*:jsqltuner-test-context-wrapper.xml</jsqltuner.test.context>
             </properties>
         </profile>
         <profile>
@@ -97,6 +125,7 @@
     <build>
         <filters>
             <filter>src/main/filters/memcached.properties</filter>
+            <filter>src/main/filters/${jsqltuner.config}.properties</filter>
             <filter>src/main/filters/${jsqltuner.jdbc.provider}.properties</filter>
             <filter>src/main/filters/${jsqltuner.test.jdbc.provider}-test.properties</filter>
         </filters>
@@ -110,9 +139,6 @@
             <testResource>
                 <directory>src/test/resources/</directory>
                 <filtering>true</filtering>
-                <excludes>
-                    <exclude>jsqltuner-test-datasources-memcached*</exclude>
-                </excludes>
             </testResource>
         </testResources>
     </build>
@@ -140,6 +166,8 @@
         </repository>
     </repositories>
     <dependencies>
+
+
         <dependency>
             <groupId>pl.piotrsukiennik.tuner</groupId>
             <artifactId>service</artifactId>

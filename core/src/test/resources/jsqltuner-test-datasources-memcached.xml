@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jsqltuner="http://piotrsukiennik.pl/schema/jsqltuner"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://piotrsukiennik.pl/schema/jsqltuner http://piotrsukiennik.pl/ns/jsqltuner.xsd">
 
 
     <jsqltuner:keyValueDataSource id="memcachedKeyValueDataSource" keyValueService-ref="keyValueMemcachedService"/>
     <jsqltuner:keyValueMemcachedService id="keyValueMemcachedService" memcachedClient-ref="memcachedClient"/>
 
 
-    <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean" scope="singleton">
+    <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean" >
         <property name="servers" value="${mem.servers}"/>
         <property name="protocol" value="${mem.protocol}"/>
     </bean>

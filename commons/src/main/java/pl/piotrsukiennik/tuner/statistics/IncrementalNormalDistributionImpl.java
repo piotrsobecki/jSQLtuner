@@ -10,7 +10,7 @@ import org.apache.commons.math.stat.descriptive.moment.StandardDeviation;
  * @author Piotr Sukiennik
  * @date 22.05.14
  */
-public class IncrContNormalDistrImpl implements IncrContDistr, NormalDistribution {
+public class IncrementalNormalDistributionImpl implements IncrementalContinuousDistribution, NormalDistribution {
 
     private Mean mean = new Mean();
 

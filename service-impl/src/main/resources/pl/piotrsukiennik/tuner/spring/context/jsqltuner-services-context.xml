@@ -28,7 +28,7 @@
     <bean id="dataSourceSelectionHelperBuilder" class="pl.piotrsukiennik.tuner.model.DataSourceSelectionHelperBuilder">
         <constructor-arg>
             <bean class="pl.piotrsukiennik.tuner.util.GenericBuilderImpl">
-                <constructor-arg value="pl.piotrsukiennik.ai.selectionhelper.impl.RouletteWheelSelection"/>
+                <constructor-arg value="${jsqltuner.service.selection.algorithm}"/>
             </bean>
         </constructor-arg>
         <constructor-arg ref="fitnessCalculator"/>

@@ -7,7 +7,7 @@ import pl.piotrsukiennik.tuner.model.query.Query;
 import pl.piotrsukiennik.tuner.model.query.ReadQuery;
 import pl.piotrsukiennik.tuner.service.QueryExecutionComplexityStatisticsService;
 import pl.piotrsukiennik.tuner.statistics.CumulativeProbabilityCapable;
-import pl.piotrsukiennik.tuner.statistics.IncrContDistr;
+import pl.piotrsukiennik.tuner.statistics.IncrementalContinuousDistribution;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -21,11 +21,11 @@ import java.util.Map;
 @Service
 public class QueryExecutionComplexityStatisticsServiceImpl implements QueryExecutionComplexityStatisticsService {
 
-    private Map<Class<? extends Query>, Map<ReadQueryExecutionComplexityEstimationImpl.Type,IncrContDistr>> distributions;
+    private Map<Class<? extends Query>, Map<ReadQueryExecutionComplexityEstimationImpl.Type,IncrementalContinuousDistribution>> distributions;
 
     @Override
     public Map<ReadQueryExecutionComplexityEstimationImpl.Type, ? extends CumulativeProbabilityCapable> getDistributions( ReadQuery query ) {
-        Map<ReadQueryExecutionComplexityEstimationImpl.Type,IncrContDistr> map = new HashMap<>(  );
+        Map<ReadQueryExecutionComplexityEstimationImpl.Type,IncrementalContinuousDistribution> map = new HashMap<>(  );
         for (ReadQueryExecutionComplexityEstimationImpl.Type type : ReadQueryExecutionComplexityEstimationImpl.Type.values()){
             map.put( type, getDistribution( query, type ) );
         }
@@ -40,19 +40,19 @@ public class QueryExecutionComplexityStatisticsServiceImpl implements QueryExecu
     }
 
     @Override
-    public IncrContDistr incrementDistribution(Query query, ReadQueryExecutionComplexityEstimationImpl.Type type, double value){
-        IncrContDistr distr = getDistribution( query, type );
+    public IncrementalContinuousDistribution incrementDistribution(Query query, ReadQueryExecutionComplexityEstimationImpl.Type type, double value){
+        IncrementalContinuousDistribution distr = getDistribution( query, type );
         distr.increment( value );
         return distr;
     }
 
     @Override
-    public IncrContDistr getDistribution(Query query, ReadQueryExecutionComplexityEstimationImpl.Type type ){
+    public IncrementalContinuousDistribution getDistribution(Query query, ReadQueryExecutionComplexityEstimationImpl.Type type ){
         return distributions.get( query.getClass() ).get( type );
     }
 
     @Resource(name = "perQueryDistributions")
-    public void setDistributions( Map<Class<? extends Query>, Map<ReadQueryExecutionComplexityEstimationImpl.Type, IncrContDistr>> distributions ) {
+    public void setDistributions( Map<Class<? extends Query>, Map<ReadQueryExecutionComplexityEstimationImpl.Type, IncrementalContinuousDistribution>> distributions ) {
         this.distributions = Collections.unmodifiableMap(distributions);
     }
 }
